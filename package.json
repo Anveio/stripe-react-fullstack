@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@shopify/polaris": "^1.0.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "redux": "^3.6.0"
   },
   "devDependencies": {
@@ -12,6 +15,9 @@
     "@types/node": "^7.0.22",
     "@types/react": "^15.0.24",
     "@types/react-dom": "^15.5.0",
+    "@types/react-router": "^4.0.9",
+    "@types/react-router-dom": "^4.0.4",
+    "@types/redux": "^3.6.0",
     "react-scripts-ts": "2.0.1"
   },
   "scripts": {
