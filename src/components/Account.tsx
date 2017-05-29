@@ -22,7 +22,7 @@ export default class Account extends React.PureComponent<{}, State> {
     this.setState(({connected}) => ({connected: !connected}));
   }
 
-  connectAccountMarkup = (): JSX.Element => {
+  readonly connectAccountMarkup = (): JSX.Element => {
     return (
       <Layout.AnnotatedSection
         title="Account"
@@ -35,7 +35,7 @@ export default class Account extends React.PureComponent<{}, State> {
           }}
           details="No account connected"
           termsOfService={(
-            <p>By clicking Connect, you are accepting PS Admin's'
+            <p>By clicking Connect, you are accepting Pluralsight Administration's
               <Link url="https://polaris.shopify.com"> Terms and Conditions</Link>
               , including a commission rate of 15% on sales.
             </p>
@@ -45,7 +45,7 @@ export default class Account extends React.PureComponent<{}, State> {
     );
   }
 
-  disconnectAccountMarkup = (): JSX.Element => {
+  readonly disconnectAccountMarkup = (): JSX.Element => {
     return (
       <Layout.AnnotatedSection
           title="Account"

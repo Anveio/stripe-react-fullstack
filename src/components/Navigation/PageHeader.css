@@ -1,0 +1,61 @@
+
+
+/*.Navbar {
+  margin: 0 auto;
+  height: 12rem;
+  padding-left: 3.2rem;
+  padding-right: 3.2rem;
+  max-width: 103.6rem;
+}*/
+
+.Navbar {
+  display: block;
+}
+
+.Navbar-container {
+  display: flex;
+  justify-content: space-between;
+
+  height: 100%;
+}
+
+.Navbar__brand {
+  margin-top: 4rem;
+}
+
+.Logo {
+  animation: Logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.Navbar__list {
+  display: flex;
+  list-style: none;
+}
+
+.Navbar .Navbar__list a {
+  display: block;
+  flex: 0 0 auto;
+  
+  position: relative;
+  padding: 5.6rem 1.6rem 1.6rem;
+  max-width: 60rem;
+
+  background: #f4f6f8;
+  color: #1a222b;
+  text-decoration: none;
+
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  line-height: 1;
+}
+
+.Navbar .Navbar__list li {
+  display: table-cell;
+}
+
+@keyframes Logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
