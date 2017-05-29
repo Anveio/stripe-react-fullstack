@@ -7,7 +7,7 @@
 /coverage
 
 # production
-package.lock.json
+/build
 
 # misc
 .DS_Store
