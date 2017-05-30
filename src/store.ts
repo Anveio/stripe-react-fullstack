@@ -8,7 +8,6 @@ const rootReducer = combineReducers<RootState>({
 });
 
 const store = createStore<RootState>(rootReducer, {
-  appName: 'Pluralsight Administration',
   enthusiasm: {
     level: 1,
     languageName: 'TypeScript',

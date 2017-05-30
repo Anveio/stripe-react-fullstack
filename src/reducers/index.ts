@@ -7,7 +7,7 @@ const initialState: EnthusiasmState = {
   languageName: 'TypeScript'
 };
 
-export default function(state: EnthusiasmState = initialState, action: EnthusiasmAction): EnthusiasmState {
+const enthusiasm = (state: EnthusiasmState = initialState, action: EnthusiasmAction): EnthusiasmState => {
   let partialState: Partial<EnthusiasmState> | undefined;
 
   switch (action.type) {
@@ -20,3 +20,5 @@ export default function(state: EnthusiasmState = initialState, action: Enthusias
 
   return { ...state, ...partialState };
 };
+
+export default enthusiasm;

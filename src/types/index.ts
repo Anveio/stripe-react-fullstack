@@ -1,5 +1,4 @@
 export interface RootState {
-  appName: string;
   enthusiasm: EnthusiasmState;
 }
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Layout, AccountConnection, Link } from '@shopify/polaris';
 
-interface State {
+export interface State {
   first: string;
   last: string;
   email: string;
