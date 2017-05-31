@@ -1,5 +1,6 @@
 import * as React from 'react';
 import About from '../components/About';
+import { RootState } from '../types/states';
 import { shallow } from 'enzyme';
 import enthusiasmReducer from '../reducers';
 import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from '../constants';
@@ -22,6 +23,13 @@ const shallowAboutComponent = () => {
     props,
     enzymeWrapper
   };
+};
+
+// To prevent one test from affecting another, we will re-render the app with a fresh state for each test.
+const setup = (state: RootState) => {
+  const { store, wrapper } = renderAppWithState(state);
+  const buttons = wrapper.find(About).find(Button);
+  return { store, wrapper, buttons };
 };
 
 describe('About component', () => { 
@@ -72,27 +80,24 @@ describe('About component', () => {
     });
   });
 
-  describe('clicking a button', () => {
-    const initialState = { enthusiasm: {
-        level: 3,
+  describe('clicking buttons', () => {
+    const initialState = {
+      enthusiasm: {
+        level: 1,
         languageName: 'TypeScript',
+      },
+      courses: {
+        list: []
       }
     };
 
-    // To prevent one test from affecting another, we will re-render the app with a fresh state for each test.
-    const setup = () => {
-      const { store, wrapper } = renderAppWithState(initialState);
-      const buttons = wrapper.find(About).find(Button);
-      return { store, wrapper, buttons }
-    };
-
     it('initializes with the correct state', () => {
-      const { store } = setup();
+      const { store } = setup(initialState);
       expect(store.getState()).toEqual(initialState);
-    })
+    });
 
     it('increments level by 1 on "+" button click', () => { 
-      const { store, buttons } = setup();
+      const { store, buttons } = setup(initialState);
       const incrementButton = buttons.at(1);    
       incrementButton.simulate('click');
 
@@ -105,7 +110,7 @@ describe('About component', () => {
     });
 
     it('decrements level by 1 on "-" button click', () => {
-      const { store, buttons } = setup();
+      const { store, buttons } = setup(initialState);
       const decrementButton = buttons.at(0);
 
       decrementButton.simulate('click');

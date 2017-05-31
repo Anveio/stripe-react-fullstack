@@ -1,27 +1,27 @@
 import * as React from 'react';
-import { Account, Props } from '../components/About';
+// import { Account, Props } from '../components/Account';
 import { shallow } from 'enzyme';
 // import * as actions from '../actions/enthusiasm';
 // import account from '../reducers';
 // import { CONNECT_ACCOUNT, DISCONNECT_ACCOUNT } from '../constants';
 // import { Layout, AccountConnection, Link } from '@shopify/polaris';
 
-function setup() {
-  const props: Props = {
-    first: '',
-    last: '',
-    email: '',
-    checkboxes: [],
-    connected: false
-  };
+// function setup() {
+//   const props: Props = {
+//     first: '',
+//     last: '',
+//     email: '',
+//     checkboxes: [],
+//     connected: false
+//   };
 
-  const enzymeWrapper = shallow(<Account {...props} />);
+//   const enzymeWrapper = shallow(<Account {...props} />);
 
-  return {
-    props,
-    enzymeWrapper
-  };
-}
+//   return {
+//     props,
+//     enzymeWrapper
+//   };
+// }
 
 describe('Account component', () => {
   describe('rendering itself and child components', () => {

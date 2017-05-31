@@ -1,6 +1,6 @@
 import About from '../components/About';
 import * as actions from '../actions/enthusiasm';
-import { RootState } from '../types/index';
+import { RootState } from '../types/states';
 import { connect, Dispatch } from 'react-redux';
 
 export const mapStateToProps = (rootState: RootState) => {

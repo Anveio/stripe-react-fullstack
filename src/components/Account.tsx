@@ -9,6 +9,14 @@ export interface State {
   connected: boolean;
 }
 
+export interface Props {
+  first: string;
+  last: string;
+  email: string;
+  checkboxes: Array<{}>;
+  connected: boolean;
+}
+
 export default class Account extends React.PureComponent<{}, State> {
   state = {
     first: '',

@@ -5,22 +5,19 @@ import Account from './Account';
 import Footer from './Footer';
 import About from '../containers/About';
 
-export default class Home extends React.Component<undefined, never> {
-  render() {
-    return (
-      <Page title="Pluralsight Administration">
-        <Layout>
-          {/*<Navigation />*/}
-          {/*<Home />*/}
-          <Account />
-          <About />
-          <Footer />
-        </Layout>
-      </Page>
+const Home = () => {
+  return (
+    <Page title="Pluralsight Administration">
+      <Layout>
+        <Account />
+        <About />
+      </Layout>
+      <Footer />
+    </Page>
+  );
+};
 
-    );
-  }
-}
+export default Home;
 
 /*<Layout.AnnotatedSection title="Home">
         <Card sectioned>

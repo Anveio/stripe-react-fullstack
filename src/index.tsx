@@ -11,7 +11,7 @@ import App from './components/App';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App title={'Pluralsight Administration'}/>
+    <App />
   </Provider>,
   document.getElementById('root') as HTMLElement
 );

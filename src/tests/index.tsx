@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
 import { combineReducers, createStore } from 'redux';
 import App from '../components/App';
-import { RootState } from '../types';
-import { default as enthusiasmReducer } from '../reducers';
+import { RootState } from '../types/states';
+import { default as enthusiasmReducer } from '../reducers/enthusiasm';
 
 export default function renderAppWithState(state: RootState) {
   const rootReducer = combineReducers<RootState>({
@@ -13,14 +13,17 @@ export default function renderAppWithState(state: RootState) {
 
   const store = createStore<RootState>(rootReducer, {
     enthusiasm: {
-      level: state.enthusiasm.level,
-      languageName: state.enthusiasm.languageName
+      level: 1,
+      languageName: 'TypeScript',
+    },
+    courses: {
+      list: []
     }
   });
 
   const wrapper = mount(
     <Provider store={store}>
-      <App title={'Pluralsight Administration'}/>
+      <App />
     </Provider>
   );
   return {store, wrapper};

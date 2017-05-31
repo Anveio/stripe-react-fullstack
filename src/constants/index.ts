@@ -9,3 +9,9 @@ export type CONNECT_ACCOUNT = typeof CONNECT_ACCOUNT;
 
 export const DISCONNECT_ACCOUNT = 'DISCONNECT_ACCOUNT';
 export type DISCONNECT_ACCOUNT = typeof DISCONNECT_ACCOUNT;
+
+export const ADD_COURSE = 'ADD_COURSE';
+export type ADD_COURSE = typeof ADD_COURSE;
+
+export const REMOVE_COURSE = 'REMOVE_COURSE';
+export type REMOVE_COURSE = typeof REMOVE_COURSE;
