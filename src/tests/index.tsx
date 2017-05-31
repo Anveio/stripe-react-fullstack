@@ -13,8 +13,8 @@ export default function renderAppWithState(state: RootState) {
 
   const store = createStore<RootState>(rootReducer, {
     enthusiasm: {
-      level: 1,
-      languageName: 'TypeScript',
+      level: state.enthusiasm.level,
+      languageName: state.enthusiasm.languageName
     }
   });
 
