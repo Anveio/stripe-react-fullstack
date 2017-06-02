@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PageHeader from './Navigation/PageHeader';
 import Home from './Home';
 import Catalogue from './Catalogue/Catalogue';
+// import AddCourse from '../containers/AddCourse';
 
 export default class App extends React.Component<{}, never> {
   render() {
@@ -16,6 +17,7 @@ export default class App extends React.Component<{}, never> {
         <PageHeader />
         <Route exact path="/" component={Home} />
         <Route exact path="/catalogue" component={Catalogue} />
+        {/*<Route exact path="/catalogue/courses/add" component={AddCourse} />*/}
       </main>
     </Router>
     );

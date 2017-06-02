@@ -15,3 +15,6 @@ export type ADD_COURSE = typeof ADD_COURSE;
 
 export const REMOVE_COURSE = 'REMOVE_COURSE';
 export type REMOVE_COURSE = typeof REMOVE_COURSE;
+
+export const UPDATE_TEXT_FIELD = 'UPDATE_TEXT_FIELD';
+export type UPDATE_TEXT_FIELD = typeof UPDATE_TEXT_FIELD;

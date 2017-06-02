@@ -3,6 +3,7 @@ import { Course } from './schema';
 export interface RootState {
   enthusiasm: EnthusiasmState;
   courses: CoursesState;
+  form: FormState;
 }
 
 export interface EnthusiasmState { 
@@ -12,4 +13,8 @@ export interface EnthusiasmState {
 
 export interface CoursesState {
   list: Course[];
+}
+
+export interface FormState {
+  text: string;
 }

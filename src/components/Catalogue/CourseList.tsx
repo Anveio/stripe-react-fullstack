@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Layout, EmptyState } from '@shopify/polaris';
+import {  EmptyState, Layout, Card } from '@shopify/polaris';
 import { Course } from '../../types/schema';
+// import AddCourse from './AddCourse';
 const emptyImage = require('./empty-state.svg');
 
 export interface Props {
@@ -11,26 +12,40 @@ export interface Props {
 const CourseList = (props: Props): JSX.Element => {
   const { list, onNewCourse } = props;
 
+  // const addCourseRedirect = (): void => {
+  //   window.location.href = '/catalogue/courses/add';
+  // };
+
+  /*const courseCard = (course: Course): JSX.Element => {
+    return (
+        <Card sectioned>
+          Professor: {course.author}
+          Starts on {course.dateStart}
+          Ends on {course.dateEnd}
+        </Card>
+      
+    )
+  }*/
+
   const emptyCourseListMarkup = (): JSX.Element => {
     return (
-      <Layout.AnnotatedSection>
-        <EmptyState
-          heading="You don't have any courses yet."
-          action={{content: 'Add course', onAction: onNewCourse}}
-          imageContained={false}
-          image={emptyImage}
-        >
+      <EmptyState
+        heading="You don't have any courses yet."
+        action={{content: 'Add course', onAction: onNewCourse}}
+        image={emptyImage}
+      >
         <p>Get started by adding a course.</p>
-        </EmptyState>
-    </Layout.AnnotatedSection>
+      </EmptyState>
     );
   };
 
   const populatedCourseListMarkup = (): JSX.Element => {
     return (
-      <div>
-        {list.map((course: Course) => course.author )}
-      </div>
+      <Layout.AnnotatedSection title={'My enrolled courses'}>
+        <Card sectioned>
+          Hi.
+        </Card>
+      </Layout.AnnotatedSection>
     );
   };
 

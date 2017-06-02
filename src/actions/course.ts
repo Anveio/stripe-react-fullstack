@@ -15,7 +15,6 @@ export function addCourse(): AddCourse {
     type: constants.ADD_COURSE
   };
 }
-
 export function removeCourse(): RemoveCourse {
   return {
     type: constants.REMOVE_COURSE
