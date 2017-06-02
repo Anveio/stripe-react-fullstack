@@ -11,7 +11,7 @@ const formUpdateReducer = (state: FormState = initialState, action: FormUpdate):
 
   switch (action.type) {
     case UPDATE_TEXT_FIELD:
-      partialState = { text: state.text + 'a' }; break;
+      partialState = { text: action.value }; break;
     default: return state;
   }
 

@@ -11,7 +11,7 @@ export const mapStateToProps = (state: RootState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch<actions.FormAction>) => {
   return {
-    onTextInput: () => dispatch(actions.addTextToForm())
+    onTextInput: (value: string) => dispatch(actions.changeFormText(value)),
   };
 };
 

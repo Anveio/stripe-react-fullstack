@@ -22,7 +22,7 @@ const store = createStore<RootState>(rootReducer, {
     ]
   },
   form: {
-    text: 'asdasdasd'
+    text: ''
   }
 });
 
