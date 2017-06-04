@@ -4,6 +4,7 @@ import { Page, Layout } from '@shopify/polaris';
 import Account from './Account';
 import Footer from './Footer';
 import About from '../containers/About';
+import CourseList from '../containers/CourseList';
 import AddCourse from '../containers/AddCourse';
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
       <Layout>
         <Account />
         <About />
+        <CourseList />
         <AddCourse />
       </Layout>
       <Footer />

@@ -1,28 +1,27 @@
-import { CourseAction } from '../actions/course';
+import { FormSubmission } from '../actions/input';
 import { CoursesState } from '../types/states';
-import { ADD_COURSE, REMOVE_COURSE } from '../constants';
+import { ADD_COURSE } from '../constants';
 import { Course } from '../types/schema';
 
 const initialState: CoursesState = {
   list: []
 };
 
-const generateNewCourse = (): Course => {
+const generateNewCourse = (course: Course): Course => {
   return {
-    author: 'Shovon Hasan',
-    dateStart: new Date,
-    dateEnd: new Date
+    name: course.name
+    // author: 'Shovon Hasan',
+    // dateStart: new Date,
+    // dateEnd: new Date
   };
 };
 
-const courseReducer = (state: CoursesState = initialState, action: CourseAction): CoursesState => {
+const courseReducer = (state: CoursesState = initialState, action: FormSubmission): CoursesState => {
   let partialState: Partial<CoursesState> | undefined;
 
   switch (action.type) {
     case ADD_COURSE:
-      partialState = { list: [generateNewCourse()]}; break;
-    case REMOVE_COURSE:
-      partialState = { list: [] }; break;
+      partialState = { list: [generateNewCourse(action.value)]}; break;
     default: return state;
   }
 

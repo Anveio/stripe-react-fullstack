@@ -1,5 +1,5 @@
 import CourseList from '../components/Catalogue/CourseList';
-import * as actions from '../actions/course';
+import * as actions from '../actions/input';
 import { RootState } from '../types/states';
 import { connect, Dispatch } from 'react-redux';
 
@@ -9,9 +9,9 @@ export const mapStateToProps = (rootState: RootState) => {
   };
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<actions.CourseAction>) => {
+export const mapDispatchToProps = (dispatch: Dispatch<actions.FormAction>) => {
   return {
-    onNewCourse: () => dispatch(actions.addCourse()),
+    // onNewCourse: () => dispatch(actions.addCourse()),
   };
 };
 

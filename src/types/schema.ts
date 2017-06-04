@@ -1,5 +1,6 @@
 export class Course {
-  readonly author: string;
-  readonly dateStart: Date;
-  readonly dateEnd: Date;
+  readonly name: string;
+  // readonly author: string;
+  // readonly dateStart: Date;
+  // readonly dateEnd: Date;
 }
