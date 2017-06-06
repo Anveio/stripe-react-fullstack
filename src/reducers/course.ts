@@ -21,13 +21,14 @@ const courseReducer = (state: CoursesState = initialState, action: FormSubmissio
 
   switch (action.type) {
     case ADD_COURSE:
-      console.log(state.list);
       // state.list.push(generateNewCourse(action.value));
       // partialState = { list: state.list}; break;
-      partialState = {list: [generateNewCourse(action.value)]}; break;
+      // partialState = {list: [generateNewCourse(action.value)]}; break;
+      partialState = { 
+        list: state.list.concat(generateNewCourse(action.value)) 
+      }; break;
     default: return state;
   }
-  console.log({ ...state, ...partialState });
   return { ...state, ...partialState };
 };
 
