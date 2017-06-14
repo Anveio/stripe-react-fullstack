@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { EmptyState, Layout, Card } from '@shopify/polaris';
-import { Course } from '../../types/schema';
-// import AddCourse from './AddCourse';
 const emptyImage = require('./empty-state.svg');
 
 export interface Props {

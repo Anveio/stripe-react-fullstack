@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { Layout, Card, FormLayout, TextField, Button } from '@shopify/polaris';
-// import { Layout, Card } from '@shopify/polaris';
-// import { reduxForm } from 'redux-form';
-import { Course } from '../../types/schema';
 
 export interface Props {
   readonly text: string;
