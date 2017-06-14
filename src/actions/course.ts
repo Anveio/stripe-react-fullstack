@@ -1,22 +1,19 @@
-// import * as constants from '../constants';
+import * as constants from '../constants';
+import * as schema from '../types/schema';
+import { Course } from '../types/schema';
 
-// export interface AddCourse {
-//   type: constants.ADD_COURSE;
-// }
+export type CourseAction = AddCourse;
 
-// export interface RemoveCourse {
-//   type: constants.REMOVE_COURSE;
-// }
+export interface AddCourse {
+  type: constants.ADD_COURSE;
+  value: schema.Course;
+}
 
-// export type CourseAction = AddCourse | RemoveCourse;
-
-// export function addCourse(): AddCourse {
-//   return {
-//     type: constants.ADD_COURSE
-//   };
-// }
-// export function removeCourse(): RemoveCourse {
-//   return {
-//     type: constants.REMOVE_COURSE
-//   };
-// }
+export function addCourse(course: Course): AddCourse {
+  return {
+    type: constants.ADD_COURSE,
+    value: {
+      name: course.name
+    }
+  };
+}

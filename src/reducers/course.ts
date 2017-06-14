@@ -1,4 +1,4 @@
-import { FormSubmission } from '../actions/input';
+import { CourseAction } from '../actions/course';
 import { CoursesState } from '../types/states';
 import { ADD_COURSE } from '../constants';
 import { Course } from '../types/schema';
@@ -10,20 +10,14 @@ const initialState: CoursesState = {
 const generateNewCourse = (course: Course): Course => {
   return {
     name: course.name
-    // author: 'Shovon Hasan',
-    // dateStart: new Date,
-    // dateEnd: new Date
   };
 };
 
-const courseReducer = (state: CoursesState = initialState, action: FormSubmission): CoursesState => {
+const courseReducer = (state: CoursesState = initialState, action: CourseAction): CoursesState => {
   let partialState: Partial<CoursesState> | undefined;
 
   switch (action.type) {
     case ADD_COURSE:
-      // state.list.push(generateNewCourse(action.value));
-      // partialState = { list: state.list}; break;
-      // partialState = {list: [generateNewCourse(action.value)]}; break;
       partialState = { 
         list: state.list.concat(generateNewCourse(action.value)) 
       }; break;

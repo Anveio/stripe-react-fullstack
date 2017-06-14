@@ -18,3 +18,6 @@ export type REMOVE_COURSE = typeof REMOVE_COURSE;
 
 export const UPDATE_TEXT_FIELD = 'UPDATE_TEXT_FIELD';
 export type UPDATE_TEXT_FIELD = typeof UPDATE_TEXT_FIELD;
+
+export const RESET_TEXT_FIELD = 'RESET_TEXT_FIELD';
+export type RESET_TEXT_FIELD = typeof RESET_TEXT_FIELD;

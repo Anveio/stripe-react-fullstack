@@ -7,7 +7,7 @@ import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from '../constants';
 import { Layout, Card, Button } from '@shopify/polaris';
 import renderAppWithState from './index';
 
-// TEsting for null type checks are omitted because the TypeScript compiler will catch those errors.
+// Testing for null type checks are omitted because the TypeScript compiler will catch those errors.
 
 const shallowAboutComponent = () => {
   const props = {
@@ -50,8 +50,8 @@ describe('About component', () => {
 
   describe('reducer for enthusiasm counter', () => {
     it('increases level by 1 when passed INCREMENT_ENTHUSIASM', () => {
-      expect(
-        enthusiasmReducer(
+      expect (
+        enthusiasmReducer (
           { level: 1, languageName: 'TypeScript'},
           { type: INCREMENT_ENTHUSIASM })
       ).toEqual(

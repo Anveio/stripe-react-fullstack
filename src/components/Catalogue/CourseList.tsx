@@ -49,8 +49,7 @@ const CourseList = (props: Props): JSX.Element => {
     return (
       <Layout.AnnotatedSection title={'My enrolled courses'}>
         <Card sectioned>
-          {/*{list.map(course => course.name)}*/}
-          {list.length}
+          {list.map(course => course.name)}
         </Card>
       </Layout.AnnotatedSection>
     );
