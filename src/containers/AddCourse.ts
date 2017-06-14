@@ -1,15 +1,10 @@
 import AddCourse from '../components/Catalogue/AddCourse';
 import * as courseActions from '../actions/course';
-import * as formActions from '../actions/input';
+import * as formActions from '../actions/form';
 import { RootState } from '../types/states';
 import { connect, Dispatch } from 'react-redux';
-import { Course } from '../types/schema';
 
-export const mapStateToProps = (state: RootState) => {
-  return {
-    text: state.form.text
-  };
-};
+export const mapStateToProps = (state: RootState) => ({ text: state.form.text });
 
 export const mapDispatchToProps = (dispatch: Dispatch<courseActions.AddCourse>) => {
   return {

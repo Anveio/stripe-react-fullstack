@@ -1,5 +1,3 @@
-import { Course } from './schema';
-
 export interface RootState {
   enthusiasm: EnthusiasmState;
   courses: CoursesState;

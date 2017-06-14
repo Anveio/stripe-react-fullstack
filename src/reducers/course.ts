@@ -1,7 +1,6 @@
 import { CourseAction } from '../actions/course';
 import { CoursesState } from '../types/states';
 import { ADD_COURSE } from '../constants';
-import { Course } from '../types/schema';
 
 const initialState: CoursesState = {
   list: []
