@@ -1,5 +1,4 @@
 import { FormAction } from '../actions/form';
-import { FormState } from '../types/states';
 import { UPDATE_TEXT_FIELD, RESET_TEXT_FIELD } from '../constants';
 
 const initialState: FormState = {

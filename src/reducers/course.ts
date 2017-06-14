@@ -1,5 +1,4 @@
 import { CourseAction } from '../actions/course';
-import { CoursesState } from '../types/states';
 import { ADD_COURSE } from '../constants';
 
 const initialState: CoursesState = {

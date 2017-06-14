@@ -1,5 +1,4 @@
 import { EnthusiasmAction } from '../actions/enthusiasm';
-import { EnthusiasmState } from '../types/states';
 import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from '../constants';
 
 const initialState: EnthusiasmState = {

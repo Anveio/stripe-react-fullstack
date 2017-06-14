@@ -1,7 +1,6 @@
 import AddCourse from '../components/Catalogue/AddCourse';
 import * as courseActions from '../actions/course';
 import * as formActions from '../actions/form';
-import { RootState } from '../types/states';
 import { connect, Dispatch } from 'react-redux';
 
 export const mapStateToProps = (state: RootState) => ({ text: state.form.text });

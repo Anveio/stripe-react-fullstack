@@ -1,6 +1,5 @@
 import CourseList from '../components/Catalogue/CourseList';
 import * as actions from '../actions/form';
-import { RootState } from '../types/states';
 import { connect, Dispatch } from 'react-redux';
 
 export const mapStateToProps = (rootState: RootState) => {

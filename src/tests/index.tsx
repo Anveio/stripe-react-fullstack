@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
 import { combineReducers, createStore } from 'redux';
 import App from '../components/App';
-import { RootState } from '../types/states';
 import { default as enthusiasmReducer } from '../reducers/enthusiasm';
 
 export default function renderAppWithState(state: RootState) {
@@ -18,6 +17,9 @@ export default function renderAppWithState(state: RootState) {
     },
     courses: {
       list: []
+    },
+    form: {
+      text: ''
     }
   });
 

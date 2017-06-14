@@ -1,6 +1,5 @@
 import { combineReducers, createStore } from 'redux';
 // import { default as EnthusiasmState } from './reducers/index';
-import { RootState } from './types/states';
 import { default as enthusiasmReducer } from './reducers/enthusiasm';
 import { default as courseReducer } from './reducers/course';
 import { default as addCourse } from './reducers/form';
