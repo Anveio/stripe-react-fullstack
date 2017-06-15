@@ -22,7 +22,7 @@ export default class PageHeader extends React.PureComponent<never, never> {
     );
   }
 
-  render() {
+  public render() {
     return (
       this.loggedOutMarkup()
     );

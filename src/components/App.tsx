@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import Home from './Home';
 
 import PageHeader from './Navigation/PageHeader';
+// import SideNav from './Navigation/SideNav';
 import Home from './Home';
 import Catalogue from './Catalogue/Catalogue';
 // import AddCourse from '../containers/AddCourse';
@@ -15,9 +16,9 @@ export default class App extends React.Component<{}, never> {
     <Router>
       <main>
         <PageHeader />
+        {/*<SideNav />*/}
         <Route exact path="/" component={Home} />
         <Route exact path="/catalogue" component={Catalogue} />
-        {/*<Route exact path="/catalogue/courses/add" component={AddCourse} />*/}
       </main>
     </Router>
     );
