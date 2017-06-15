@@ -1,5 +1,5 @@
-import { CourseAction } from '../actions/course';
-import { ADD_COURSE } from '../constants';
+import { FormSubmit } from '../actions/form';
+import { SUBMIT_FORM } from '../constants';
 
 const initialState: CoursesState = {
   list: []
@@ -11,11 +11,11 @@ const generateNewCourse = (course: Course): Course => {
   };
 };
 
-const courseReducer = (state: CoursesState = initialState, action: CourseAction): CoursesState => {
+export default (state: CoursesState = initialState, action: FormSubmit): CoursesState => {
   let partialState: Partial<CoursesState> | undefined;
 
   switch (action.type) {
-    case ADD_COURSE:
+    case SUBMIT_FORM:
       partialState = { 
         list: state.list.concat(generateNewCourse(action.value)) 
       }; break;
@@ -23,5 +23,3 @@ const courseReducer = (state: CoursesState = initialState, action: CourseAction)
   }
   return { ...state, ...partialState };
 };
-
-export default courseReducer;

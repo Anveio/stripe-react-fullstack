@@ -20,3 +20,8 @@ declare interface CoursesState {
 declare interface FormState {
   text: string;
 }
+
+declare interface AuthState {
+  inProgress: boolean;
+  
+}

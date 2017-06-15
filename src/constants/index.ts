@@ -21,3 +21,6 @@ export type UPDATE_TEXT_FIELD = typeof UPDATE_TEXT_FIELD;
 
 export const RESET_TEXT_FIELD = 'RESET_TEXT_FIELD';
 export type RESET_TEXT_FIELD = typeof RESET_TEXT_FIELD;
+
+export const SUBMIT_FORM = 'SUBMIT_FORM';
+export type SUBMIT_FORM = typeof SUBMIT_FORM;

@@ -1,16 +1,15 @@
 import AddCourse from '../components/Catalogue/AddCourse';
-import * as courseActions from '../actions/course';
-import * as formActions from '../actions/form';
+import * as actions from '../actions/form';
 import { connect, Dispatch } from 'react-redux';
 
 export const mapStateToProps = (state: RootState) => ({ text: state.form.text });
 
-export const mapDispatchToProps = (dispatch: Dispatch<courseActions.AddCourse>) => {
+export const mapDispatchToProps = (dispatch: Dispatch<actions.FormSubmit>) => {
   return {
-    onTextInput: (value: string) => dispatch(formActions.changeFormText(value)),
+    onTextInput: (value: string) => dispatch(actions.changeFormText(value)),
     onAddCourse: (course: Course) => {
-      dispatch(courseActions.addCourse(course));
-      dispatch(formActions.resetFormText()); 
+      dispatch(actions.submitCourse(course));
+      dispatch(actions.resetFormText()); 
     },
   };
 };
