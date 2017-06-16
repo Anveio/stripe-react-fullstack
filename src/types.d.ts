@@ -2,6 +2,12 @@ declare class Course {
   public readonly name: string;
 }
 
+declare class User {
+  public readonly username: string;
+  public readonly email: string;
+  private readonly password: string;
+}
+
 declare interface RootState {
   enthusiasm: EnthusiasmState;
   courses: CoursesState;

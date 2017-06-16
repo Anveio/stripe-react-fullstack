@@ -23,8 +23,8 @@ const AddCourse = ({text, onTextInput, onAddCourse}: Props): JSX.Element => {
   return (
     <Layout.AnnotatedSection title="Add a course">
       <Card sectioned>
-        <form onSubmit={handleSubmit}>
-          <FormLayout>
+        <FormLayout>
+          <form onSubmit={handleSubmit}>
             <TextField
               label="Course name"
               type="text"
@@ -43,8 +43,8 @@ const AddCourse = ({text, onTextInput, onAddCourse}: Props): JSX.Element => {
               onClick={handleAddCourse}
               accessibilityLabel="Add Course"
             > Add Course</Button>
-          </FormLayout>
-        </form>
+          </form>
+        </FormLayout>
       </Card>
     </Layout.AnnotatedSection>
   );
