@@ -1,5 +1,6 @@
-import * as React from 'react';
-import { Layout, Card, FormLayout, TextField, Button } from '@shopify/polaris';
+import * as React from "react";
+import axios from "axios";
+import { Layout, Card, FormLayout, TextField, Button } from "@shopify/polaris";
 
 export interface Props {
   readonly text: string;
@@ -7,8 +8,9 @@ export interface Props {
   readonly onAddCourse: (course: Course) => void;
 }
 
-const AddCourse = ({text, onTextInput, onAddCourse}: Props): JSX.Element => {
+const AddCourse = ({ text, onTextInput, onAddCourse }: Props): JSX.Element => {
   const handleAddCourse = (): void => {
+    axios.get("http://localhost:7777/api/Catalogue").then(res => console.log(res.data));
     const course: Course = {
       name: text
     };
@@ -37,12 +39,14 @@ const AddCourse = ({text, onTextInput, onAddCourse}: Props): JSX.Element => {
               onChange={onTextInput}
               maxLength={120}
             />
-            <Button 
+            <Button
               primary
               icon="add"
               onClick={handleAddCourse}
               accessibilityLabel="Add Course"
-            > Add Course</Button>
+            >
+              Add Course
+            </Button>
           </form>
         </FormLayout>
       </Card>

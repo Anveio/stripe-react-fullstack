@@ -1,0 +1,30 @@
+{
+  "name": "ps-admin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Shovon Hasan <im.shovonhasan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon ./start.js --legacy-watch",
+    "client": "cd ../client && npm start"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "express-validator": "^3.2.0",
+    "mongoose": "^4.10.7",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0",
+    "validator": "^7.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0",
+    "nodemon": "^1.11.0"
+  }
+}

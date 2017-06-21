@@ -1,0 +1,6 @@
+node_modules/
+*.log
+variables.env
+variables.env.now
+.vscode/settings.json
+tsconfig.json
