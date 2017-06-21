@@ -4,10 +4,10 @@ const path = require("path");
 
 require("dotenv").config({ path: "variables.env" });
 
-// mongoose.connect(process.env.DATABASE);
-// mongoose.connection.on("error", err => {
-//   console.error(`Error connecting to database ${err.message}`);
-// });
+mongoose.connect(process.env.DATABASE);
+mongoose.connection.on("error", err => {
+  console.error(`Error connecting to database ${err.message}`);
+});
 
 const app = require("./app");
 
@@ -30,7 +30,9 @@ switch (app.get("env")) {
     return console.log("Invalid environment setting");
 }
 
-app.set("port", process.env.PORT || 3000);
+require("./models/User");
+
+app.set("port", process.env.PORT || 7777);
 const server = app.listen(app.get("port"), () => {
   console.log(`Server running on port ${server.address().port}`);
 });
