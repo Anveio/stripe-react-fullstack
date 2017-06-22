@@ -1,13 +1,33 @@
-import { AccountAction } from '../actions/auth'; 
-import { CONNECT_ACCOUNT, DISCONNECT_ACCOUNT } from '../constants';
+import { AuthAction, RegisterAccountAction } from '../actions/auth';
+import { UPDATE_FIELD_AUTH } from '../constants';
 
-export default (state: AuthState, action: AccountAction): AuthState => {
-  // let partialState: Partial<AuthState> | undefined;
+const emptyAuthForm: AuthTextField = { text: '', error: null };
+
+const initialState: SignupForm = {
+  email: emptyAuthForm,
+  username: emptyAuthForm,
+  password: emptyAuthForm
+};
+
+export default (
+  state = initialState,
+  action: AuthAction | RegisterAccountAction
+): SignupForm => {
+  let partialState: Partial<SignupForm> | undefined;
+
   switch (action.type) {
-    case CONNECT_ACCOUNT: 
+    case UPDATE_FIELD_AUTH:
+      partialState = {
+        [action.key]: {
+          text: action.value
+        }
+      };
+      break;
+    default:
       return state;
-    case DISCONNECT_ACCOUNT:
-      return state;
-    default: return state;
   }
+
+  // console.log({ ...state, ...partialState });
+
+  return { ...state, ...partialState };
 };

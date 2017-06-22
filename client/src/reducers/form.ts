@@ -1,21 +1,17 @@
 import { FormAction } from '../actions/form';
 import { UPDATE_TEXT_FIELD, RESET_TEXT_FIELD } from '../constants';
 
-const emptyAuthForm = { text: '', error: null };
+// const emptyAuthField = { text: '', error: null };
 
-const initialState: AppForms = {
-  addCourse: {
-    text: ''
-  },
-  signup: {
-    email: emptyAuthForm,
-    username: emptyAuthForm,
-    password: emptyAuthForm
-  }
+const initialState: AddCourseForm = {
+  name: { text: '' }
 };
 
-const formUpdateReducer = (state: AppForms = initialState, action: FormAction): AppForms => {
-  let partialState: Partial<AppForms> | undefined;
+export default (
+  state: AddCourseForm = initialState,
+  action: FormAction
+): AddCourseForm => {
+  let partialState: Partial<AddCourseForm> | undefined;
 
   switch (action.type) {
     case UPDATE_TEXT_FIELD:
@@ -23,17 +19,18 @@ const formUpdateReducer = (state: AppForms = initialState, action: FormAction): 
         [action.key]: {
           text: action.value
         }
-      }; break;
+      };
+      break;
     case RESET_TEXT_FIELD:
       partialState = {
         [action.key]: {
           text: action.value
         }
-      }; break;
-    default: return state;
+      };
+      break;
+    default:
+      return state;
   }
 
   return { ...state, ...partialState };
 };
-
-export default formUpdateReducer;

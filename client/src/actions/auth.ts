@@ -1,23 +1,46 @@
 import * as constants from '../constants';
 
-export interface ConnectAccount {
-  type: constants.CONNECT_ACCOUNT;
+// const ROOT_URL = constants.rootUrl();
+
+export interface RegisterAccountRequest {
+  type: constants.REGISTER_ACCOUNT_REQUEST;
+  user: User;
 }
 
-export interface DisconnectAccount {
-  type: constants.DISCONNECT_ACCOUNT;
+export interface RegisterAccountSuccess {
+  type: constants.REGISTER_ACCOUNT_SUCCESS;
 }
 
-export type AccountAction = ConnectAccount | DisconnectAccount;
+export interface RegisterAccountFailure {
+  type: constants.REGISTER_ACCOUNT_FAILURE;
+}
 
-export function connectAccount(): ConnectAccount {
+export interface AuthFieldUpdate {
+  type: constants.UPDATE_FIELD_AUTH;
+  key: string;
+  value: string;
+}
+
+export type AuthAction = AuthFieldUpdate;
+export type RegisterAccountAction =
+  | RegisterAccountRequest
+  | RegisterAccountFailure
+  | RegisterAccountSuccess;
+
+export function registerAccountReq(user: User): RegisterAccountRequest {
   return {
-    type: constants.CONNECT_ACCOUNT
+    type: constants.REGISTER_ACCOUNT_REQUEST,
+    user
   };
 }
 
-export function disconnectAccount(): DisconnectAccount {
+export function changeAuthFieldText(
+  value: string,
+  key: string
+): AuthFieldUpdate {
   return {
-    type: constants.DISCONNECT_ACCOUNT
+    type: constants.UPDATE_FIELD_AUTH,
+    key,
+    value
   };
 }

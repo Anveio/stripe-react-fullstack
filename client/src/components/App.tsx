@@ -8,6 +8,8 @@ import PageHeader from './Navigation/PageHeader';
 // import SideNav from './Navigation/SideNav';
 import Home from './Home';
 import Catalogue from './Catalogue/Catalogue';
+// import SignupWrapper from './Auth/SignupWrapper';
+import SignupForm from '../containers/SignupForm';
 // import AddCourse from '../containers/AddCourse';
 
 export default class App extends React.Component<{}, never> {
@@ -18,7 +20,8 @@ export default class App extends React.Component<{}, never> {
         <PageHeader />
         {/*<SideNav />*/}
         <Route exact path="/" component={Home} />
-        <Route exact path="/catalogue" component={Catalogue} />
+        <Route path="/catalogue" component={Catalogue} />
+        <Route path="/signup" render={() => { return <SignupForm />; }}/>
       </main>
     </Router>
     );

@@ -8,41 +8,45 @@ declare class User {
   private readonly password: string;
 }
 
-declare interface RootState {
+interface RootState {
   enthusiasm: EnthusiasmState;
   courses: CoursesState;
   forms: AppForms;
 }
 
-declare interface EnthusiasmState { 
-  languageName: string; 
+interface EnthusiasmState {
+  languageName: string;
   level: number;
 }
 
-declare interface CoursesState {
+interface CoursesState {
   list: Course[];
 }
 
-declare interface AppForms {
+interface AppForms {
   signup: SignupForm;
-  addCourse: DefaultTextField;
+  addCourse: AddCourseForm;
 }
 
-declare interface SignupForm {
-  email: DefaultTextField;
-  username: DefaultTextField;
-  password: DefaultTextField;
+interface SignupForm {
+  email: AuthTextField;
+  username: AuthTextField;
+  password: AuthTextField;
 }
 
-declare interface AuthTextField {
+interface AddCourseForm {
+  name: DefaultTextField;
+}
+
+interface AuthTextField {
   text: string;
   error: Error | null;
 }
 
-declare interface DefaultTextField {
-  text: string
+interface DefaultTextField {
+  text: string;
 }
 
-declare interface AuthState {
+interface AuthState {
   inProgress: boolean;
 }
