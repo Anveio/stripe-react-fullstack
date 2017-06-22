@@ -8,6 +8,7 @@ export interface Props {
   readonly onChangeEmail: (value: string) => void;
   readonly onChangePassword: (value: string) => void;
   readonly onChangeUserName: (value: string) => void;
+  readonly onSubmit: (user: User) => void;
 }
 
 export default (props: Props) => {
@@ -17,11 +18,17 @@ export default (props: Props) => {
     password,
     onChangeEmail,
     onChangePassword,
-    onChangeUserName
+    onChangeUserName,
+    onSubmit
   } = props;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    onSubmit({
+      email: email.text,
+      username: username.text,
+      password: password.text
+    });
   };
 
   return (
