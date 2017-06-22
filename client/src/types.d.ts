@@ -4,49 +4,49 @@ declare class Course {
 
 declare class User {
   public readonly username: string;
+  public readonly password: string;
   public readonly email: string;
-  private readonly password: string;
 }
 
 interface RootState {
-  enthusiasm: EnthusiasmState;
-  courses: CoursesState;
-  forms: AppForms;
+  readonly enthusiasm: EnthusiasmState;
+  readonly courses: CoursesState;
+  readonly forms: AppForms;
 }
 
 interface EnthusiasmState {
-  languageName: string;
-  level: number;
+  readonly languageName: string;
+  readonly level: number;
 }
 
 interface CoursesState {
-  list: Course[];
+  readonly list: Course[];
 }
 
 interface AppForms {
-  signup: SignupForm;
-  addCourse: AddCourseForm;
+  readonly signup: SignupForm;
+  readonly addCourse: AddCourseForm;
 }
 
 interface SignupForm {
-  email: AuthTextField;
-  username: AuthTextField;
-  password: AuthTextField;
+  readonly email: AuthTextField;
+  readonly username: AuthTextField;
+  readonly password: AuthTextField;
 }
 
 interface AddCourseForm {
-  name: DefaultTextField;
+  readonly name: DefaultTextField;
 }
 
 interface AuthTextField {
-  text: string;
-  error: Error | null;
+  readonly text: string;
+  readonly error: Error | null;
 }
 
 interface DefaultTextField {
-  text: string;
+  readonly text: string;
 }
 
 interface AuthState {
-  inProgress: boolean;
+ readonly  inProgress: boolean;
 }
