@@ -8,12 +8,12 @@ export interface FormUpdate {
 
 export interface FormSubmit {
   type: constants.SUBMIT_FORM;
-  key: string;
   value: Course;
 }
 
 export interface FormReset {
   type: constants.RESET_TEXT_FIELD;
+  key: string;
   value: string;
 }
 
@@ -30,16 +30,16 @@ export function changeFormText(value: string, key: string): FormUpdate {
 export function submitCourse(course: Course): FormSubmit {
   return {
     type: constants.SUBMIT_FORM,
-    key: 'course',
     value: {
       name: course.name
     }
   };
 }
 
-export function resetFormText(): FormReset {
+export function resetFormText(key: string): FormReset {
   return {
     type: constants.RESET_TEXT_FIELD,
+    key,
     value: ''
   };
 }

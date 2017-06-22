@@ -11,7 +11,7 @@ declare class User {
 declare interface RootState {
   enthusiasm: EnthusiasmState;
   courses: CoursesState;
-  form: FormState;
+  forms: AppForms;
 }
 
 declare interface EnthusiasmState { 
@@ -23,11 +23,26 @@ declare interface CoursesState {
   list: Course[];
 }
 
-declare interface FormState {
+declare interface AppForms {
+  signup: SignupForm;
+  addCourse: DefaultTextField;
+}
+
+declare interface SignupForm {
+  email: DefaultTextField;
+  username: DefaultTextField;
+  password: DefaultTextField;
+}
+
+declare interface AuthTextField {
   text: string;
+  error: Error | null;
+}
+
+declare interface DefaultTextField {
+  text: string
 }
 
 declare interface AuthState {
   inProgress: boolean;
-  
 }

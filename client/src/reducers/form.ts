@@ -1,18 +1,35 @@
 import { FormAction } from '../actions/form';
 import { UPDATE_TEXT_FIELD, RESET_TEXT_FIELD } from '../constants';
 
-const initialState: FormState = {
-  text: ''
+const emptyAuthForm = { text: '', error: null };
+
+const initialState: AppForms = {
+  addCourse: {
+    text: ''
+  },
+  signup: {
+    email: emptyAuthForm,
+    username: emptyAuthForm,
+    password: emptyAuthForm
+  }
 };
 
-const formUpdateReducer = (state: FormState = initialState, action: FormAction): FormState => {
-  let partialState: Partial<FormState> | undefined;
+const formUpdateReducer = (state: AppForms = initialState, action: FormAction): AppForms => {
+  let partialState: Partial<AppForms> | undefined;
 
   switch (action.type) {
     case UPDATE_TEXT_FIELD:
-      partialState = { text: action.value }; break;
+      partialState = {
+        [action.key]: {
+          text: action.value
+        }
+      }; break;
     case RESET_TEXT_FIELD:
-      partialState = { text: action.value }; break;
+      partialState = {
+        [action.key]: {
+          text: action.value
+        }
+      }; break;
     default: return state;
   }
 
