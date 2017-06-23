@@ -36,6 +36,7 @@ const AddCourse = ({ text, onTextInput, onAddCourse }: Props): JSX.Element => {
               helpText="Type in the name and number of the course you want to add."
               onChange={onTextInput}
               maxLength={120}
+              
             />
             <Button
               primary

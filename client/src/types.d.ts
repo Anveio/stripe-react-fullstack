@@ -1,3 +1,9 @@
+declare class InternalJsonResponse {
+  res: Response;
+  status: number;
+  content: Object;
+}
+
 declare class Course {
   public readonly name: string;
 }
@@ -5,48 +11,72 @@ declare class Course {
 declare class User {
   public readonly username: string;
   public readonly email: string;
-  private readonly password: string;
 }
 
 interface RootState {
-  enthusiasm: EnthusiasmState;
-  courses: CoursesState;
-  forms: AppForms;
+  readonly currentUser: AccountConnection;
+  readonly enthusiasm: EnthusiasmState;
+  readonly courses: CoursesState;
+  readonly forms: AppForms;
+}
+
+interface AccountConnection {
+  account: User | null;
 }
 
 interface EnthusiasmState {
-  languageName: string;
-  level: number;
+  readonly languageName: string;
+  readonly level: number;
 }
 
 interface CoursesState {
-  list: Course[];
+  readonly list: Course[];
 }
 
 interface AppForms {
-  signup: SignupForm;
-  addCourse: AddCourseForm;
+  readonly signup: SignupForm;
+  readonly addCourse: AddCourseForm;
 }
 
+declare type FormStatus = 'success' | 'info' | 'warning' | 'critical';
+
 interface SignupForm {
-  email: AuthTextField;
-  username: AuthTextField;
-  password: AuthTextField;
+  readonly validationError?: string;
+  readonly email: AuthTextField;
+  readonly username: AuthTextField;
+  readonly password: AuthTextField;
+  readonly passwordConf: AuthTextField;
+  readonly loading: boolean;
+}
+
+interface RegistrationData {
+  readonly email: string;
+  readonly username: string;
+  readonly password: string;
+  readonly passwordConf: string;
 }
 
 interface AddCourseForm {
-  name: DefaultTextField;
+  readonly name: DefaultTextField;
 }
 
 interface AuthTextField {
-  text: string;
-  error: Error | null;
+  readonly text: string;
+  readonly error: string | null;
 }
 
 interface DefaultTextField {
-  text: string;
+  readonly text: string;
 }
 
-interface AuthState {
-  inProgress: boolean;
+declare type SignupFieldKey =
+  | 'username'
+  | 'email'
+  | 'password'
+  | 'passwordConf';
+
+interface SignupValidationError {
+  readonly param: SignupFieldKey | 'server-error';
+  readonly msg: string;
+  readonly value: string;
 }
