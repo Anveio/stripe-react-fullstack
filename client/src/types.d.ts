@@ -38,7 +38,10 @@ interface AppForms {
   readonly addCourse: AddCourseForm;
 }
 
+declare type FormStatus = 'success' | 'info' | 'warning' | 'critical';
+
 interface SignupForm {
+  readonly validationError?: string;
   readonly email: AuthTextField;
   readonly username: AuthTextField;
   readonly password: AuthTextField;
@@ -66,23 +69,14 @@ interface DefaultTextField {
   readonly text: string;
 }
 
-interface AuthState {
-  readonly inProgress: boolean;
-}
-
 declare type SignupFieldKey =
   | 'username'
   | 'email'
   | 'password'
   | 'passwordConf';
 
-interface SignupValidationErrorRes {
-  readonly param: (
-    | 'username'
-    | 'email'
-    | 'password'
-    | 'passwordConf'
-    | 'server-error');
+interface SignupValidationError {
+  readonly param: SignupFieldKey | 'server-error';
   readonly msg: string;
   readonly value: string;
 }

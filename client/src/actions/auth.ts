@@ -11,7 +11,7 @@ export interface RegisterAccountSuccess {
 
 export interface RegisterAccountFailure {
   type: constants.REGISTER_ACCOUNT_FAILURE;
-  errors: SignupValidationErrorRes[];
+  errors?: SignupValidationError[] | string;
 }
 
 export interface AuthFieldUpdate {
@@ -56,7 +56,7 @@ export const registerAccountSuccess = (): RegisterAccountSuccess => {
 };
 
 export const registerAccountFailure = (
-  errors: SignupValidationErrorRes[]
+  errors: SignupValidationError[]
 ): RegisterAccountFailure => {
   return {
     type: constants.REGISTER_ACCOUNT_FAILURE,

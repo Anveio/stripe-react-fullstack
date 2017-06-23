@@ -1,14 +1,16 @@
-const express = require("express");
-const session = require("express-session");
-const mongoose = require("mongoose");
-const MongoStore = require("connect-mongo")(session);
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-const passport = require("passport");
-const expressValidator = require("express-validator");
+const express = require('express');
+const session = require('express-session');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const expressValidator = require('express-validator');
+const errorHandlers = require('./handlers/errorHandlers');
+require('./handlers/passport');
 
-const routes = require("./routes");
+const routes = require('./routes');
 
 const app = express();
 
@@ -33,20 +35,26 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Origin', '*');
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
   );
-  res.header("Access-Control-Allow-Credentials", "true");
+  res.header('Access-Control-Allow-Credentials', 'true');
   res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, Content-Length, X-Requested-With"
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With'
   );
-  res.header("Access-Control-Allow-Methods", "GET, POST");
+  res.header('Access-Control-Allow-Methods', 'GET, POST');
   next();
 });
 
-app.use("/api", routes);
+app.use('/api', routes);
+
+app.use(errorHandlers.displayAuthenticationError);
+
+if (app.get('env') === 'development') {
+  app.use(errorHandlers.developmentErrors);
+}
 
 module.exports = app;

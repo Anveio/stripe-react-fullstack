@@ -36,19 +36,30 @@ export default (
       };
       break;
     case REGISTER_ACCOUNT_FAILURE:
-      partialState = action.errors.reduce(
-        (newPartialState, error: SignupValidationErrorRes) => {
-          return Object.assign(newPartialState, {
-            [error.param]: {
-              error: error.msg
-            }
-          });
-        },
-        {}
-      );
-
+      if (action.errors instanceof Array) {
+        partialState = action.errors.reduce(
+          (
+            newPartialState: Partial<SignupForm>,
+            error: SignupValidationError
+          ) => {
+            return Object.assign(newPartialState, {
+              [error.param]: {
+                error: error.msg
+              }
+            });
+          },
+          { loading: false }
+        );
+      } else {
+        partialState = {
+          validationError: action.errors
+        };
+      }
       break;
     case REGISTER_ACCOUNT_SUCCESS:
+      partialState = {
+        loading: false
+      };
       break;
     default:
       return state;

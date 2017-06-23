@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { Layout, FormLayout, Card, TextField, Button } from '@shopify/polaris';
+import AuthFormBanner from './AuthFormBanner';
 
 export interface Props {
+  readonly loading: boolean;
   readonly email: AuthTextField;
   readonly username: AuthTextField;
   readonly password: AuthTextField;
   readonly passwordConf: AuthTextField;
+  readonly validationError?: string;
   readonly onChangeEmail: (value: string) => void;
   readonly onChangeUserName: (value: string) => void;
   readonly onChangePassword: (value: string) => void;
@@ -19,6 +22,7 @@ export default (props: Props) => {
     username,
     password,
     passwordConf,
+    validationError,
     onChangeEmail,
     onChangeUserName,
     onChangePassword,
@@ -54,10 +58,17 @@ export default (props: Props) => {
     );
   };
 
+  const displayBanner = () => {
+    return validationError
+      ? <AuthFormBanner title={'Error signing up.'} message={validationError} />
+      : null;
+  };
+
   return (
     <Layout>
       <Card sectioned>
         <FormLayout>
+          {displayBanner()}
           <form action="post" onSubmit={handleFormSubmit}>
             <TextField
               label="Email address"

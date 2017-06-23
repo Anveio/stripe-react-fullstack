@@ -7,6 +7,7 @@ import { rootUrl } from '../constants';
 
 const mapStateToProps = (state: RootState): SignupForm => {
   const {
+    validationError,
     email,
     username,
     password,
@@ -15,6 +16,7 @@ const mapStateToProps = (state: RootState): SignupForm => {
   } = state.forms.signup;
 
   return {
+    validationError,
     email,
     username,
     password,
@@ -43,9 +45,11 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
         .post(`${rootUrl()}/api/signup`, payload)
         .then(
           newUser => {
+            console.log('SUCCESS');
             dispatch(actions.registerAccountSuccess());
           },
           errors => {
+            console.log(errors.response.data);
             dispatch(actions.registerAccountFailure(errors.response.data));
           }
         )

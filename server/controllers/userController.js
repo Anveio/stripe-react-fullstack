@@ -30,17 +30,16 @@ exports.validateSignup = (req, res, next) => {
   if (errors) {
     sendJson(res, 400, errors);
   }
+  res.status(202);
   next();
 };
 
-exports.createUser = async (req, res) => {
-  console.log(req.body);
+exports.createUser = async (req, res, next) => {
   const { email, username } = req.body;
 
-  const user = new User({ email, name: username });
+  const user = new User({ email, username });
   const createUserWithPromise = promisify(User.register, User);
   await createUserWithPromise(user, req.body.password);
-
-  sendJson(res, 200, req.body);
-  return;
+  res.status(201);
+  next();
 };

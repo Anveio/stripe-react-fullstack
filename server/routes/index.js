@@ -10,8 +10,9 @@ router.get('/Catalogue', userController.showUser);
 router.post(
   '/signup',
   userController.validateSignup,
-  catchErrors(userController.createUser)
-  // authController.login
+  catchErrors(userController.createUser),
+  authController.login
+  // userController.createUser
 );
 
 module.exports = router;
