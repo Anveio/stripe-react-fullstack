@@ -8,9 +8,6 @@ exports.showUser = (req, res) => {
 };
 
 exports.validateSignup = (req, res, next) => {
-  console.log(req.body);
-  // let body = Object.assign({}, req.body);
-
   req.sanitizeBody('username');
   req.checkBody('username', 'Please enter a username.').notEmpty();
   req.checkBody('email', `That email isn't valid.`).isEmail();
@@ -19,7 +16,9 @@ exports.validateSignup = (req, res, next) => {
     remove_extension: false,
     gmail_remove_subaddress: false
   });
+  req.checkBody('password', 'Password must be at least 6 characters').len(6);
   req.checkBody('password', 'Password cannot be blank').notEmpty();
+
   req
     .checkBody('passwordConf', 'Confirmed password cannot be blank')
     .notEmpty();
@@ -27,21 +26,21 @@ exports.validateSignup = (req, res, next) => {
     .checkBody('passwordConf', "Your passwords don't match.")
     .equals(req.body.password);
 
-  // console.log(req.body);
-
   const errors = req.validationErrors();
   if (errors) {
-    console.log('There were errors');
-    console.log(errors);
     sendJson(res, 400, errors);
   }
-  // console.log(req.body);
   next();
 };
 
-exports.createUser = (req, res) => {
-  const { email, name } = req.body;
+exports.createUser = async (req, res) => {
+  console.log(req.body);
+  const { email, username } = req.body;
 
-  const user = new User({ email, name });
-  console.log(`User ready for creation`);
+  const user = new User({ email, name: username });
+  const createUserWithPromise = promisify(User.register, User);
+  await createUserWithPromise(user, req.body.password);
+
+  sendJson(res, 200, req.body);
+  return;
 };

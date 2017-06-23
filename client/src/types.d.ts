@@ -77,7 +77,12 @@ declare type SignupFieldKey =
   | 'passwordConf';
 
 interface SignupValidationErrorRes {
-  readonly param: ('username' | 'email' | 'password' | 'passwordConf');
+  readonly param: (
+    | 'username'
+    | 'email'
+    | 'password'
+    | 'passwordConf'
+    | 'server-error');
   readonly msg: string;
   readonly value: string;
 }

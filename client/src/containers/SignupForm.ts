@@ -46,15 +46,20 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
             dispatch(actions.registerAccountSuccess());
           },
           errors => {
-            // console.log(
-            //   `Errors in registering user: ${Object.keys(
-            //     errors.response.data['0']
-            //   )}`
-            // );
             dispatch(actions.registerAccountFailure(errors.response.data));
           }
         )
-        .catch();
+        .catch(reason => {
+          dispatch(
+            actions.registerAccountFailure([
+              {
+                param: 'server-error',
+                msg: reason.msg,
+                value: ''
+              }
+            ])
+          );
+        });
     }
   };
 };

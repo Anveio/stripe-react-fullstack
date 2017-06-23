@@ -44,6 +44,16 @@ export default (props: Props) => {
     return error ? error : false;
   };
 
+  const validForm = (): boolean => {
+    // Todo: add realtime client side validation
+    return !(
+      !!email.text &&
+      !!username.text &&
+      !!password.text &&
+      !!passwordConf.text
+    );
+  };
+
   return (
     <Layout>
       <Card sectioned>
@@ -56,6 +66,7 @@ export default (props: Props) => {
               placeholder="e.g. name@business.com"
               onChange={onChangeEmail}
               error={errMsg(email.error)}
+              spellCheck={false}
             />
             <TextField
               label="Username"
@@ -63,7 +74,8 @@ export default (props: Props) => {
               value={username.text}
               placeholder="No spaces, numbers allowed."
               onChange={onChangeUserName}
-              error={errMsg(email.error)}
+              error={errMsg(username.error)}
+              spellCheck={false}
             />
             <TextField
               label="Password"
@@ -72,7 +84,7 @@ export default (props: Props) => {
               placeholder="At least 6 characters."
               min={6}
               onChange={onChangePassword}
-              error={errMsg(email.error)}
+              error={errMsg(password.error)}
             />
             <TextField
               label="Confirm Password"
@@ -81,10 +93,15 @@ export default (props: Props) => {
               placeholder="Same as your password."
               min={6}
               onChange={onChangePasswordConf}
-              error={errMsg(email.error)}
+              error={errMsg(passwordConf.error)}
             />
             <br />
-            <Button primary icon="circleChevronUp" onClick={handleSubmit}>
+            <Button
+              primary
+              icon="circleChevronUp"
+              onClick={handleSubmit}
+              disabled={validForm()}
+            >
               Sign up.
             </Button>
           </form>

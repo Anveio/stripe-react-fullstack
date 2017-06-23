@@ -10,7 +10,7 @@ router.get('/Catalogue', userController.showUser);
 router.post(
   '/signup',
   userController.validateSignup,
-  userController.createUser
+  catchErrors(userController.createUser)
   // authController.login
 );
 

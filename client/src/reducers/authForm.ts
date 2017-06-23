@@ -36,13 +36,6 @@ export default (
       };
       break;
     case REGISTER_ACCOUNT_FAILURE:
-      console.log(action.errors);
-      //       partialState = {
-      //   [error.param]: {
-      //     error: error.msg
-      //   }
-      // };
-
       partialState = action.errors.reduce(
         (newPartialState, error: SignupValidationErrorRes) => {
           return Object.assign(newPartialState, {
@@ -53,23 +46,6 @@ export default (
         },
         {}
       );
-      console.log(partialState);
-
-      // for (let error in action.errors) {
-      //   if (action.errors.hasOwnProperty(error)) {
-      //     partialState = {
-      //       [action.errors[error].param]: {
-      //         error: new Error(action.errors[error].msg)
-      //       }
-      //     };
-      //   }
-      // }
-
-      // partialState = {
-      //   [action.errors.param]: {
-      //     error: action.errors.msg
-      //   }
-      // };
 
       break;
     case REGISTER_ACCOUNT_SUCCESS:
@@ -77,6 +53,5 @@ export default (
     default:
       return state;
   }
-  console.log({ ...state, ...partialState });
   return { ...state, ...partialState };
 };
