@@ -35,7 +35,8 @@ const store = createStore<RootState>(rootReducer, {
     signup: {
       email: emptyAuthForm,
       username: emptyAuthForm,
-      password: emptyAuthForm
+      password: emptyAuthForm,
+      passwordConf: emptyAuthForm
     },
     addCourse: {
       name: { text: '' }

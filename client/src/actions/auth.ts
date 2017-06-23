@@ -4,15 +4,17 @@ import * as constants from '../constants';
 
 export interface RegisterAccountRequest {
   type: constants.REGISTER_ACCOUNT_REQUEST;
-  user: User;
+  data: RegistrationData;
 }
 
 export interface RegisterAccountSuccess {
   type: constants.REGISTER_ACCOUNT_SUCCESS;
+  data: RegistrationData;
 }
 
 export interface RegisterAccountFailure {
   type: constants.REGISTER_ACCOUNT_FAILURE;
+  error: Error;
 }
 
 export interface AuthFieldUpdate {
@@ -21,26 +23,44 @@ export interface AuthFieldUpdate {
   value: string;
 }
 
-export type AuthAction = AuthFieldUpdate;
+export type AuthAction = AuthFieldUpdate | RegisterAccountAction;
 export type RegisterAccountAction =
   | RegisterAccountRequest
   | RegisterAccountFailure
   | RegisterAccountSuccess;
 
-export function registerAccountReq(user: User): RegisterAccountRequest {
+export const registerAccountRequest = (
+  data: RegistrationData
+): RegisterAccountRequest => {
   return {
     type: constants.REGISTER_ACCOUNT_REQUEST,
-    user
+    data
   };
-}
+};
 
-export function changeAuthFieldText(
+export const registerAccountSuccess = (data: any): RegisterAccountSuccess => {
+  return {
+    type: constants.REGISTER_ACCOUNT_SUCCESS,
+    data
+  };
+};
+
+export const registerAccountFailure = (
+  error: Error
+): RegisterAccountFailure => {
+  return {
+    type: constants.REGISTER_ACCOUNT_FAILURE,
+    error
+  };
+};
+
+export const changeAuthFieldText = (
   value: string,
   key: string
-): AuthFieldUpdate {
+): AuthFieldUpdate => {
   return {
     type: constants.UPDATE_FIELD_AUTH,
     key,
     value
   };
-}
+};

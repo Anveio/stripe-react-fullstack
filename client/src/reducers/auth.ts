@@ -6,7 +6,8 @@ const emptyAuthForm: AuthTextField = { text: '', error: null };
 const initialState: SignupForm = {
   email: emptyAuthForm,
   username: emptyAuthForm,
-  password: emptyAuthForm
+  password: emptyAuthForm,
+  passwordConf: emptyAuthForm
 };
 
 export default (

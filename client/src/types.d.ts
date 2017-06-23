@@ -2,12 +2,6 @@ declare class Course {
   public readonly name: string;
 }
 
-declare class User {
-  public readonly username: string;
-  public readonly password: string;
-  public readonly email: string;
-}
-
 interface RootState {
   readonly enthusiasm: EnthusiasmState;
   readonly courses: CoursesState;
@@ -32,6 +26,14 @@ interface SignupForm {
   readonly email: AuthTextField;
   readonly username: AuthTextField;
   readonly password: AuthTextField;
+  readonly passwordConf: AuthTextField;
+}
+
+interface RegistrationData {
+  readonly email: string;
+  readonly username: string;
+  readonly password: string;
+  readonly passwordConf: string;
 }
 
 interface AddCourseForm {
@@ -48,5 +50,5 @@ interface DefaultTextField {
 }
 
 interface AuthState {
- readonly  inProgress: boolean;
+  readonly inProgress: boolean;
 }
