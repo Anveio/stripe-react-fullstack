@@ -45,11 +45,9 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
         .post(`${rootUrl()}/api/signup`, payload)
         .then(
           newUser => {
-            console.log('SUCCESS');
             dispatch(actions.registerAccountSuccess());
           },
           errors => {
-            console.log(errors.response.data);
             dispatch(actions.registerAccountFailure(errors.response.data));
           }
         )
