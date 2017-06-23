@@ -1,8 +1,9 @@
 import { combineReducers, createStore } from 'redux';
 import { default as enthusiasm } from './reducers/enthusiasm';
 import { default as courses } from './reducers/course';
-import { default as addCourse } from './reducers/form';
-import { default as signup } from './reducers/auth';
+import { default as addCourse } from './reducers/textForm';
+import { default as signup } from './reducers/authForm';
+import { default as currentUser } from './reducers/auth';
 
 /*
 TODO: TypeScript doesn't seem to properly check if the object passed to
@@ -16,6 +17,7 @@ const forms = combineReducers<AppForms>({
 });
 
 const rootReducer = combineReducers<RootState>({
+  currentUser,
   forms,
   courses,
   enthusiasm
@@ -24,6 +26,9 @@ const rootReducer = combineReducers<RootState>({
 const emptyAuthForm = { text: '', error: null };
 
 const store = createStore<RootState>(rootReducer, {
+  currentUser: {
+    account: null
+  },
   enthusiasm: {
     level: 1,
     languageName: 'TypeScript'
@@ -36,7 +41,8 @@ const store = createStore<RootState>(rootReducer, {
       email: emptyAuthForm,
       username: emptyAuthForm,
       password: emptyAuthForm,
-      passwordConf: emptyAuthForm
+      passwordConf: emptyAuthForm,
+      loading: false
     },
     addCourse: {
       name: { text: '' }

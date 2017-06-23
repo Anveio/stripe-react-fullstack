@@ -1,7 +1,5 @@
 import * as constants from '../constants';
 
-// const ROOT_URL = constants.rootUrl();
-
 export interface RegisterAccountRequest {
   type: constants.REGISTER_ACCOUNT_REQUEST;
   data: RegistrationData;
@@ -9,25 +7,38 @@ export interface RegisterAccountRequest {
 
 export interface RegisterAccountSuccess {
   type: constants.REGISTER_ACCOUNT_SUCCESS;
-  data: RegistrationData;
 }
 
 export interface RegisterAccountFailure {
   type: constants.REGISTER_ACCOUNT_FAILURE;
-  error: Error;
+  errors: SignupValidationErrorRes[];
 }
 
 export interface AuthFieldUpdate {
   type: constants.UPDATE_FIELD_AUTH;
-  key: string;
+  key: SignupFieldKey;
   value: string;
 }
 
-export type AuthAction = AuthFieldUpdate | RegisterAccountAction;
+export interface LoginAction {
+  type: constants.LOGIN_USER;
+  payload: User;
+}
+
+export interface LogoutAction {
+  type: constants.LOGOUT_USER;
+}
+
+export type AuthAction =
+  | AuthFieldUpdate
+  | RegisterAccountAction
+  | AccountConnectionAction;
 export type RegisterAccountAction =
   | RegisterAccountRequest
   | RegisterAccountFailure
   | RegisterAccountSuccess;
+
+export type AccountConnectionAction = LoginAction | LogoutAction;
 
 export const registerAccountRequest = (
   data: RegistrationData
@@ -38,25 +49,24 @@ export const registerAccountRequest = (
   };
 };
 
-export const registerAccountSuccess = (data: any): RegisterAccountSuccess => {
+export const registerAccountSuccess = (): RegisterAccountSuccess => {
   return {
-    type: constants.REGISTER_ACCOUNT_SUCCESS,
-    data
+    type: constants.REGISTER_ACCOUNT_SUCCESS
   };
 };
 
 export const registerAccountFailure = (
-  error: Error
+  errors: SignupValidationErrorRes[]
 ): RegisterAccountFailure => {
   return {
     type: constants.REGISTER_ACCOUNT_FAILURE,
-    error
+    errors
   };
 };
 
 export const changeAuthFieldText = (
   value: string,
-  key: string
+  key: SignupFieldKey
 ): AuthFieldUpdate => {
   return {
     type: constants.UPDATE_FIELD_AUTH,

@@ -3,14 +3,23 @@ import * as actions from '../actions/auth';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
+import { rootUrl } from '../constants';
+
 const mapStateToProps = (state: RootState): SignupForm => {
-  const { email, username, password, passwordConf } = state.forms.signup;
+  const {
+    email,
+    username,
+    password,
+    passwordConf,
+    loading
+  } = state.forms.signup;
 
   return {
     email,
     username,
     password,
-    passwordConf
+    passwordConf,
+    loading
   };
 };
 
@@ -30,9 +39,22 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
     },
     onSubmit: (payload: RegistrationData) => {
       dispatch(actions.registerAccountRequest(payload));
-      axios.post('/api/signup', payload).then(newUser => {
-        dispatch(actions.registerAccountSuccess(newUser));
-      });
+      axios
+        .post(`${rootUrl()}/api/signup`, payload)
+        .then(
+          newUser => {
+            dispatch(actions.registerAccountSuccess());
+          },
+          errors => {
+            // console.log(
+            //   `Errors in registering user: ${Object.keys(
+            //     errors.response.data['0']
+            //   )}`
+            // );
+            dispatch(actions.registerAccountFailure(errors.response.data));
+          }
+        )
+        .catch();
     }
   };
 };

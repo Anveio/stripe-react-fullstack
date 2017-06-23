@@ -1,12 +1,13 @@
-// Might be best to put this in a separate file. 
+// Might be best to put this in a separate file.
 // It's here for now for simplicity's sake.
-export const rootUrl  = () => {
+export const rootUrl = () => {
   switch (window.location.hostname) {
     case 'reduxbusinesssample.herokuapp.com':
       return 'https://reduxbusinesssample.herokuapp.com';
     case 'www.simplemarketplace.com': // Tentative Domain name for website.
       return 'https://www.simplemarketplace.com';
-    default: return 'http://localhost:3000';
+    default:
+      return 'http://localhost:4000';
   }
 };
 
@@ -28,11 +29,11 @@ export type REGISTER_ACCOUNT_SUCCESS = typeof REGISTER_ACCOUNT_SUCCESS;
 export const REGISTER_ACCOUNT_FAILURE = 'REGISTER_ACCOUNT_FAILURE';
 export type REGISTER_ACCOUNT_FAILURE = typeof REGISTER_ACCOUNT_FAILURE;
 
-export const CONNECT_ACCOUNT = 'CONNECT_ACCOUNT';
-export type CONNECT_ACCOUNT = typeof CONNECT_ACCOUNT;
+export const LOGIN_USER = 'LOGIN_USER';
+export type LOGIN_USER = typeof LOGIN_USER;
 
-export const DISCONNECT_ACCOUNT = 'DISCONNECT_ACCOUNT';
-export type DISCONNECT_ACCOUNT = typeof DISCONNECT_ACCOUNT;
+export const LOGOUT_USER = 'LOGOUT_USER';
+export type LOGOUT_USER = typeof LOGOUT_USER;
 
 export const UPDATE_TEXT_FIELD = 'UPDATE_TEXT_FIELD';
 export type UPDATE_TEXT_FIELD = typeof UPDATE_TEXT_FIELD;

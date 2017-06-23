@@ -27,19 +27,21 @@ export default (props: Props) => {
   } = props;
 
   const handleSubmit = (): void => {
-    console.log('Button Clicked');
     onSubmit({
       email: email.text,
       username: username.text,
       password: password.text,
-      passwordConf: password.text
+      passwordConf: passwordConf.text
     });
   };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log('Form submitted');
     handleSubmit();
+  };
+
+  const errMsg = (error: string | null): string | false => {
+    return error ? error : false;
   };
 
   return (
@@ -53,6 +55,7 @@ export default (props: Props) => {
               value={email.text}
               placeholder="e.g. name@business.com"
               onChange={onChangeEmail}
+              error={errMsg(email.error)}
             />
             <TextField
               label="Username"
@@ -60,6 +63,7 @@ export default (props: Props) => {
               value={username.text}
               placeholder="No spaces, numbers allowed."
               onChange={onChangeUserName}
+              error={errMsg(email.error)}
             />
             <TextField
               label="Password"
@@ -68,6 +72,7 @@ export default (props: Props) => {
               placeholder="At least 6 characters."
               min={6}
               onChange={onChangePassword}
+              error={errMsg(email.error)}
             />
             <TextField
               label="Confirm Password"
@@ -76,10 +81,11 @@ export default (props: Props) => {
               placeholder="Same as your password."
               min={6}
               onChange={onChangePasswordConf}
+              error={errMsg(email.error)}
             />
             <br />
-            <Button primary icon="circleChevronRight" onClick={handleSubmit}>
-              Log in.
+            <Button primary icon="circleChevronUp" onClick={handleSubmit}>
+              Sign up.
             </Button>
           </form>
         </FormLayout>

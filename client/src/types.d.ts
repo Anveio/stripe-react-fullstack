@@ -1,11 +1,27 @@
+declare class InternalJsonResponse {
+  res: Response;
+  status: number;
+  content: Object;
+}
+
 declare class Course {
   public readonly name: string;
 }
 
+declare class User {
+  public readonly username: string;
+  public readonly email: string;
+}
+
 interface RootState {
+  readonly currentUser: AccountConnection;
   readonly enthusiasm: EnthusiasmState;
   readonly courses: CoursesState;
   readonly forms: AppForms;
+}
+
+interface AccountConnection {
+  account: User | null;
 }
 
 interface EnthusiasmState {
@@ -27,6 +43,7 @@ interface SignupForm {
   readonly username: AuthTextField;
   readonly password: AuthTextField;
   readonly passwordConf: AuthTextField;
+  readonly loading: boolean;
 }
 
 interface RegistrationData {
@@ -42,7 +59,7 @@ interface AddCourseForm {
 
 interface AuthTextField {
   readonly text: string;
-  readonly error: Error | null;
+  readonly error: string | null;
 }
 
 interface DefaultTextField {
@@ -51,4 +68,16 @@ interface DefaultTextField {
 
 interface AuthState {
   readonly inProgress: boolean;
+}
+
+declare type SignupFieldKey =
+  | 'username'
+  | 'email'
+  | 'password'
+  | 'passwordConf';
+
+interface SignupValidationErrorRes {
+  readonly param: ('username' | 'email' | 'password' | 'passwordConf');
+  readonly msg: string;
+  readonly value: string;
 }
