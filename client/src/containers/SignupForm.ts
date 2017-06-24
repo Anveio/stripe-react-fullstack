@@ -1,5 +1,6 @@
 import SignupForm from '../components/Auth/SignupForm';
 import * as actions from '../actions/auth';
+import { pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -46,6 +47,13 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
         .then(
           newUser => {
             dispatch(actions.registerAccountSuccess());
+            dispatch(
+              pushNotification({
+                status: 'success',
+                title: 'Account creation successful.',
+                message: 'Your account has successfully been created!'
+              })
+            );
           },
           errors => {
             dispatch(actions.registerAccountFailure(errors.response.data));

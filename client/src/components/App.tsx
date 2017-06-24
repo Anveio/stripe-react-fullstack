@@ -11,19 +11,25 @@ import Catalogue from './Catalogue/Catalogue';
 // import SignupWrapper from './Auth/SignupWrapper';
 import SignupForm from '../containers/SignupForm';
 // import AddCourse from '../containers/AddCourse';
+import Notifications from '../containers/Notifications';
 
 export default class App extends React.Component<{}, never> {
   render() {
     return (
-    <Router>
-      <main>
-        <PageHeader />
-        {/*<SideNav />*/}
-        <Route exact path="/" component={Home} />
-        <Route path="/catalogue" component={Catalogue} />
-        <Route path="/signup" render={() => { return <SignupForm />; }}/>
-      </main>
-    </Router>
+      <Router>
+        <main>
+          <PageHeader />
+          <Notifications />
+          <Route exact path="/" component={Home} />
+          <Route path="/catalogue" component={Catalogue} />
+          <Route
+            path="/signup"
+            render={() => {
+              return <SignupForm />;
+            }}
+          />
+        </main>
+      </Router>
     );
   }
 }

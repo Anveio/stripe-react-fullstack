@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Layout, FormLayout, Card, TextField, Button } from '@shopify/polaris';
+import {
+  Layout,
+  DisplayText,
+  FormLayout,
+  Card,
+  TextField,
+  Button
+} from '@shopify/polaris';
 import AuthFormBanner from './AuthFormBanner';
 
 export interface Props {
@@ -30,7 +37,7 @@ export default (props: Props) => {
     onSubmit
   } = props;
 
-  const handleSubmit = (): void => {
+  const handleSignUp = (): void => {
     onSubmit({
       email: email.text,
       username: username.text,
@@ -39,9 +46,9 @@ export default (props: Props) => {
     });
   };
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    handleSubmit();
+    handleSignUp();
   };
 
   const errMsg = (error: string | null): string | false => {
@@ -68,8 +75,9 @@ export default (props: Props) => {
     <Layout>
       <Card sectioned>
         <FormLayout>
+          <DisplayText size="medium">Create an account.</DisplayText>
           {displayBanner()}
-          <form action="post" onSubmit={handleFormSubmit}>
+          <form onSubmit={handleSubmit}>
             <TextField
               label="Email address"
               type="email"
@@ -83,7 +91,7 @@ export default (props: Props) => {
               label="Username"
               type="text"
               value={username.text}
-              placeholder="No spaces, numbers allowed."
+              placeholder="No spaces or numbers."
               onChange={onChangeUserName}
               error={errMsg(username.error)}
               spellCheck={false}
@@ -109,9 +117,10 @@ export default (props: Props) => {
             <br />
             <Button
               primary
-              icon="circleChevronUp"
-              onClick={handleSubmit}
+              icon="circleChevronRight"
+              onClick={handleSignUp}
               disabled={validForm()}
+              accessibilityLabel="Sign up"
             >
               Sign up.
             </Button>
