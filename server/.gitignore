@@ -3,3 +3,4 @@ node_modules/
 variables.env
 variables.env.now
 tsconfig.json
+.vscode/
