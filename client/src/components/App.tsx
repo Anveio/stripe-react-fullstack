@@ -5,6 +5,7 @@ import { Page } from '@shopify/polaris';
 import HeaderNav from './Navigation/PageHeader';
 import Home from './Home';
 import SignupForm from '../containers/SignupForm';
+import LoginForm from '../containers/LoginForm';
 import Notifications from '../containers/Notifications';
 
 export default class App extends React.Component<{}, never> {
@@ -19,6 +20,12 @@ export default class App extends React.Component<{}, never> {
             path="/signup"
             render={() => {
               return <SignupForm />;
+            }}
+          />
+          <Route
+            path="/login"
+            render={() => {
+              return <LoginForm />;
             }}
           />
         </Page>

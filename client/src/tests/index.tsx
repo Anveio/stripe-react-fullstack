@@ -5,28 +5,18 @@ import { combineReducers, createStore } from 'redux';
 import App from '../components/App';
 import { default as enthusiasmReducer } from '../reducers/enthusiasm';
 
+import { blankStore } from './fixtures/store';
+
 export default function renderAppWithState(state: RootState) {
   const rootReducer = combineReducers<RootState>({
     enthusiasm: enthusiasmReducer
   });
 
-  const store = createStore<RootState>(rootReducer, {
-    enthusiasm: {
-      level: 1,
-      languageName: 'TypeScript',
-    },
-    courses: {
-      list: []
-    },
-    form: {
-      text: ''
-    }
-  });
-
+  const store = createStore<RootState>(rootReducer, blankStore);
   const wrapper = mount(
     <Provider store={store}>
       <App />
     </Provider>
   );
-  return {store, wrapper};
+  return { store, wrapper };
 }

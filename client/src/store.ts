@@ -3,7 +3,6 @@ import { default as enthusiasm } from './reducers/enthusiasm';
 import { default as courses } from './reducers/course';
 import { default as addCourse } from './reducers/textForm';
 import { default as signup } from './reducers/authForm';
-import { default as currentUser } from './reducers/auth';
 import { default as notifications } from './reducers/notifications';
 
 /*
@@ -19,7 +18,6 @@ const forms = combineReducers<AppForms>({
 
 const rootReducer = combineReducers<RootState>({
   notifications,
-  currentUser,
   forms,
   courses,
   enthusiasm

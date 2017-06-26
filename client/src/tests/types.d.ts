@@ -1,3 +1,4 @@
+
 declare class Course {
   public readonly name: string;
 }
@@ -62,22 +63,11 @@ interface SignupForm {
   readonly loading: boolean;
 }
 
-interface LoginForm {
-  readonly email: AuthTextField;
-  readonly password: AuthTextField;
-  readonly loading: boolean;
-}
-
-interface SignupPayload {
+interface RegistrationData {
   readonly email: string;
   readonly username: string;
   readonly password: string;
   readonly passwordConf: string;
-}
-
-interface LoginPayload {
-  readonly email: string;
-  readonly password: string;
 }
 
 interface AddCourseForm {

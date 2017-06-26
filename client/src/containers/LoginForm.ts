@@ -1,4 +1,4 @@
-import SignupForm from '../components/Auth/SignupForm';
+import LoginForm from '../components/Auth/LoginForm';
 import * as actions from '../actions/auth';
 import { pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
@@ -6,20 +6,12 @@ import axios from 'axios';
 
 import { rootUrl } from '../constants';
 
-const mapStateToProps = (state: RootState): SignupForm => {
-  const {
-    email,
-    username,
-    password,
-    passwordConf,
-    loading
-  } = state.forms.signup;
+const mapStateToProps = (state: RootState): LoginForm => {
+  const { email, password, loading } = state.forms.signup;
 
   return {
     email,
-    username,
     password,
-    passwordConf,
     loading
   };
 };
@@ -29,27 +21,21 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
     onChangeEmail: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'email'));
     },
-    onChangeUserName: (value: string) => {
-      dispatch(actions.changeAuthFieldText(value, 'username'));
-    },
     onChangePassword: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'password'));
     },
-    onChangePasswordConf: (value: string) => {
-      dispatch(actions.changeAuthFieldText(value, 'passwordConf'));
-    },
-    onSubmit: (payload: SignupPayload) => {
-      dispatch(actions.registerAccountRequest(payload));
+    onSubmit: (payload: LoginPayload) => {
+      dispatch(actions.loginRequest(payload));
       axios
         .post(`${rootUrl()}/api/signup`, payload)
         .then(
           newUser => {
-            dispatch(actions.registerAccountSuccess());
+            dispatch(actions.loginSuccess());
             dispatch(
               pushNotification({
                 status: 'success',
-                title: 'Account creation successful.',
-                message: 'Your account has successfully been created!'
+                title: 'Login successful',
+                message: 'You\'re now logged in.'
               })
             );
           },
@@ -63,12 +49,12 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
 
             const data: ExpressValidatorError[] | string = errors.response.data;
             if (data instanceof Array) {
-              dispatch(actions.registerAccountFailure(data));
+              dispatch(actions.loginFailure(data));
             } else {
               dispatch(
                 pushNotification({
                   status: 'critical',
-                  title: 'Account creation unsuccessful.',
+                  title: 'Login unsuccessful.',
                   message: data
                 })
               );
@@ -77,7 +63,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
         )
         .catch(reason => {
           dispatch(
-            actions.registerAccountFailure([
+            actions.loginFailure([
               {
                 param: 'server-error',
                 msg: reason.msg,
@@ -88,7 +74,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
           dispatch(
             pushNotification({
               status: 'critical',
-              title: 'Account creation unsuccessful..',
+              title: 'Login unsuccessful.',
               message: reason.msg
             })
           );
@@ -97,4 +83,4 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

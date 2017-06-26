@@ -18,7 +18,7 @@ export interface Props {
   readonly onChangeUserName: (value: string) => void;
   readonly onChangePassword: (value: string) => void;
   readonly onChangePasswordConf: (value: string) => void;
-  readonly onSubmit: (payload: RegistrationData) => void;
+  readonly onSubmit: (payload: SignupPayload) => void;
 }
 
 export default (props: Props) => {

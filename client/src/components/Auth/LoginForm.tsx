@@ -7,7 +7,7 @@ export interface Props {
   readonly password: AuthTextField;
   readonly onChangeEmail: (value: string) => void;
   readonly onChangePassword: (value: string) => void;
-  readonly onSubmit: (payload: LoginData) => void;
+  readonly onSubmit: (payload: LoginPayload) => void;
 }
 
 export default (props: Props) => {
