@@ -1,6 +1,12 @@
 import * as React from 'react';
-import { Layout, FormLayout, Card, TextField, Button } from '@shopify/polaris';
-import AuthFormBanner from './AuthFormBanner';
+import {
+  Layout,
+  DisplayText,
+  FormLayout,
+  Card,
+  TextField,
+  Button
+} from '@shopify/polaris';
 
 export interface Props {
   readonly loading: boolean;
@@ -8,7 +14,6 @@ export interface Props {
   readonly username: AuthTextField;
   readonly password: AuthTextField;
   readonly passwordConf: AuthTextField;
-  readonly validationError?: string;
   readonly onChangeEmail: (value: string) => void;
   readonly onChangeUserName: (value: string) => void;
   readonly onChangePassword: (value: string) => void;
@@ -22,7 +27,6 @@ export default (props: Props) => {
     username,
     password,
     passwordConf,
-    validationError,
     onChangeEmail,
     onChangeUserName,
     onChangePassword,
@@ -30,7 +34,7 @@ export default (props: Props) => {
     onSubmit
   } = props;
 
-  const handleSubmit = (): void => {
+  const handleSignUp = (): void => {
     onSubmit({
       email: email.text,
       username: username.text,
@@ -39,9 +43,9 @@ export default (props: Props) => {
     });
   };
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    handleSubmit();
+    handleSignUp();
   };
 
   const errMsg = (error: string | null): string | false => {
@@ -58,18 +62,12 @@ export default (props: Props) => {
     );
   };
 
-  const displayBanner = () => {
-    return validationError
-      ? <AuthFormBanner title={'Error signing up.'} message={validationError} />
-      : null;
-  };
-
   return (
-    <Layout>
+    <Layout.Section>
       <Card sectioned>
         <FormLayout>
-          {displayBanner()}
-          <form action="post" onSubmit={handleFormSubmit}>
+          <DisplayText size="medium">Create an account.</DisplayText>
+          <form onSubmit={handleSubmit}>
             <TextField
               label="Email address"
               type="email"
@@ -83,7 +81,7 @@ export default (props: Props) => {
               label="Username"
               type="text"
               value={username.text}
-              placeholder="No spaces, numbers allowed."
+              placeholder="No spaces or numbers."
               onChange={onChangeUserName}
               error={errMsg(username.error)}
               spellCheck={false}
@@ -109,15 +107,16 @@ export default (props: Props) => {
             <br />
             <Button
               primary
-              icon="circleChevronUp"
-              onClick={handleSubmit}
+              icon="circleChevronRight"
+              onClick={handleSignUp}
               disabled={validForm()}
+              accessibilityLabel="Sign up"
             >
               Sign up.
             </Button>
           </form>
         </FormLayout>
       </Card>
-    </Layout>
+    </Layout.Section>
   );
 };

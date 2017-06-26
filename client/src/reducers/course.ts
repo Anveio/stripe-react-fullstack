@@ -11,15 +11,20 @@ const generateNewCourse = (course: Course): Course => {
   };
 };
 
-export default (state: CoursesState = initialState, action: FormSubmit): CoursesState => {
+export default (
+  state: CoursesState = initialState,
+  action: FormSubmit
+): CoursesState => {
   let partialState: Partial<CoursesState> | undefined;
 
   switch (action.type) {
     case SUBMIT_FORM:
-      partialState = { 
-        list: state.list.concat(generateNewCourse(action.value)) 
-      }; break;
-    default: return state;
+      partialState = {
+        list: state.list.concat(generateNewCourse(action.value))
+      };
+      break;
+    default:
+      return state;
   }
   return { ...state, ...partialState };
 };

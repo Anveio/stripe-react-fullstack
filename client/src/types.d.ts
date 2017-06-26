@@ -15,6 +15,7 @@ declare class User {
 
 interface RootState {
   readonly currentUser: AccountConnection;
+  readonly notifications: NotificationsState;
   readonly enthusiasm: EnthusiasmState;
   readonly courses: CoursesState;
   readonly forms: AppForms;
@@ -22,6 +23,25 @@ interface RootState {
 
 interface AccountConnection {
   account: User | null;
+}
+
+interface NotificationsState {
+  fromServer: ServerMessage[];
+}
+
+interface ServerMessage {
+  status: StatusType;
+  title: string;
+  message: string;
+  secondaryAction?: Action;
+  onDismiss?(): void;
+}
+
+interface Action {
+  content?: string;
+  accessibilityLabel?: string;
+  url?: string;
+  onAction?(): void;
 }
 
 interface EnthusiasmState {
@@ -38,10 +58,9 @@ interface AppForms {
   readonly addCourse: AddCourseForm;
 }
 
-declare type FormStatus = 'success' | 'info' | 'warning' | 'critical';
+declare type StatusType = 'success' | 'info' | 'warning' | 'critical';
 
 interface SignupForm {
-  readonly validationError?: string;
   readonly email: AuthTextField;
   readonly username: AuthTextField;
   readonly password: AuthTextField;
@@ -75,7 +94,7 @@ declare type SignupFieldKey =
   | 'password'
   | 'passwordConf';
 
-interface SignupValidationError {
+interface ExpressValidatorError {
   readonly param: SignupFieldKey | 'server-error';
   readonly msg: string;
   readonly value: string;

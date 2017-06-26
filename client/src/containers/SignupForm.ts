@@ -1,5 +1,6 @@
 import SignupForm from '../components/Auth/SignupForm';
 import * as actions from '../actions/auth';
+import { pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -7,7 +8,6 @@ import { rootUrl } from '../constants';
 
 const mapStateToProps = (state: RootState): SignupForm => {
   const {
-    validationError,
     email,
     username,
     password,
@@ -16,7 +16,6 @@ const mapStateToProps = (state: RootState): SignupForm => {
   } = state.forms.signup;
 
   return {
-    validationError,
     email,
     username,
     password,
@@ -46,9 +45,34 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
         .then(
           newUser => {
             dispatch(actions.registerAccountSuccess());
+            dispatch(
+              pushNotification({
+                status: 'success',
+                title: 'Account creation successful.',
+                message: 'Your account has successfully been created!'
+              })
+            );
           },
           errors => {
-            dispatch(actions.registerAccountFailure(errors.response.data));
+            /*
+            If express validator catches an error:
+             'data' will be a SignupValidationError[].
+            If our moongoose User Schema catches an error:
+             'data' will be a string.
+            */
+
+            const data: ExpressValidatorError[] | string = errors.response.data;
+            if (data instanceof Array) {
+              dispatch(actions.registerAccountFailure(data));
+            } else {
+              dispatch(
+                pushNotification({
+                  status: 'critical',
+                  title: 'Account creation unsuccessful.',
+                  message: data
+                })
+              );
+            }
           }
         )
         .catch(reason => {
@@ -60,6 +84,13 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
                 value: ''
               }
             ])
+          );
+          dispatch(
+            pushNotification({
+              status: 'critical',
+              title: 'Account creation unsuccessful..',
+              message: reason.msg
+            })
           );
         });
     }
