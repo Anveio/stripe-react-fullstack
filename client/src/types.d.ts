@@ -61,7 +61,6 @@ interface AppForms {
 declare type StatusType = 'success' | 'info' | 'warning' | 'critical';
 
 interface SignupForm {
-  readonly validationError?: string;
   readonly email: AuthTextField;
   readonly username: AuthTextField;
   readonly password: AuthTextField;
