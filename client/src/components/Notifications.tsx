@@ -27,7 +27,5 @@ export default (notifications: NotificationsState) => {
     });
   };
 
-  return notifications
-    ? <Layout.Section>{notificationsMarkup()}</Layout.Section>
-    : <p>Nothing here.</p>;
+  return <Layout.Section>{notificationsMarkup()}</Layout.Section>;
 };
