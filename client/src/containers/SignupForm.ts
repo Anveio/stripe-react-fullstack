@@ -56,7 +56,25 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
             );
           },
           errors => {
-            dispatch(actions.registerAccountFailure(errors.response.data));
+            /*
+            If express validator catches an error:
+             'data' will be a SignupValidationError[].
+            If our moongoose User Schema catches an error:
+             'data' will be a string.
+            */
+
+            const data: ExpressValidatorError[] | string = errors.response.data;
+            if (data instanceof Array) {
+              dispatch(actions.registerAccountFailure(data));
+            } else {
+              dispatch(
+                pushNotification({
+                  status: 'critical',
+                  title: 'Account creation unsuccessful.',
+                  message: data
+                })
+              );
+            }
           }
         )
         .catch(reason => {
@@ -68,6 +86,13 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
                 value: ''
               }
             ])
+          );
+          dispatch(
+            pushNotification({
+              status: 'success',
+              title: 'Account creation unsuccessful..',
+              message: reason.msg
+            })
           );
         });
     }

@@ -22,9 +22,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*<Layout.AnnotatedSection title="Home">
-        <Card sectioned>
-          <p>Use this page to manage your Pluralsight courses.</p> 
-        </Card> 
-      </Layout.AnnotatedSection>*/

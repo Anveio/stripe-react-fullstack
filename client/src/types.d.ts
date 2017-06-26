@@ -30,7 +30,7 @@ interface NotificationsState {
 }
 
 interface ServerMessage {
-  status: ResponseStatus;
+  status: StatusType;
   title: string;
   message: string;
   secondaryAction?: Action;
@@ -58,7 +58,7 @@ interface AppForms {
   readonly addCourse: AddCourseForm;
 }
 
-declare type ResponseStatus = 'success' | 'info' | 'warning' | 'critical';
+declare type StatusType = 'success' | 'info' | 'warning' | 'critical';
 
 interface SignupForm {
   readonly validationError?: string;
@@ -95,7 +95,7 @@ declare type SignupFieldKey =
   | 'password'
   | 'passwordConf';
 
-interface SignupValidationError {
+interface ExpressValidatorError {
   readonly param: SignupFieldKey | 'server-error';
   readonly msg: string;
   readonly value: string;
