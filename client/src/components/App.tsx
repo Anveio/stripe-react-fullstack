@@ -4,7 +4,6 @@ import { Page } from '@shopify/polaris';
 
 import HeaderNav from './Navigation/PageHeader';
 import Home from './Home';
-import Catalogue from './Catalogue/Catalogue';
 import SignupForm from '../containers/SignupForm';
 import Notifications from '../containers/Notifications';
 
@@ -17,7 +16,6 @@ export default class App extends React.Component<{}, never> {
           <Page title="My Business">
             <Notifications />
             <Route exact path="/" component={Home} />
-            <Route path="/catalogue" component={Catalogue} />
             <Route
               path="/signup"
               render={() => {

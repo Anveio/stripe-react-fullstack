@@ -6,8 +6,7 @@ export default class PageHeader extends React.PureComponent<never, never> {
     return (
       <nav className="Navbar">
         <ul className="Navbar__list">
-          <NavbarLink path="/" text="Home"/>
-          <NavbarLink path="/Catalogue" />
+          <NavbarLink path="/" text="Home" />
           <NavbarLink path="/Signup" />
         </ul>
       </nav>
