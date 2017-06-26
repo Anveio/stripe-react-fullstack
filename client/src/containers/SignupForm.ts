@@ -87,7 +87,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
           );
           dispatch(
             pushNotification({
-              status: 'success',
+              status: 'critical',
               title: 'Account creation unsuccessful..',
               message: reason.msg
             })
