@@ -2,11 +2,11 @@ import AddCourse from '../components/Catalogue/AddCourse';
 import * as actions from '../actions/form';
 import { connect, Dispatch } from 'react-redux';
 
-export const mapStateToProps = (state: RootState): DefaultTextField => {
+const mapStateToProps = (state: RootState): DefaultTextField => {
   return { text: state.forms.addCourse.name.text };
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<actions.FormAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<actions.FormAction>) => {
   return {
     onTextInput: (value: string) =>
       dispatch(actions.changeFormText(value, 'name')),

@@ -32,7 +32,13 @@ const blankStore = {
     account: null
   },
   notifications: {
-    fromServer: []
+    fromServer: [
+      {
+        status: 'critical' as StatusType,
+        title: 'Account creation unsuccessful.',
+        message: 'A user with the given username is already registered'
+      }
+    ]
   },
   enthusiasm: {
     level: 1,

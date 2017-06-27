@@ -48,10 +48,6 @@ export default (props: Props) => {
     handleSignUp();
   };
 
-  const errMsg = (error: string | null): string | false => {
-    return error ? error : false;
-  };
-
   const validForm = (): boolean => {
     // Todo: add realtime client side validation
     return !(
@@ -67,7 +63,7 @@ export default (props: Props) => {
       <Card sectioned>
         <FormLayout>
           <DisplayText size="medium">Create an account.</DisplayText>
-          <form onSubmit={handleSubmit} acceptCharset="ISO-8859-1">
+          <form onSubmit={handleSubmit} acceptCharset="UTF-8">
             <TextField
               label="Email address"
               type="email"
@@ -92,9 +88,9 @@ export default (props: Props) => {
               type="password"
               value={password.text}
               placeholder="At least 6 characters."
-              min={6}
               onChange={onChangePassword}
               error={password.error || false}
+              min={6}
             />
             <TextField
               label="Confirm Password"
@@ -103,7 +99,7 @@ export default (props: Props) => {
               placeholder="Same as your password."
               min={6}
               onChange={onChangePasswordConf}
-              error={errMsg(passwordConf.error)}
+              error={password.error || false}
             />
             <br />
             <Button

@@ -24,7 +24,7 @@ const mapStateToProps = (state: RootState): SignupForm => {
   };
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
   return {
     onChangeEmail: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'email'));

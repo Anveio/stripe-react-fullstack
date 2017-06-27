@@ -1,5 +1,5 @@
-import { PushNotification } from '../actions/notifications';
-import { PUSH_NOTIFICATION } from '../constants';
+import { NotificationAction } from '../actions/notifications';
+import { PUSH_NOTIFICATION, DISMISS_NOTIFICATION } from '../constants';
 
 const initialState = {
   fromServer: []
@@ -7,7 +7,7 @@ const initialState = {
 
 export default (
   state: NotificationsState = initialState,
-  action: PushNotification
+  action: NotificationAction
 ) => {
   let partialState: Partial<NotificationsState> | undefined;
 
@@ -30,7 +30,11 @@ export default (
           onDismiss
         })
       };
-
+      break;
+    case DISMISS_NOTIFICATION:
+      partialState = {
+        fromServer: []
+      };
       break;
     default:
       return state;
