@@ -36,7 +36,17 @@ const blankStore = {
       {
         status: 'critical' as StatusType,
         title: 'Account creation unsuccessful.',
-        message: 'A user with the given username is already registered'
+        message: '1'
+      },
+      {
+        status: 'critical' as StatusType,
+        title: 'Account creation unsuccessful.',
+        message: '2'
+      },
+      {
+        status: 'critical' as StatusType,
+        title: 'Account creation unsuccessful.',
+        message: '3'
       }
     ]
   },

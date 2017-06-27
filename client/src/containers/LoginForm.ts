@@ -1,6 +1,7 @@
 import LoginForm from '../components/Auth/LoginForm';
 import * as actions from '../actions/auth';
-import { pushNotification } from '../actions/notifications';
+import { AccountConnectionAction, connectAccount } from '../actions/connection';
+import { NotificationAction, pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -16,7 +17,11 @@ const mapStateToProps = (state: RootState): LoginForm => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
+const mapDispatchToProps = (
+  dispatch: Dispatch<
+    actions.AuthAction | NotificationAction | AccountConnectionAction
+  >
+) => {
   return {
     onChangeEmail: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'email'));
@@ -31,6 +36,7 @@ const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
         .then(
           json => {
             dispatch(actions.loginSuccess(payload));
+            dispatch(connectAccount(payload));
             dispatch(
               pushNotification({
                 status: 'success',

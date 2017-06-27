@@ -6,7 +6,8 @@ export interface PushNotification {
 }
 
 export interface DismissNotification {
-  type: constants.DISMISS_NOTIFICATION;
+  type: constants.DISMISS_NOTIFICATION_BY_MESSAGE;
+  message: string;
 }
 
 export type NotificationAction = DismissNotification | PushNotification;
@@ -18,8 +19,9 @@ export const pushNotification = (data: ServerMessage): PushNotification => {
   };
 };
 
-export const dismissNotification = (): DismissNotification => {
+export const dismissNotification = (message: string): DismissNotification => {
   return {
-    type: constants.DISMISS_NOTIFICATION
+    type: constants.DISMISS_NOTIFICATION_BY_MESSAGE,
+    message
   };
 };

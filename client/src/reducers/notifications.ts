@@ -1,5 +1,8 @@
 import { NotificationAction } from '../actions/notifications';
-import { PUSH_NOTIFICATION, DISMISS_NOTIFICATION } from '../constants';
+import {
+  PUSH_NOTIFICATION,
+  DISMISS_NOTIFICATION_BY_MESSAGE
+} from '../constants';
 
 const initialState = {
   fromServer: []
@@ -23,9 +26,9 @@ export default (
         })
       };
       break;
-    case DISMISS_NOTIFICATION:
+    case DISMISS_NOTIFICATION_BY_MESSAGE:
       partialState = {
-        fromServer: []
+        fromServer: state.fromServer.filter(el => el.message !== action.message)
       };
       break;
     default:

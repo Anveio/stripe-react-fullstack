@@ -11,8 +11,8 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<DismissNotification>) => {
   return {
-    onDismiss: () => {
-      dispatch(dismissNotification());
+    onDismiss: (message: string) => {
+      dispatch(dismissNotification(message));
     }
   };
 };
