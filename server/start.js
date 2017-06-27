@@ -9,7 +9,7 @@ mongoose.connection.on('error', err => {
   console.error(`Error connecting to database ${err.message}`);
 });
 
-// Models must be registered before importing app.
+// Models must be registered BEFORE importing app.
 require('./models/User');
 
 const app = require('./app');

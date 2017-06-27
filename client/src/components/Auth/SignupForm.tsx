@@ -67,15 +67,16 @@ export default (props: Props) => {
       <Card sectioned>
         <FormLayout>
           <DisplayText size="medium">Create an account.</DisplayText>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} acceptCharset="ISO-8859-1">
             <TextField
               label="Email address"
               type="email"
               value={email.text}
               placeholder="e.g. name@business.com"
               onChange={onChangeEmail}
-              error={errMsg(email.error)}
+              error={email.error || false}
               spellCheck={false}
+              autoFocus
             />
             <TextField
               label="Username"
@@ -83,7 +84,7 @@ export default (props: Props) => {
               value={username.text}
               placeholder="No spaces or numbers."
               onChange={onChangeUserName}
-              error={errMsg(username.error)}
+              error={username.error || false}
               spellCheck={false}
             />
             <TextField
@@ -93,7 +94,7 @@ export default (props: Props) => {
               placeholder="At least 6 characters."
               min={6}
               onChange={onChangePassword}
-              error={errMsg(password.error)}
+              error={password.error || false}
             />
             <TextField
               label="Confirm Password"

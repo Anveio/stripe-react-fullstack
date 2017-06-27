@@ -12,7 +12,8 @@ router.post(
   userController.validateSignup,
   catchErrors(userController.createUser),
   authController.login
-  // userController.createUser
 );
+
+router.post('/login', authController.login);
 
 module.exports = router;

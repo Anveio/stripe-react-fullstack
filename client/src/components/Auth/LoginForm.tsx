@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Layout, Card, FormLayout, TextField, Button } from '@shopify/polaris';
+import {
+  Layout,
+  Card,
+  FormLayout,
+  TextField,
+  Button,
+  DisplayText
+} from '@shopify/polaris';
 
 export interface Props {
   readonly loading: boolean;
@@ -25,10 +32,6 @@ export default (props: Props) => {
     handleLogIn();
   };
 
-  const errMsg = (error: string | null): string | false => {
-    return error ? error : false;
-  };
-
   const validForm = (): boolean => {
     return !(!!email.text && !!password.text);
   };
@@ -37,20 +40,22 @@ export default (props: Props) => {
     <Layout.Section>
       <Card sectioned>
         <FormLayout>
-          <form onSubmit={handleSubmit}>
+          <DisplayText size="medium">Log in.</DisplayText>
+          <form onSubmit={handleSubmit} acceptCharset="ISO-8859-1">
             <TextField
               label="Email address"
               type="email"
               value={email.text}
               onChange={onChangeEmail}
-              error={errMsg(email.error)}
+              error={email.error || false}
+              autoFocus
             />
             <TextField
               label="Password"
               type="password"
               value={password.text}
               onChange={onChangePassword}
-              error={errMsg(password.error)}
+              error={password.error || false}
             />
             <br />
             <Button

@@ -49,6 +49,7 @@ interface CoursesState {
 
 interface AppForms {
   readonly signup: SignupForm;
+  readonly login: LoginForm;
   readonly addCourse: AddCourseForm;
 }
 
@@ -93,14 +94,15 @@ interface DefaultTextField {
   readonly text: string;
 }
 
-declare type SignupFieldKey =
-  | 'username'
-  | 'email'
-  | 'password'
-  | 'passwordConf';
+declare type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';
 
 interface ExpressValidatorError {
-  readonly param: SignupFieldKey | 'server-error';
+  readonly param: AuthFieldKey | 'server-error';
   readonly msg: string;
   readonly value: string;
+}
+
+interface PassportAuthError {
+  message: string;
+  name: string;
 }

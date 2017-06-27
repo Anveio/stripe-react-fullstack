@@ -7,7 +7,7 @@ import axios from 'axios';
 import { rootUrl } from '../constants';
 
 const mapStateToProps = (state: RootState): LoginForm => {
-  const { email, password, loading } = state.forms.signup;
+  const { email, password, loading } = state.forms.login;
 
   return {
     email,
@@ -27,28 +27,23 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
     onSubmit: (payload: LoginPayload) => {
       dispatch(actions.loginRequest(payload));
       axios
-        .post(`${rootUrl()}/api/signup`, payload)
+        .post(`${rootUrl()}/api/login`, payload)
         .then(
-          newUser => {
-            dispatch(actions.loginSuccess());
+          json => {
+            dispatch(actions.loginSuccess(payload));
             dispatch(
               pushNotification({
                 status: 'success',
                 title: 'Login successful',
-                message: 'You\'re now logged in.'
+                // tslint:disable-next-line:quotemark
+                message: "You're now logged in."
               })
             );
           },
           errors => {
-            /*
-            If express validator catches an error:
-             'data' will be a SignupValidationError[].
-            If our moongoose User Schema catches an error:
-             'data' will be a string.
-            */
-
-            const data: ExpressValidatorError[] | string = errors.response.data;
-            if (data instanceof Array) {
+            // console.log(errors.response.data);
+            const data: PassportAuthError = errors.response.data;
+            if (data instanceof Object) {
               dispatch(actions.loginFailure(data));
             } else {
               dispatch(
@@ -63,13 +58,11 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
         )
         .catch(reason => {
           dispatch(
-            actions.loginFailure([
-              {
-                param: 'server-error',
-                msg: reason.msg,
-                value: ''
-              }
-            ])
+            actions.loginFailure({
+              message:
+                'There was problem logging you in. Please try again later.',
+              name: 'miscError'
+            })
           );
           dispatch(
             pushNotification({

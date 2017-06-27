@@ -2,7 +2,7 @@ import * as constants from '../constants';
 
 export interface RegisterAccountRequest {
   type: constants.REGISTER_ACCOUNT_REQUEST;
-  data: SignupPayload;
+  payload: SignupPayload;
 }
 
 export interface RegisterAccountSuccess {
@@ -16,21 +16,22 @@ export interface RegisterAccountFailure {
 
 export interface LoginRequest {
   type: constants.LOGIN_REQUEST;
-  data: LoginPayload;
+  payload: LoginPayload;
 }
 
 export interface LoginSuccess {
   type: constants.LOGIN_SUCCESS;
+  payload: LoginPayload;
 }
 
 export interface LoginFailure {
   type: constants.LOGIN_FAILURE;
-  errors: ExpressValidatorError[];
+  error: PassportAuthError;
 }
 
 export interface AuthFieldUpdate {
   type: constants.UPDATE_FIELD_AUTH;
-  key: SignupFieldKey;
+  key: AuthFieldKey;
   value: string;
 }
 
@@ -43,11 +44,11 @@ export type RegisterAccountAction =
 export type LoginAction = LoginRequest | LoginSuccess | LoginFailure;
 
 export const registerAccountRequest = (
-  data: SignupPayload
+  payload: SignupPayload
 ): RegisterAccountRequest => {
   return {
     type: constants.REGISTER_ACCOUNT_REQUEST,
-    data
+    payload
   };
 };
 
@@ -68,7 +69,7 @@ export const registerAccountFailure = (
 
 export const changeAuthFieldText = (
   value: string,
-  key: SignupFieldKey
+  key: AuthFieldKey
 ): AuthFieldUpdate => {
   return {
     type: constants.UPDATE_FIELD_AUTH,
@@ -77,22 +78,23 @@ export const changeAuthFieldText = (
   };
 };
 
-export const loginRequest = (data: LoginPayload): LoginRequest => {
+export const loginRequest = (payload: LoginPayload): LoginRequest => {
   return {
     type: constants.LOGIN_REQUEST,
-    data
+    payload
   };
 };
 
-export const loginSuccess = (): LoginSuccess => {
+export const loginSuccess = (payload: LoginPayload): LoginSuccess => {
   return {
-    type: constants.LOGIN_SUCCESS
+    type: constants.LOGIN_SUCCESS,
+    payload
   };
 };
 
-export const loginFailure = (errors: ExpressValidatorError[]): LoginFailure => {
+export const loginFailure = (error: PassportAuthError): LoginFailure => {
   return {
     type: constants.LOGIN_FAILURE,
-    errors
+    error
   };
 };
