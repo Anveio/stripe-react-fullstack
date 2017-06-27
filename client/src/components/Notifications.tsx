@@ -10,16 +10,10 @@ export default ({ notifications, onDismiss }: Props) => {
   const notificationsMarkup = () => {
     const serverNotifications = notifications.fromServer;
     return serverNotifications.map((notification, i) => {
-      const { status, title, message, secondaryAction } = notification;
+      const { status, title, message } = notification;
 
       return (
-        <Banner
-          status={status}
-          title={title}
-          secondaryAction={secondaryAction}
-          onDismiss={onDismiss}
-          key={i}
-        >
+        <Banner status={status} title={title} onDismiss={onDismiss} key={i}>
           <p>{message}</p>
         </Banner>
       );

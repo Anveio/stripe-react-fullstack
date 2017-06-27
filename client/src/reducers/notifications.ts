@@ -13,21 +13,13 @@ export default (
 
   switch (action.type) {
     case PUSH_NOTIFICATION:
-      const {
-        status,
-        title,
-        message,
-        onDismiss,
-        secondaryAction
-      } = action.data;
+      const { status, title, message } = action.data;
 
       partialState = {
         fromServer: state.fromServer.concat({
           status,
           title,
-          message,
-          secondaryAction,
-          onDismiss
+          message
         })
       };
       break;

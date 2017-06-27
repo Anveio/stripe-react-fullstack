@@ -27,8 +27,6 @@ interface ServerMessage {
   status: StatusType;
   title: string;
   message: string;
-  secondaryAction?: Action;
-  onDismiss?(): void;
 }
 
 interface Action {

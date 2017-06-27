@@ -43,6 +43,7 @@ export default (
         ) => {
           return Object.assign(newPartialState, {
             [error.param]: {
+              text: '',
               error: error.msg
             }
           });
