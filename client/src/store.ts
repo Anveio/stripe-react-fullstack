@@ -32,23 +32,7 @@ const blankStore = {
     account: null
   },
   notifications: {
-    fromServer: [
-      {
-        status: 'critical' as StatusType,
-        title: 'Account creation unsuccessful.',
-        message: '1'
-      },
-      {
-        status: 'critical' as StatusType,
-        title: 'Account creation unsuccessful.',
-        message: '2'
-      },
-      {
-        status: 'critical' as StatusType,
-        title: 'Account creation unsuccessful.',
-        message: '3'
-      }
-    ]
+    fromServer: []
   },
   enthusiasm: {
     level: 1,
