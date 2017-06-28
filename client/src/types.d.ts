@@ -3,19 +3,18 @@ declare class Course {
 }
 
 declare class User {
-  public readonly username: string;
   public readonly email: string;
 }
 
 interface RootState {
-  readonly currentUser: AccountConnection;
+  readonly currentUser: CurrentUserState;
   readonly notifications: NotificationsState;
   readonly enthusiasm: EnthusiasmState;
   readonly courses: CoursesState;
   readonly forms: AppForms;
 }
 
-interface AccountConnection {
+interface CurrentUserState {
   account: User | null;
 }
 

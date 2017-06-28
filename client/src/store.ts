@@ -5,6 +5,7 @@ import { default as addCourse } from './reducers/textForm';
 import { default as signup } from './reducers/signupForm';
 import { default as login } from './reducers/loginForm';
 import { default as notifications } from './reducers/notifications';
+import { default as currentUser } from './reducers/accountConnection';
 
 /*
 TODO: TypeScript doesn't seem to properly check if the object passed to
@@ -19,6 +20,7 @@ const forms = combineReducers<AppForms>({
 });
 
 const rootReducer = combineReducers<RootState>({
+  currentUser,
   notifications,
   forms,
   courses,

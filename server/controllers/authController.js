@@ -12,7 +12,9 @@ exports.login = (req, res) => {
     }
     if (!user) {
       console.log('!user ' + message);
-      return sendJson(res, 401, message);
+      return sendJson(res, 401, {
+        message: 'Password and/or email are incorrect.'
+      });
     }
     if (user) {
       console.log(user);

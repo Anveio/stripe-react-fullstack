@@ -36,7 +36,7 @@ const mapDispatchToProps = (
         .then(
           json => {
             dispatch(actions.loginSuccess(payload));
-            dispatch(connectAccount(payload));
+            dispatch(connectAccount({ email: payload.email }));
             dispatch(
               pushNotification({
                 status: 'success',
