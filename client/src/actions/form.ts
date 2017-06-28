@@ -1,7 +1,7 @@
 import * as constants from '../constants';
 
 export interface FormUpdate {
-  type: constants.UPDATE_TEXT_FIELD;
+  type: constants.UPDATE_FIELD_TEXT;
   key: string;
   value: string;
 }
@@ -21,7 +21,7 @@ export type FormAction = FormUpdate | FormReset | FormSubmit;
 
 export function changeFormText(value: string, key: string): FormUpdate {
   return {
-    type: constants.UPDATE_TEXT_FIELD,
+    type: constants.UPDATE_FIELD_TEXT,
     key,
     value
   };

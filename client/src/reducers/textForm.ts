@@ -1,5 +1,5 @@
 import { FormAction } from '../actions/form';
-import { UPDATE_TEXT_FIELD, RESET_TEXT_FIELD } from '../constants';
+import { UPDATE_FIELD_TEXT, RESET_TEXT_FIELD } from '../constants';
 
 // const emptyAuthField = { text: '', error: null };
 
@@ -14,7 +14,7 @@ export default (
   let partialState: Partial<AddCourseForm> | undefined;
 
   switch (action.type) {
-    case UPDATE_TEXT_FIELD:
+    case UPDATE_FIELD_TEXT:
       partialState = {
         [action.key]: {
           text: action.value

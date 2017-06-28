@@ -1,20 +1,22 @@
+
 declare class Course {
   public readonly name: string;
 }
 
 declare class User {
+  public readonly username: string;
   public readonly email: string;
 }
 
 interface RootState {
-  readonly currentUser: CurrentUserState;
+  readonly currentUser: AccountConnection;
   readonly notifications: NotificationsState;
   readonly enthusiasm: EnthusiasmState;
   readonly courses: CoursesState;
   readonly forms: AppForms;
 }
 
-interface CurrentUserState {
+interface AccountConnection {
   account: User | null;
 }
 
@@ -26,6 +28,8 @@ interface ServerMessage {
   status: StatusType;
   title: string;
   message: string;
+  secondaryAction?: Action;
+  onDismiss?(): void;
 }
 
 interface Action {
@@ -46,7 +50,6 @@ interface CoursesState {
 
 interface AppForms {
   readonly signup: SignupForm;
-  readonly login: LoginForm;
   readonly addCourse: AddCourseForm;
 }
 
@@ -60,22 +63,11 @@ interface SignupForm {
   readonly loading: boolean;
 }
 
-interface LoginForm {
-  readonly email: AuthTextField;
-  readonly password: AuthTextField;
-  readonly loading: boolean;
-}
-
-interface SignupPayload {
+interface RegistrationData {
   readonly email: string;
   readonly username: string;
   readonly password: string;
   readonly passwordConf: string;
-}
-
-interface LoginPayload {
-  readonly email: string;
-  readonly password: string;
 }
 
 interface AddCourseForm {
@@ -91,15 +83,14 @@ interface DefaultTextField {
   readonly text: string;
 }
 
-declare type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';
+declare type SignupFieldKey =
+  | 'username'
+  | 'email'
+  | 'password'
+  | 'passwordConf';
 
 interface ExpressValidatorError {
-  readonly param: AuthFieldKey | 'server-error';
+  readonly param: SignupFieldKey | 'server-error';
   readonly msg: string;
   readonly value: string;
-}
-
-interface PassportAuthError {
-  message: string;
-  name: string;
 }

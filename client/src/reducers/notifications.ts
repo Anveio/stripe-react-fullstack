@@ -1,5 +1,8 @@
-import { PushNotification } from '../actions/notifications';
-import { PUSH_NOTIFICATION } from '../constants';
+import { NotificationAction } from '../actions/notifications';
+import {
+  PUSH_NOTIFICATION,
+  DISMISS_NOTIFICATION_BY_MESSAGE
+} from '../constants';
 
 const initialState = {
   fromServer: []
@@ -7,30 +10,26 @@ const initialState = {
 
 export default (
   state: NotificationsState = initialState,
-  action: PushNotification
+  action: NotificationAction
 ) => {
   let partialState: Partial<NotificationsState> | undefined;
 
   switch (action.type) {
     case PUSH_NOTIFICATION:
-      const {
-        status,
-        title,
-        message,
-        onDismiss,
-        secondaryAction
-      } = action.data;
+      const { status, title, message } = action.data;
 
       partialState = {
         fromServer: state.fromServer.concat({
           status,
           title,
-          message,
-          secondaryAction,
-          onDismiss
+          message
         })
       };
-
+      break;
+    case DISMISS_NOTIFICATION_BY_MESSAGE:
+      partialState = {
+        fromServer: state.fromServer.filter(el => el.message !== action.message)
+      };
       break;
     default:
       return state;

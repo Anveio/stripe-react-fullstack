@@ -2,9 +2,10 @@ import { combineReducers, createStore } from 'redux';
 import { default as enthusiasm } from './reducers/enthusiasm';
 import { default as courses } from './reducers/course';
 import { default as addCourse } from './reducers/textForm';
-import { default as signup } from './reducers/authForm';
-import { default as currentUser } from './reducers/auth';
+import { default as signup } from './reducers/signupForm';
+import { default as login } from './reducers/loginForm';
 import { default as notifications } from './reducers/notifications';
+import { default as currentUser } from './reducers/accountConnection';
 
 /*
 TODO: TypeScript doesn't seem to properly check if the object passed to
@@ -13,13 +14,14 @@ and it won't be caught by the compiler.
 */
 
 const forms = combineReducers<AppForms>({
-  addCourse,
-  signup
+  signup,
+  login,
+  addCourse
 });
 
 const rootReducer = combineReducers<RootState>({
-  notifications,
   currentUser,
+  notifications,
   forms,
   courses,
   enthusiasm
@@ -47,6 +49,11 @@ const blankStore = {
       username: emptyAuthForm,
       password: emptyAuthForm,
       passwordConf: emptyAuthForm,
+      loading: false
+    },
+    login: {
+      email: emptyAuthForm,
+      password: emptyAuthForm,
       loading: false
     },
     addCourse: {

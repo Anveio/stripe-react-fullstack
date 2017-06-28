@@ -18,7 +18,7 @@ export interface Props {
   readonly onChangeUserName: (value: string) => void;
   readonly onChangePassword: (value: string) => void;
   readonly onChangePasswordConf: (value: string) => void;
-  readonly onSubmit: (payload: RegistrationData) => void;
+  readonly onSubmit: (payload: SignupPayload) => void;
 }
 
 export default (props: Props) => {
@@ -48,10 +48,6 @@ export default (props: Props) => {
     handleSignUp();
   };
 
-  const errMsg = (error: string | null): string | false => {
-    return error ? error : false;
-  };
-
   const validForm = (): boolean => {
     // Todo: add realtime client side validation
     return !(
@@ -67,15 +63,16 @@ export default (props: Props) => {
       <Card sectioned>
         <FormLayout>
           <DisplayText size="medium">Create an account.</DisplayText>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} acceptCharset="UTF-8">
             <TextField
               label="Email address"
               type="email"
               value={email.text}
               placeholder="e.g. name@business.com"
               onChange={onChangeEmail}
-              error={errMsg(email.error)}
+              error={email.error || false}
               spellCheck={false}
+              autoFocus
             />
             <TextField
               label="Username"
@@ -83,7 +80,7 @@ export default (props: Props) => {
               value={username.text}
               placeholder="No spaces or numbers."
               onChange={onChangeUserName}
-              error={errMsg(username.error)}
+              error={username.error || false}
               spellCheck={false}
             />
             <TextField
@@ -91,9 +88,9 @@ export default (props: Props) => {
               type="password"
               value={password.text}
               placeholder="At least 6 characters."
-              min={6}
               onChange={onChangePassword}
-              error={errMsg(password.error)}
+              error={password.error || false}
+              min={6}
             />
             <TextField
               label="Confirm Password"
@@ -102,7 +99,7 @@ export default (props: Props) => {
               placeholder="Same as your password."
               min={6}
               onChange={onChangePasswordConf}
-              error={errMsg(passwordConf.error)}
+              error={password.error || false}
             />
             <br />
             <Button

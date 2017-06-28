@@ -1,11 +1,12 @@
 import * as React from 'react';
 import About from '../components/About';
-import { RootState } from '../types/states';
 import { shallow } from 'enzyme';
-import enthusiasmReducer from '../reducers';
+import enthusiasmReducer from '../reducers/enthusiasm';
 import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from '../constants';
 import { Layout, Card, Button } from '@shopify/polaris';
 import renderAppWithState from './index';
+
+import { blankStore } from './fixtures/store';
 
 // Testing for null type checks are omitted because the TypeScript compiler will catch those errors.
 
@@ -32,7 +33,7 @@ const setup = (state: RootState) => {
   return { store, wrapper, buttons };
 };
 
-describe('About component', () => { 
+describe('About component', () => {
   describe('rendering itself and its children', () => {
     const { enzymeWrapper } = shallowAboutComponent();
     it('renders Layout.AnnotatedSection', () => {
@@ -50,74 +51,61 @@ describe('About component', () => {
 
   describe('reducer for enthusiasm counter', () => {
     it('increases level by 1 when passed INCREMENT_ENTHUSIASM', () => {
-      expect (
-        enthusiasmReducer (
-          { level: 1, languageName: 'TypeScript'},
-          { type: INCREMENT_ENTHUSIASM })
-      ).toEqual(
-        { level: 2, languageName: 'TypeScript'}
-      );
+      expect(
+        enthusiasmReducer(
+          { level: 1, languageName: 'TypeScript' },
+          { type: INCREMENT_ENTHUSIASM }
+        )
+      ).toEqual({ level: 2, languageName: 'TypeScript' });
     });
 
     it('decreases level by 1 when passed DECREMENT_ENTHUSIASM', () => {
       expect(
         enthusiasmReducer(
-          { level: 2, languageName: 'TypeScript'},
-          { type: DECREMENT_ENTHUSIASM })
-      ).toEqual(
-        { level: 1, languageName: 'TypeScript'}
-      );
+          { level: 2, languageName: 'TypeScript' },
+          { type: DECREMENT_ENTHUSIASM }
+        )
+      ).toEqual({ level: 1, languageName: 'TypeScript' });
     });
 
     it('does not reduce level below 1 when passed DECREMENT_ENTHUSIASM', () => {
       expect(
-        enthusiasmReducer (
-          { level: 1, languageName: 'TypeScript'},
-          { type: DECREMENT_ENTHUSIASM })
-      ).toEqual(
-        { level: 1, languageName: 'TypeScript'}
-      );
+        enthusiasmReducer(
+          { level: 1, languageName: 'TypeScript' },
+          { type: DECREMENT_ENTHUSIASM }
+        )
+      ).toEqual({ level: 1, languageName: 'TypeScript' });
     });
   });
 
   describe('clicking buttons', () => {
-    const initialState = {
-      enthusiasm: {
-        level: 1,
-        languageName: 'TypeScript',
-      },
-      courses: {
-        list: []
-      }
-    };
-
     it('initializes with the correct state', () => {
-      const { store } = setup(initialState);
-      expect(store.getState()).toEqual(initialState);
+      const { store } = setup(blankStore);
+      expect(store.getState()).toEqual(blankStore);
     });
 
-    it('increments level by 1 on "+" button click', () => { 
-      const { store, buttons } = setup(initialState);
-      const incrementButton = buttons.at(1);    
+    it('increments level by 1 on "+" button click', () => {
+      const { store, buttons } = setup(blankStore);
+      const incrementButton = buttons.at(1);
       incrementButton.simulate('click');
 
       expect(store.getState()).toEqual({
         enthusiasm: {
           level: 4,
-          languageName: 'TypeScript',
+          languageName: 'TypeScript'
         }
       });
     });
 
     it('decrements level by 1 on "-" button click', () => {
-      const { store, buttons } = setup(initialState);
+      const { store, buttons } = setup(blankStore);
       const decrementButton = buttons.at(0);
 
       decrementButton.simulate('click');
       expect(store.getState()).toEqual({
         enthusiasm: {
           level: 2,
-          languageName: 'TypeScript',
+          languageName: 'TypeScript'
         }
       });
     });

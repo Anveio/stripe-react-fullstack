@@ -24,7 +24,7 @@ const mapStateToProps = (state: RootState): SignupForm => {
   };
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
   return {
     onChangeEmail: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'email'));
@@ -38,7 +38,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
     onChangePasswordConf: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'passwordConf'));
     },
-    onSubmit: (payload: RegistrationData) => {
+    onSubmit: (payload: SignupPayload) => {
       dispatch(actions.registerAccountRequest(payload));
       axios
         .post(`${rootUrl()}/api/signup`, payload)
