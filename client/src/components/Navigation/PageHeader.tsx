@@ -14,7 +14,13 @@ export default ({ account }: CurrentUserState) => {
           <Link to="/" className="Navbar__brand">
             <img src={logo} className="Logo" alt="logo" />
           </Link>
-          <Navbar />
+          <Navbar
+            links={[
+              { path: '/', text: 'Home' },
+              { path: '/Signup' },
+              { path: '/Login' }
+            ]}
+          />
         </div>
       </header>
     );
@@ -27,7 +33,13 @@ export default ({ account }: CurrentUserState) => {
           <Link to="/" className="Navbar__brand">
             <img src={logo} className="Logo" alt="logo" />
           </Link>
-          <Navbar />
+          <Navbar
+            links={[
+              { path: '/', text: 'Home' },
+              { path: '/Account' },
+              { path: '/Users' }
+            ]}
+          />
         </div>
       </header>
     );
