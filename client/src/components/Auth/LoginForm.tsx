@@ -13,12 +13,15 @@ export interface Props {
   readonly email: AuthTextField;
   readonly password: AuthTextField;
   readonly account: User | null;
+}
+
+export interface Handlers {
   readonly onChangeEmail: (value: string) => void;
   readonly onChangePassword: (value: string) => void;
   readonly onSubmit: (payload: LoginPayload) => void;
 }
 
-export default (props: Props) => {
+export default (props: Props & Handlers) => {
   const {
     email,
     password,

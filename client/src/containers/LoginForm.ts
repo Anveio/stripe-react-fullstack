@@ -1,14 +1,14 @@
-import LoginForm from '../components/Auth/LoginForm';
+import LoginForm, { Props, Handlers } from '../components/Auth/LoginForm';
 import * as actions from '../actions/auth';
 import { AccountConnectionAction, connectAccount } from '../actions/connection';
 import { NotificationAction, pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
-import history from '../history';
 
+import history from '../history';
 import { rootUrl } from '../constants';
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState): Props => {
   const { email, password, loading } = state.forms.login;
   const account = state.currentUser.account;
 
@@ -24,7 +24,7 @@ const mapDispatchToProps = (
   dispatch: Dispatch<
     actions.AuthAction | NotificationAction | AccountConnectionAction
   >
-) => {
+): Handlers => {
   return {
     onChangeEmail: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'email'));

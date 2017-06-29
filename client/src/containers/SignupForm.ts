@@ -1,4 +1,4 @@
-import SignupForm from '../components/Auth/SignupForm';
+import SignupForm, { Props, Handlers } from '../components/Auth/SignupForm';
 import * as actions from '../actions/auth';
 import { AccountConnectionAction, connectAccount } from '../actions/connection';
 import { pushNotification } from '../actions/notifications';
@@ -8,7 +8,7 @@ import axios from 'axios';
 import history from '../history';
 import { rootUrl } from '../constants';
 
-const mapStateToProps = (state: RootState): SignupForm => {
+const mapStateToProps = (state: RootState): Props => {
   const {
     email,
     username,
@@ -28,7 +28,7 @@ const mapStateToProps = (state: RootState): SignupForm => {
 
 const mapDispatchToProps = (
   dispatch: Dispatch<actions.AuthAction | AccountConnectionAction>
-) => {
+): Handlers => {
   return {
     onChangeEmail: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'email'));

@@ -14,6 +14,9 @@ export interface Props {
   readonly username: AuthTextField;
   readonly password: AuthTextField;
   readonly passwordConf: AuthTextField;
+}
+
+export interface Handlers {
   readonly onChangeEmail: (value: string) => void;
   readonly onChangeUserName: (value: string) => void;
   readonly onChangePassword: (value: string) => void;
@@ -21,7 +24,7 @@ export interface Props {
   readonly onSubmit: (payload: SignupPayload) => void;
 }
 
-export default (props: Props) => {
+export default (props: Props & Handlers) => {
   const {
     email,
     username,
