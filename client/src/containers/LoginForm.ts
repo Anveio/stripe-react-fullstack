@@ -4,6 +4,7 @@ import { AccountConnectionAction, connectAccount } from '../actions/connection';
 import { NotificationAction, pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
+import history from '../history';
 
 import { rootUrl } from '../constants';
 
@@ -40,6 +41,7 @@ const mapDispatchToProps = (
             const response: LoginPayload = success.data;
             dispatch(actions.loginSuccess(response));
             dispatch(connectAccount({ email: response.email }));
+            history.push('/');
             dispatch(
               pushNotification({
                 status: 'success',

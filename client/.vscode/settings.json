@@ -1,5 +1,6 @@
 {
   "tslint.enable": true,
   "eslint.enable": false,
-  "editor.formatOnType": true
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true
 }

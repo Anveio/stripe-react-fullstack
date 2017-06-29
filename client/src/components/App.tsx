@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route } from 'react-router-dom';
 import { Page } from '@shopify/polaris';
 
-import HeaderNav from './Navigation/PageHeader';
+import PageHeader from '../containers/PageHeader';
 import Home from './Home';
 import SignupForm from '../containers/SignupForm';
 import LoginForm from '../containers/LoginForm';
@@ -12,8 +12,8 @@ export default class App extends React.Component<{}, never> {
   render() {
     return (
       <main>
-        <HeaderNav />
-        <Page title="My Business">
+        <PageHeader />
+        <Page title="Dashboard">
           <Notifications />
           <Route exact path="/" component={Home} />
           <Route
