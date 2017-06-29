@@ -7,10 +7,12 @@ import axios from 'axios';
 
 import { rootUrl } from '../constants';
 
-const mapStateToProps = (state: RootState): LoginForm => {
+const mapStateToProps = (state: RootState) => {
   const { email, password, loading } = state.forms.login;
+  const account = state.currentUser.account;
 
   return {
+    account,
     email,
     password,
     loading
@@ -34,9 +36,10 @@ const mapDispatchToProps = (
       axios
         .post(`${rootUrl()}/api/login`, payload)
         .then(
-          json => {
-            dispatch(actions.loginSuccess(payload));
-            dispatch(connectAccount({ email: payload.email }));
+          success => {
+            const response: LoginPayload = success.data;
+            dispatch(actions.loginSuccess(response));
+            dispatch(connectAccount({ email: response.email }));
             dispatch(
               pushNotification({
                 status: 'success',
@@ -47,7 +50,6 @@ const mapDispatchToProps = (
             );
           },
           errors => {
-            // console.log(errors.response.data);
             const data: PassportAuthError = errors.response.data;
             if (data instanceof Object) {
               dispatch(actions.loginFailure(data));
