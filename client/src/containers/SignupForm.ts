@@ -1,9 +1,11 @@
 import SignupForm from '../components/Auth/SignupForm';
 import * as actions from '../actions/auth';
+import { AccountConnectionAction, connectAccount } from '../actions/connection';
 import { pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
+import history from '../history';
 import { rootUrl } from '../constants';
 
 const mapStateToProps = (state: RootState): SignupForm => {
@@ -24,7 +26,9 @@ const mapStateToProps = (state: RootState): SignupForm => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
+const mapDispatchToProps = (
+  dispatch: Dispatch<actions.AuthAction | AccountConnectionAction>
+) => {
   return {
     onChangeEmail: (value: string) => {
       dispatch(actions.changeAuthFieldText(value, 'email'));
@@ -45,11 +49,19 @@ const mapDispatchToProps = (dispatch: Dispatch<actions.AuthAction>) => {
         .then(
           newUser => {
             dispatch(actions.registerAccountSuccess());
+            /* POSTing to /api/signup will run through passport.js' login 
+            middleware. So if there are no errors at this point we can log-in 
+            the user without sending a separate request.
+            */
+            dispatch(connectAccount({ email: payload.email }));
+            history.push('/');
             dispatch(
               pushNotification({
                 status: 'success',
                 title: 'Account creation successful.',
-                message: 'Your account has successfully been created!'
+                message:
+                  // tslint:disable-next-line:quotemark
+                  "Your account's been made and you're now logged in."
               })
             );
           },
