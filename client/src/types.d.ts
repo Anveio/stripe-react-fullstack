@@ -2,7 +2,7 @@ declare class Course {
   public readonly name: string;
 }
 
-declare class User {
+declare class PublicUserInfo {
   public readonly email: string;
 }
 
@@ -12,29 +12,16 @@ interface RootState {
   readonly enthusiasm: EnthusiasmState;
   readonly courses: CoursesState;
   readonly forms: AppForms;
+  readonly users: UsersListState;
 }
 
 interface CurrentUserState {
-  account: User | null;
+  account: PublicUserInfo | null;
 }
 
 interface NotificationsState {
   fromServer: ServerMessage[];
 }
-
-interface ServerMessage {
-  status: StatusType;
-  title: string;
-  message: string;
-}
-
-interface Action {
-  content?: string;
-  accessibilityLabel?: string;
-  url?: string;
-  onAction?(): void;
-}
-
 interface EnthusiasmState {
   readonly languageName: string;
   readonly level: number;
@@ -48,6 +35,23 @@ interface AppForms {
   readonly signup: SignupForm;
   readonly login: LoginForm;
   readonly addCourse: AddCourseForm;
+}
+
+interface UsersListState {
+  readonly list: PublicUserInfo[];
+}
+
+interface ServerMessage {
+  status: StatusType;
+  title: string;
+  message: string;
+}
+
+interface Action {
+  content?: string;
+  accessibilityLabel?: string;
+  url?: string;
+  onAction?(): void;
 }
 
 declare type StatusType = 'success' | 'info' | 'warning' | 'critical';

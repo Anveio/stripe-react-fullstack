@@ -3,8 +3,8 @@ const User = mongoose.model('User');
 const promisify = require('es6-promisify');
 const sendJson = require('../handlers/sendJson');
 
-exports.showUser = (req, res) => {
-  res.json({ msg: 'HELLO' });
+exports.showUsers = (req, res) => {
+  return sendJson(res, 200, 'HELLO');
 };
 
 exports.validateSignup = (req, res, next) => {
@@ -19,12 +19,8 @@ exports.validateSignup = (req, res, next) => {
   req.checkBody('password', 'Password must be at least 6 characters').len(6);
   req.checkBody('password', 'Password cannot be blank').notEmpty();
 
-  req
-    .checkBody('passwordConf', 'Confirmed password cannot be blank')
-    .notEmpty();
-  req
-    .checkBody('passwordConf', "Your passwords don't match.")
-    .equals(req.body.password);
+  req.checkBody('passwordConf', 'Confirmed password cannot be blank').notEmpty();
+  req.checkBody('passwordConf', "Your passwords don't match.").equals(req.body.password);
 
   const errors = req.validationErrors();
   if (errors) {

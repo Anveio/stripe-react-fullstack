@@ -12,7 +12,7 @@ export interface Props {
   readonly loading: boolean;
   readonly email: AuthTextField;
   readonly password: AuthTextField;
-  readonly account: User | null;
+  readonly account: PublicUserInfo | null;
 }
 
 export interface Handlers {
@@ -85,7 +85,7 @@ export default (props: Props & Handlers) => {
     );
   };
 
-  const loggedInMarkup = (user: User) => {
+  const loggedInMarkup = (user: PublicUserInfo) => {
     return (
       <Layout.Section>
         <Card sectioned>

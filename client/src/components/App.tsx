@@ -7,6 +7,7 @@ import Home from './Home';
 import SignupForm from '../containers/SignupForm';
 import LoginForm from '../containers/LoginForm';
 import Notifications from '../containers/Notifications';
+import UserList from '../containers/UserList';
 
 export default class App extends React.Component<{}, never> {
   render() {
@@ -26,6 +27,12 @@ export default class App extends React.Component<{}, never> {
             path="/login"
             render={() => {
               return <LoginForm />;
+            }}
+          />
+          <Route
+            path="/users"
+            render={() => {
+              return <UserList />;
             }}
           />
         </Page>

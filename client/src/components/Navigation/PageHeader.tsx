@@ -6,6 +6,18 @@ import Navbar from './Navbar';
 import './PageHeader.css';
 const logo = require('./logo.svg');
 
+const loggedOutLinks = [
+  { path: '/', text: 'Home' },
+  { path: 'Signup' },
+  { path: 'Login' }
+];
+
+const loggedInLinks = [
+  { path: '/', text: 'Home' },
+  { path: 'Account' },
+  { path: 'Users' }
+];
+
 export default ({ account }: CurrentUserState) => {
   const loggedOutMarkup = () => {
     return (
@@ -14,13 +26,7 @@ export default ({ account }: CurrentUserState) => {
           <Link to="/" className="Navbar__brand">
             <img src={logo} className="Logo" alt="logo" />
           </Link>
-          <Navbar
-            links={[
-              { path: '/', text: 'Home' },
-              { path: '/Signup' },
-              { path: '/Login' }
-            ]}
-          />
+          <Navbar links={loggedOutLinks} />
         </div>
       </header>
     );
@@ -33,13 +39,7 @@ export default ({ account }: CurrentUserState) => {
           <Link to="/" className="Navbar__brand">
             <img src={logo} className="Logo" alt="logo" />
           </Link>
-          <Navbar
-            links={[
-              { path: '/', text: 'Home' },
-              { path: '/Account' },
-              { path: '/Users' }
-            ]}
-          />
+          <Navbar links={loggedInLinks} />
         </div>
       </header>
     );
