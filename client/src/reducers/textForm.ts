@@ -24,7 +24,7 @@ export default (
     case RESET_TEXT_FIELD:
       partialState = {
         [action.key]: {
-          text: action.value
+          text: ''
         }
       };
       break;

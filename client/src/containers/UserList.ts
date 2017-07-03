@@ -15,17 +15,18 @@ const mapDispatchToProps = (dispatch: Dispatch<actions.UserListAction>): Handler
   return {
     onLoad: () => {
       axios
-        .post(`${rootUrl()}/api/users`)
+        .get(`${rootUrl()}/api/users`)
         .then(
           response => {
-            dispatch(actions.getUserListSuccess(response.data));
+            let users: PublicUserInfo[] = response.data;
+            dispatch(actions.getUserListSuccess(users));
           },
           error => {
             dispatch(actions.getUserListFailure());
           }
         )
         .catch(reason => {
-          throw new Error(reason);
+          console.log(reason); // tslint:disable-line:no-console
         });
     }
   };

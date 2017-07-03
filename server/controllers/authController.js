@@ -4,7 +4,8 @@ const User = mongoose.model('User');
 
 const sendJson = require('../handlers/sendJson');
 
-exports.login = (req, res) => {
+// See http://passportjs.org/docs#custom-callback
+exports.login = (req, res, next) => {
   passport.authenticate('local', (err, user, message) => {
     if (err) {
       console.log('err ' + message);
@@ -19,7 +20,7 @@ exports.login = (req, res) => {
     if (user) {
       return sendJson(res, 200, { email: user.email, username: user.username });
     }
-  })(req, res);
+  })(req, res, next);
 };
 
 exports.logout = (req, res) => {
@@ -27,9 +28,7 @@ exports.logout = (req, res) => {
 };
 
 exports.isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    return sendJson(res, 401, 'Please log in first.');
-  }
+  console.log('This route was hit');
+  console.log(req.body);
+  return req.isAuthenticated() ? next() : sendJson(res, 401);
 };

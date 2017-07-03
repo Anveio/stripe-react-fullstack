@@ -12,6 +12,9 @@ export default (state = initial, action: UserListAction): UsersListState => {
     case GET_USER_LIST_FAILURE:
       break;
     case GET_USER_LIST_SUCCESS:
+      partialState = {
+        list: action.userList
+      };
       break;
     default:
       return state;

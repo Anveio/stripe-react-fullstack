@@ -1,7 +1,7 @@
-// import { enthusiasm } from '../reducers';
+import { Button, Card, Layout } from '@shopify/polaris';
 import * as React from 'react';
-import { Layout, Card, Button } from '@shopify/polaris';
 
+// import { enthusiasm } from '../reducers';
 class Props {
   readonly languageName: string;
   readonly level: number;

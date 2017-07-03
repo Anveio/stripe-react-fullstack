@@ -14,7 +14,6 @@ export interface FormSubmit {
 export interface FormReset {
   type: constants.RESET_TEXT_FIELD;
   key: string;
-  value: string;
 }
 
 export type FormAction = FormUpdate | FormReset | FormSubmit;
@@ -39,7 +38,6 @@ export function submitCourse(course: Course): FormSubmit {
 export function resetFormText(key: string): FormReset {
   return {
     type: constants.RESET_TEXT_FIELD,
-    key,
-    value: ''
+    key
   };
 }

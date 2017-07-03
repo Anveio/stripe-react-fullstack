@@ -3,8 +3,10 @@ const User = mongoose.model('User');
 const promisify = require('es6-promisify');
 const sendJson = require('../handlers/sendJson');
 
-exports.showUsers = (req, res) => {
-  return sendJson(res, 200, 'HELLO');
+exports.showUsers = async (req, res) => {
+  const users = await User.find().select('email');
+
+  sendJson(res, 200, users);
 };
 
 exports.validateSignup = (req, res, next) => {

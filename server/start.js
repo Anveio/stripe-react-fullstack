@@ -16,14 +16,14 @@ const app = require('./app');
 
 switch (app.get('env')) {
   case 'development':
-    console.log('using development');
+    console.log('App starting in development');
     app.use(express.static(path.join(__dirname, '/../client/public')));
     app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname + '/../client/public/index.html'));
     });
     break;
   case 'production':
-    console.log('using production');
+    console.log('App starting in production');
     app.use(express.static(path.join(__dirname, '/../client/build')));
     app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname + '../client/build/index.html'));

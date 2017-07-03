@@ -21,8 +21,8 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
   readonly usersFoundMarkup = () => {
     return (
       <Layout.AnnotatedSection title="Users">
-        {this.props.userList.map(user => {
-          return <Card sectioned title={user.email} />;
+        {this.props.userList.map((user, i) => {
+          return <Card sectioned title={user.email} key={i} />;
         })}
       </Layout.AnnotatedSection>
     );
