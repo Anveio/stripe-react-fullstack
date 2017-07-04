@@ -20,10 +20,6 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
     this.props.onLoad();
   }
 
-  reload = () => {
-    this.props.onLoad();
-  }; // tslint:disable-line:semicolon
-
   readonly usersFoundMarkup = () => {
     return (
       <Layout.AnnotatedSection title="Users">
@@ -40,7 +36,7 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
         image={emptySvg}
         imageContained
         heading="No users found."
-        action={{ content: 'Reload', onAction: this.reload }}
+        action={{ content: 'Reload', onAction: this.props.onLoad }}
       >
         <p>Reload this component.</p>
       </EmptyState>
