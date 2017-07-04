@@ -1,16 +1,17 @@
+const cors = require('cors');
 const express = require('express');
-const session = require('express-session');
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const passport = require('passport');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const MongoStore = require('connect-mongo')(session);
 const expressValidator = require('express-validator');
 const errorHandlers = require('./handlers/errorHandlers');
-require('./handlers/passport');
 
+require('./handlers/passport');
 const routes = require('./routes');
+const CORS_WHITELIST = require('./constants/frontend');
 
 const app = express();
 
@@ -34,27 +35,17 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, Content-Length, X-Requested-With'
-  );
-  res.header('Access-Control-Allow-Methods', 'GET, POST');
-  next();
-});
+const corsOptions = {
+  origin: (origin, callback) =>
+    CORS_WHITELIST.includes(origin)
+      ? callback(null, true)
+      : callback(new Error('Not allowed by CORS'))
+};
+
+app.use(cors(corsOptions));
 
 app.use('/api', routes);
 
 app.use(errorHandlers.displayAuthenticationError);
-
-if (app.get('env') === 'development') {
-  app.use(errorHandlers.developmentErrors);
-}
 
 module.exports = app;

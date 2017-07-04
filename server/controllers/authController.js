@@ -18,6 +18,7 @@ exports.login = (req, res, next) => {
       });
     }
     if (user) {
+      console.log(user);
       return sendJson(res, 200, { email: user.email, username: user.username });
     }
   })(req, res, next);

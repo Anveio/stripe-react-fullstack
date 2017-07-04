@@ -1,6 +1,7 @@
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
+const errorHandlers = require('./handlers/errorHandlers');
 
 require('dotenv').config({ path: 'variables.env' });
 
@@ -14,10 +15,11 @@ require('./models/User');
 
 const app = require('./app');
 
-switch (app.get('env')) {
+switch (process.env.NODE_ENV) {
   case 'development':
     console.log('App starting in development');
     app.use(express.static(path.join(__dirname, '/../client/public')));
+    app.use(errorHandlers.developmentErrors);
     app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname + '/../client/public/index.html'));
     });
@@ -33,7 +35,6 @@ switch (app.get('env')) {
     return console.log('Invalid environment setting');
 }
 
-app.set('port', process.env.PORT || 7777);
-const server = app.listen(app.get('port'), () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${server.address().port}`);
 });
