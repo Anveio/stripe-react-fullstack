@@ -2,4 +2,5 @@ node_modules/
 *.log
 variables.env
 variables.env.now
+tsconfig.jsonnode_modules/
 tsconfig.json
