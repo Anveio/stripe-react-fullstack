@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Layout, Card } from '@shopify/polaris';
+import { Layout, EmptyState, Card } from '@shopify/polaris';
+
+const emptySvg = require('./empty-state.svg');
 
 export interface Props {
   userList: PublicUserInfo[];
@@ -18,6 +20,10 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
     this.props.onLoad();
   }
 
+  reload = () => {
+    this.props.onLoad();
+  }; // tslint:disable-line:semicolon
+
   readonly usersFoundMarkup = () => {
     return (
       <Layout.AnnotatedSection title="Users">
@@ -28,8 +34,23 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
     );
   }; // tslint:disable-line:semicolon
 
+  readonly usersNotFoundMarkup = () => {
+    return (
+      <EmptyState
+        image={emptySvg}
+        imageContained
+        heading="No users found."
+        action={{ content: 'Reload', onAction: this.reload }}
+      >
+        <p>Reload this component.</p>
+      </EmptyState>
+    );
+  }; // tslint:disable-line:semicolon
+
   public render() {
-    return this.props.userList ? this.usersFoundMarkup() : <div />;
+    return this.props.userList.length > 0
+      ? this.usersFoundMarkup()
+      : this.usersNotFoundMarkup();
   }
 }
 
