@@ -5,23 +5,23 @@ const User = mongoose.model('User');
 const sendJson = require('../handlers/sendJson');
 
 // See http://passportjs.org/docs#custom-callback
-exports.login = (req, res, next) => {
-  passport.authenticate('local', (err, user, message) => {
+exports.login = (req, res) => {
+  return passport.authenticate('local', (err, user, message) => {
     if (err) {
       console.log('err ' + message);
       return sendJson(res, 500, err);
     }
     if (!user) {
       console.log('!user ' + message);
-      return sendJson(res, 400, {
+      return sendJson(res, 403, {
         message: 'Password and/or email are incorrect.'
       });
     }
     if (user) {
-      console.log(user);
-      return sendJson(res, 200, { email: user.email, username: user.username });
+      user.token = user.generateJWT();
+      return sendJson(res, 200, { user: user.toAuthJSON() });
     }
-  })(req, res, next);
+  })(req, res);
 };
 
 exports.logout = (req, res) => {
