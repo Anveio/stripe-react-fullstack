@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { EmptyState, Layout, Card } from '@shopify/polaris';
-const emptyImage = require('./empty-state.svg');
+const emptyImage = require('../empty-state.svg');
 
 export interface Props {
   readonly list: Course[];

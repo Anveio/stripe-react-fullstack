@@ -6,7 +6,7 @@ import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
 import history from '../history';
-import { rootUrl } from '../constants';
+import { CLIENT_ROOT_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
   const {
@@ -45,7 +45,7 @@ const mapDispatchToProps = (
     onSubmit: (payload: SignupPayload) => {
       dispatch(actions.registerAccountRequest(payload));
       axios
-        .post(`${rootUrl()}/api/signup`, payload)
+        .post(`${CLIENT_ROOT_URL()}/api/signup`, payload)
         .then(
           newUser => {
             dispatch(actions.registerAccountSuccess());

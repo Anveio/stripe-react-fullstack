@@ -6,7 +6,7 @@ import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
 import history from '../history';
-import { rootUrl } from '../constants';
+import { CLIENT_ROOT_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
   const { email, password, loading } = state.forms.login;
@@ -35,12 +35,13 @@ const mapDispatchToProps = (
     onSubmit: (payload: LoginPayload) => {
       dispatch(actions.loginRequest(payload));
       axios
-        .post(`${rootUrl()}/api/login`, payload)
+        .post(`${CLIENT_ROOT_URL()}/api/login`, payload)
         .then(
           success => {
-            const response: LoginPayload = success.data;
-            dispatch(actions.loginSuccess(response));
-            dispatch(connectAccount({ email: response.email }));
+            const token: string = success.data;
+            window.localStorage.setItem('jwt', token);
+            dispatch(actions.loginSuccess(payload));
+            dispatch(connectAccount({ email: payload.email }));
             history.push('/');
             dispatch(
               pushNotification({

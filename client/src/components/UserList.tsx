@@ -17,12 +17,17 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
   }
 
   componentWillMount() {
-    this.props.onLoad();
+    if (this.props.userList.length === 0) {
+      this.props.onLoad();
+    }
   }
 
   readonly usersFoundMarkup = () => {
     return (
-      <Layout.AnnotatedSection title="Users">
+      <Layout.AnnotatedSection
+        title="Users"
+        description="These are the emails of users that have registered."
+      >
         {this.props.userList.map((user, i) => {
           return <Card sectioned title={user.email} key={i} />;
         })}

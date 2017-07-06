@@ -3,7 +3,7 @@ import * as actions from '../actions/users';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
-import { rootUrl } from '../constants';
+import { CLIENT_ROOT_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
   return {
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch: Dispatch<actions.UserListAction>): Handler
   return {
     onLoad: () => {
       axios
-        .get(`${rootUrl()}/api/users`)
+        .get(`${CLIENT_ROOT_URL()}/api/users`)
         .then(
           response => {
             let users: PublicUserInfo[] = response.data;
