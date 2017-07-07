@@ -1,9 +1,13 @@
-declare class Course {
-  public readonly name: string;
+interface Course {
+  readonly name: string;
 }
 
-declare class PublicUserInfo {
-  public readonly email: string;
+interface PublicUserInfo {
+  readonly email: string;
+}
+
+interface JsonWebToken {
+  readonly token: string;
 }
 
 interface RootState {
@@ -16,11 +20,11 @@ interface RootState {
 }
 
 interface CurrentUserState {
-  account: PublicUserInfo | null;
+  readonly account: PublicUserInfo | null;
 }
 
 interface NotificationsState {
-  fromServer: ServerMessage[];
+  readonly fromServer: ServerMessage[];
 }
 interface EnthusiasmState {
   readonly languageName: string;
@@ -104,6 +108,6 @@ interface ExpressValidatorError {
 }
 
 interface PassportAuthError {
-  message: string;
-  name: string;
+  readonly message: string;
+  readonly name: string;
 }

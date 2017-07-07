@@ -1,4 +1,4 @@
-const sendJson = require('./sendJson');
+const { sendJson } = require('./util');
 
 // Wrapper for async functions so we don't have to try/catch every time.
 exports.catchErrors = fn => {

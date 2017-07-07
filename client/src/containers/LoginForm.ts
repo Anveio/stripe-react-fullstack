@@ -38,8 +38,10 @@ const mapDispatchToProps = (
         .post(`${CLIENT_ROOT_URL()}/api/login`, payload)
         .then(
           success => {
-            const token: string = success.data;
-            window.localStorage.setItem('jwt', token);
+            window.localStorage.setItem(
+              'jwt',
+              (success.data as JsonWebToken).token
+            );
             dispatch(actions.loginSuccess(payload));
             dispatch(connectAccount({ email: payload.email }));
             history.push('/');

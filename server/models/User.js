@@ -32,25 +32,17 @@ const userSchema = new mongoose.Schema(
 
 userSchema.methods.generateJWT = function() {
   const today = new Date();
-  const expiry = new Date(today);
-  expiry.setDate(today.getDate() + 60);
+  const exp = new Date(today);
+  exp.setDate(today.getDate() + 60); // 2 Months
 
   return jwt.sign(
     {
-      id: this._id, // exists natively for every document in mongoose,
+      id: this._id,
       username: this.username,
-      expiry: parseInt(expiry.getTime() / 1000)
+      exp: parseInt(exp.getTime() / 1000)
     },
     secret
   );
-};
-
-userSchema.methods.toAuthJSON = function() {
-  return {
-    username: this.username,
-    email: this.email,
-    token: this.generateJWT()
-  };
 };
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });

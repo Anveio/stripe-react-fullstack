@@ -1,8 +1,9 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const jwt = require('express-jwt');
 
-const sendJson = require('../handlers/sendJson');
+const { sendJson, getTokenFromHeader } = require('../handlers/util');
 
 // See http://passportjs.org/docs#custom-callback
 exports.login = (req, res) => {
@@ -18,8 +19,7 @@ exports.login = (req, res) => {
       });
     }
     if (user) {
-      user.token = user.generateJWT();
-      return sendJson(res, 200, { user: user.toAuthJSON() });
+      return sendJson(res, 200, { token: user.generateJWT() });
     }
   })(req, res);
 };
@@ -28,8 +28,8 @@ exports.logout = (req, res) => {
   res.logout;
 };
 
-exports.isLoggedIn = (req, res, next) => {
-  console.log('This route was hit');
-  console.log(req.body);
-  return req.isAuthenticated() ? next() : sendJson(res, 401);
-};
+exports.isLoggedIn = jwt({
+  secret: 'kappa',
+  userProperty: 'payload',
+  getToken: getTokenFromHeader
+});

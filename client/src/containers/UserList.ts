@@ -11,11 +11,17 @@ const mapStateToProps = (state: RootState): Props => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<actions.UserListAction>): Handlers => {
+const mapDispatchToProps = (
+  dispatch: Dispatch<actions.UserListAction>
+): Handlers => {
   return {
     onLoad: () => {
       axios
-        .get(`${CLIENT_ROOT_URL()}/api/users`)
+        .get(`${CLIENT_ROOT_URL()}/api/users`, {
+          headers: {
+            authorization: `Bearer ${window.localStorage.getItem('jwt')}`
+          }
+        })
         .then(
           response => {
             let users: PublicUserInfo[] = response.data;

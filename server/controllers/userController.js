@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
-const sendJson = require('../handlers/sendJson');
+const { sendJson } = require('../handlers/util');
 
 exports.showUsers = async (req, res) => {
   const users = await User.find().select('email');
-  console.log(users);
   sendJson(res, 200, users);
 };
 

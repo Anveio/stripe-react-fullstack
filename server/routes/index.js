@@ -13,10 +13,7 @@ router.post(
   authController.login
 );
 
-router.get('/users', 
-  // authController.isLoggedIn, 
-  userController.showUsers
-);
+router.get('/users', authController.isLoggedIn, userController.showUsers);
 
 router.post('/login', authController.login);
 
