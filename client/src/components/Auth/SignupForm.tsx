@@ -4,11 +4,15 @@ import {
   DisplayText,
   FormLayout,
   Card,
-  TextField,
   Button
 } from '@shopify/polaris';
 
-import { PasswordField, EmailField } from './AuthTextFields';
+import {
+  PasswordField,
+  PasswordConfField,
+  EmailField,
+  UsernameField
+} from './AuthTextFields';
 
 export interface Props {
   readonly loading: boolean;
@@ -64,30 +68,17 @@ export default (props: Props & Handlers) => {
   };
 
   return (
-    <Layout.Section>
+    <Layout>
       <Card sectioned>
         <FormLayout>
           <DisplayText size="medium">Create an account.</DisplayText>
           <form onSubmit={handleSubmit} acceptCharset="UTF-8">
             <EmailField field={email} onChange={onChangeEmail} />
-            <TextField
-              label="Username"
-              type="text"
-              value={username.text}
-              placeholder="No spaces or numbers."
-              onChange={onChangeUserName}
-              error={username.error || false}
-              spellCheck={false}
-            />
+            <UsernameField field={username} onChange={onChangeUserName} />
             <PasswordField field={password} onChange={onChangePassword} />
-            <TextField
-              label="Confirm Password"
-              type="password"
-              value={passwordConf.text}
-              placeholder="Same as your password."
-              min={6}
+            <PasswordConfField
+              field={passwordConf}
               onChange={onChangePasswordConf}
-              error={password.error || false}
             />
             <br />
             <Button
@@ -102,6 +93,6 @@ export default (props: Props & Handlers) => {
           </form>
         </FormLayout>
       </Card>
-    </Layout.Section>
+    </Layout>
   );
 };

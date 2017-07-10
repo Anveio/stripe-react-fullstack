@@ -50,7 +50,7 @@ export default (props: Props & Handlers) => {
 
   const loggedOutMarkup = () => {
     return (
-      <Layout.Section>
+      <Layout>
         <Card sectioned>
           <FormLayout>
             <DisplayText size="medium">Log in.</DisplayText>
@@ -69,7 +69,7 @@ export default (props: Props & Handlers) => {
             </form>
           </FormLayout>
         </Card>
-      </Layout.Section>
+      </Layout>
     );
   };
 

@@ -20,6 +20,20 @@ const PasswordField = ({ field, onChange }: Props) => {
   );
 };
 
+const PasswordConfField = ({ field, onChange }: Props) => {
+  return (
+    <TextField
+      label="Confirm Password"
+      type="password"
+      value={field.text}
+      placeholder="Same as your password."
+      min={6}
+      onChange={onChange}
+      error={field.error || false}
+    />
+  );
+};
+
 const EmailField = ({ field, onChange }: Props) => {
   return (
     <TextField
@@ -34,5 +48,18 @@ const EmailField = ({ field, onChange }: Props) => {
     />
   );
 };
+const UsernameField = ({ field, onChange }: Props) => {
+  return (
+    <TextField
+      label="Username"
+      type="text"
+      value={field.text}
+      placeholder="No spaces or numbers."
+      onChange={onChange}
+      error={field.error || false}
+      spellCheck={false}
+    />
+  );
+};
 
-export { PasswordField, EmailField };
+export { PasswordField, PasswordConfField, EmailField, UsernameField };
