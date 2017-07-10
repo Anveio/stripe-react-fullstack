@@ -6,7 +6,7 @@ import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
 import history from '../history';
-import { CLIENT_ROOT_URL } from '../constants';
+import { SERVER_ROOT_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
   const { email, password, loading } = state.forms.login;
@@ -35,7 +35,7 @@ const mapDispatchToProps = (
     onSubmit: (payload: LoginPayload) => {
       dispatch(actions.loginRequest(payload));
       axios
-        .post(`${CLIENT_ROOT_URL()}/api/login`, payload)
+        .post(`${SERVER_ROOT_URL()}/api/login`, payload)
         .then(
           success => {
             window.localStorage.setItem(

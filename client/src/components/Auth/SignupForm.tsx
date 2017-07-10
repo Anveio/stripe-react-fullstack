@@ -8,6 +8,8 @@ import {
   Button
 } from '@shopify/polaris';
 
+import { PasswordField, EmailField } from './AuthTextFields';
+
 export interface Props {
   readonly loading: boolean;
   readonly email: AuthTextField;
@@ -67,16 +69,7 @@ export default (props: Props & Handlers) => {
         <FormLayout>
           <DisplayText size="medium">Create an account.</DisplayText>
           <form onSubmit={handleSubmit} acceptCharset="UTF-8">
-            <TextField
-              label="Email address"
-              type="email"
-              value={email.text}
-              placeholder="e.g. name@business.com"
-              onChange={onChangeEmail}
-              error={email.error || false}
-              spellCheck={false}
-              autoFocus
-            />
+            <EmailField field={email} onChange={onChangeEmail} />
             <TextField
               label="Username"
               type="text"
@@ -86,15 +79,7 @@ export default (props: Props & Handlers) => {
               error={username.error || false}
               spellCheck={false}
             />
-            <TextField
-              label="Password"
-              type="password"
-              value={password.text}
-              placeholder="At least 6 characters."
-              onChange={onChangePassword}
-              error={password.error || false}
-              min={6}
-            />
+            <PasswordField field={password} onChange={onChangePassword} />
             <TextField
               label="Confirm Password"
               type="password"

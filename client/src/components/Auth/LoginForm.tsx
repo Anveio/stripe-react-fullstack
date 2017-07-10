@@ -3,10 +3,11 @@ import {
   Layout,
   Card,
   FormLayout,
-  TextField,
   Button,
   DisplayText
 } from '@shopify/polaris';
+
+import { PasswordField, EmailField } from './AuthTextFields';
 
 export interface Props {
   readonly loading: boolean;
@@ -54,21 +55,8 @@ export default (props: Props & Handlers) => {
           <FormLayout>
             <DisplayText size="medium">Log in.</DisplayText>
             <form onSubmit={handleSubmit} acceptCharset="ISO-8859-1">
-              <TextField
-                label="Email address"
-                type="email"
-                value={email.text}
-                onChange={onChangeEmail}
-                error={email.error || false}
-                autoFocus
-              />
-              <TextField
-                label="Password"
-                type="password"
-                value={password.text}
-                onChange={onChangePassword}
-                error={password.error || false}
-              />
+              <EmailField field={email} onChange={onChangeEmail} />
+              <PasswordField field={password} onChange={onChangePassword} />
               <br />
               <Button
                 primary
