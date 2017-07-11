@@ -1,6 +1,6 @@
 // Might be best to put this in a separate file.
 // It's here for now for simplicity's sake.
-export const CLIENT_ROOT_URL = () => {
+export const SERVER_ROOT_URL = () => {
   switch (window.location.hostname) {
     case 'reduxbusinesssample.herokuapp.com':
       return 'https://reduxbusinesssample.herokuapp.com';

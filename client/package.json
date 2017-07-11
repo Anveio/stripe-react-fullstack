@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@shopify/polaris": "^1.0.3",
+    "@shopify/polaris": "^1.1.1",
     "axios": "^0.16.2",
     "history": "^4.6.3",
     "react": "^15.5.4",

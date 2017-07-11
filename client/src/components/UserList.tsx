@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Layout, EmptyState, Card } from '@shopify/polaris';
 
-const emptySvg = require('./empty-state.svg');
+import emptySvg from './empty-state.svg';
 
 export interface Props {
   userList: PublicUserInfo[];

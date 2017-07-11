@@ -68,7 +68,7 @@ export default (props: Props & Handlers) => {
   };
 
   return (
-    <Layout>
+    <Layout sectioned>
       <Card sectioned>
         <FormLayout>
           <DisplayText size="medium">Create an account.</DisplayText>

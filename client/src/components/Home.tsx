@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Layout } from '@shopify/polaris';
 
-import Account from './Account';
 import About from '../containers/About';
 import CourseList from '../containers/CourseList';
 import AddCourse from '../containers/AddCourse';
@@ -9,7 +8,6 @@ import AddCourse from '../containers/AddCourse';
 const Home = () => {
   return (
     <Layout>
-      <Account />
       <About />
       <CourseList />
       <AddCourse />

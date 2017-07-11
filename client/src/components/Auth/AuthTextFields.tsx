@@ -38,6 +38,8 @@ const EmailField = ({ field, onChange }: Props) => {
   return (
     <TextField
       label="Email address"
+      name="email"
+      id="email"
       type="email"
       value={field.text}
       placeholder="e.g. name@business.com"
@@ -52,6 +54,8 @@ const UsernameField = ({ field, onChange }: Props) => {
   return (
     <TextField
       label="Username"
+      name="username"
+      id="username"
       type="text"
       value={field.text}
       placeholder="No spaces or numbers."

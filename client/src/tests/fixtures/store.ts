@@ -22,8 +22,16 @@ export const blankStore = {
       passwordConf: emptyAuthForm,
       loading: false
     },
+    login: {
+      email: emptyAuthForm,
+      password: emptyAuthForm,
+      loading: false
+    },
     addCourse: {
       name: { text: '' }
     }
+  },
+  users: {
+    list: []
   }
 };
