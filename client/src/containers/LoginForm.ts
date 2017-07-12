@@ -10,7 +10,7 @@ import { SERVER_ROOT_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
   const { email, password, loading } = state.forms.login;
-  const account = state.currentUser.account;
+  const account = state.currentUser;
 
   return {
     account,

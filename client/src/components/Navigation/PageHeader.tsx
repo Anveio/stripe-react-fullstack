@@ -26,7 +26,7 @@ const loggedInLinks = [
   { path: 'users' }
 ];
 
-export default ({ account }: CurrentUserState) => {
+export default (account: UserState) => {
   const loggedOutMarkup = () => {
     return (
       <header>

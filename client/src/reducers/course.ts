@@ -11,10 +11,7 @@ const generateNewCourse = (course: Course): Course => {
   };
 };
 
-export default (
-  state: CoursesState = initialState,
-  action: FormSubmit
-): CoursesState => {
+export default (state: CoursesState = initialState, action: FormSubmit) => {
   let partialState: Partial<CoursesState> | undefined;
 
   switch (action.type) {

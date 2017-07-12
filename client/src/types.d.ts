@@ -11,7 +11,7 @@ interface JsonWebToken {
 }
 
 interface RootState {
-  readonly currentUser: CurrentUserState;
+  readonly currentUser: UserState;
   readonly notifications: NotificationsState;
   readonly enthusiasm: EnthusiasmState;
   readonly courses: CoursesState;
@@ -19,8 +19,9 @@ interface RootState {
   readonly users: UsersListState;
 }
 
-interface CurrentUserState {
-  readonly account: PublicUserInfo | null;
+interface UserState {
+  readonly email: string;
+  readonly token: string;
 }
 
 interface NotificationsState {

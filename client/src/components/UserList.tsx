@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout, EmptyState, Card } from '@shopify/polaris';
+import { Layout, EmptyState, Button, Card } from '@shopify/polaris';
 
 import emptySvg from './empty-state.svg';
 
@@ -28,6 +28,11 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
         title="Users"
         description="These are the emails of users that have registered."
       >
+        <Card sectioned>
+          <Button primary onClick={this.props.onLoad}>
+            Reload Users.
+          </Button>
+        </Card>
         {this.props.userList.map((user, i) => {
           return <Card sectioned title={user.email} key={i} />;
         })}
