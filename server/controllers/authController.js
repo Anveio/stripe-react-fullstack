@@ -1,7 +1,7 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const jwt = require('express-jwt');
+const expressJwt = require('express-jwt');
 
 const { sendJson, getTokenFromHeader } = require('../handlers/util');
 
@@ -28,7 +28,7 @@ exports.logout = (req, res) => {
   res.logout;
 };
 
-exports.isLoggedIn = jwt({
+exports.isLoggedIn = expressJwt({
   secret: 'kappa',
   userProperty: 'payload',
   getToken: getTokenFromHeader
