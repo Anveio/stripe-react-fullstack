@@ -60,15 +60,16 @@ const mapDispatchToProps = (
             );
           },
           errors => {
-            const data: PassportAuthError = errors.response.data;
-            if (data instanceof Object) {
-              dispatch(actions.loginFailure(data));
+            const error: PassportAuthError = errors.response.data;
+            // Our server gives us errors in different types depending on the error.
+            // Todo: Normalize error messages from server on login failure.
+            if (error && error.message) {
+              dispatch(actions.loginFailure(error));
             } else {
               dispatch(
                 pushNotification({
                   status: 'critical',
-                  title: 'Login unsuccessful.',
-                  message: data
+                  title: 'Login unsuccessful.'
                 })
               );
             }

@@ -21,11 +21,17 @@ export default ({ notifications, onDismiss }: Props) => {
           onDismiss={handleDismiss}
           key={index}
         >
-          <p>{message}</p>
+          <p>
+            {message}
+          </p>
         </Banner>
       );
     });
   };
 
-  return <Layout.Section>{notificationsMarkup()}</Layout.Section>;
+  return (
+    <Layout.Section>
+      {notificationsMarkup()}
+    </Layout.Section>
+  );
 };
