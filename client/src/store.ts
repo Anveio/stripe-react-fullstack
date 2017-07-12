@@ -6,7 +6,7 @@ const emptyAuthForm = { text: '', error: null };
 
 const blankStore = {
   currentUser: {
-    email: 'a@b.com',
+    email: '',
     token: ''
   },
   notifications: {

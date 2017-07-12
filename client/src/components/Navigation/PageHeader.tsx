@@ -48,5 +48,5 @@ export default (account: UserState) => {
       </header>
     );
   };
-  return account ? loggedInMarkup() : loggedOutMarkup();
+  return account.token ? loggedInMarkup() : loggedOutMarkup();
 };
