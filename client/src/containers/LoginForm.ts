@@ -10,10 +10,10 @@ import { SERVER_ROOT_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
   const { email, password, loading } = state.forms.login;
-  const account = state.currentUser;
+  const currentUser = state.currentUser;
 
   return {
-    account,
+    currentUser,
     email,
     password,
     loading
@@ -43,7 +43,12 @@ const mapDispatchToProps = (
               (success.data as JsonWebToken).token
             );
             dispatch(actions.loginSuccess(payload));
-            dispatch(connectAccount({ email: payload.email }));
+            dispatch(
+              connectAccount({
+                email: payload.email,
+                token: (success.data as JsonWebToken).token
+              })
+            );
             history.push('/');
             dispatch(
               pushNotification({

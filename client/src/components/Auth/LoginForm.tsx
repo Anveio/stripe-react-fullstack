@@ -13,7 +13,7 @@ export interface Props {
   readonly loading: boolean;
   readonly email: AuthTextField;
   readonly password: AuthTextField;
-  readonly account: PublicUserInfo | null;
+  readonly currentUser: UserState;
 }
 
 export interface Handlers {
@@ -29,7 +29,7 @@ export default (props: Props & Handlers) => {
     onChangeEmail,
     onChangePassword,
     onSubmit,
-    account
+    currentUser
   } = props;
 
   const handleLogIn = (): void => {
@@ -73,7 +73,7 @@ export default (props: Props & Handlers) => {
     );
   };
 
-  const loggedInMarkup = (user: PublicUserInfo) => {
+  const loggedInMarkup = (user: UserState) => {
     return (
       <Layout.Section>
         <Card sectioned>
@@ -85,5 +85,5 @@ export default (props: Props & Handlers) => {
     );
   };
 
-  return account ? loggedInMarkup(account) : loggedOutMarkup();
+  return currentUser.email ? loggedInMarkup(currentUser) : loggedOutMarkup();
 };

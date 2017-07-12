@@ -2,7 +2,7 @@ import * as constants from '../constants';
 
 export interface ConnectAccount {
   type: constants.CONNECT_ACCOUNT;
-  user: PublicUserInfo;
+  user: UserState;
 }
 
 export interface DisconnectAccount {
@@ -11,7 +11,7 @@ export interface DisconnectAccount {
 
 export type AccountConnectionAction = DisconnectAccount | ConnectAccount;
 
-export const connectAccount = (user: PublicUserInfo) => {
+export const connectAccount = (user: UserState) => {
   return {
     type: constants.CONNECT_ACCOUNT,
     user

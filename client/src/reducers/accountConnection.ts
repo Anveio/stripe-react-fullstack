@@ -12,7 +12,8 @@ export default (state = initialState, action: AccountConnectionAction) => {
   switch (action.type) {
     case CONNECT_ACCOUNT:
       partialState = {
-        email: action.user.email
+        email: action.user.email,
+        token: action.user.token
       };
       break;
     case DISCONNECT_ACCOUNT:

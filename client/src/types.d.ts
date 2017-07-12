@@ -20,8 +20,8 @@ interface RootState {
 }
 
 interface UserState {
-  readonly email: string;
-  readonly token: string;
+  readonly email: string | null;
+  readonly token: string | null;
 }
 
 interface NotificationsState {
