@@ -52,11 +52,6 @@ export default (props: Props & Handlers) => {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    handleSignUp();
-  };
-
   const validForm = (): boolean => {
     // Todo: add realtime client side validation
     return !(
@@ -67,12 +62,23 @@ export default (props: Props & Handlers) => {
     );
   };
 
+  const watchForEnter = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.charCode === 13) {
+      event.preventDefault();
+      handleSignUp();
+    }
+  };
+
   return (
     <Layout sectioned>
       <Card sectioned>
         <FormLayout>
           <DisplayText size="medium">Create an account.</DisplayText>
-          <form onSubmit={handleSubmit} acceptCharset="UTF-8">
+          <form
+            onSubmit={handleSignUp}
+            acceptCharset="UTF-8"
+            onKeyPress={watchForEnter}
+          >
             <EmailField field={email} onChange={onChangeEmail} />
             <UsernameField field={username} onChange={onChangeUserName} />
             <PasswordField field={password} onChange={onChangePassword} />

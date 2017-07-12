@@ -39,13 +39,15 @@ export default (props: Props & Handlers) => {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    handleLogIn();
-  };
-
   const validForm = (): boolean => {
     return !email.text && !password.text;
+  };
+
+  const watchForEnter = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.charCode === 13) {
+      event.preventDefault();
+      handleLogIn();
+    }
   };
 
   const loggedOutMarkup = () => {
@@ -54,7 +56,11 @@ export default (props: Props & Handlers) => {
         <Card sectioned>
           <FormLayout>
             <DisplayText size="medium">Log in.</DisplayText>
-            <form onSubmit={handleSubmit} acceptCharset="ISO-8859-1">
+            <form
+              onSubmit={handleLogIn}
+              acceptCharset="utf-8"
+              onKeyPress={watchForEnter}
+            >
               <EmailField field={email} onChange={onChangeEmail} />
               <PasswordField field={password} onChange={onChangePassword} />
               <br />

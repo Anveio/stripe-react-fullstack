@@ -69,7 +69,8 @@ const mapDispatchToProps = (
               dispatch(
                 pushNotification({
                   status: 'critical',
-                  title: 'Login unsuccessful.'
+                  title: 'Login unsuccessful.',
+                  message: 'There were errors with your login information.'
                 })
               );
             }
