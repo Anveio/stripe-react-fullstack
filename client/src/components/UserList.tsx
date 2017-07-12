@@ -39,7 +39,6 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
     return (
       <EmptyState
         image={emptySvg}
-        imageContained
         heading="No users found."
         action={{ content: 'Reload', onAction: this.props.onLoad }}
       >

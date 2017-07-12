@@ -16,7 +16,6 @@ const CourseList = (props: Props): JSX.Element => {
             heading="You don't have any courses yet."
             action={{ content: 'Add course' }}
             image={emptyImage}
-            imageContained
           >
             <p>Get started by adding a course.</p>
           </EmptyState>

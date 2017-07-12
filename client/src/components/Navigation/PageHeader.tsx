@@ -6,26 +6,32 @@ import Navbar from './Navbar';
 import './PageHeader.css';
 const logo = require('./logo.svg');
 
+const LeftLogo = () => {
+  return (
+    <Link to="/" className="Navbar__brand">
+      <img src={logo} className="Logo" alt="logo" />
+    </Link>
+  );
+};
+
 const loggedOutLinks = [
   { path: '/', text: 'Home' },
-  { path: 'Signup' },
-  { path: 'Login' }
+  { path: 'signup' },
+  { path: 'login' }
 ];
 
 const loggedInLinks = [
   { path: '/', text: 'Home' },
-  { path: 'Account' },
-  { path: 'Users' }
+  { path: 'account' },
+  { path: 'users' }
 ];
 
 export default ({ account }: CurrentUserState) => {
   const loggedOutMarkup = () => {
     return (
-      <header className="Page-Header Polaris-Page">
+      <header>
         <div className="Navbar-container">
-          <Link to="/" className="Navbar__brand">
-            <img src={logo} className="Logo" alt="logo" />
-          </Link>
+          <LeftLogo />
           <Navbar links={loggedOutLinks} />
         </div>
       </header>
@@ -34,11 +40,9 @@ export default ({ account }: CurrentUserState) => {
 
   const loggedInMarkup = () => {
     return (
-      <header className="Page-Header Polaris-Page">
+      <header>
         <div className="Navbar-container">
-          <Link to="/" className="Navbar__brand">
-            <img src={logo} className="Logo" alt="logo" />
-          </Link>
+          <LeftLogo />
           <Navbar links={loggedInLinks} />
         </div>
       </header>

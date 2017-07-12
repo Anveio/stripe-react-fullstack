@@ -1,3 +1,9 @@
+header {
+  margin: 0 auto;
+  padding: 0.2rem;
+  max-width: 103.6rem;
+}
+
 .Navbar {
   display: block;
 }
@@ -10,6 +16,7 @@
 }
 
 .Navbar__brand {
+  align-self: flex-start;
   margin-top: 4rem;
 }
 
@@ -26,7 +33,7 @@
 .Navbar .Navbar__list a {
   display: block;
   flex: 0 0 auto;
-  
+
   position: relative;
   padding: 5.6rem 1.6rem 1.6rem;
   max-width: 60rem;
@@ -46,6 +53,31 @@
 }
 
 @keyframes Logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 46.5em) {
+  header {
+    padding: 0 3.2rem;
+  }
+}
+
+@media (min-width: 40em) {
+  header {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 30.625em) {
+  .Navbar__brand {
+    display: none;
+  }
+  .Navbar__list {
+    padding-left: 0;
+  }
 }

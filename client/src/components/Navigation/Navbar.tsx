@@ -14,8 +14,8 @@ export default ({ links }: Props) => {
   return (
     <nav className="Navbar">
       <ul className="Navbar__list">
-        {links.map((link, i) => {
-          return <NavbarLink {...link} key={i} />;
+        {links.map(link => {
+          return <NavbarLink {...link} key={link.text} />;
         })}
       </ul>
     </nav>
