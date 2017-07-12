@@ -49,7 +49,7 @@ interface UsersListState {
 interface ServerMessage {
   status: StatusType;
   title: string;
-  message: string;
+  message?: string;
 }
 
 interface Action {
