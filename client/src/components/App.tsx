@@ -9,7 +9,24 @@ import SignupForm from '../containers/SignupForm';
 import UserList from '../containers/UserList';
 import Home from './Home';
 
-export default class App extends React.Component<{}, never> {
+export interface Props {
+  readonly currentUser: UserState;
+}
+
+export interface Handlers {
+  readonly onBoot: () => void;
+}
+
+export default class App extends React.Component<Props & Handlers, never> {
+  componentWillMount() {
+    if (localStorage.getItem('jwt')) {
+      this.props.onBoot();
+    } else {
+      // tslint:disable-next-line:no-console
+      console.log('No jwt in localstorage. Skipping automatic log in.');
+    }
+  }
+
   render() {
     return (
       <main>

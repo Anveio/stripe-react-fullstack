@@ -8,7 +8,7 @@ import history from './history';
 import registerServiceWorker from './registerServiceWorker';
 import '@shopify/polaris/styles.css';
 
-import App from './components/App';
+import App from './containers/App';
 
 ReactDOM.render(
   <Provider store={store}>
