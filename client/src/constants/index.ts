@@ -1,15 +1,14 @@
 // Might be best to put this in a separate file.
 // It's here for now for simplicity's sake.
-export const SERVER_ROOT_URL = () => {
-  switch (window.location.hostname) {
-    case 'reduxbusinesssample.herokuapp.com':
-      return 'https://reduxbusinesssample.herokuapp.com';
-    case 'www.simplemarketplace.com': // Tentative Domain name for website.
-      return 'https://www.simplemarketplace.com';
-    default:
-      return 'http://localhost:4000';
-  }
-};
+export const SERVER_ROOT_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'http://myapidomain.com'
+    : 'http://localhost:4000';
+
+export const STRIPE_PUBLISHABLE =
+  process.env.NODE_ENV === 'production'
+    ? 'pk_live_MY_PUBLISHABLE_KEY'
+    : 'pk_test_E3bAxFY7EGHaxeBXjyh92p9b';
 
 export const INCREMENT_ENTHUSIASM = 'INCREMENT_ENTHUSIASM';
 export type INCREMENT_ENTHUSIASM = typeof INCREMENT_ENTHUSIASM;

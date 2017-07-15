@@ -35,7 +35,7 @@ const mapDispatchToProps = (
     onSubmit: (payload: LoginPayload) => {
       dispatch(actions.loginRequest(payload));
       axios
-        .post(`${SERVER_ROOT_URL()}/api/login`, payload)
+        .post(`${SERVER_ROOT_URL}/api/login`, payload)
         .then(
           success => {
             window.localStorage.setItem(
