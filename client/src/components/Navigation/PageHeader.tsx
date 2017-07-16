@@ -15,15 +15,16 @@ const LeftLogo = () => {
 };
 
 const loggedOutLinks = [
-  { path: '/', text: 'Home' },
+  { path: '/', text: 'home' },
   { path: 'signup' },
   { path: 'login' }
 ];
 
 const loggedInLinks = [
-  { path: '/', text: 'Home' },
+  { path: '/', text: 'home' },
   { path: 'account' },
-  { path: 'users' }
+  { path: 'users' },
+  { path: 'checkout' }
 ];
 
 export default (account: UserState) => {

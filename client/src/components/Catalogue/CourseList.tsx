@@ -6,9 +6,8 @@ export interface Props {
   readonly list: Course[];
 }
 
-const CourseList = (props: Props): JSX.Element => {
-  const { list } = props;
-  const emptyCourseListMarkup = (): JSX.Element => {
+const CourseList = ({ list }: Props) => {
+  const emptyCourseListMarkup = () => {
     return (
       <Layout.AnnotatedSection title={'My enrolled courses'}>
         <Card sectioned>
@@ -24,7 +23,7 @@ const CourseList = (props: Props): JSX.Element => {
     );
   };
 
-  const populatedCourseListMarkup = (): JSX.Element => {
+  const populatedCourseListMarkup = () => {
     return (
       <Layout.AnnotatedSection title={'My enrolled courses'}>
         <Card sectioned>
