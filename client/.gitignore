@@ -20,6 +20,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+variables.env
+
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

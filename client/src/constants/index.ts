@@ -8,7 +8,7 @@ export const SERVER_ROOT_URL =
 export const STRIPE_PUBLISHABLE =
   process.env.NODE_ENV === 'production'
     ? 'pk_live_MY_PUBLISHABLE_KEY'
-    : 'pk_test_E3bAxFY7EGHaxeBXjyh92p9b';
+    : process.env.STRIPE_PUBLISHABLE_TEST;
 
 export const INCREMENT_ENTHUSIASM = 'INCREMENT_ENTHUSIASM';
 export type INCREMENT_ENTHUSIASM = typeof INCREMENT_ENTHUSIASM;
