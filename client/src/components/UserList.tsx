@@ -33,9 +33,9 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
             Reload Users.
           </Button>
         </Card>
-        {this.props.userList.map((user, i) => {
-          return <Card sectioned title={user.email} key={i} />;
-        })}
+        {this.props.userList.map((user, i) =>
+          <Card sectioned title={user.email} key={i} />
+        )}
       </Layout.AnnotatedSection>
     );
   }; // tslint:disable-line:semicolon

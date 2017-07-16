@@ -34,6 +34,7 @@ export default ({ name, description, amount }: Props) => {
     name,
     description,
     token: onToken(amount, description),
+    amount,
     stripeKey: STRIPE_PUBLISHABLE
   };
 

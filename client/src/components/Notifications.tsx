@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { Layout, Banner } from '@shopify/polaris';
 
-interface Props {
+export interface Props {
   notifications: NotificationsState;
+}
+
+export interface Handlers {
   onDismiss: (message: string) => void;
 }
 
-export default ({ notifications, onDismiss }: Props) => {
+export default ({ notifications, onDismiss }: Props & Handlers) => {
   const notificationsMarkup = () => {
     const serverNotifications = notifications.fromServer;
     return serverNotifications.map((notification, index) => {

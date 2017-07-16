@@ -42,7 +42,7 @@ export default class App extends React.PureComponent<Props & Handlers, never> {
                 <Checkout
                   name={'The Road to learn React'}
                   description={'Only the Book'}
-                  amount={1}
+                  amount={100}
                 />
               );
             }}

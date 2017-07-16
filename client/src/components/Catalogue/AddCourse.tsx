@@ -3,11 +3,16 @@ import { Layout, Card, FormLayout, TextField, Button } from '@shopify/polaris';
 
 export interface Props {
   readonly text: string;
+}
+
+export interface Handlers {
   readonly onTextInput: (value: string) => void;
   readonly onAddCourse: (course: Course) => void;
 }
 
-const AddCourse = ({ text, onTextInput, onAddCourse }: Props): JSX.Element => {
+const AddCourse = (props: Props & Handlers): JSX.Element => {
+  const { text, onTextInput, onAddCourse } = props;
+
   const handleAddCourse = (): void => {
     const course: Course = {
       name: text

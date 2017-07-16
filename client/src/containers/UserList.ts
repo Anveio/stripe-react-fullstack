@@ -17,7 +17,7 @@ const mapDispatchToProps = (
   return {
     onLoad: () => {
       axios
-        .get(`${SERVER_ROOT_URL()}/api/users`, {
+        .get(`${SERVER_ROOT_URL}/api/users`, {
           headers: {
             authorization: `Bearer ${window.localStorage.getItem('jwt')}`
           }

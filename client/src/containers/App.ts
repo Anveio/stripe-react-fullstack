@@ -1,6 +1,6 @@
+import App, { Props, Handlers } from '../components/App';
 import { connect, Dispatch } from 'react-redux';
 import { AccountConnectionAction, connectAccount } from '../actions/connection';
-import App, { Props, Handlers } from '../components/App';
 // import axios from 'axios';
 // import { SERVER_ROOT_URL } from '../constants';
 
