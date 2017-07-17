@@ -28,8 +28,13 @@ exports.logout = (req, res) => {
   res.logout;
 };
 
-exports.isLoggedIn = expressJwt({
+exports.authenticateJwt = expressJwt({
   secret: 'kappa',
   userProperty: 'payload',
   getToken: getTokenFromHeader
 });
+
+exports.logUser = (req, res, next) => {
+  console.log(req.user);
+  next();
+};

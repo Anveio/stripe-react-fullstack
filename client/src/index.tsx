@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Router } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import history from './history';
@@ -8,12 +8,12 @@ import history from './history';
 import registerServiceWorker from './registerServiceWorker';
 import '@shopify/polaris/styles.css';
 
-import App from './components/App';
+import App from './containers/App';
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <App />
+      <Route path="/" component={props => <App {...props} />} />
     </Router>
   </Provider>,
   document.getElementById('root') as HTMLElement

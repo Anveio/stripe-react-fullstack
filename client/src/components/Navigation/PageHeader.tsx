@@ -15,38 +15,25 @@ const LeftLogo = () => {
 };
 
 const loggedOutLinks = [
-  { path: '/', text: 'Home' },
+  { path: '/', text: 'home' },
   { path: 'signup' },
   { path: 'login' }
 ];
 
 const loggedInLinks = [
-  { path: '/', text: 'Home' },
+  { path: '/', text: 'home' },
   { path: 'account' },
-  { path: 'users' }
+  { path: 'users' },
+  { path: 'checkout' }
 ];
 
 export default (account: UserState) => {
-  const loggedOutMarkup = () => {
-    return (
-      <header>
-        <div className="Navbar-container">
-          <LeftLogo />
-          <Navbar links={loggedOutLinks} />
-        </div>
-      </header>
-    );
-  };
-
-  const loggedInMarkup = () => {
-    return (
-      <header>
-        <div className="Navbar-container">
-          <LeftLogo />
-          <Navbar links={loggedInLinks} />
-        </div>
-      </header>
-    );
-  };
-  return account.token ? loggedInMarkup() : loggedOutMarkup();
+  return (
+    <header>
+      <div className="Navbar-container">
+        <LeftLogo />
+        <Navbar links={account.token ? loggedInLinks : loggedOutLinks} />
+      </div>
+    </header>
+  );
 };

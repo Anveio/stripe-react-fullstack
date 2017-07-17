@@ -45,7 +45,7 @@ const mapDispatchToProps = (
     onSubmit: (payload: SignupPayload) => {
       dispatch(actions.registerAccountRequest(payload));
       axios
-        .post(`${SERVER_ROOT_URL()}/api/signup`, payload)
+        .post(`${SERVER_ROOT_URL}/api/signup`, payload)
         .then(
           success => {
             dispatch(actions.registerAccountSuccess());

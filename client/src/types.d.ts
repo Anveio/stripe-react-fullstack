@@ -47,16 +47,16 @@ interface UsersListState {
 }
 
 interface ServerMessage {
-  status: StatusType;
-  title: string;
-  message: string;
+  readonly status: StatusType;
+  readonly title: string;
+  readonly message: string;
 }
 
 interface Action {
-  content?: string;
-  accessibilityLabel?: string;
-  url?: string;
-  onAction?(): void;
+  readonly content?: string;
+  readonly accessibilityLabel?: string;
+  readonly url?: string;
+  readonly onAction: () => void;
 }
 
 declare type StatusType = 'success' | 'info' | 'warning' | 'critical';

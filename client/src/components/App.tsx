@@ -7,9 +7,24 @@ import Notifications from '../containers/Notifications';
 import PageHeader from '../containers/PageHeader';
 import SignupForm from '../containers/SignupForm';
 import UserList from '../containers/UserList';
+import Checkout from './Payment/Checkout';
 import Home from './Home';
 
-export default class App extends React.Component<{}, never> {
+export interface Props {
+  readonly currentUser: UserState;
+}
+
+export interface Handlers {
+  readonly onBoot: () => void;
+}
+
+export default class App extends React.PureComponent<Props & Handlers, never> {
+  componentWillMount() {
+    localStorage.getItem('jwt')
+      ? this.props.onBoot() // tslint:disable-next-line:no-console
+      : console.log('No jwt in localstorage. Skipping automatic log in.');
+  }
+
   render() {
     return (
       <main>
@@ -17,22 +32,19 @@ export default class App extends React.Component<{}, never> {
         <Page title="Dashboard">
           <Notifications />
           <Route exact path="/" component={Home} />
+          <Route path="/signup" component={() => <SignupForm />} />
+          <Route path="/login" component={() => <LoginForm />} />
+          <Route path="/users" component={() => <UserList />} />
           <Route
-            path="/signup"
-            render={() => {
-              return <SignupForm />;
-            }}
-          />
-          <Route
-            path="/login"
-            render={() => {
-              return <LoginForm />;
-            }}
-          />
-          <Route
-            path="/users"
-            render={() => {
-              return <UserList />;
+            path="/checkout"
+            component={() => {
+              return (
+                <Checkout
+                  name={'The Road to learn React'}
+                  description={'Only the Book'}
+                  amount={100}
+                />
+              );
             }}
           />
         </Page>
