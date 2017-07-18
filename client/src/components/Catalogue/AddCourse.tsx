@@ -17,27 +17,32 @@ const AddCourse = (props: Props & Handlers): JSX.Element => {
     onAddCourse({ name: text });
   };
 
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-  //   event.preventDefault();
-  //   handleAddCourse();
-  // };
+  const watchForEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.charCode === 13) {
+      event.preventDefault();
+      handleAddCourse();
+    }
+  };
 
   return (
     <Layout.AnnotatedSection title="Add a course">
       <Card sectioned>
         <FormLayout>
-          <TextField
-            label="Course name"
-            type="text"
-            name="add-course"
-            value={text}
-            placeholder="e.g. History 101"
-            helpText="Type in the name and number of the course you want to add."
-            onChange={onTextInput}
-            maxLength={120}
-          />
+          <div onKeyPress={watchForEnter}>
+            <TextField
+              label="Course name"
+              type="text"
+              name="add-course"
+              value={text}
+              placeholder="e.g. History 101"
+              helpText="Type in the name and number of the course you want to add."
+              onChange={onTextInput}
+              maxLength={120}
+            />
+          </div>
           <Button
             primary
+            submit
             icon="add"
             onClick={handleAddCourse}
             accessibilityLabel="Add Course"
