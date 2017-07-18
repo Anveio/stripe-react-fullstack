@@ -14,43 +14,36 @@ const AddCourse = (props: Props & Handlers): JSX.Element => {
   const { text, onTextInput, onAddCourse } = props;
 
   const handleAddCourse = (): void => {
-    const course: Course = {
-      name: text
-    };
-    onAddCourse(course);
+    onAddCourse({ name: text });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    handleAddCourse();
-  };
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  //   event.preventDefault();
+  //   handleAddCourse();
+  // };
 
   return (
     <Layout.AnnotatedSection title="Add a course">
       <Card sectioned>
         <FormLayout>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              label="Course name"
-              type="text"
-              name="add-course"
-              value={text}
-              autoFocus
-              autoComplete
-              placeholder="e.g. History 101"
-              helpText="Type in the name and number of the course you want to add."
-              onChange={onTextInput}
-              maxLength={120}
-            />
-            <Button
-              primary
-              icon="add"
-              onClick={handleAddCourse}
-              accessibilityLabel="Add Course"
-            >
-              Add Course
-            </Button>
-          </form>
+          <TextField
+            label="Course name"
+            type="text"
+            name="add-course"
+            value={text}
+            placeholder="e.g. History 101"
+            helpText="Type in the name and number of the course you want to add."
+            onChange={onTextInput}
+            maxLength={120}
+          />
+          <Button
+            primary
+            icon="add"
+            onClick={handleAddCourse}
+            accessibilityLabel="Add Course"
+          >
+            Add Course
+          </Button>
         </FormLayout>
       </Card>
     </Layout.AnnotatedSection>
