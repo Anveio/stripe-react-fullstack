@@ -49,6 +49,10 @@ const mapDispatchToProps = (
         .then(
           success => {
             dispatch(actions.registerAccountSuccess());
+            window.localStorage.setItem(
+              'jwt',
+              (success.data as JsonWebToken).token
+            );
             /* POSTing to /api/signup will run through passport.js' login 
             middleware. So if there are no errors at this point we can log-in 
             the user without sending a separate request.
