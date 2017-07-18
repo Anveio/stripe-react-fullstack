@@ -10,6 +10,7 @@ const PasswordField = ({ field, onChange }: Props) => {
   return (
     <TextField
       label="Password"
+      name="password"
       type="password"
       placeholder="At least 6 characters."
       value={field.text}
@@ -24,6 +25,7 @@ const PasswordConfField = ({ field, onChange }: Props) => {
   return (
     <TextField
       label="Confirm Password"
+      name="passwordConf"
       type="password"
       value={field.text}
       placeholder="Same as your password."
