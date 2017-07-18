@@ -14,43 +14,41 @@ const AddCourse = (props: Props & Handlers): JSX.Element => {
   const { text, onTextInput, onAddCourse } = props;
 
   const handleAddCourse = (): void => {
-    const course: Course = {
-      name: text
-    };
-    onAddCourse(course);
+    onAddCourse({ name: text });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    handleAddCourse();
+  const watchForEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.charCode === 13) {
+      event.preventDefault();
+      handleAddCourse();
+    }
   };
 
   return (
     <Layout.AnnotatedSection title="Add a course">
       <Card sectioned>
         <FormLayout>
-          <form onSubmit={handleSubmit}>
+          <div onKeyPress={watchForEnter}>
             <TextField
               label="Course name"
               type="text"
               name="add-course"
               value={text}
-              autoFocus
-              autoComplete
               placeholder="e.g. History 101"
               helpText="Type in the name and number of the course you want to add."
               onChange={onTextInput}
               maxLength={120}
             />
-            <Button
-              primary
-              icon="add"
-              onClick={handleAddCourse}
-              accessibilityLabel="Add Course"
-            >
-              Add Course
-            </Button>
-          </form>
+          </div>
+          <Button
+            primary
+            submit
+            icon="add"
+            onClick={handleAddCourse}
+            accessibilityLabel="Add Course"
+          >
+            Add Course
+          </Button>
         </FormLayout>
       </Card>
     </Layout.AnnotatedSection>
@@ -58,54 +56,3 @@ const AddCourse = (props: Props & Handlers): JSX.Element => {
 };
 
 export default AddCourse;
-
-// export default class AddCourse extends React.PureComponent<Props, never> {
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   handleAddCourse = (): void => {
-//     const course: Course = {
-//       name: this.props.text
-//     };
-//     onAddCourse(course);
-//   };
-
-//   handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-//     event.preventDefault();
-//     handleAddCourse();
-//   };
-
-//   render() {
-//     return (
-//       <Layout.AnnotatedSection title="Add a course">
-//         <Card sectioned>
-//           <FormLayout>
-//             <form onSubmit={handleSubmit}>
-//               <TextField
-//                 label="Course name"
-//                 type="text"
-//                 name="add-course"
-//                 value={text}
-//                 autoFocus
-//                 autoComplete
-//                 placeholder="e.g. History 101"
-//                 helpText="Type in the name and number of the course you want to add."
-//                 onChange={onTextInput}
-//                 maxLength={120}
-//               />
-//               <Button
-//                 primary
-//                 icon="add"
-//                 onClick={handleAddCourse}
-//                 accessibilityLabel="Add Course"
-//               >
-//                 Add Course
-//               </Button>
-//             </form>
-//           </FormLayout>
-//         </Card>
-//       </Layout.AnnotatedSection>
-//     );
-//   }
-// }

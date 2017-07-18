@@ -43,7 +43,7 @@ export default (props: Props & Handlers) => {
     return !email.text && !password.text;
   };
 
-  const watchForEnter = (event: React.KeyboardEvent<HTMLFormElement>) => {
+  const watchForEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.charCode === 13) {
       event.preventDefault();
       handleLogIn();
@@ -56,23 +56,18 @@ export default (props: Props & Handlers) => {
         <Card sectioned>
           <FormLayout>
             <DisplayText size="medium">Log in.</DisplayText>
-            <form
-              onSubmit={handleLogIn}
-              acceptCharset="utf-8"
-              onKeyPress={watchForEnter}
-            >
+            <div onKeyPress={watchForEnter}>
               <EmailField field={email} onChange={onChangeEmail} />
               <PasswordField field={password} onChange={onChangePassword} />
-              <br />
-              <Button
-                primary
-                icon="circleChevronRight"
-                onClick={handleLogIn}
-                disabled={validForm()}
-              >
-                Log in.
-              </Button>
-            </form>
+            </div>
+            <Button
+              primary
+              icon="circleChevronRight"
+              onClick={handleLogIn}
+              disabled={validForm()}
+            >
+              Log in.
+            </Button>
           </FormLayout>
         </Card>
       </Layout>
