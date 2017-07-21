@@ -1,5 +1,7 @@
 // Might be best to put this in a separate file.
 // It's here for now for simplicity's sake.
+import { STRIPE_PUBLISHABLE_TEST } from './config';
+
 export const ROOT_API_URL =
   process.env.NODE_ENV === 'production'
     ? 'http://myapidomain.com'
@@ -8,7 +10,7 @@ export const ROOT_API_URL =
 export const STRIPE_PUBLISHABLE =
   process.env.NODE_ENV === 'production'
     ? 'pk_live_MY_PUBLISHABLE_KEY'
-    : process.env.STRIPE_PUBLISHABLE_TEST;
+    : STRIPE_PUBLISHABLE_TEST;
 
 export const INCREMENT_ENTHUSIASM = 'INCREMENT_ENTHUSIASM';
 export type INCREMENT_ENTHUSIASM = typeof INCREMENT_ENTHUSIASM;
