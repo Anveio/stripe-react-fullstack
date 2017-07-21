@@ -1,9 +1,9 @@
 // Might be best to put this in a separate file.
 // It's here for now for simplicity's sake.
-export const SERVER_ROOT_URL =
+export const ROOT_API_URL =
   process.env.NODE_ENV === 'production'
     ? 'http://myapidomain.com'
-    : 'http://localhost:4000';
+    : 'http://localhost:4000/api';
 
 export const STRIPE_PUBLISHABLE =
   process.env.NODE_ENV === 'production'

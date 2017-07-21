@@ -3,13 +3,13 @@ import axios from 'axios';
 import { Card } from '@shopify/polaris';
 import StripeCheckout, { Token } from 'react-stripe-checkout';
 
-import { STRIPE_PUBLISHABLE, SERVER_ROOT_URL } from '../../constants';
+import { STRIPE_PUBLISHABLE, ROOT_API_URL } from '../../constants';
 
 const fromEuroToCent = (amount: number) => amount * 100;
 
 const onToken = (amount: number, description: string) => (token: Token) => {
   axios
-    .post(`${SERVER_ROOT_URL}/api/payments`, {
+    .post(`${ROOT_API_URL}/payments`, {
       description,
       source: token.id,
       currency: 'USD',

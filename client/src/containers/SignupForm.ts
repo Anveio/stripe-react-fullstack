@@ -6,7 +6,7 @@ import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
 import history from '../history';
-import { SERVER_ROOT_URL } from '../constants';
+import { ROOT_API_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
   const {
@@ -45,7 +45,7 @@ const mapDispatchToProps = (
     onSubmit: (payload: SignupPayload) => {
       dispatch(actions.registerAccountRequest(payload));
       axios
-        .post(`${SERVER_ROOT_URL}/api/signup`, payload)
+        .post(`${ROOT_API_URL}/signup`, payload)
         .then(
           success => {
             dispatch(actions.registerAccountSuccess());
@@ -53,10 +53,12 @@ const mapDispatchToProps = (
               'jwt',
               (success.data as JsonWebToken).token
             );
-            /* POSTing to /api/signup will run through passport.js' login 
-            middleware. So if there are no errors at this point we can log-in 
-            the user without sending a separate request.
-            */
+            /**
+             * POSTing to /signup will run through passport.js' login 
+             * middleware. So if there are no errors at this point we can log-in
+             * the user without sending a separate request.
+             */
+
             dispatch(
               connectAccount({
                 email: payload.email,
@@ -75,12 +77,11 @@ const mapDispatchToProps = (
             );
           },
           errors => {
-            /*
-            If express validator catches an error:
-             'data' will be a SignupValidationError[].
-            If our moongoose User Schema catches an error:
-             'data' will be a string.
-            */
+            /**
+             * If express validator catches an error: 'data' will be a 
+             * SignupValidationError[]. If our moongoose User Schema catches an 
+             * error: 'data' will be a string.
+             */
 
             const data: ExpressValidatorError[] | string = errors.response.data;
             if (data instanceof Array) {

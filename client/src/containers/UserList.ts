@@ -3,7 +3,7 @@ import * as actions from '../actions/users';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
 
-import { SERVER_ROOT_URL } from '../constants';
+import { ROOT_API_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
   return {
@@ -17,7 +17,7 @@ const mapDispatchToProps = (
   return {
     onLoad: () => {
       axios
-        .get(`${SERVER_ROOT_URL}/api/users`, {
+        .get(`${ROOT_API_URL}/users`, {
           headers: {
             authorization: `Bearer ${window.localStorage.getItem('jwt')}`
           }
