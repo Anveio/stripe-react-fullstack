@@ -5,15 +5,14 @@ import StripeCheckout, { Token } from 'react-stripe-checkout';
 
 import { STRIPE_PUBLISHABLE, ROOT_API_URL } from '../../constants';
 
-const fromEuroToCent = (amount: number) => amount * 100;
-
 const onToken = (amount: number, description: string) => (token: Token) => {
   axios
-    .post(`${ROOT_API_URL}/payments`, {
+    .post(`${ROOT_API_URL}/stripe`, {
       description,
       source: token.id,
+      email: token.email,
       currency: 'USD',
-      amount: fromEuroToCent(amount)
+      amount
     })
     .then(
       // tslint:disable-next-line:no-console

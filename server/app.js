@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: process.env.JWT_SECRET,
     cookie: {
       maxAge: 60000
     },
