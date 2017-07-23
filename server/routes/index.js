@@ -5,6 +5,7 @@ const { catchErrors } = require('../handlers/errorHandlers');
 
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const stripeController = require('../controllers/stripeController');
 
 router.post(
   '/signup',
@@ -12,6 +13,8 @@ router.post(
   catchErrors(userController.createUser),
   authController.login
 );
+
+router.post('/stripe', catchErrors(stripeController.processPayment));
 
 router.get(
   '/users',

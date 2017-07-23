@@ -20,7 +20,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-variables.env
+# Secret Stuff
+*.env
+config.ts
 
 .vscode/*
 !.vscode/settings.json

@@ -5,7 +5,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const jwt = require('jsonwebtoken');
 
 const Schema = mongoose.Schema;
-const secret = process.env.SECRET;
+const secret = process.env.JWT_SECRET;
 /* Mongoose: mpromise (mongoose's default promise library) is deprecated,
 plug in your own promise library instead:
 http://mongoosejs.com/docs/promises.html */

@@ -1,13 +1,13 @@
-const cors = require('cors'),
-  express = require('express'),
-  passport = require('passport'),
-  mongoose = require('mongoose'),
-  bodyParser = require('body-parser'),
-  session = require('express-session'),
-  cookieParser = require('cookie-parser'),
-  MongoStore = require('connect-mongo')(session),
-  expressValidator = require('express-validator'),
-  errorHandlers = require('./handlers/errorHandlers');
+const cors = require('cors');
+const express = require('express');
+const passport = require('passport');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const MongoStore = require('connect-mongo')(session);
+const expressValidator = require('express-validator');
+const errorHandlers = require('./handlers/errorHandlers');
 
 require('./handlers/passport');
 const routes = require('./routes');
@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: process.env.JWT_SECRET,
     cookie: {
       maxAge: 60000
     },
