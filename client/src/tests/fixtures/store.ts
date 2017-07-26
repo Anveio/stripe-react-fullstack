@@ -1,38 +1,5 @@
-const emptyAuthForm = { text: '', error: null };
+import { createStore } from 'redux';
+import { rootReducer } from '../../reducers';
+import { blankState } from './state';
 
-export const blankStore = {
-  currentUser: {
-    email: null,
-    token: null
-  },
-  notifications: {
-    fromServer: []
-  },
-  enthusiasm: {
-    level: 1,
-    languageName: 'TypeScript'
-  },
-  courses: {
-    list: []
-  },
-  forms: {
-    signup: {
-      email: emptyAuthForm,
-      username: emptyAuthForm,
-      password: emptyAuthForm,
-      passwordConf: emptyAuthForm,
-      loading: false
-    },
-    login: {
-      email: emptyAuthForm,
-      password: emptyAuthForm,
-      loading: false
-    },
-    addCourse: {
-      name: { text: '' }
-    }
-  },
-  users: {
-    list: []
-  }
-};
+export const blankStore = createStore<RootState>(rootReducer, blankState);

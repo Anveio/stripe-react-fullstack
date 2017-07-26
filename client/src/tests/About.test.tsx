@@ -4,9 +4,10 @@ import { shallow } from 'enzyme';
 import enthusiasmReducer from '../reducers/enthusiasm';
 import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from '../constants';
 import { Layout, Card, Button } from '@shopify/polaris';
-import renderAppWithState from './index';
+import { renderAppWithState } from './mock/app';
 
-import { blankStore } from './fixtures/store';
+import { blankState } from './fixtures/state';
+import { mockLocalStorage } from './mock/localStorage';
 
 // Testing for null type checks are omitted because the TypeScript compiler will catch those errors.
 
@@ -27,11 +28,22 @@ const shallowAboutComponent = () => {
 };
 
 // To prevent one test from affecting another, we will re-render the app with a fresh state for each test.
-const setup = (state: RootState) => {
-  const { store, wrapper } = renderAppWithState(state);
+const setup = () => {
+  const customEnthusiasm = {
+    enthusiasm: {
+      languageName: 'TypeScript',
+      level: 5
+    }
+  };
+
+  const { store, wrapper } = renderAppWithState(customEnthusiasm);
   const buttons = wrapper.find(About).find(Button);
   return { store, wrapper, buttons };
 };
+
+beforeEach(() => {
+  mockLocalStorage();
+});
 
 describe('About component', () => {
   describe('rendering itself and its children', () => {
@@ -80,33 +92,32 @@ describe('About component', () => {
 
   describe('clicking buttons', () => {
     it('initializes with the correct state', () => {
-      const { store } = setup(blankStore);
-      expect(store.getState()).toEqual(blankStore);
+      const { store } = setup();
+      expect(store.getState().enthusiasm).toEqual({
+        languageName: 'TypeScript',
+        level: 5
+      });
     });
 
     it('increments level by 1 on "+" button click', () => {
-      const { store, buttons } = setup(blankStore);
+      const { store, buttons } = setup();
       const incrementButton = buttons.at(1);
       incrementButton.simulate('click');
 
-      expect(store.getState()).toEqual({
-        enthusiasm: {
-          level: 4,
-          languageName: 'TypeScript'
-        }
+      expect(store.getState().enthusiasm).toEqual({
+        languageName: 'TypeScript',
+        level: 6
       });
     });
 
     it('decrements level by 1 on "-" button click', () => {
-      const { store, buttons } = setup(blankStore);
+      const { store, buttons } = setup();
       const decrementButton = buttons.at(0);
 
       decrementButton.simulate('click');
-      expect(store.getState()).toEqual({
-        enthusiasm: {
-          level: 2,
-          languageName: 'TypeScript'
-        }
+      expect(store.getState().enthusiasm).toEqual({
+        level: 4,
+        languageName: 'TypeScript'
       });
     });
   });
