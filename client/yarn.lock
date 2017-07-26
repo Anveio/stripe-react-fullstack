@@ -4434,9 +4434,9 @@ react-scripts-ts@2.0.1:
   optionalDependencies:
     fsevents "1.0.17"
 
-react-stripe-checkout@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-stripe-checkout/-/react-stripe-checkout-2.4.0.tgz#1b9cdcc79ef131199cc39e944b34e1e81a00cd10"
+react-stripe-checkout@2.6.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-stripe-checkout/-/react-stripe-checkout-2.5.0.tgz#6a6f612f99e3e2bf787b88aed98b5f86a87b81dd"
 
 react@^15.5.4:
   version "15.5.4"

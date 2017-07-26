@@ -30,6 +30,7 @@ interface Props {
 
 export default ({ name, description, amount }: Props) => {
   const props = {
+    label: 'Hi',
     name,
     description,
     token: onToken(amount, description),
