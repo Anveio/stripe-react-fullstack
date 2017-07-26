@@ -2,7 +2,8 @@ const emptyAuthForm = { text: '', error: null };
 
 export const blankStore = {
   currentUser: {
-    account: null
+    email: null,
+    token: null
   },
   notifications: {
     fromServer: []
