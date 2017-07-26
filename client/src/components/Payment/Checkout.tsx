@@ -6,10 +6,11 @@ import StripeCheckout, { Token } from 'react-stripe-checkout';
 import { STRIPE_PUBLISHABLE, ROOT_API_URL } from '../../constants';
 
 const onToken = (amount: number, description: string) => (token: Token) => {
+  console.log(token);
   axios
     .post(`${ROOT_API_URL}/stripe`, {
       description,
-      source: token.id,
+      token,
       email: token.email,
       currency: 'USD',
       amount
@@ -17,7 +18,7 @@ const onToken = (amount: number, description: string) => (token: Token) => {
     .then(
       // tslint:disable-next-line:no-console
       success => console.log('Successful payment: ' + success.data),
-      error => console.warn('Problem with payment: ' + error)
+      reject => console.warn('Problem with payment: ' + reject)
     )
     .catch();
 };
