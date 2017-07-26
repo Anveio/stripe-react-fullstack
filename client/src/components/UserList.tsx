@@ -38,7 +38,7 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
         )}
       </Layout.AnnotatedSection>
     );
-  }; // tslint:disable-line:semicolon
+  }; 
 
   readonly usersNotFoundMarkup = () => {
     return (
@@ -50,7 +50,7 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
         <p>Reload this component.</p>
       </EmptyState>
     );
-  }; // tslint:disable-line:semicolon
+  };
 
   public render() {
     return this.props.userList.length > 0
