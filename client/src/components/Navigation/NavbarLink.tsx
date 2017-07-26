@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 interface Props {
-  path: string;
-  text?: string;
+  readonly path: string;
+  readonly text?: string;
 }
 
 export default ({ path, text }: Props) => {
