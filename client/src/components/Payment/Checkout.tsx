@@ -10,7 +10,7 @@ const onToken = (amount: number, description: string) => (token: Token) => {
   axios
     .post(`${ROOT_API_URL}/stripe`, {
       description,
-      token,
+      source: token.id,
       email: token.email,
       currency: 'USD',
       amount
