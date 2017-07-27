@@ -10,7 +10,7 @@ interface Props {
   readonly links: LinkInfo[];
 }
 
-export default ({ links }: Props) => {
+const Navbar = ({ links }: Props) => {
   return (
     <nav className="Navbar">
       <ul className="Navbar__list">
@@ -19,3 +19,5 @@ export default ({ links }: Props) => {
     </nav>
   );
 };
+
+export default Navbar;

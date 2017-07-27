@@ -30,17 +30,17 @@ export interface Handlers {
   readonly onSubmit: (payload: SignupPayload) => void;
 }
 
-export default (props: Props & Handlers) => {
+const SignupForm = (props: Props & Handlers) => {
   const {
     email,
     username,
     password,
     passwordConf,
+    onSubmit,
     onChangeEmail,
     onChangeUserName,
     onChangePassword,
     onChangePasswordConf,
-    onSubmit
   } = props;
 
   const handleSignUp = (): void => {
@@ -97,3 +97,5 @@ export default (props: Props & Handlers) => {
     </Layout>
   );
 };
+
+export default SignupForm;

@@ -9,18 +9,17 @@ class Props {
   readonly onDecrement: () => void;
 }
 
-const About = (props: Props): JSX.Element => {
-  const { languageName, level = 1, onIncrement, onDecrement } = props;
+const About = ({ languageName, level = 1, onIncrement, onDecrement }: Props) => {
   return (
     <Layout.AnnotatedSection title="About">
-        <Card sectioned>
-          <p>Language: {languageName} Enthusiasm: {level}</p>
-          <Button onClick={onDecrement}>-</Button>
-          <Button onClick={onIncrement}>+</Button>
-          <p>We're using React, Redux, Shopify Polaris components and a variety of other helpful libraries.</p>
-          <p>It was written in TypeScript using the TypeScript React starter template.</p>
-        </Card>
-      </Layout.AnnotatedSection>
+      <Card sectioned>
+        <p>Language: {languageName} Enthusiasm: {level}</p>
+        <Button onClick={onDecrement}>-</Button>
+        <Button onClick={onIncrement}>+</Button>
+        <p>We're using React, Redux, Shopify Polaris components and a variety of other helpful libraries.</p>
+        <p>It was written in TypeScript using the TypeScript React starter template.</p>
+      </Card>
+    </Layout.AnnotatedSection>
   );
 };
 

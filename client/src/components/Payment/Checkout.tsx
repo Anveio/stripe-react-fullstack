@@ -16,9 +16,9 @@ const onToken = (amount: number, description: string) => (token: Token) => {
       amount
     })
     .then(
-      // tslint:disable-next-line:no-console
-      success => console.log('Successful payment: ' + success.data),
-      reject => console.warn('Problem with payment: ' + reject)
+    // tslint:disable-next-line:no-console
+    success => console.log('Successful payment: ' + success.data),
+    reject => console.warn('Problem with payment: ' + reject)
     )
     .catch();
 };
@@ -29,7 +29,7 @@ interface Props {
   amount: number;
 }
 
-export default ({ name, description, amount }: Props) => {
+const Checkout = ({ name, description, amount }: Props) => {
   const props = {
     label: 'Hi',
     name,
@@ -50,3 +50,5 @@ export default ({ name, description, amount }: Props) => {
     </Card>
   );
 };
+
+export default Checkout;

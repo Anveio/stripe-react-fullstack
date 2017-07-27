@@ -22,7 +22,7 @@ export interface Handlers {
   readonly onSubmit: (payload: LoginPayload) => void;
 }
 
-export default (props: Props & Handlers) => {
+const LoginForm = (props: Props & Handlers) => {
   const {
     email,
     password,
@@ -88,3 +88,6 @@ export default (props: Props & Handlers) => {
 
   return currentUser.email ? loggedInMarkup(currentUser) : loggedOutMarkup();
 };
+
+
+export default LoginForm;

@@ -27,7 +27,7 @@ const loggedInLinks = [
   { path: 'checkout' }
 ];
 
-export default (account: UserState) => {
+const PageHeader = (account: UserState) => {
   return (
     <header>
       <div className="Navbar-container">
@@ -37,3 +37,5 @@ export default (account: UserState) => {
     </header>
   );
 };
+
+export default PageHeader;
