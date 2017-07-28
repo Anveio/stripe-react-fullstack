@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Layout, EmptyState, Button, Card } from '@shopify/polaris';
+import {
+  Layout,
+  EmptyState,
+  Button,
+  Card,
+  ResourceList
+} from '@shopify/polaris';
 
 import emptySvg from './empty-state.svg';
 
@@ -33,12 +39,15 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
             Reload Users.
           </Button>
         </Card>
-        {this.props.userList.map((user, i) =>
-          <Card sectioned title={user.email} key={i} />
-        )}
+        <ResourceList
+          items={this.props.userList}
+          renderItem={(user: PublicUserInfo, index: number) => (
+            <ResourceList.Item attributeOne={user.email} />
+          )}
+        />
       </Layout.AnnotatedSection>
     );
-  }; 
+  };
 
   readonly usersNotFoundMarkup = () => {
     return (
