@@ -2,7 +2,7 @@ import { Button, Card, Layout } from '@shopify/polaris';
 import * as React from 'react';
 
 // import { enthusiasm } from '../reducers';
-class Props {
+interface Props {
   readonly languageName: string;
   readonly level: number;
   readonly onIncrement: () => void;
