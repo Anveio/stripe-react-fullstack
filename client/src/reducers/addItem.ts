@@ -11,7 +11,7 @@ const initialState: Product = {
   price: 0
 };
 
-export default (state: Product = initialState, action: FormAction): Product => {
+export default (state = initialState, action: FormAction<Product>): Product => {
   let partialState: Partial<Product> | undefined;
 
   switch (action.type) {

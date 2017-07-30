@@ -1,31 +1,34 @@
 import * as constants from '../constants';
 
-export interface FormUpdate {
+export interface FormUpdate<T> {
   type: constants.UPDATE_FIELD_TEXT;
-  key: keyof Product;
+  key: keyof T;
   value: string;
 }
 
-export interface FormSubmit {
+export interface FormSubmit<T> {
   type: constants.SUBMIT_FORM;
-  product: Product;
+  payload: T;
 }
 
-export interface FormReset {
+export interface FormReset<T> {
   type: constants.RESET_TEXT_FIELD;
-  key: keyof Product;
+  key: keyof T;
 }
 
-export type FormAction = FormUpdate | FormReset | FormSubmit;
+export type FormAction<T extends Product | Course> =
+  | FormUpdate<T>
+  | FormReset<T>
+  | FormSubmit<T>;
 
-export function submitProduct(product: Product): FormSubmit {
+export function submitForm<T>(payload: T): FormSubmit<T> {
   return {
     type: constants.SUBMIT_FORM,
-    product
+    payload
   };
 }
 
-export function changeFormText(key: keyof Product, value: string): FormUpdate {
+export function changeFormText<T>(key: keyof T, value: string): FormUpdate<T> {
   return {
     type: constants.UPDATE_FIELD_TEXT,
     key,
@@ -33,7 +36,7 @@ export function changeFormText(key: keyof Product, value: string): FormUpdate {
   };
 }
 
-export function resetFormText(key: keyof Product): FormReset {
+export function resetFormText<T>(key: keyof T): FormReset<T> {
   return {
     type: constants.RESET_TEXT_FIELD,
     key
