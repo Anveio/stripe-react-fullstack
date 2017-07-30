@@ -7,6 +7,8 @@ import { default as login } from './loginForm';
 import { default as notifications } from './notifications';
 import { default as currentUser } from './accountConnection';
 import { default as users } from './userList';
+import { default as shelf } from './shelf';
+import { default as addItem } from './addItem';
 
 /*
 TODO: TypeScript doesn't seem to properly check if the object passed to
@@ -17,7 +19,8 @@ and it won't be caught by the compiler.
 const forms = combineReducers<AppForms>({
   signup,
   login,
-  addCourse
+  addCourse,
+  addItem
 });
 
 export const rootReducer = combineReducers<RootState>({
@@ -26,5 +29,6 @@ export const rootReducer = combineReducers<RootState>({
   forms,
   courses,
   enthusiasm,
-  users
+  users,
+  shelf
 });

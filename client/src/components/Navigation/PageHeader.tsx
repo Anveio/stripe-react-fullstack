@@ -22,9 +22,9 @@ const loggedOutLinks = [
 
 const loggedInLinks = [
   { path: '/', text: 'home' },
-  { path: 'account' },
   { path: 'users' },
-  { path: 'checkout' }
+  { path: 'checkout' },
+  { path: 'inventory' }
 ];
 
 const PageHeader = (account: UserState) => {

@@ -7,6 +7,7 @@ import Notifications from '../containers/Notifications';
 import PageHeader from '../containers/PageHeader';
 import SignupForm from '../containers/SignupForm';
 import UserList from '../containers/UserList';
+import AddItemForm from '../containers/AddProductForm';
 import Checkout from './Payment/Checkout';
 import Home from './Home';
 
@@ -35,6 +36,7 @@ export default class App extends React.PureComponent<Props & Handlers, never> {
           <Route path="/signup" component={() => <SignupForm />} />
           <Route path="/login" component={() => <LoginForm />} />
           <Route path="/users" component={() => <UserList />} />
+          <Route path="/inventory" component={() => <AddItemForm />} />
           <Route
             path="/checkout"
             component={() => {

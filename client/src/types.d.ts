@@ -17,6 +17,7 @@ interface RootState {
   readonly courses: CoursesState;
   readonly forms: AppForms;
   readonly users: UsersListState;
+  readonly shelf: ShelfState;
 }
 
 interface UserState {
@@ -40,10 +41,15 @@ interface AppForms {
   readonly signup: SignupForm;
   readonly login: LoginForm;
   readonly addCourse: AddCourseForm;
+  readonly addItem: Product;
 }
 
 interface UsersListState {
   readonly list: PublicUserInfo[];
+}
+
+interface ShelfState {
+  products: Product[];
 }
 
 interface ServerMessage {
@@ -117,4 +123,12 @@ declare module '*.svg' {
   // Wierd, but allows us to use import syntax to require SVGs.
   const x: string;
   export default x;
+}
+
+interface Product {
+  name: string;
+  description: string;
+  category?: string;
+  imageSrc?: string;
+  price: number;
 }
