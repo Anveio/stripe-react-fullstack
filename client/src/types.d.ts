@@ -93,17 +93,9 @@ interface LoginPayload {
   readonly password: string;
 }
 
-interface AddCourseForm {
-  readonly name: DefaultTextField;
-}
-
 interface AuthTextField {
   readonly text: string;
   readonly error: string | null;
-}
-
-interface DefaultTextField {
-  readonly text: string;
 }
 
 declare type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';

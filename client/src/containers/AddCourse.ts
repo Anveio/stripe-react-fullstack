@@ -6,9 +6,7 @@ const mapState = (state: RootState): Course => {
   return { name: state.forms.addCourse.name };
 };
 
-const mapDispatch = (
-  dispatch: Dispatch<actions.FormAction<Course>>
-): Handlers => {
+const mapDispatch = (dispatch: Dispatch<actions.FormAction<Course>>): Handlers => {
   return {
     onChange: (key: keyof Course, value: string) =>
       dispatch(actions.changeFormText<Course>(key, value)),
