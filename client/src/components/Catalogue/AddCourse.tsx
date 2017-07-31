@@ -1,20 +1,18 @@
 import * as React from 'react';
 import { Layout, Card, FormLayout, TextField, Button } from '@shopify/polaris';
 
-export interface Props {
-  readonly text: string;
-}
-
 export interface Handlers {
-  readonly onTextInput: (value: string) => void;
-  readonly onAddCourse: (course: Course) => void;
+  readonly onChange: (key: keyof Course, value: string) => void;
+  readonly onSubmit: (course: Course) => void;
 }
 
-const AddCourse = (props: Props & Handlers): JSX.Element => {
-  const { text, onTextInput, onAddCourse } = props;
-
+const AddCourse = ({ name, onChange, onSubmit }: Course & Handlers) => {
   const handleAddCourse = (): void => {
-    onAddCourse({ name: text });
+    onSubmit({ name });
+  };
+
+  const updateField = (key: keyof Course) => (value: string) => {
+    onChange(key, value);
   };
 
   const watchForEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -33,10 +31,10 @@ const AddCourse = (props: Props & Handlers): JSX.Element => {
               label="Course name"
               type="text"
               name="add-course"
-              value={text}
+              value={name}
               placeholder="e.g. History 101"
               helpText="Type in the name and number of the course you want to add."
-              onChange={onTextInput}
+              onChange={updateField('name')}
               maxLength={120}
             />
           </div>

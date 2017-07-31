@@ -1,23 +1,17 @@
-import { FormSubmit } from '../actions/form';
+import { FormSubmit } from '../actions/addItem';
 import { SUBMIT_FORM } from '../constants';
 
 const initialState: CoursesState = {
   list: []
 };
 
-const generateNewCourse = (course: Course): Course => {
-  return {
-    name: course.name
-  };
-};
-
-export default (state: CoursesState = initialState, action: FormSubmit) => {
+export default (state = initialState, action: FormSubmit<Course>) => {
   let partialState: Partial<CoursesState> | undefined;
 
   switch (action.type) {
     case SUBMIT_FORM:
       partialState = {
-        list: state.list.concat(generateNewCourse(action.value))
+        list: [ ...state.list, action.payload ]
       };
       break;
     default:

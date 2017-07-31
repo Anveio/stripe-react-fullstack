@@ -1,20 +1,22 @@
-import AddCourse, { Props, Handlers } from '../components/Catalogue/AddCourse';
-import * as actions from '../actions/form';
+import AddCourse, { Handlers } from '../components/Catalogue/AddCourse';
+import * as actions from '../actions/addItem';
 import { connect, Dispatch } from 'react-redux';
 
-const mapStateToProps = (state: RootState): Props => {
-  return { text: state.forms.addCourse.name.text };
+const mapState = (state: RootState): Course => {
+  return { name: state.forms.addCourse.name };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<actions.FormAction>): Handlers => {
+const mapDispatch = (
+  dispatch: Dispatch<actions.FormAction<Course>>
+): Handlers => {
   return {
-    onTextInput: (value: string) =>
-      dispatch(actions.changeFormText(value, 'name')),
-    onAddCourse: (payload: Course) => {
-      dispatch(actions.submitCourse(payload));
-      dispatch(actions.resetFormText('name'));
+    onChange: (key: keyof Course, value: string) =>
+      dispatch(actions.changeFormText<Course>(key, value)),
+    onSubmit: (payload: Course) => {
+      dispatch(actions.submitForm<Course>(payload));
+      dispatch(actions.resetFormText<Course>('name'));
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCourse);
+export default connect(mapState, mapDispatch)(AddCourse);

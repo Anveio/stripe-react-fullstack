@@ -1,31 +1,22 @@
-import { FormAction } from '../actions/form';
+import { FormAction } from '../actions/addItem';
 import { UPDATE_FIELD_TEXT, RESET_TEXT_FIELD } from '../constants';
 
-// const emptyAuthField = { text: '', error: null };
-
-const initialState: AddCourseForm = {
-  name: { text: '' }
+const initialState: Course = {
+  name: ''
 };
 
-export default (
-  state: AddCourseForm = initialState,
-  action: FormAction
-): AddCourseForm => {
-  let partialState: Partial<AddCourseForm> | undefined;
+export default (state = initialState, action: FormAction<Course>): Course => {
+  let partialState: Partial<Course> | undefined;
 
   switch (action.type) {
     case UPDATE_FIELD_TEXT:
       partialState = {
-        [action.key]: {
-          text: action.value
-        }
+        [action.key]: action.value
       };
       break;
     case RESET_TEXT_FIELD:
       partialState = {
-        [action.key]: {
-          text: ''
-        }
+        [action.key]: ''
       };
       break;
     default:

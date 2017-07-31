@@ -40,7 +40,7 @@ interface CoursesState {
 interface AppForms {
   readonly signup: SignupForm;
   readonly login: LoginForm;
-  readonly addCourse: AddCourseForm;
+  readonly addCourse: Course;
   readonly addItem: Product;
 }
 

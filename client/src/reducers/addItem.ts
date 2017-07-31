@@ -1,8 +1,6 @@
 import { FormAction } from '../actions/addItem';
 import { UPDATE_FIELD_TEXT, RESET_TEXT_FIELD } from '../constants';
 
-// const emptyAuthField = { text: '', error: null };
-
 const initialState: Product = {
   category: '',
   description: '',
