@@ -9,10 +9,10 @@ const mapState = (state: RootState): Course => {
 const mapDispatch = (dispatch: Dispatch<actions.FormAction<Course>>): Handlers => {
   return {
     onChange: (key: keyof Course, value: string) =>
-      dispatch(actions.changeFormText<Course>(key, value)),
+      dispatch(actions.changeFormText<Course>('addCourse', key, value)),
     onSubmit: (payload: Course) => {
-      dispatch(actions.submitForm<Course>(payload));
-      dispatch(actions.resetFormText<Course>('name'));
+      dispatch(actions.submitForm<Course>('addCourse', payload));
+      dispatch(actions.resetFormText<Course>('addCourse', 'name'));
     }
   };
 };

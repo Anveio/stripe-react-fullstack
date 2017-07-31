@@ -9,9 +9,9 @@ const mapState = (state: RootState): Product => {
 const mapDispatch = (dispatch: Dispatch<actions.FormAction<Product>>): Handlers => {
   return {
     onChange: (key: keyof Product, value: string) =>
-      dispatch(actions.changeFormText<Product>(key, value)),
+      dispatch(actions.changeFormText<Product>('addItem', key, value)),
     onSubmit: (payload: Product) => {
-      dispatch(actions.submitForm<Product>(payload));
+      dispatch(actions.submitForm<Product>('addItem', payload));
     }
   };
 };
