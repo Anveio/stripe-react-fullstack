@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Layout,
-  DisplayText,
-  FormLayout,
-  Card,
-  Button
-} from '@shopify/polaris';
+import { Layout, DisplayText, FormLayout, Card, Button } from '@shopify/polaris';
 
 import {
   PasswordField,
@@ -23,25 +17,16 @@ export interface Props {
 }
 
 export interface Handlers {
-  readonly onChangeEmail: (value: string) => void;
-  readonly onChangeUserName: (value: string) => void;
-  readonly onChangePassword: (value: string) => void;
-  readonly onChangePasswordConf: (value: string) => void;
+  readonly onChange: (key: keyof SignupForm, value: string) => void;
   readonly onSubmit: (payload: SignupPayload) => void;
 }
 
 const SignupForm = (props: Props & Handlers) => {
-  const {
-    email,
-    username,
-    password,
-    passwordConf,
-    onSubmit,
-    onChangeEmail,
-    onChangeUserName,
-    onChangePassword,
-    onChangePasswordConf,
-  } = props;
+  const { email, username, password, passwordConf, onSubmit, onChange } = props;
+
+  const updateField = (key: keyof SignupForm) => (value: string) => {
+    onChange(key, value);
+  };
 
   const handleSignUp = (): void => {
     onSubmit({
@@ -75,12 +60,12 @@ const SignupForm = (props: Props & Handlers) => {
         <FormLayout>
           <div onKeyPress={watchForEnter}>
             <DisplayText size="medium">Create an account.</DisplayText>
-            <EmailField field={email} onChange={onChangeEmail} />
-            <UsernameField field={username} onChange={onChangeUserName} />
-            <PasswordField field={password} onChange={onChangePassword} />
+            <EmailField field={email} onChange={updateField('email')} />
+            <UsernameField field={username} onChange={updateField('username')} />
+            <PasswordField field={password} onChange={updateField('password')} />
             <PasswordConfField
               field={passwordConf}
-              onChange={onChangePasswordConf}
+              onChange={updateField('passwordConf')}
             />
           </div>
           <Button

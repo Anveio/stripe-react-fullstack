@@ -1,3 +1,14 @@
+interface RootState {
+  readonly currentUser: UserState;
+  readonly notifications: NotificationsState;
+  readonly enthusiasm: EnthusiasmState;
+  readonly courses: CoursesState;
+  readonly forms: TextForms;
+  readonly authForms: AuthForms;
+  readonly users: UsersListState;
+  readonly shelf: ShelfState;
+}
+
 interface Course {
   readonly name: string;
 }
@@ -8,16 +19,6 @@ interface PublicUserInfo {
 
 interface JsonWebToken {
   readonly token: string;
-}
-
-interface RootState {
-  readonly currentUser: UserState;
-  readonly notifications: NotificationsState;
-  readonly enthusiasm: EnthusiasmState;
-  readonly courses: CoursesState;
-  readonly forms: AppForms;
-  readonly users: UsersListState;
-  readonly shelf: ShelfState;
 }
 
 interface UserState {
@@ -37,11 +38,14 @@ interface CoursesState {
   readonly list: Course[];
 }
 
-interface AppForms {
-  readonly signup: SignupForm;
-  readonly login: LoginForm;
+interface TextForms {
   readonly addCourse: Course;
   readonly addItem: Product;
+}
+
+interface AuthForms {
+  readonly signup: SignupForm;
+  readonly login: LoginForm;
 }
 
 interface UsersListState {

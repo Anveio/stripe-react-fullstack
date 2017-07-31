@@ -6,7 +6,7 @@ const addCourse: Course = {
 };
 
 const addItem: Product = {
-  category: '',
+  category: 'hi',
   description: '',
   imageSrc: '',
   name: '',

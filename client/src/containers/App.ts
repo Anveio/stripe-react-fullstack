@@ -17,8 +17,8 @@ const mapDispatchToProps = (
     onBoot: () => {
       dispatch(
         connectAccount({
-          email: 'hi',
-          token: 'hi'
+          email: '',
+          token: ''
         })
       );
     }

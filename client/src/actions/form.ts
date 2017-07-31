@@ -4,20 +4,20 @@ export type FormTypes = Product | Course;
 
 export interface FormUpdate<T extends FormTypes> {
   type: constants.UPDATE_FIELD_TEXT;
-  form: keyof AppForms;
+  form: keyof TextForms;
   key: keyof T;
   value: string;
 }
 
 export interface FormSubmit<T extends FormTypes> {
   type: constants.SUBMIT_FORM;
-  form: keyof AppForms;
+  form: keyof TextForms;
   payload: T;
 }
 
 export interface FormReset<T extends FormTypes> {
-  type: constants.RESET_TEXT_FIELD;
-  form: keyof AppForms;
+  type: constants.RESET_FIELD_TEXT;
+  form: keyof TextForms;
   key: keyof T;
 }
 
@@ -27,7 +27,7 @@ export type FormAction<T extends FormTypes> =
   | FormSubmit<T>;
 
 export function submitForm<T extends FormTypes>(
-  form: keyof AppForms,
+  form: keyof TextForms,
   payload: T
 ): FormSubmit<T> {
   return {
@@ -38,7 +38,7 @@ export function submitForm<T extends FormTypes>(
 }
 
 export function changeFormText<T extends FormTypes>(
-  form: keyof AppForms,
+  form: keyof TextForms,
   key: keyof T,
   value: string
 ): FormUpdate<T> {
@@ -51,11 +51,11 @@ export function changeFormText<T extends FormTypes>(
 }
 
 export function resetFormText<T extends FormTypes>(
-  form: keyof AppForms,
+  form: keyof TextForms,
   key: keyof T
 ): FormReset<T> {
   return {
-    type: constants.RESET_TEXT_FIELD,
+    type: constants.RESET_FIELD_TEXT,
     form,
     key
   };

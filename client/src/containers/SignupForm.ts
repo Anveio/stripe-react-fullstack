@@ -1,6 +1,7 @@
 import SignupForm, { Props, Handlers } from '../components/Auth/SignupForm';
-import * as actions from '../actions/auth';
+import * as actions from '../actions/formAuth';
 import { AccountConnectionAction, connectAccount } from '../actions/connection';
+import { registerAccountSuccess, registerAccountFailure } from '../actions/signup';
 import { pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
 import axios from 'axios';
@@ -15,7 +16,7 @@ const mapStateToProps = (state: RootState): Props => {
     password,
     passwordConf,
     loading
-  } = state.forms.signup;
+  } = state.authForms.signup;
 
   return {
     email,
@@ -27,32 +28,20 @@ const mapStateToProps = (state: RootState): Props => {
 };
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<actions.AuthAction | AccountConnectionAction>
+  dispatch: Dispatch<actions.AuthFormAction<SignupPayload> | AccountConnectionAction>
 ): Handlers => {
   return {
-    onChangeEmail: (value: string) => {
-      dispatch(actions.changeAuthFieldText(value, 'email'));
-    },
-    onChangeUserName: (value: string) => {
-      dispatch(actions.changeAuthFieldText(value, 'username'));
-    },
-    onChangePassword: (value: string) => {
-      dispatch(actions.changeAuthFieldText(value, 'password'));
-    },
-    onChangePasswordConf: (value: string) => {
-      dispatch(actions.changeAuthFieldText(value, 'passwordConf'));
+    onChange: (key: keyof SignupPayload, value: string) => {
+      dispatch(actions.changeAuthFieldText<SignupPayload>('signup', key, value));
     },
     onSubmit: (payload: SignupPayload) => {
-      dispatch(actions.registerAccountRequest(payload));
+      dispatch(actions.submitAuthField('signup', payload));
       axios
         .post(`${ROOT_API_URL}/signup`, payload)
         .then(
           success => {
-            dispatch(actions.registerAccountSuccess());
-            window.localStorage.setItem(
-              'jwt',
-              (success.data as JsonWebToken).token
-            );
+            dispatch(registerAccountSuccess());
+            window.localStorage.setItem('jwt', (success.data as JsonWebToken).token);
             /**
              * POSTing to /signup will run through passport.js' login 
              * middleware. So if there are no errors at this point we can log-in
@@ -85,7 +74,7 @@ const mapDispatchToProps = (
 
             const data: ExpressValidatorError[] | string = errors.response.data;
             if (data instanceof Array) {
-              dispatch(actions.registerAccountFailure(data));
+              dispatch(registerAccountFailure(data));
             } else {
               dispatch(
                 pushNotification({
@@ -99,7 +88,7 @@ const mapDispatchToProps = (
         )
         .catch(reason => {
           dispatch(
-            actions.registerAccountFailure([
+            registerAccountFailure([
               {
                 param: 'server-error',
                 msg: reason.msg,

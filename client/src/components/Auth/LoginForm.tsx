@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Layout,
-  Card,
-  FormLayout,
-  Button,
-  DisplayText
-} from '@shopify/polaris';
+import { Layout, Card, FormLayout, Button, DisplayText } from '@shopify/polaris';
 
 import { PasswordField, EmailField } from './AuthTextFields';
 
@@ -17,26 +11,22 @@ export interface Props {
 }
 
 export interface Handlers {
-  readonly onChangeEmail: (value: string) => void;
-  readonly onChangePassword: (value: string) => void;
+  readonly onChange: (key: keyof LoginPayload, value: string) => void;
   readonly onSubmit: (payload: LoginPayload) => void;
 }
 
 const LoginForm = (props: Props & Handlers) => {
-  const {
-    email,
-    password,
-    onChangeEmail,
-    onChangePassword,
-    onSubmit,
-    currentUser
-  } = props;
+  const { email, password, onChange, onSubmit, currentUser } = props;
 
   const handleLogIn = (): void => {
     onSubmit({
       email: email.text,
       password: password.text
     });
+  };
+
+  const updateField = (key: keyof LoginPayload) => (value: string) => {
+    onChange(key, value);
   };
 
   const validForm = (): boolean => {
@@ -57,8 +47,8 @@ const LoginForm = (props: Props & Handlers) => {
           <FormLayout>
             <DisplayText size="medium">Log in.</DisplayText>
             <div onKeyPress={watchForEnter}>
-              <EmailField field={email} onChange={onChangeEmail} />
-              <PasswordField field={password} onChange={onChangePassword} />
+              <EmailField field={email} onChange={updateField('email')} />
+              <PasswordField field={password} onChange={updateField('password')} />
             </div>
             <Button
               primary

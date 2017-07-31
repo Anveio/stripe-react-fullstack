@@ -1,5 +1,6 @@
 import LoginForm, { Props, Handlers } from '../components/Auth/LoginForm';
-import * as actions from '../actions/auth';
+import * as actions from '../actions/formAuth';
+import { loginSuccess, loginFailure } from '../actions/login';
 import { AccountConnectionAction, connectAccount } from '../actions/connection';
 import { NotificationAction, pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
@@ -9,7 +10,7 @@ import history from '../history';
 import { ROOT_API_URL } from '../constants';
 
 const mapStateToProps = (state: RootState): Props => {
-  const { email, password, loading } = state.forms.login;
+  const { email, password, loading } = state.authForms.login;
   const currentUser = state.currentUser;
 
   return {
@@ -22,27 +23,22 @@ const mapStateToProps = (state: RootState): Props => {
 
 const mapDispatchToProps = (
   dispatch: Dispatch<
-    actions.AuthAction | NotificationAction | AccountConnectionAction
+    | actions.AuthFormAction<LoginPayload>
+    | NotificationAction
+    | AccountConnectionAction
   >
 ): Handlers => {
   return {
-    onChangeEmail: (value: string) => {
-      dispatch(actions.changeAuthFieldText(value, 'email'));
-    },
-    onChangePassword: (value: string) => {
-      dispatch(actions.changeAuthFieldText(value, 'password'));
-    },
+    onChange: (key: keyof LoginPayload, value: string) =>
+      dispatch(actions.changeAuthFieldText<LoginPayload>('login', key, value)),
     onSubmit: (payload: LoginPayload) => {
-      dispatch(actions.loginRequest(payload));
+      dispatch(actions.submitAuthField('login', payload));
       axios
         .post(`${ROOT_API_URL}/login`, payload)
         .then(
           success => {
-            window.localStorage.setItem(
-              'jwt',
-              (success.data as JsonWebToken).token
-            );
-            dispatch(actions.loginSuccess(payload));
+            window.localStorage.setItem('jwt', (success.data as JsonWebToken).token);
+            dispatch(loginSuccess(payload));
             dispatch(
               connectAccount({
                 email: payload.email,
@@ -64,7 +60,7 @@ const mapDispatchToProps = (
             // Our server gives us errors in different types depending on the error.
             // Todo: Normalize error messages from server on login failure.
             if (error && error.message) {
-              dispatch(actions.loginFailure(error));
+              dispatch(loginFailure(error));
             } else {
               dispatch(
                 pushNotification({
@@ -78,9 +74,8 @@ const mapDispatchToProps = (
         )
         .catch(reason => {
           dispatch(
-            actions.loginFailure({
-              message:
-                'There was problem logging you in. Please try again later.',
+            loginFailure({
+              message: 'There was problem logging you in. Please try again later.',
               name: 'miscError'
             })
           );
