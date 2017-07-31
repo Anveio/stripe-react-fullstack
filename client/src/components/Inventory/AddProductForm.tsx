@@ -57,6 +57,13 @@ const AddProductForm = ({
             value={name}
           />
           <TextField
+            label="Category"
+            name="category"
+            id="add-product-category"
+            onChange={updateField('category')}
+            value={category}
+          />
+          <TextField
             type="number"
             name="price"
             id="add-product-price"

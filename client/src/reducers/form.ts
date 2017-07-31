@@ -20,20 +20,19 @@ const initialState: TextForms = {
 
 export default (state = initialState, action: FormAction<FormTypes>): TextForms => {
   let partialState: Partial<TextForms> | undefined;
+  let partialForm: Partial<FormTypes> | undefined;
 
   switch (action.type) {
     case UPDATE_FIELD_TEXT:
+      partialForm = { ...state[action.form], [action.key]: action.value };
       partialState = {
-        [action.form]: {
-          [action.key]: action.value
-        }
+        [action.form]: partialForm
       };
       break;
     case RESET_FIELD_TEXT:
+      partialForm = { [action.key]: '' };
       partialState = {
-        [action.form]: {
-          [action.key]: ''
-        }
+        [action.form]: partialForm
       };
       break;
     default:

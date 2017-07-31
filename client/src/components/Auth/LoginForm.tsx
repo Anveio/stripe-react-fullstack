@@ -4,9 +4,9 @@ import { Layout, Card, FormLayout, Button, DisplayText } from '@shopify/polaris'
 import { PasswordField, EmailField } from './AuthTextFields';
 
 export interface Props {
-  readonly loading: boolean;
   readonly email: AuthTextField;
   readonly password: AuthTextField;
+  readonly loading: boolean;
   readonly currentUser: UserState;
 }
 

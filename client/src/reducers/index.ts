@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { default as enthusiasm } from './enthusiasm';
 import { default as courses } from './course';
-import { default as forms } from './forms';
-import { default as authForms } from './authForms';
+import { default as forms } from './form';
+import { default as authForms } from './authForm';
 import { default as notifications } from './notifications';
 import { default as currentUser } from './accountConnection';
 import { default as users } from './userList';

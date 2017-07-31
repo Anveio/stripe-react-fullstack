@@ -1,5 +1,5 @@
 import { AuthFormAction, AuthFormTypes } from '../actions/authForm';
-import { UPDATE_FIELD_AUTH, RESET_FIELD_AUTH, ERROR_FIELD_AUTH } from '../constants';
+import { UPDATE_FIELD_AUTH, RESET_FIELD_AUTH } from '../constants';
 
 const emptyAuthForm: AuthTextField = { text: '', error: null };
 
@@ -32,14 +32,16 @@ export default (
     case UPDATE_FIELD_AUTH:
       partialState = {
         [action.form]: {
-          [action.key]: action.value
+          [action.key]: action.value,
+          error: null
         }
       };
       break;
     case RESET_FIELD_AUTH:
       partialState = {
         [action.form]: {
-          [action.key]: ''
+          [action.key]: '',
+          error: null,
         }
       };
       break;

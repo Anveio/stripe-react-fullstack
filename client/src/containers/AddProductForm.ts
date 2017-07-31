@@ -3,7 +3,9 @@ import * as actions from '../actions/form';
 import { connect, Dispatch } from 'react-redux';
 
 const mapState = (state: RootState): Product => {
-  return state.forms.addItem;
+  const { category, description, imageSrc, name, price } = state.forms.addItem;
+
+  return { category, description, imageSrc, name, price };
 };
 
 const mapDispatch = (dispatch: Dispatch<actions.FormAction<Product>>): Handlers => {
