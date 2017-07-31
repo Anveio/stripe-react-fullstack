@@ -1,4 +1,4 @@
-import { FormSubmit } from '../actions/addItem';
+import { FormSubmit } from '../actions/form';
 import { SUBMIT_FORM } from '../constants';
 
 const initialState: CoursesState = {

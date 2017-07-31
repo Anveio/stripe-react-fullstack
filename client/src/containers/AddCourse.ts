@@ -1,5 +1,5 @@
 import AddCourse, { Handlers } from '../components/Catalogue/AddCourse';
-import * as actions from '../actions/addItem';
+import * as actions from '../actions/form';
 import { connect, Dispatch } from 'react-redux';
 
 const mapState = (state: RootState): Course => {

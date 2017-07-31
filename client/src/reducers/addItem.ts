@@ -1,4 +1,4 @@
-import { FormAction } from '../actions/addItem';
+import { FormAction } from '../actions/form';
 import { UPDATE_FIELD_TEXT, RESET_TEXT_FIELD } from '../constants';
 
 const initialState: Product = {
