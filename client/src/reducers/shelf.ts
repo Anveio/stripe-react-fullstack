@@ -20,5 +20,3 @@ export default (state = initialState, action: ShelfAction): ShelfState => {
 
   return { ...state, ...partialState };
 };
-
-

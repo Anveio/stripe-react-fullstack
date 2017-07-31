@@ -89,5 +89,4 @@ const LoginForm = (props: Props & Handlers) => {
   return currentUser.email ? loggedInMarkup(currentUser) : loggedOutMarkup();
 };
 
-
 export default LoginForm;

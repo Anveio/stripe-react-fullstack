@@ -10,8 +10,6 @@ import '@shopify/polaris/styles.css';
 
 import App from './containers/App';
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

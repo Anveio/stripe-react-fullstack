@@ -6,7 +6,6 @@ import StripeCheckout, { Token } from 'react-stripe-checkout';
 import { STRIPE_PUBLISHABLE, ROOT_API_URL } from '../../constants';
 
 const onToken = (amount: number, description: string) => (token: Token) => {
-  console.log(token);
   axios
     .post(`${ROOT_API_URL}/stripe`, {
       description,
