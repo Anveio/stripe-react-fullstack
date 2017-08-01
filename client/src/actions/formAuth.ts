@@ -1,60 +1,49 @@
 import * as constants from '../constants';
 
-export type AuthFormTypes = LoginPayload | SignupPayload;
+export type AuthPayload = LoginPayload | SignupPayload;
 
-export type ServerError = PassportAuthError | ExpressValidatorError[];
+export type FormError = PassportAuthError | ExpressValidatorError[];
 
-export interface AuthFormUpdate<T extends AuthFormTypes> {
+export interface AuthFormUpdate<T extends AuthPayload> {
   type: constants.UPDATE_FIELD_AUTH;
   form: keyof AuthForms;
   key: keyof T;
   value: string;
 }
-export interface AuthFormSubmit<T extends AuthFormTypes> {
+export interface AuthFormSubmit<T extends AuthPayload> {
   type: constants.SUBMIT_FORM_AUTH;
   form: keyof AuthForms;
   payload: T;
 }
 
-export interface AuthFormError<T extends AuthFormTypes> {
+export interface AuthFormError<T extends AuthPayload> {
   type: constants.ERROR_FIELD_AUTH;
   form: keyof AuthForms;
   key: keyof T;
-  error: ServerError;
+  error: FormError;
 }
 
-export interface AuthFormReset<T extends AuthFormTypes> {
-  type: constants.RESET_FIELD_AUTH;
-  form: keyof AuthForms;
-  key: keyof T;
-}
-
-export type AuthFormAction<T extends AuthFormTypes> =
+export type AuthFormAction<T extends AuthPayload> =
   | AuthFormUpdate<T>
-  | AuthFormReset<T>
   | AuthFormSubmit<T>
   | AuthFormError<T>;
 
-export function changeAuthFieldText<T extends AuthFormTypes>(
+export const changeAuthFieldText = <T extends AuthPayload>(
   form: keyof AuthForms,
   key: keyof T,
   value: string
-): AuthFormUpdate<T> {
-  return {
-    type: constants.UPDATE_FIELD_AUTH,
-    form,
-    key,
-    value
-  };
-}
+): AuthFormUpdate<T> => ({
+  type: constants.UPDATE_FIELD_AUTH,
+  form,
+  key,
+  value
+});
 
-export function submitAuthField<T extends AuthFormTypes>(
+export const submitAuthField = <T extends AuthPayload>(
   form: keyof AuthForms,
   payload: T
-): AuthFormSubmit<T> {
-  return {
-    type: constants.SUBMIT_FORM_AUTH,
-    form,
-    payload
-  };
-}
+): AuthFormSubmit<T> => ({
+  type: constants.SUBMIT_FORM_AUTH,
+  form,
+  payload
+});

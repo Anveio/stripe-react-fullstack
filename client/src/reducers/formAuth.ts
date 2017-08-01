@@ -1,4 +1,4 @@
-import { AuthFormAction, AuthPayload } from '../actions/authForm';
+import { AuthFormAction, AuthPayload } from '../actions/formAuth';
 import { LoginAction } from '../actions/login';
 import { RegisterAccountAction } from '../actions/signup';
 import {

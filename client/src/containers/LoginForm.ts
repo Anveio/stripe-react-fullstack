@@ -1,6 +1,6 @@
 import LoginForm, { Props, Handlers } from '../components/Auth/LoginForm';
 import * as actions from '../actions/formAuth';
-import { loginSuccess, loginFailure } from '../actions/login';
+import { loginFailure } from '../actions/login';
 import { AccountConnectionAction, connectAccount } from '../actions/connection';
 import { NotificationAction, pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
@@ -38,7 +38,6 @@ const mapDispatchToProps = (
         .then(
           success => {
             window.localStorage.setItem('jwt', (success.data as JsonWebToken).token);
-            dispatch(loginSuccess(payload));
             dispatch(
               connectAccount({
                 email: payload.email,

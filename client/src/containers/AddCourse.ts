@@ -12,7 +12,7 @@ const mapDispatch = (dispatch: Dispatch<actions.FormAction<Course>>): Handlers =
       dispatch(actions.changeFormText<Course>('addCourse', key, value)),
     onSubmit: (payload: Course) => {
       dispatch(actions.submitForm<Course>('addCourse', payload));
-      dispatch(actions.resetFormText<Course>('addCourse', 'name'));
+      dispatch(actions.resetFormText('addCourse'));
     }
   };
 };

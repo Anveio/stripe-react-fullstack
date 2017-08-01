@@ -19,9 +19,7 @@ export const pushNotification = (data: ServerMessage): PushNotification => {
   };
 };
 
-export const dismissNotification = (message: string): DismissNotification => {
-  return {
-    type: constants.DISMISS_NOTIFICATION_BY_MESSAGE,
-    message
-  };
-};
+export const dismissNotification = (message: string): DismissNotification => ({
+  type: constants.DISMISS_NOTIFICATION_BY_MESSAGE,
+  message
+});

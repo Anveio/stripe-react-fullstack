@@ -11,17 +11,13 @@ export interface RegisterAccountFailure {
   errors: ExpressValidatorError[];
 }
 
-export const registerAccountSuccess = (): RegisterAccountSuccess => {
-  return {
-    type: constants.REGISTER_ACCOUNT_SUCCESS
-  };
-};
+export const registerAccountSuccess = (): RegisterAccountSuccess => ({
+  type: constants.REGISTER_ACCOUNT_SUCCESS
+});
 
 export const registerAccountFailure = (
   errors: ExpressValidatorError[]
-): RegisterAccountFailure => {
-  return {
-    type: constants.REGISTER_ACCOUNT_FAILURE,
-    errors
-  };
-};
+): RegisterAccountFailure => ({
+  type: constants.REGISTER_ACCOUNT_FAILURE,
+  errors
+});
