@@ -9,7 +9,7 @@ import axios from 'axios';
 import history from '../history';
 import { ROOT_API_URL } from '../constants';
 
-const mapStateToProps = (state: RootState): Props => {
+const mapState = (state: RootState): Props => {
   const { email, password, loading } = state.authForms.login;
   const currentUser = state.currentUser;
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state: RootState): Props => {
   };
 };
 
-const mapDispatchToProps = (
+const mapDispatch = (
   dispatch: Dispatch<
     | actions.AuthFormAction<LoginPayload>
     | NotificationAction
@@ -90,4 +90,4 @@ const mapDispatchToProps = (
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapState, mapDispatch)(LoginForm);

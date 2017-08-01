@@ -13,29 +13,27 @@ const mapStateToProps = (state: RootState): Props => {
 
 const mapDispatchToProps = (
   dispatch: Dispatch<actions.UserListAction>
-): Handlers => {
-  return {
-    onLoad: () => {
-      axios
-        .get(`${ROOT_API_URL}/users`, {
-          headers: {
-            authorization: `Bearer ${window.localStorage.getItem('jwt')}`
-          }
-        })
-        .then(
-          response => {
-            let users: PublicUserInfo[] = response.data;
-            dispatch(actions.getUserListSuccess(users));
-          },
-          error => {
-            dispatch(actions.getUserListFailure());
-          }
-        )
-        .catch(reason => {
-          console.log(reason); // tslint:disable-line:no-console
-        });
-    }
-  };
-};
+): Handlers => ({
+  onLoad: () => {
+    axios
+      .get(`${ROOT_API_URL}/users`, {
+        headers: {
+          authorization: `Bearer ${window.localStorage.getItem('jwt')}`
+        }
+      })
+      .then(
+        response => {
+          let users: PublicUserInfo[] = response.data;
+          dispatch(actions.getUserListSuccess(users));
+        },
+        error => {
+          dispatch(actions.getUserListFailure());
+        }
+      )
+      .catch(reason => {
+        console.log(reason); // tslint:disable-line:no-console
+      });
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);
