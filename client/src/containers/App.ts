@@ -4,25 +4,21 @@ import { AccountConnectionAction, connectAccount } from '../actions/connection';
 // import axios from 'axios';
 // import { SERVER_ROOT_URL } from '../constants';
 
-const mapStateToProps = (state: RootState): Props => {
+const mapState = (state: RootState): Props => {
   return {
     currentUser: state.currentUser
   };
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<AccountConnectionAction>
-): Handlers => {
-  return {
-    onBoot: () => {
-      dispatch(
-        connectAccount({
-          email: '',
-          token: ''
-        })
-      );
-    }
-  };
-};
+const mapDispatch = (dispatch: Dispatch<AccountConnectionAction>): Handlers => ({
+  onBoot: () => {
+    dispatch(
+      connectAccount({
+        email: '',
+        token: ''
+      })
+    );
+  }
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapState, mapDispatch)(App);

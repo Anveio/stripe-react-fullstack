@@ -1,6 +1,6 @@
 import LoginForm, { Props, Handlers } from '../components/Auth/LoginForm';
 import * as actions from '../actions/formAuth';
-import { loginSuccess, loginFailure } from '../actions/login';
+import { loginFailure } from '../actions/login';
 import { AccountConnectionAction, connectAccount } from '../actions/connection';
 import { NotificationAction, pushNotification } from '../actions/notifications';
 import { connect, Dispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import history from '../history';
 import { ROOT_API_URL } from '../constants';
 
-const mapStateToProps = (state: RootState): Props => {
+const mapState = (state: RootState): Props => {
   const { email, password, loading } = state.authForms.login;
   const currentUser = state.currentUser;
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state: RootState): Props => {
   };
 };
 
-const mapDispatchToProps = (
+const mapDispatch = (
   dispatch: Dispatch<
     | actions.AuthFormAction<LoginPayload>
     | NotificationAction
@@ -38,7 +38,6 @@ const mapDispatchToProps = (
         .then(
           success => {
             window.localStorage.setItem('jwt', (success.data as JsonWebToken).token);
-            dispatch(loginSuccess(payload));
             dispatch(
               connectAccount({
                 email: payload.email,
@@ -91,4 +90,4 @@ const mapDispatchToProps = (
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapState, mapDispatch)(LoginForm);

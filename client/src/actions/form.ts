@@ -15,48 +15,39 @@ export interface FormSubmit<T extends FormPayload> {
   payload: T;
 }
 
-export interface FormReset<T extends FormPayload> {
+export interface FormReset {
   type: constants.RESET_FORM;
   form: keyof TextForms;
-  key: keyof T;
 }
 
 export type FormAction<T extends FormPayload> =
   | FormUpdate<T>
-  | FormReset<T>
+  | FormReset
   | FormSubmit<T>;
 
-export function submitForm<T extends FormPayload>(
+export const submitForm = <T extends FormPayload>(
   form: keyof TextForms,
   payload: T
-): FormSubmit<T> {
+): FormSubmit<T> => {
   return {
     type: constants.SUBMIT_FORM,
     form,
     payload
   };
-}
+};
 
-export function changeFormText<T extends FormPayload>(
+export const changeFormText = <T extends FormPayload>(
   form: keyof TextForms,
   key: keyof T,
   value: string
-): FormUpdate<T> {
-  return {
-    type: constants.UPDATE_FIELD_TEXT,
-    form,
-    key,
-    value
-  };
-}
+): FormUpdate<T> => ({
+  type: constants.UPDATE_FIELD_TEXT,
+  form,
+  key,
+  value
+});
 
-export function resetFormText<T extends FormPayload>(
-  form: keyof TextForms,
-  key: keyof T
-): FormReset<T> {
-  return {
-    type: constants.RESET_FORM,
-    form,
-    key
-  };
-}
+export const resetFormText = (form: keyof TextForms): FormReset => ({
+  type: constants.RESET_FORM,
+  form
+});

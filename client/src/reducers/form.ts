@@ -6,7 +6,7 @@ const addCourse: Course = {
 };
 
 const addItem: Product = {
-  category: 'hi',
+  category: '',
   description: '',
   imageSrc: '',
   name: '',
@@ -18,7 +18,10 @@ const initialState: TextForms = {
   addItem
 };
 
-export default (state = initialState, action: FormAction<FormPayload>): TextForms => {
+export default (
+  state = initialState,
+  action: FormAction<FormPayload>
+): TextForms => {
   let partialState: Partial<TextForms> | undefined;
   let partialForm: Partial<FormPayload> | undefined;
 
@@ -30,7 +33,11 @@ export default (state = initialState, action: FormAction<FormPayload>): TextForm
       };
       break;
     case RESET_FORM:
-      partialForm = { [action.key]: '' };
+      partialForm = Object.keys(state[action.form]).reduce(
+        (resetForm, field: keyof FormPayload) =>
+          Object.assign(resetForm, { [field]: '' }),
+        {}
+      );
       partialState = {
         [action.form]: partialForm
       };

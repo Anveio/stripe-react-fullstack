@@ -8,14 +8,13 @@ const mapState = (state: RootState): Product => {
   return { category, description, imageSrc, name, price };
 };
 
-const mapDispatch = (dispatch: Dispatch<actions.FormAction<Product>>): Handlers => {
-  return {
-    onChange: (key: keyof Product, value: string) =>
-      dispatch(actions.changeFormText<Product>('addItem', key, value)),
-    onSubmit: (payload: Product) => {
-      dispatch(actions.submitForm<Product>('addItem', payload));
-    }
-  };
-};
+const mapDispatch = (dispatch: Dispatch<actions.FormAction<Product>>): Handlers => ({
+  onChange: (key: keyof Product, value: string) =>
+    dispatch(actions.changeFormText<Product>('addItem', key, value)),
+  onSubmit: (payload: Product) => {
+    dispatch(actions.submitForm<Product>('addItem', payload));
+    dispatch(actions.resetFormText('addItem'));
+  }
+});
 
 export default connect(mapState, mapDispatch)(AddCourseForm);
