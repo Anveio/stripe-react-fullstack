@@ -1,4 +1,4 @@
-import { AuthFormAction, AuthFormTypes } from '../actions/authForm';
+import { AuthFormAction, AuthPayload } from '../actions/authForm';
 import { UPDATE_FIELD_AUTH, RESET_FIELD_AUTH } from '../constants';
 
 const emptyAuthForm: AuthTextField = { text: '', error: null };
@@ -24,16 +24,17 @@ const initialState: AuthForms = {
 
 export default (
   state = initialState,
-  action: AuthFormAction<AuthFormTypes>
+  action: AuthFormAction<AuthPayload>
 ): AuthForms => {
   let partialState: Partial<AuthForms> | undefined;
+  // let partialField: Partial<AuthFormTypes> | undefined;
 
   switch (action.type) {
     case UPDATE_FIELD_AUTH:
       partialState = {
         [action.form]: {
-          [action.key]: action.value,
-          error: null
+          ...state[action.form],
+          [action.key]: { text: action.value, error: null }
         }
       };
       break;
@@ -41,7 +42,7 @@ export default (
       partialState = {
         [action.form]: {
           [action.key]: '',
-          error: null,
+          error: null
         }
       };
       break;

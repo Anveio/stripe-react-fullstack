@@ -1,4 +1,4 @@
-import { FormAction, FormTypes } from '../actions/form';
+import { FormAction, FormPayload } from '../actions/form';
 import { UPDATE_FIELD_TEXT, RESET_FIELD_TEXT } from '../constants';
 
 const addCourse: Course = {
@@ -18,9 +18,9 @@ const initialState: TextForms = {
   addItem
 };
 
-export default (state = initialState, action: FormAction<FormTypes>): TextForms => {
+export default (state = initialState, action: FormAction<FormPayload>): TextForms => {
   let partialState: Partial<TextForms> | undefined;
-  let partialForm: Partial<FormTypes> | undefined;
+  let partialForm: Partial<FormPayload> | undefined;
 
   switch (action.type) {
     case UPDATE_FIELD_TEXT:
