@@ -1,5 +1,5 @@
 import { FormAction, FormPayload } from '../actions/form';
-import { UPDATE_FIELD_TEXT, RESET_FIELD_TEXT } from '../constants';
+import { UPDATE_FIELD_TEXT, RESET_FORM } from '../constants';
 
 const addCourse: Course = {
   name: ''
@@ -29,7 +29,7 @@ export default (state = initialState, action: FormAction<FormPayload>): TextForm
         [action.form]: partialForm
       };
       break;
-    case RESET_FIELD_TEXT:
+    case RESET_FORM:
       partialForm = { [action.key]: '' };
       partialState = {
         [action.form]: partialForm

@@ -16,7 +16,7 @@ export interface FormSubmit<T extends FormPayload> {
 }
 
 export interface FormReset<T extends FormPayload> {
-  type: constants.RESET_FIELD_TEXT;
+  type: constants.RESET_FORM;
   form: keyof TextForms;
   key: keyof T;
 }
@@ -55,7 +55,7 @@ export function resetFormText<T extends FormPayload>(
   key: keyof T
 ): FormReset<T> {
   return {
-    type: constants.RESET_FIELD_TEXT,
+    type: constants.RESET_FORM,
     form,
     key
   };

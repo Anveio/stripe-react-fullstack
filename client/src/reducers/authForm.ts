@@ -1,5 +1,12 @@
 import { AuthFormAction, AuthPayload } from '../actions/authForm';
-import { UPDATE_FIELD_AUTH, RESET_FIELD_AUTH } from '../constants';
+import { LoginAction } from '../actions/login';
+import {
+  UPDATE_FIELD_AUTH,
+  // LOGIN_SUCCESS,
+  LOGIN_FAILURE
+  // REGISTER_ACCOUNT_FAILURE,
+  // REGISTER_ACCOUNT_SUCCESS
+} from '../constants';
 
 const emptyAuthForm: AuthTextField = { text: '', error: null };
 
@@ -24,10 +31,9 @@ const initialState: AuthForms = {
 
 export default (
   state = initialState,
-  action: AuthFormAction<AuthPayload>
+  action: AuthFormAction<AuthPayload> | LoginAction
 ): AuthForms => {
   let partialState: Partial<AuthForms> | undefined;
-  // let partialField: Partial<AuthFormTypes> | undefined;
 
   switch (action.type) {
     case UPDATE_FIELD_AUTH:
@@ -38,11 +44,12 @@ export default (
         }
       };
       break;
-    case RESET_FIELD_AUTH:
+    case LOGIN_FAILURE:
       partialState = {
-        [action.form]: {
-          [action.key]: '',
-          error: null
+        login: {
+          email: { text: '', error: action.error.message },
+          password: { text: '', error: action.error.message },
+          loading: false
         }
       };
       break;

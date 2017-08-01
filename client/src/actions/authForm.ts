@@ -23,15 +23,14 @@ export interface AuthFormError<T extends AuthPayload> {
   error: ServerError;
 }
 
-export interface AuthFormReset<T extends AuthPayload> {
+export interface AuthFormReset {
   type: constants.RESET_FIELD_AUTH;
   form: keyof AuthForms;
-  key: keyof T;
 }
 
 export type AuthFormAction<T extends AuthPayload> =
   | AuthFormUpdate<T>
-  | AuthFormReset<T>
+  | AuthFormReset
   | AuthFormSubmit<T>
   | AuthFormError<T>;
 
@@ -57,4 +56,11 @@ export function submitAuthField<T extends AuthPayload>(
     form,
     payload
   };
+}
+
+export function resetAuthForm(form: keyof AuthForms): AuthFormReset {
+  return {
+    type: constants.RESET_FIELD_AUTH,
+    form
+  }
 }
