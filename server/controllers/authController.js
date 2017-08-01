@@ -9,11 +9,9 @@ const { sendJson, getTokenFromHeader } = require('../handlers/util');
 exports.login = (req, res) => {
   return passport.authenticate('local', (err, user, message) => {
     if (err) {
-      console.log('err ' + message);
       return sendJson(res, 500, err);
     }
     if (!user) {
-      console.log('!user ' + message);
       return sendJson(res, 403, {
         message: 'Password and/or email are incorrect.'
       });
@@ -33,8 +31,3 @@ exports.authenticateJwt = expressJwt({
   userProperty: 'payload',
   getToken: getTokenFromHeader
 });
-
-exports.logUser = (req, res, next) => {
-  console.log(req.user);
-  next();
-};

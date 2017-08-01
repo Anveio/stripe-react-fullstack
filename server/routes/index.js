@@ -19,7 +19,6 @@ router.post('/stripe', catchErrors(stripeController.processPayment));
 router.get(
   '/users',
   authController.authenticateJwt,
-  authController.logUser,
   userController.showUsers
 );
 

@@ -29,7 +29,7 @@ exports.validateSignup = (req, res, next) => {
 
   const errors = req.validationErrors();
   if (errors) {
-    sendJson(res, 422, errors);
+    return sendJson(res, 422, errors);
   }
   next();
 };
