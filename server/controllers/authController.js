@@ -2,12 +2,13 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const expressJwt = require('express-jwt');
+const jwt = require('jsonwebtoken');
 
 const { sendJson, getTokenFromHeader } = require('../handlers/util');
 
 // See http://passportjs.org/docs#custom-callback
 exports.login = (req, res) => {
-  return passport.authenticate('local', (err, user, message) => {
+  return passport.authenticate('local', { session: false }, (err, user, message) => {
     if (err) {
       console.log('err ' + message);
       return sendJson(res, 500, err);
@@ -34,7 +35,23 @@ exports.authenticateJwt = expressJwt({
   getToken: getTokenFromHeader
 });
 
-exports.logUser = (req, res, next) => {
-  console.log(req.user);
-  next();
+exports.emailFromJwt = (req, res) => {
+  console.log(
+    '******************************************************************************************************'
+  );
+  console.log(req);
+  const { token } = req.body;
+
+  if (token) {
+    const payload = jwt.decode(token);
+    sendJson(res, 200, { email: payload.username });
+  } else {
+    sendJson(res, 401, { message: 'Authorization failed.' });
+  }
+};
+
+exports.decodeJwt = (req, res) => {
+  // const jwt = getTokenFromHeader(req);
+  console.log(jwt);
+  return;
 };

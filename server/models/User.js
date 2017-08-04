@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      validate: [validator.isEmail, 'Invalid email address.'],
+      validate: [ validator.isEmail, 'Invalid email address.' ],
       required: 'Please enter an email.'
     },
     username: {
@@ -38,7 +38,7 @@ userSchema.methods.generateJWT = function() {
   return jwt.sign(
     {
       id: this._id,
-      username: this.username,
+      username: this.email,
       exp: parseInt(exp.getTime() / 1000)
     },
     secret
