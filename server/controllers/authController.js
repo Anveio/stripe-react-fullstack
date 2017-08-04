@@ -29,7 +29,7 @@ exports.logout = (req, res) => {
 };
 
 exports.authenticateJwt = expressJwt({
-  secret: 'kappa',
+  secret: process.env.JWT_SECRET,
   userProperty: 'payload',
   getToken: getTokenFromHeader
 });
