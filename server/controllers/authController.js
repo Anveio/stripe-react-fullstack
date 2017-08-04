@@ -36,14 +36,10 @@ exports.authenticateJwt = expressJwt({
 });
 
 exports.emailFromJwt = (req, res) => {
-  console.log(
-    '******************************************************************************************************'
-  );
-  console.log(req);
   const { token } = req.body;
 
   if (token) {
-    const payload = jwt.decode(token);
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
     sendJson(res, 200, { email: payload.username });
   } else {
     sendJson(res, 401, { message: 'Authorization failed.' });
