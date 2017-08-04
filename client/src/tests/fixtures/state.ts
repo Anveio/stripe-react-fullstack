@@ -16,6 +16,10 @@ export const blankState: RootState = {
     list: []
   },
   forms: {
+    addCourse: { name: '' },
+    addItem: { category: '', description: '', imageSrc: '', name: '', price: 0 }
+  },
+  authForms: {
     signup: {
       email: emptyAuthForm,
       username: emptyAuthForm,
@@ -27,12 +31,10 @@ export const blankState: RootState = {
       email: emptyAuthForm,
       password: emptyAuthForm,
       loading: false
-    },
-    addCourse: {
-      name: { text: '' }
     }
   },
   users: {
     list: []
-  }
+  },
+  shelf: { products: [] }
 };

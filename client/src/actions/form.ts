@@ -47,7 +47,7 @@ export const changeFormText = <T extends FormPayload>(
   value
 });
 
-export const resetFormText = (form: keyof TextForms): FormReset => ({
+export const resetForm = (form: keyof TextForms): FormReset => ({
   type: constants.RESET_FORM,
   form
 });

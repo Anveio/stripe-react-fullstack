@@ -22,6 +22,10 @@ router.get(
   userController.showUsers
 );
 
+router.get('/connect/jwt',
+  authController.authenticateJwt,
+)
+
 router.post('/login', authController.login);
 
 module.exports = router;

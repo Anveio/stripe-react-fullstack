@@ -4,7 +4,7 @@ import { rootReducer } from './reducers';
 
 // tslint:disable:no-any
 // tslint:disable:no-string-literal
-let devtools: any = window['devToolsExtension']
+const devtools: any = window['devToolsExtension']
   ? window['devToolsExtension']
   : (f: any) => f;
 

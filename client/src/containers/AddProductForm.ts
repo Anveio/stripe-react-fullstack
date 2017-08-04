@@ -13,7 +13,7 @@ const mapDispatch = (dispatch: Dispatch<actions.FormAction<Product>>): Handlers 
     dispatch(actions.changeFormText<Product>('addItem', key, value)),
   onSubmit: (payload: Product) => {
     dispatch(actions.submitForm<Product>('addItem', payload));
-    dispatch(actions.resetFormText('addItem'));
+    dispatch(actions.resetForm('addItem'));
   }
 });
 
