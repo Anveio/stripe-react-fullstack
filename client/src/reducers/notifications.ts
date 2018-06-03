@@ -1,27 +1,25 @@
 import { NotificationAction } from '../actions/notifications';
-import { PUSH_NOTIFICATION, DISMISS_NOTIFICATION_BY_MESSAGE } from '../constants';
+import {
+  PUSH_NOTIFICATION,
+  DISMISS_NOTIFICATION_BY_MESSAGE
+} from '../constants';
+import { NotificationsState } from 'types';
 
 const initialState: NotificationsState = {
   fromServer: []
 };
 
 export default (state = initialState, action: NotificationAction) => {
-  let partialState: Partial<NotificationsState> | undefined;
-
   switch (action.type) {
     case PUSH_NOTIFICATION:
-      partialState = {
-        fromServer: [ ...state.fromServer, action.data ]
+      return {
+        fromServer: [...state.fromServer, action.data]
       };
-      break;
     case DISMISS_NOTIFICATION_BY_MESSAGE:
-      partialState = {
+      return {
         fromServer: state.fromServer.filter(el => el.message !== action.message)
       };
-      break;
     default:
       return state;
   }
-
-  return { ...state, ...partialState };
 };

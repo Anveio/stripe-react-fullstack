@@ -1,5 +1,6 @@
 import { AccountConnectionAction } from '../actions/connection';
 import { CONNECT_ACCOUNT, DISCONNECT_ACCOUNT } from '../constants';
+import { UserState } from 'types';
 
 const initialState: UserState = {
   email: '',
@@ -7,22 +8,19 @@ const initialState: UserState = {
 };
 
 export default (state = initialState, action: AccountConnectionAction) => {
-  let partialState: Partial<UserState> | undefined;
-
   switch (action.type) {
     case CONNECT_ACCOUNT:
-      partialState = {
+      return {
+        ...state,
         email: action.user.email,
         token: action.user.token
       };
-      break;
     case DISCONNECT_ACCOUNT:
-      partialState = {
+      return {
+        ...state,
         email: ''
       };
-      break;
     default:
       return state;
   }
-  return { ...state, ...partialState };
 };

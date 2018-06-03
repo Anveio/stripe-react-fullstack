@@ -1,4 +1,11 @@
 import * as constants from '../constants';
+import {
+  LoginPayload,
+  SignupPayload,
+  PassportAuthError,
+  ExpressValidatorError,
+  AuthForms
+} from 'types';
 
 export type AuthPayload = LoginPayload | SignupPayload;
 

@@ -1,4 +1,5 @@
 import * as constants from '../constants';
+import { UserState } from 'types';
 
 export interface ConnectAccount {
   type: constants.CONNECT_ACCOUNT;
@@ -11,11 +12,11 @@ export interface DisconnectAccount {
 
 export type AccountConnectionAction = DisconnectAccount | ConnectAccount;
 
-export const connectAccount = (user: UserState) => ({
+export const connectAccount = (user: UserState): ConnectAccount => ({
   type: constants.CONNECT_ACCOUNT,
   user
 });
 
-export const disconnectAccount = () => ({
+export const disconnectAccount = (): DisconnectAccount => ({
   type: constants.DISCONNECT_ACCOUNT
 });

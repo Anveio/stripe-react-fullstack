@@ -1,4 +1,5 @@
 import * as constants from '../constants';
+import { PassportAuthError } from 'types';
 
 export type LoginAction = LoginFailure;
 

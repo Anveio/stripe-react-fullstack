@@ -11,7 +11,7 @@ header {
 .Navbar-container {
   display: flex;
   justify-content: space-between;
-
+  flex-direction: row-reverse;
   height: 100%;
 }
 
@@ -44,7 +44,7 @@ header {
 
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   line-height: 1;
 }
 

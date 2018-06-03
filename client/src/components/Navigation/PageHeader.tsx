@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import Navbar from './Navbar';
 
 import './PageHeader.css';
-const logo = require('./logo.svg');
+import { connect } from 'react-redux';
+import { RootState, UserState } from 'types';
+// const logo = require('./logo.svg');
 
-const LeftLogo = () => {
-  return (
-    <Link to="/" className="Navbar__brand">
-      <img src={logo} className="Logo" alt="logo" />
-    </Link>
-  );
-};
+// const LeftLogo = () => {
+//   return (
+//     <Link to="/" className="Navbar__brand">
+//       <img src={logo} className="Logo" alt="logo" />
+//     </Link>
+//   );
+// };
 
 const loggedOutLinks = [
   { path: '/', text: 'home' },
@@ -31,11 +33,16 @@ const PageHeader = (account: UserState) => {
   return (
     <header>
       <div className="Navbar-container">
-        <LeftLogo />
+        {/* <LeftLogo /> */}
         <Navbar links={account.token ? loggedInLinks : loggedOutLinks} />
       </div>
     </header>
   );
 };
 
-export default PageHeader;
+const mapStateToProps = (state: RootState): UserState => ({
+  email: state.currentUser.email,
+  token: state.currentUser.token
+});
+
+export default connect(mapStateToProps)(PageHeader);

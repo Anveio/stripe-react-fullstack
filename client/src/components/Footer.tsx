@@ -1,17 +1,19 @@
 import { FooterHelp, Layout, Link } from '@shopify/polaris';
 import * as React from 'react';
 
-export default class About extends React.PureComponent<{}, never> {
+export default class Footer extends React.PureComponent<{}, never> {
   render() {
     return (
       <Layout.Section>
         <FooterHelp>
           This web app was made Shovon Hasan. Check out his
           <Link external url="https://github.com/Anveio">
-            {' '}GitHub
+            {' '}
+            GitHub
           </Link>, or visit his
           <Link external url="https://www.shovonhasan.com">
-            {' '}website
+            {' '}
+            website
           </Link>.
         </FooterHelp>
       </Layout.Section>

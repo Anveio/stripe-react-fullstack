@@ -2,13 +2,12 @@ import { createStore, compose } from 'redux';
 import { persistStore } from 'redux-persist';
 import { rootReducer } from './reducers';
 
-// tslint:disable:no-any
 // tslint:disable:no-string-literal
-const devtools: any = window['devToolsExtension']
-  ? window['devToolsExtension']
-  : (f: any) => f;
+const devtools = window['__REDUX_DEVTOOLS_EXTENSION__']
+  ? window['__REDUX_DEVTOOLS_EXTENSION__']()
+  : compose;
 
-const store = createStore<RootState>(rootReducer, compose(devtools()));
+const store = createStore(rootReducer, devtools);
 
 persistStore(store);
 

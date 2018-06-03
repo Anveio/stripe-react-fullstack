@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { TextField } from '@shopify/polaris';
+import { AuthTextField } from 'types';
 
 interface Props {
   readonly field: AuthTextField;
@@ -15,7 +16,7 @@ const PasswordField = ({ field, onChange }: Props) => {
       placeholder="At least 6 characters."
       value={field.text}
       onChange={onChange}
-      error={field.error || false}
+      error={field.error || undefined}
       min={6}
     />
   );
@@ -31,7 +32,7 @@ const PasswordConfField = ({ field, onChange }: Props) => {
       placeholder="Same as your password."
       min={6}
       onChange={onChange}
-      error={field.error || false}
+      error={field.error || undefined}
     />
   );
 };
@@ -46,7 +47,7 @@ const EmailField = ({ field, onChange }: Props) => {
       value={field.text}
       placeholder="e.g. name@business.com"
       onChange={onChange}
-      error={field.error || false}
+      error={field.error || undefined}
       spellCheck={false}
       autoFocus
     />
@@ -62,7 +63,7 @@ const UsernameField = ({ field, onChange }: Props) => {
       value={field.text}
       placeholder="No spaces or numbers."
       onChange={onChange}
-      error={field.error || false}
+      error={field.error || undefined}
       spellCheck={false}
     />
   );

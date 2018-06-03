@@ -1,12 +1,16 @@
-import * as constants from '../constants';
+import {
+  PUSH_NOTIFICATION,
+  DISMISS_NOTIFICATION_BY_MESSAGE
+} from '../constants';
+import { ServerMessage } from 'types';
 
 export interface PushNotification {
-  type: constants.PUSH_NOTIFICATION;
+  type: PUSH_NOTIFICATION;
   data: ServerMessage;
 }
 
 export interface DismissNotification {
-  type: constants.DISMISS_NOTIFICATION_BY_MESSAGE;
+  type: DISMISS_NOTIFICATION_BY_MESSAGE;
   message: string;
 }
 
@@ -14,12 +18,12 @@ export type NotificationAction = DismissNotification | PushNotification;
 
 export const pushNotification = (data: ServerMessage): PushNotification => {
   return {
-    type: constants.PUSH_NOTIFICATION,
+    type: PUSH_NOTIFICATION,
     data
   };
 };
 
 export const dismissNotification = (message: string): DismissNotification => ({
-  type: constants.DISMISS_NOTIFICATION_BY_MESSAGE,
+  type: DISMISS_NOTIFICATION_BY_MESSAGE,
   message
 });

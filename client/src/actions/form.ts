@@ -1,22 +1,23 @@
-import * as constants from '../constants';
+import { Product, Course, TextForms } from 'types';
+import { UPDATE_FIELD_TEXT, SUBMIT_FORM, RESET_FORM } from '../constants';
 
 export type FormPayload = Product | Course;
 
 export interface FormUpdate<T extends FormPayload> {
-  type: constants.UPDATE_FIELD_TEXT;
+  type: UPDATE_FIELD_TEXT;
   form: keyof TextForms;
   key: keyof T;
   value: string;
 }
 
 export interface FormSubmit<T extends FormPayload> {
-  type: constants.SUBMIT_FORM;
+  type: SUBMIT_FORM;
   form: keyof TextForms;
   payload: T;
 }
 
 export interface FormReset {
-  type: constants.RESET_FORM;
+  type: RESET_FORM;
   form: keyof TextForms;
 }
 
@@ -30,7 +31,7 @@ export const submitForm = <T extends FormPayload>(
   payload: T
 ): FormSubmit<T> => {
   return {
-    type: constants.SUBMIT_FORM,
+    type: SUBMIT_FORM,
     form,
     payload
   };
@@ -41,13 +42,13 @@ export const changeFormText = <T extends FormPayload>(
   key: keyof T,
   value: string
 ): FormUpdate<T> => ({
-  type: constants.UPDATE_FIELD_TEXT,
+  type: UPDATE_FIELD_TEXT,
   form,
   key,
   value
 });
 
 export const resetForm = (form: keyof TextForms): FormReset => ({
-  type: constants.RESET_FORM,
+  type: RESET_FORM,
   form
 });

@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Layout, DisplayText, FormLayout, Card, Button } from '@shopify/polaris';
+import {
+  Layout,
+  DisplayText,
+  FormLayout,
+  Card,
+  Button
+} from '@shopify/polaris';
 
 import {
   PasswordField,
@@ -7,6 +13,29 @@ import {
   EmailField,
   UsernameField
 } from './AuthTextFields';
+import {
+  AuthTextField,
+  SignupForm,
+  SignupPayload,
+  RootState,
+  JsonWebToken,
+  ExpressValidatorError
+} from 'types';
+import { Dispatch, connect } from 'react-redux';
+import {
+  AuthFormAction,
+  changeAuthFieldText,
+  submitAuthField
+} from 'actions/formAuth';
+import { AccountConnectionAction, connectAccount } from 'actions/connection';
+import Axios from 'axios';
+import {
+  registerAccountSuccess,
+  registerAccountFailure,
+  RegisterAccountAction
+} from 'actions/signup';
+import { pushNotification, NotificationAction } from 'actions/notifications';
+import { ROOT_API_URL } from '../../constants';
 
 export interface Props {
   readonly loading: boolean;
@@ -55,14 +84,20 @@ const SignupForm = (props: Props & Handlers) => {
   };
 
   return (
-    <Layout sectioned>
+    <Layout.Section>
       <Card sectioned>
         <FormLayout>
           <div onKeyPress={watchForEnter}>
             <DisplayText size="medium">Create an account.</DisplayText>
             <EmailField field={email} onChange={updateField('email')} />
-            <UsernameField field={username} onChange={updateField('username')} />
-            <PasswordField field={password} onChange={updateField('password')} />
+            <UsernameField
+              field={username}
+              onChange={updateField('username')}
+            />
+            <PasswordField
+              field={password}
+              onChange={updateField('password')}
+            />
             <PasswordConfField
               field={passwordConf}
               onChange={updateField('passwordConf')}
@@ -79,8 +114,112 @@ const SignupForm = (props: Props & Handlers) => {
           </Button>
         </FormLayout>
       </Card>
-    </Layout>
+    </Layout.Section>
   );
 };
 
-export default SignupForm;
+const mapStateToProps = (state: RootState): Props => {
+  const {
+    email,
+    username,
+    password,
+    passwordConf,
+    loading
+  } = state.authForms.signup;
+
+  return {
+    email,
+    username,
+    password,
+    passwordConf,
+    loading
+  };
+};
+
+const mapDispatchToProps = (
+  dispatch: Dispatch<
+    | AuthFormAction<SignupPayload>
+    | AccountConnectionAction
+    | NotificationAction
+    | RegisterAccountAction
+  >
+): Handlers => ({
+  onChange: (key: keyof SignupPayload, value: string) => {
+    dispatch(changeAuthFieldText<SignupPayload>('signup', key, value));
+  },
+  onSubmit: (payload: SignupPayload) => {
+    dispatch(submitAuthField('signup', payload));
+    Axios.post(`${ROOT_API_URL}/signup`, payload)
+      .then(
+        success => {
+          dispatch(registerAccountSuccess());
+          window.localStorage.setItem(
+            'jwt',
+            (success.data as JsonWebToken).token
+          );
+          /**
+           * POSTing to /signup will run through passport.js' login
+           * middleware. So if there are no errors at this point we can log-in
+           * the user without sending a separate request.
+           */
+
+          dispatch(
+            connectAccount({
+              email: payload.email,
+              token: (success.data as JsonWebToken).token
+            })
+          );
+          history.pushState('/');
+          dispatch(
+            pushNotification({
+              status: 'success',
+              title: 'Account creation successful.',
+              message:
+                // tslint:disable-next-line:quotemark
+                "Your account's been made and you're now logged in."
+            })
+          );
+        },
+        errors => {
+          /**
+           * If express validator catches an error: 'data' will be a
+           * SignupValidationError[]. If our moongoose User Schema catches an
+           * error: 'data' will be a string.
+           */
+
+          const data: ExpressValidatorError[] | string = errors.response.data;
+          if (data instanceof Array) {
+            dispatch(registerAccountFailure(data));
+          } else {
+            dispatch(
+              pushNotification({
+                status: 'critical',
+                title: 'Account creation unsuccessful.',
+                message: data
+              })
+            );
+          }
+        }
+      )
+      .catch(reason => {
+        dispatch(
+          registerAccountFailure([
+            {
+              param: 'server-error',
+              msg: reason.msg,
+              value: ''
+            }
+          ])
+        );
+        dispatch(
+          pushNotification({
+            status: 'critical',
+            title: 'Account creation unsuccessful..',
+            message: reason.msg
+          })
+        );
+      });
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);

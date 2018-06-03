@@ -1,0 +1,13 @@
+{
+  "name": "stripe-react-fullstack",
+  "version": "1.0.0",
+  "description":
+    "Boilerplate for react-redux-typescript frontend for a store. Includes user signup/authentication with JWT and (PCI compliant?) payment authorization with Stripe on the server.",
+  "main": "index.js",
+  "scripts": {
+    "run": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

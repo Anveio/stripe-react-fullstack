@@ -1,4 +1,4 @@
-interface RootState {
+export interface RootState {
   readonly currentUser: UserState;
   readonly notifications: NotificationsState;
   readonly enthusiasm: EnthusiasmState;
@@ -9,69 +9,69 @@ interface RootState {
   readonly shelf: ShelfState;
 }
 
-interface Course {
+export interface Course {
   readonly name: string;
 }
 
-interface PublicUserInfo {
+export interface PublicUserInfo {
   readonly email: string;
 }
 
-interface JsonWebToken {
+export interface JsonWebToken {
   readonly token: string;
 }
 
-interface UserState {
+export interface UserState {
   readonly email: string | null;
   readonly token: string | null;
 }
 
-interface NotificationsState {
+export interface NotificationsState {
   readonly fromServer: ServerMessage[];
 }
-interface EnthusiasmState {
+export interface EnthusiasmState {
   readonly languageName: string;
   readonly level: number;
 }
 
-interface CoursesState {
+export interface CoursesState {
   readonly list: Course[];
 }
 
-interface TextForms {
+export interface TextForms {
   readonly addCourse: Course;
   readonly addItem: Product;
 }
 
-interface AuthForms {
+export interface AuthForms {
   readonly signup: SignupForm;
   readonly login: LoginForm;
 }
 
-interface UsersListState {
+export interface UsersListState {
   readonly list: PublicUserInfo[];
 }
 
-interface ShelfState {
+export interface ShelfState {
   products: Product[];
 }
 
-interface ServerMessage {
+export interface ServerMessage {
   readonly status: StatusType;
   readonly title: string;
   readonly message: string;
 }
 
-interface Action {
+export interface Action {
   readonly content?: string;
   readonly accessibilityLabel?: string;
   readonly url?: string;
   readonly onAction: () => void;
 }
 
-declare type StatusType = 'success' | 'info' | 'warning' | 'critical';
+export type StatusType = 'success' | 'info' | 'warning' | 'critical';
 
-interface SignupForm {
+export interface SignupForm {
   readonly email: AuthTextField;
   readonly username: AuthTextField;
   readonly password: AuthTextField;
@@ -79,38 +79,38 @@ interface SignupForm {
   readonly loading: boolean;
 }
 
-interface LoginForm {
+export interface LoginForm {
   readonly email: AuthTextField;
   readonly password: AuthTextField;
   readonly loading: boolean;
 }
 
-interface SignupPayload {
+export interface SignupPayload {
   readonly email: string;
   readonly username: string;
   readonly password: string;
   readonly passwordConf: string;
 }
 
-interface LoginPayload {
+export interface LoginPayload {
   readonly email: string;
   readonly password: string;
 }
 
-interface AuthTextField {
+export interface AuthTextField {
   readonly text: string;
   readonly error: string | null;
 }
 
 declare type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';
 
-interface ExpressValidatorError {
+export interface ExpressValidatorError {
   readonly param: AuthFieldKey | 'server-error';
   readonly msg: string;
   readonly value: string;
 }
 
-interface PassportAuthError {
+export interface PassportAuthError {
   readonly message: string;
   readonly name: string;
 }
@@ -121,10 +121,14 @@ declare module '*.svg' {
   export default x;
 }
 
-interface Product {
+export interface Product {
   name: string;
   description: string;
   category?: string;
   imageSrc?: string;
   price: number;
+}
+
+export interface JwtConnectionSuccess {
+  email: string;
 }

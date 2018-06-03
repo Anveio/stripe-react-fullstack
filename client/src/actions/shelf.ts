@@ -1,8 +1,9 @@
-import * as constants from '../constants';
+import { SHELF_REFRESH_SUCCESS } from '../constants';
+import { Product } from 'types';
 
 export interface ShelfRefreshSuccess {
-  type: constants.SHELF_REFRESH_SUCCESS;
-  payload: Product[];
+  readonly type: SHELF_REFRESH_SUCCESS;
+  readonly payload: Product[];
 }
 
 export type ShelfAction = ShelfRefreshSuccess;

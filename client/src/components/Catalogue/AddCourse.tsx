@@ -1,7 +1,15 @@
 import * as React from 'react';
 import { Layout, Card, FormLayout, TextField, Button } from '@shopify/polaris';
+import { Dispatch, connect } from 'react-redux';
+import {
+  FormAction,
+  changeFormText,
+  submitForm,
+  resetForm
+} from 'actions/form';
+import { Course, RootState } from 'types';
 
-export interface Handlers {
+interface Handlers {
   readonly onChange: (key: keyof Course, value: string) => void;
   readonly onSubmit: (course: Course) => void;
 }
@@ -53,4 +61,17 @@ const AddCourse = ({ name, onChange, onSubmit }: Course & Handlers) => {
   );
 };
 
-export default AddCourse;
+const mapState = (state: RootState): Course => ({
+  name: state.forms.addCourse.name
+});
+
+const mapDispatch = (dispatch: Dispatch<FormAction<Course>>): Handlers => ({
+  onChange: (key: keyof Course, value: string) =>
+    dispatch(changeFormText<Course>('addCourse', key, value)),
+  onSubmit: (payload: Course) => {
+    dispatch(submitForm<Course>('addCourse', payload));
+    dispatch(resetForm('addCourse'));
+  }
+});
+
+export default connect(mapState, mapDispatch)(AddCourse);

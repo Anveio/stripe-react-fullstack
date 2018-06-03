@@ -1,37 +1,38 @@
 {
-  "name": "react-redux-pluralsight",
+  "name": "stripe-react-fullstack",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@shopify/polaris": "^1.1.1",
-    "axios": "^0.16.2",
-    "history": "^4.6.3",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "@shopify/polaris": "^2.1.1",
+    "axios": "^0.18.0",
+    "history": "^4.7.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
-    "react-stripe-checkout": "2.6.0",
-    "redux": "^3.6.0",
+    "react-stripe-checkout": "2.6.3",
+    "redux": "^4.0.0",
     "redux-persist": "^4.8.2"
   },
   "devDependencies": {
-    "@types/enzyme": "^2.8.0",
-    "@types/jest": "^19.2.3",
-    "@types/node": "^7.0.22",
-    "@types/react": "^15.0.24",
-    "@types/react-dom": "^15.5.0",
-    "@types/react-redux": "^4.4.40",
-    "@types/react-router": "^4.0.9",
-    "@types/react-router-dom": "^4.0.4",
+    "typescript": "^2.9.1",
+    "@types/enzyme": "^3.1.10",
+    "@types/jest": "^23.0.0",
+    "@types/node": "^10.3.0",
+    "@types/react": "^16.3.16",
+    "@types/react-dom": "^16.0.5",
+    "@types/react-redux": "^6.0.1",
+    "@types/react-router": "^4.0.26",
+    "@types/react-router-dom": "^4.0.7",
     "@types/redux": "^3.6.0",
-    "enzyme": "^2.8.2",
+    "enzyme": "^3.3.0",
     "react-addons-test-utils": "^15.5.1",
-    "react-scripts-ts": "2.0.1"
+    "react-scripts-ts": "2.16.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom ",
+    "test": "react-scripts-ts test --env=jsdom modulePaths=src",
     "eject": "react-scripts-ts eject"
   }
 }

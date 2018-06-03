@@ -7,13 +7,22 @@ import {
   ResourceList
 } from '@shopify/polaris';
 
-import emptySvg from './empty-state.svg';
+import Axios from 'axios';
+import { Dispatch, connect } from 'react-redux';
+import {
+  UserListAction,
+  getUserListSuccess,
+  getUserListFailure
+} from 'actions/users';
+import { PublicUserInfo, RootState } from 'types';
+import { ROOT_API_URL } from '../constants';
+const emptySvg = require('./empty-state.svg');
 
-export interface Props {
+interface Props {
   userList: PublicUserInfo[];
 }
 
-export interface Handlers {
+interface Handlers {
   onLoad(): void;
 }
 
@@ -41,8 +50,10 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
         </Card>
         <ResourceList
           items={this.props.userList}
-          renderItem={(user: PublicUserInfo, index: number) => (
-            <ResourceList.Item attributeOne={user.email} />
+          renderItem={(user: PublicUserInfo) => (
+            <ResourceList.Item onClick={console.log} id={user.email}>
+              {user.email}
+            </ResourceList.Item>
           )}
         />
       </Layout.AnnotatedSection>
@@ -68,4 +79,32 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
   }
 }
 
-export default UserList;
+const mapStateToProps = (state: RootState): Props => {
+  return {
+    userList: state.users.list
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<UserListAction>): Handlers => ({
+  onLoad: () => {
+    Axios.get(`${ROOT_API_URL}/users`, {
+      headers: {
+        authorization: `Bearer ${window.localStorage.getItem('jwt')}`
+      }
+    })
+      .then(
+        response => {
+          let users: PublicUserInfo[] = response.data;
+          dispatch(getUserListSuccess(users));
+        },
+        error => {
+          dispatch(getUserListFailure());
+        }
+      )
+      .catch(reason => {
+        console.log(reason); // tslint:disable-line:no-console
+      });
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserList);

@@ -6,8 +6,9 @@ import {
   Card,
   ResourceList
 } from '@shopify/polaris';
+import { PublicUserInfo } from 'types';
 
-import emptySvg from './empty-state.svg';
+const emptyImage = require('../empty-state.svg');
 
 export interface Props {
   userList: PublicUserInfo[];
@@ -41,8 +42,10 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
         </Card>
         <ResourceList
           items={this.props.userList}
-          renderItem={(user: PublicUserInfo, index: number) => (
-            <ResourceList.Item attributeOne={user.email} />
+          renderItem={(user: PublicUserInfo) => (
+            <ResourceList.Item onClick={console.log} id={user.email}>
+              <div>{user.email}</div>
+            </ResourceList.Item>
           )}
         />
       </Layout.AnnotatedSection>
@@ -52,7 +55,7 @@ class UserList extends React.PureComponent<Props & Handlers, never> {
   readonly usersNotFoundMarkup = () => {
     return (
       <EmptyState
-        image={emptySvg}
+        image={emptyImage}
         heading="No users found."
         action={{ content: 'Reload', onAction: this.props.onLoad }}
       >

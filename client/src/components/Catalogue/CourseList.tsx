@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { EmptyState, Layout, Card } from '@shopify/polaris';
+import { connect } from 'react-redux';
+import { RootState, Course } from 'types';
 const emptyImage = require('../empty-state.svg');
 
-export interface Props {
+interface Props {
   readonly list: Course[];
 }
 
@@ -26,9 +28,7 @@ const CourseList = ({ list }: Props) => {
   const populatedCourseListMarkup = () => {
     return (
       <Layout.AnnotatedSection title={'My enrolled courses'}>
-        <Card sectioned>
-          {list.map(course => course.name)}
-        </Card>
+        <Card sectioned>{list.map(course => course.name)}</Card>
       </Layout.AnnotatedSection>
     );
   };
@@ -38,4 +38,8 @@ const CourseList = ({ list }: Props) => {
     : emptyCourseListMarkup();
 };
 
-export default CourseList;
+const mapStateToProps = (rootState: RootState) => ({
+  list: rootState.courses.list
+});
+
+export default connect(mapStateToProps)(CourseList);

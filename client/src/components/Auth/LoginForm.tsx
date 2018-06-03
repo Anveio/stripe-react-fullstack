@@ -1,7 +1,31 @@
 import * as React from 'react';
-import { Layout, Card, FormLayout, Button, DisplayText } from '@shopify/polaris';
-
+import {
+  Layout,
+  Card,
+  FormLayout,
+  Button,
+  DisplayText
+} from '@shopify/polaris';
 import { PasswordField, EmailField } from './AuthTextFields';
+import { connect, Dispatch } from 'react-redux';
+import {
+  AuthTextField,
+  UserState,
+  LoginPayload,
+  RootState,
+  JsonWebToken,
+  PassportAuthError
+} from 'types';
+import {
+  AuthFormAction,
+  changeAuthFieldText,
+  submitAuthField
+} from 'actions/formAuth';
+import { NotificationAction, pushNotification } from 'actions/notifications';
+import { AccountConnectionAction, connectAccount } from 'actions/connection';
+import Axios from 'axios';
+import { ROOT_API_URL } from '../../constants';
+import { loginFailure, LoginFailure } from 'actions/login';
 
 export interface Props {
   readonly email: AuthTextField;
@@ -42,13 +66,16 @@ const LoginForm = (props: Props & Handlers) => {
 
   const loggedOutMarkup = () => {
     return (
-      <Layout sectioned>
+      <Layout.Section>
         <Card sectioned>
           <FormLayout>
             <DisplayText size="medium">Log in.</DisplayText>
             <div onKeyPress={watchForEnter}>
               <EmailField field={email} onChange={updateField('email')} />
-              <PasswordField field={password} onChange={updateField('password')} />
+              <PasswordField
+                field={password}
+                onChange={updateField('password')}
+              />
             </div>
             <Button
               primary
@@ -60,7 +87,7 @@ const LoginForm = (props: Props & Handlers) => {
             </Button>
           </FormLayout>
         </Card>
-      </Layout>
+      </Layout.Section>
     );
   };
 
@@ -79,4 +106,89 @@ const LoginForm = (props: Props & Handlers) => {
   return currentUser.email ? loggedInMarkup(currentUser) : loggedOutMarkup();
 };
 
-export default LoginForm;
+const mapState = (state: RootState): Props => {
+  const { email, password, loading } = state.authForms.login;
+  const currentUser = state.currentUser;
+
+  return {
+    currentUser,
+    email,
+    password,
+    loading
+  };
+};
+
+const mapDispatch = (
+  dispatch: Dispatch<
+    | AuthFormAction<LoginPayload>
+    | NotificationAction
+    | AccountConnectionAction
+    | LoginFailure
+  >
+): Handlers => {
+  return {
+    onChange: (key: keyof LoginPayload, value: string) =>
+      dispatch(changeAuthFieldText<LoginPayload>('login', key, value)),
+    onSubmit: (payload: LoginPayload) => {
+      dispatch(submitAuthField('login', payload));
+      Axios.post(`${ROOT_API_URL}/login`, payload)
+        .then(
+          success => {
+            window.localStorage.setItem(
+              'jwt',
+              (success.data as JsonWebToken).token
+            );
+            dispatch(
+              connectAccount({
+                email: payload.email,
+                token: (success.data as JsonWebToken).token
+              })
+            );
+            history.pushState('/');
+            dispatch(
+              pushNotification({
+                status: 'success',
+                title: 'Login successful',
+                // tslint:disable-next-line:quotemark
+                message: "You're now logged in."
+              })
+            );
+          },
+          errors => {
+            const error: PassportAuthError = errors.response.data;
+            // Our server gives us errors in different types depending on the error.
+            // Todo: Normalize error messages from server on login failure.
+            if (error && error.message) {
+              dispatch(loginFailure(error));
+            } else {
+              dispatch(
+                pushNotification({
+                  status: 'critical',
+                  title: 'Login unsuccessful.',
+                  message: 'There were errors with your login information.'
+                })
+              );
+            }
+          }
+        )
+        .catch(reason => {
+          dispatch(
+            loginFailure({
+              message:
+                'There was problem logging you in. Please try again later.',
+              name: 'miscError'
+            })
+          );
+          dispatch(
+            pushNotification({
+              status: 'critical',
+              title: 'Login unsuccessful.',
+              message: reason.msg
+            })
+          );
+        });
+    }
+  };
+};
+
+export default connect(mapState, mapDispatch)(LoginForm);

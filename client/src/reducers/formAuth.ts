@@ -8,6 +8,13 @@ import {
   REGISTER_ACCOUNT_FAILURE
   // REGISTER_ACCOUNT_SUCCESS
 } from '../constants';
+import {
+  SignupForm,
+  ExpressValidatorError,
+  AuthForms,
+  AuthTextField,
+  LoginForm
+} from 'types';
 
 const emptyAuthForm: AuthTextField = { text: '', error: null };
 
@@ -34,26 +41,24 @@ export default (
   state = initialState,
   action: AuthFormAction<AuthPayload> | LoginAction | RegisterAccountAction
 ): AuthForms => {
-  let partialState: Partial<AuthForms> | undefined;
-
   switch (action.type) {
     case UPDATE_FIELD_AUTH:
-      partialState = {
+      return {
+        ...state,
         [action.form]: {
           ...state[action.form],
           [action.key]: { text: action.value, error: null }
         }
       };
-      break;
     case LOGIN_FAILURE:
-      partialState = {
+      return {
+        ...state,
         login: {
           email: { text: '', error: action.error.message },
           password: { text: '', error: action.error.message },
           loading: false
         }
       };
-      break;
     case REGISTER_ACCOUNT_FAILURE:
       const fieldsWithErrors = action.errors.reduce(
         (newPartialState: Partial<SignupForm>, error: ExpressValidatorError) =>
@@ -65,14 +70,11 @@ export default (
           }),
         { loading: false }
       );
-
-      partialState = {
+      return {
+        ...state,
         signup: { ...state.signup, ...fieldsWithErrors, loading: false }
       };
-      break;
     default:
       return state;
   }
-
-  return { ...state, ...partialState };
 };

@@ -1,13 +1,16 @@
 import * as React from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Card } from '@shopify/polaris';
-import StripeCheckout, { Token } from 'react-stripe-checkout';
+import StripeCheckout, {
+  Token,
+  StripeCheckoutProps
+} from 'react-stripe-checkout';
 
 import { STRIPE_PUBLISHABLE, ROOT_API_URL } from '../../constants';
 
 const onToken = (amount: number, description: string) => (token: Token) => {
   axios
-    .post(`${ROOT_API_URL}/stripe`, {
+    .post<AxiosResponse>(`${ROOT_API_URL}/stripe`, {
       description,
       source: token.id,
       email: token.email,
@@ -29,7 +32,7 @@ interface Props {
 }
 
 const Checkout = ({ name, description, amount }: Props) => {
-  const props = {
+  const props: StripeCheckoutProps = {
     label: 'Pay With Card',
     name,
     description,

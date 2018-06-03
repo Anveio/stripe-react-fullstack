@@ -1,18 +1,13 @@
 import { combineReducers } from 'redux';
-import { default as enthusiasm } from './enthusiasm';
-import { default as courses } from './course';
-import { default as forms } from './form';
-import { default as authForms } from './formAuth';
-import { default as notifications } from './notifications';
-import { default as currentUser } from './accountConnection';
-import { default as users } from './userList';
-import { default as shelf } from './shelf';
-
-/*
-TODO: TypeScript doesn't seem to properly check if the object passed to
-combineReducers adheres to the RootState type. You can enter gibberish as a key
-and it won't be caught by the compiler. 
-*/
+import enthusiasm from './enthusiasm';
+import courses from './course';
+import forms from './form';
+import authForms from './formAuth';
+import notifications from './notifications';
+import currentUser from './accountConnection';
+import users from './userList';
+import shelf from './shelf';
+import { RootState } from 'types';
 
 export const rootReducer = combineReducers<RootState>({
   currentUser,
