@@ -15,11 +15,7 @@ const app = require('./app');
 switch (process.env.NODE_ENV) {
   case 'development':
     console.log('App starting in development');
-    app.use(express.static(path.join(__dirname, '/../client/public')));
     app.use(errorHandlers.developmentErrors);
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname + '/../client/public/index.html'));
-    });
     mongoose.connect(process.env.DEV_DATABASE);
     mongoose.connection.on('error', err => {
       console.error(`Error connecting to dev database ${err.message}`);
@@ -27,10 +23,6 @@ switch (process.env.NODE_ENV) {
     break;
   case 'production':
     console.log('App starting in production');
-    app.use(express.static(path.join(__dirname, '/../client/build')));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname + '../client/build/index.html'));
-    });
     mongoose.connect(process.env.PROD_DATABASE);
     mongoose.connection.on('error', err => {
       console.error(`Error connecting to production database ${err.message}`);
