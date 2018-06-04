@@ -13,7 +13,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cd client && npm run build",
-    "start": "cd server && npm run start"
+    "start": "cd server && npm install && run start"
   },
   "license": "ISC"
 }
