@@ -22,7 +22,6 @@ yarn-error.log*
 
 # Secret Stuff
 *.env
-config.ts
 
 .vscode
 !.vscode/settings.json

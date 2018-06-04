@@ -1,16 +1,7 @@
-// Might be best to put this in a separate file.
-// It's here for now for simplicity's sake.
-import { STRIPE_PUBLISHABLE_TEST } from './config';
+import { configureApiRoot } from 'utils/config';
 
-export const ROOT_API_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'http://myapidomain.com'
-    : 'http://localhost:4000/api';
-
-export const STRIPE_PUBLISHABLE =
-  process.env.NODE_ENV === 'production'
-    ? 'pk_live_MY_PUBLISHABLE_KEY'
-    : STRIPE_PUBLISHABLE_TEST;
+export const ROOT_API_URL = configureApiRoot();
+export const STRIPE_PUBLISHABLE_TEST_KEY = 'pk_test_lSPPphIp2RSq3TYbez575NQW';
 
 export const INCREMENT_ENTHUSIASM = 'INCREMENT_ENTHUSIASM';
 export type INCREMENT_ENTHUSIASM = typeof INCREMENT_ENTHUSIASM;
@@ -63,7 +54,8 @@ export type PUSH_INFO_NOTIFICATION = typeof PUSH_INFO_NOTIFICATION;
 export const PUSH_NOTIFICATION = 'PUSH_NOTIFICATION';
 export type PUSH_NOTIFICATION = typeof PUSH_NOTIFICATION;
 
-export const DISMISS_NOTIFICATION_BY_MESSAGE = 'DISMISS_NOTIFICATION_BY_MESSAGE';
+export const DISMISS_NOTIFICATION_BY_MESSAGE =
+  'DISMISS_NOTIFICATION_BY_MESSAGE';
 export type DISMISS_NOTIFICATION_BY_MESSAGE = typeof DISMISS_NOTIFICATION_BY_MESSAGE;
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';

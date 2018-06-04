@@ -6,7 +6,7 @@ import StripeCheckout, {
   StripeCheckoutProps
 } from 'react-stripe-checkout';
 
-import { STRIPE_PUBLISHABLE, ROOT_API_URL } from '../../constants';
+import { STRIPE_PUBLISHABLE_TEST_KEY, ROOT_API_URL } from '../../constants';
 
 const onToken = (amount: number, description: string) => (token: Token) => {
   axios
@@ -38,7 +38,7 @@ const Checkout = ({ name, description, amount }: Props) => {
     description,
     token: onToken(amount, description),
     amount,
-    stripeKey: STRIPE_PUBLISHABLE,
+    stripeKey: STRIPE_PUBLISHABLE_TEST_KEY,
     currency: 'USD'
   };
 
