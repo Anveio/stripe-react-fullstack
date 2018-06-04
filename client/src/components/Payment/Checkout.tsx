@@ -6,7 +6,7 @@ import StripeCheckout, {
   StripeCheckoutProps
 } from 'react-stripe-checkout';
 
-import { STRIPE_PUBLISHABLE_TEST_KEY, ROOT_API_URL } from '../../constants';
+import { ROOT_API_URL, STRIPE_PUBLISHABLE_TEST_KEY } from '../../constants';
 
 const onToken = (amount: number, description: string) => (token: Token) => {
   axios

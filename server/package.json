@@ -6,9 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./start.js",
-    "dev-start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon ./start.js --legacy-watch",
-    "client": "cd ../client && npm start"
+    "server": "nodemon ./start.js --legacy-watch"
   },
   "dependencies": {
     "axios": "^0.18.0",
