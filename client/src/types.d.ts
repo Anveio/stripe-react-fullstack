@@ -1,8 +1,6 @@
 export interface RootState {
   readonly currentUser: UserState;
   readonly notifications: NotificationsState;
-  readonly enthusiasm: EnthusiasmState;
-  readonly courses: CoursesState;
   readonly forms: TextForms;
   readonly authForms: AuthForms;
   readonly users: UsersListState;

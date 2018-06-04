@@ -1,8 +1,8 @@
 const FRONTEND_DEV_URLS = ['http://localhost:3000'];
 
 const FRONTEND_PROD_URLS = [
-  'https://www.FILL_IN_THIS_BLANK.com',
-  'https://FILL_IN_THIS_BLANK.com'
+  'https://www.stripe-example.shovonhasan.com.com',
+  'http://localhost:3000'
 ];
 
 module.exports =

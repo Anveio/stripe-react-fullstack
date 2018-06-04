@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux';
-import enthusiasm from './enthusiasm';
-import courses from './course';
 import forms from './form';
 import authForms from './formAuth';
 import notifications from './notifications';
@@ -14,8 +12,6 @@ export const rootReducer = combineReducers<RootState>({
   notifications,
   forms,
   authForms,
-  courses,
-  enthusiasm,
   users,
   shelf
 });

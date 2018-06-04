@@ -1,4 +1,4 @@
-const Stripe = require('stripe');
+import Stripe from 'stripe';
 
 const STRIPE_SECRET_KEY =
   process.env.NODE_ENV === 'production'
@@ -7,4 +7,4 @@ const STRIPE_SECRET_KEY =
 
 const stripe = Stripe(STRIPE_SECRET_KEY);
 
-module.exports = stripe;
+export default stripe;

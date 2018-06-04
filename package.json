@@ -1,13 +1,19 @@
 {
   "name": "stripe-react-fullstack",
+  "author": {
+    "name": "Shovon Hasan",
+    "url": "https://www.shovonhasan.com"
+  },
+  "repository": {
+    "url": "https://github.com/Anveio/stripe-react-fullstack"
+  },
   "version": "1.0.0",
   "description":
-    "Boilerplate for react-redux-typescript frontend for a store. Includes user signup/authentication with JWT and (PCI compliant?) payment authorization with Stripe on the server.",
+    "Example of payment with Stripe with a React Redux front-end. Includes user signup/authentication with JWT and payment authorization with Stripe on the server.",
   "main": "index.js",
   "scripts": {
-    "run": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cd client && npm run build",
+    "start": "cd server && npm run start"
   },
-  "author": "",
   "license": "ISC"
 }

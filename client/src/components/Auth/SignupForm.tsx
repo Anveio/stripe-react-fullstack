@@ -169,7 +169,7 @@ const mapDispatchToProps = (
               token: (success.data as JsonWebToken).token
             })
           );
-          history.pushState('/');
+          history.pushState({}, undefined, '/');
           dispatch(
             pushNotification({
               status: 'success',

@@ -1,4 +1,4 @@
-const stripe = require('../constants/stripe');
+const stripe = require('../constants/stripe').default;
 const { sendJson } = require('../handlers/util');
 
 const postStripeCharge = res => (stripeErr, stripeRes) => {

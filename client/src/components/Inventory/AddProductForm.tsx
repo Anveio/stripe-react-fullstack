@@ -16,7 +16,7 @@ import {
   resetForm
 } from 'actions/form';
 
-export interface Handlers {
+interface Handlers {
   readonly onChange: (key: keyof Product, value: string) => void;
   readonly onSubmit: (payload: Product) => void;
 }
