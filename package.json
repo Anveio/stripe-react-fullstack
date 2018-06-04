@@ -14,7 +14,7 @@
   "scripts": {
     "build-client": "cd client && npm install && npm run build ",
     "build": "cd server && npm install",
-    "start": "cd server && npm install && npm run start"
+    "start": "cd server && npm run start"
   },
   "license": "ISC"
 }
