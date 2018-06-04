@@ -11,15 +11,12 @@
   "description":
     "Example of payment with Stripe with a React Redux front-end. Includes user signup/authentication with JWT and payment authorization with Stripe on the server.",
   "main": "index.js",
-  "dependencies": {
-    "react-scripts-ts": "^2.16.0"
-  },
   "scripts": {
     "build-client": "cd client && npm install && npm run build ",
     "build-server": "cd server && npm install",
     "start-server": "cd server && npm start",
     "build":
-      "npm install && npm run build-client && npm run build-server && npm run start-server"
+      "npm run build-client && npm run build-server && npm run start-server"
   },
   "license": "ISC"
 }
