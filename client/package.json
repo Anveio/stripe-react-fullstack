@@ -2,6 +2,7 @@
   "name": "stripe-react-fullstack-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://stripe-fullstack-example.shovonhasan.com/",
   "dependencies": {
     "@shopify/polaris": "^2.1.1",
     "axios": "^0.18.0",
@@ -27,7 +28,6 @@
     "@types/enzyme": "^3.1.10",
     "@types/jest": "^23.0.0"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
