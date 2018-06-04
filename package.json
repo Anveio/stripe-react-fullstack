@@ -8,15 +8,13 @@
     "url": "https://github.com/Anveio/stripe-react-fullstack"
   },
   "version": "1.0.0",
-  "description":
-    "Example of payment with Stripe with a React Redux front-end. Includes user signup/authentication with JWT and payment authorization with Stripe on the server.",
+  "description": "Example of payment with Stripe with a React Redux front-end. Includes user signup/authentication with JWT and payment authorization with Stripe on the server.",
   "main": "index.js",
   "scripts": {
     "build-client": "cd client && npm install && npm run build ",
     "build-server": "cd server && npm install",
-    "start-server": "cd server && npm start",
-    "build":
-      "npm run build-client && npm run build-server && npm run start-server"
+    "start": "cd server && npm start",
+    "build": "npm run build-client && npm run build-server"
   },
   "license": "ISC"
 }
