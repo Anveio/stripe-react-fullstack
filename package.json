@@ -10,6 +10,7 @@
   "version": "1.0.0",
   "description": "Example of payment with Stripe with a React Redux front-end. Includes user signup/authentication with JWT and payment authorization with Stripe on the server.",
   "main": "index.js",
+  "homepage": "https://stripe-fullstack-example.shovonhasan.com/",
   "scripts": {
     "build-client": "cd client && npm install && npm run build ",
     "start": "cd server && npm run start"
