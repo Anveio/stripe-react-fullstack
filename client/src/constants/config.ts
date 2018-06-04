@@ -1,1 +1,1 @@
-const WEBSITE_NAME_PRODUCTION = 'stripe-fullstack-example.shovonhasan.com';
+const API_HOST_NAME = 'afternoon-falls-86728.herokuapp.com';
