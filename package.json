@@ -13,6 +13,7 @@
   "homepage": "https://stripe-fullstack-example.shovonhasan.com/",
   "scripts": {
     "build-client": "cd client && npm install && npm run build ",
+    "build": "npm run start",
     "start": "cd server && npm install && npm run start"
   },
   "license": "ISC"
