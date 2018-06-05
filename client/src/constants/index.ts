@@ -1,13 +1,21 @@
 import { configureApiRoot } from 'utils/config';
 
-export const ROOT_API_URL = configureApiRoot();
+/**
+ * Replace this with your Stripe API publishable key at https://dashboard.stripe.com/account/apikeys
+ */
 export const STRIPE_PUBLISHABLE_TEST_KEY = 'pk_test_lSPPphIp2RSq3TYbez575NQW';
 
-export const INCREMENT_ENTHUSIASM = 'INCREMENT_ENTHUSIASM';
-export type INCREMENT_ENTHUSIASM = typeof INCREMENT_ENTHUSIASM;
+/**
+ * Replace with the URL of the site you deployed to Netlify. Make sure it doesn't have "https://" at the beginning.
+ */
+export const PRODUCTION_FRONTEND_HOSTNAME = `stripe-fullstack-example.shovonhasan.com`;
 
-export const DECREMENT_ENTHUSIASM = 'DECREMENT_ENTHUSIASM';
-export type DECREMENT_ENTHUSIASM = typeof DECREMENT_ENTHUSIASM;
+/**
+ * Replace with the URL of the site you deployed to Heroku. Make sure it doesn't have "https://" at the beginning.
+ */
+export const PRODUCTION_API_HOSTNAME = 'afternoon-falls-86728.herokuapp.com';
+
+export const ROOT_API_URL = configureApiRoot();
 
 export const UPDATE_FIELD_AUTH = 'UPDATE_FIELD_AUTH';
 export type UPDATE_FIELD_AUTH = typeof UPDATE_FIELD_AUTH;
@@ -39,23 +47,12 @@ export type SUBMIT_FORM = typeof SUBMIT_FORM;
 export const SUBMIT_FORM_AUTH = 'SUBMIT_FORM_AUTH';
 export type SUBMIT_FORM_AUTH = typeof SUBMIT_FORM_AUTH;
 
-export const PUSH_SUCCESS_NOTIFICATION = 'PUSH_SUCCESS_NOTIFICATION';
-export type PUSH_SUCCESS_NOTIFICATION = typeof PUSH_SUCCESS_NOTIFICATION;
-
-export const PUSH_WARNING_NOTIFICATION = 'PUSH_WARNING_NOTIFICATION';
-export type PUSH_WARNING_NOTIFICATION = typeof PUSH_WARNING_NOTIFICATION;
-
-export const PUSH_CRITICAL_NOTIFICATION = 'PUSH_CRITICAL_NOTIFICATION';
-export type PUSH_CRITICAL_NOTIFICATION = typeof PUSH_CRITICAL_NOTIFICATION;
-
-export const PUSH_INFO_NOTIFICATION = 'PUSH_INFO_NOTIFICATION';
-export type PUSH_INFO_NOTIFICATION = typeof PUSH_INFO_NOTIFICATION;
-
 export const PUSH_NOTIFICATION = 'PUSH_NOTIFICATION';
 export type PUSH_NOTIFICATION = typeof PUSH_NOTIFICATION;
 
 export const DISMISS_NOTIFICATION_BY_MESSAGE =
   'DISMISS_NOTIFICATION_BY_MESSAGE';
+
 export type DISMISS_NOTIFICATION_BY_MESSAGE = typeof DISMISS_NOTIFICATION_BY_MESSAGE;
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';

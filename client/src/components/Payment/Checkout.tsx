@@ -32,7 +32,7 @@ interface Props {
 }
 
 const Checkout = ({ name, description, amount }: Props) => {
-  const props: StripeCheckoutProps = {
+  const stripeCheckoutProps: StripeCheckoutProps = {
     label: 'Pay With Card',
     name,
     description,
@@ -44,7 +44,7 @@ const Checkout = ({ name, description, amount }: Props) => {
 
   return (
     <Card sectioned>
-      <StripeCheckout {...props} />
+      <StripeCheckout {...stripeCheckoutProps} />
     </Card>
   );
 };

@@ -1,11 +1,13 @@
-const FRONTEND_HOST_NAME = `stripe-fullstack-example.shovonhasan.com`;
-const API_HOST_NAME = 'afternoon-falls-86728.herokuapp.com';
+import {
+  PRODUCTION_FRONTEND_HOSTNAME,
+  PRODUCTION_API_HOSTNAME
+} from '../constants';
 
 export const configureApiRoot = () => {
   const hostname = window && window.location && window.location.hostname;
   switch (hostname) {
-    case FRONTEND_HOST_NAME:
-      return `https://${API_HOST_NAME}/api`;
+    case PRODUCTION_FRONTEND_HOSTNAME:
+      return `https://${PRODUCTION_API_HOSTNAME}/api`;
     case 'localhost':
       return 'http://localhost:4000/api';
     default:
