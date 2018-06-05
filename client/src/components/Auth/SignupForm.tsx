@@ -36,6 +36,8 @@ import {
 } from 'actions/signup';
 import { pushNotification, NotificationAction } from 'actions/notifications';
 import { ROOT_API_URL } from '../../constants';
+import { pushToWindowHistory } from 'utils/history';
+import { Routes } from 'constants/routes';
 
 export interface Props {
   readonly loading: boolean;
@@ -169,7 +171,7 @@ const mapDispatchToProps = (
               token: (success.data as JsonWebToken).token
             })
           );
-          history.pushState({}, undefined, '/');
+          pushToWindowHistory(Routes.HOME);
           dispatch(
             pushNotification({
               status: 'success',
@@ -222,4 +224,7 @@ const mapDispatchToProps = (
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignupForm);

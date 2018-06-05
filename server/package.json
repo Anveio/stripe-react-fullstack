@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./start.js",
-    "server": "nodemon ./start.js --legacy-watch"
+    "start-dev": "nodemon ./start.js --legacy-watch"
   },
   "dependencies": {
     "axios": "^0.18.0",

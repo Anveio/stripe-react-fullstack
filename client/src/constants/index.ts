@@ -15,6 +15,8 @@ export const PRODUCTION_FRONTEND_HOSTNAME = `stripe-fullstack-example.shovonhasa
  */
 export const PRODUCTION_API_HOSTNAME = 'afternoon-falls-86728.herokuapp.com';
 
+export const API_VERSION = 1;
+
 export const ROOT_API_URL = configureApiRoot();
 
 export const UPDATE_FIELD_AUTH = 'UPDATE_FIELD_AUTH';

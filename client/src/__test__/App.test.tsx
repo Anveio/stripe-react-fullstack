@@ -7,6 +7,8 @@ import { rootReducer } from '../reducers/';
 
 import { mockLocalStorage } from './mock/localStorage';
 import App from 'components/App';
+import { freshHistory } from 'utils/history';
+
 beforeEach(() => {
   mockLocalStorage();
 });
@@ -18,8 +20,8 @@ it('renders without crashing', () => {
   const store = createStore(rootReducer);
   ReactDOM.render(
     <Provider store={store}>
-      <Router history>
-        <Route path="/" component={(props: any) => <App {...props} />} />
+      <Router history={freshHistory}>
+        <Route path="/" component={App} />
       </Router>
     </Provider>,
     div

@@ -12,8 +12,8 @@ import { ROOT_API_URL } from '../constants';
 import BannerLayer from './BannerLayer';
 import SignupForm from './Auth/SignupForm';
 import LoginForm from './Auth/LoginForm';
-import UserList from './UserList';
 import { NotificationAction, pushNotification } from 'actions/notifications';
+import { Routes } from 'constants/routes';
 
 interface Props {
   readonly currentUser: UserState;
@@ -41,9 +41,8 @@ class App extends React.PureComponent<Props & Handlers, never> {
             </Layout.Section>
             <Route path="/signup" component={() => <SignupForm />} />
             <Route path="/login" component={() => <LoginForm />} />
-            <Route path="/users" component={() => <UserList />} />
             <Route
-              path="/checkout"
+              path={Routes.CHECKOUT}
               component={() => {
                 return (
                   <Checkout
@@ -114,4 +113,7 @@ const mapDispatch = (
   }
 });
 
-export default connect(mapState, mapDispatch)(App);
+export default connect(
+  mapState,
+  mapDispatch
+)(App);

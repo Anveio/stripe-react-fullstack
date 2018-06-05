@@ -1,15 +1,16 @@
 import {
   PRODUCTION_FRONTEND_HOSTNAME,
-  PRODUCTION_API_HOSTNAME
+  PRODUCTION_API_HOSTNAME,
+  API_VERSION
 } from '../constants';
 
 export const configureApiRoot = () => {
   const hostname = window && window.location && window.location.hostname;
   switch (hostname) {
     case PRODUCTION_FRONTEND_HOSTNAME:
-      return `https://${PRODUCTION_API_HOSTNAME}/api`;
+      return `https://${PRODUCTION_API_HOSTNAME}/api/v${API_VERSION}`;
     case 'localhost':
-      return 'http://localhost:4000/api';
+      return `http://localhost:4000/api/v${API_VERSION}`;
     default:
       throw new Error('Invalid hostname');
   }

@@ -26,6 +26,8 @@ import { AccountConnectionAction, connectAccount } from 'actions/connection';
 import Axios from 'axios';
 import { ROOT_API_URL } from '../../constants';
 import { loginFailure, LoginFailure } from 'actions/login';
+import { pushToWindowHistory } from 'utils/history';
+import { Routes } from 'constants/routes';
 
 export interface Props {
   readonly email: AuthTextField;
@@ -144,7 +146,7 @@ const mapDispatch = (
                 token: (success.data as JsonWebToken).token
               })
             );
-            history.pushState('/');
+            pushToWindowHistory(Routes.HOME);
             dispatch(
               pushNotification({
                 status: 'success',
@@ -191,4 +193,7 @@ const mapDispatch = (
   };
 };
 
-export default connect(mapState, mapDispatch)(LoginForm);
+export default connect(
+  mapState,
+  mapDispatch
+)(LoginForm);
