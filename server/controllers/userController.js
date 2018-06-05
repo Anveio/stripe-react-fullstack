@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const promisify = require('es6-promisify');
 const { sendJson } = require('../handlers/util');
 
 exports.validateSignup = (req, res, next) => {
   req.sanitizeBody('username');
-  req.checkBody('username', 'Please enter a username.').notEmpty();
   req.checkBody('email', `That email isn't valid.`).isEmail();
   req.sanitizeBody('email').normalizeEmail({
     remove_dots: false,
@@ -33,7 +31,7 @@ exports.createUser = async (req, res, next) => {
   const { email, username } = req.body;
 
   const user = new User({ email, username });
-  const createUserWithPromise = promisify(User.register, User);
-  await createUserWithPromise(user, req.body.password);
+
+  await User.register(user, req.body.password);
   next();
 };
