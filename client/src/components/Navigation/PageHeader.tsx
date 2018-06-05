@@ -24,7 +24,6 @@ const loggedOutLinks = [
 
 const loggedInLinks = [
   { path: '/', text: 'home' },
-  { path: 'users' },
   { path: 'checkout' },
   { path: 'inventory' }
 ];
