@@ -51,8 +51,8 @@ export default (
       return {
         ...state,
         login: {
-          email: { text: '', error: action.error.message },
-          password: { text: '', error: action.error.message },
+          email: { ...state.login.email, error: action.error.message },
+          password: { ...state.login.password, error: action.error.message },
           loading: false
         }
       };

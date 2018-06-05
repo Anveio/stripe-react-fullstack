@@ -59,7 +59,6 @@ const LoginForm = (props: Props & Handlers) => {
       <Layout.Section>
         <Card sectioned>
           <FormLayout>
-            <DisplayText size="medium">Log in.</DisplayText>
             <div onKeyPress={watchForEnter}>
               <EmailField field={email} onChange={updateField('email')} />
               <PasswordField

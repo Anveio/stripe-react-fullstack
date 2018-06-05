@@ -1,11 +1,6 @@
 import axios from 'axios';
 import { ROOT_API_URL } from '../constants';
-import {
-  JwtConnectionSuccess,
-  LoginPayload,
-  JsonWebToken,
-  PassportAuthError
-} from 'types';
+import { LoginPayload, JsonWebToken, PassportAuthError } from 'types';
 import { ApiEndpoint } from 'constants/routes';
 
 interface PasswordLoginResolution {
@@ -53,7 +48,7 @@ interface JwtLoginResolution {
 export const loginWithJwt = async (
   jwt: string
 ): Promise<JwtLoginResolution> => {
-  const response = await axios.post<JwtConnectionSuccess>(
+  const response = await axios.post<{ email: string }>(
     `${ROOT_API_URL}${ApiEndpoint.LOGIN_WITH_JWT}`,
     {
       token: jwt

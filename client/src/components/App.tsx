@@ -8,11 +8,10 @@ import { connect, Dispatch } from 'react-redux';
 import { UserState, RootState } from 'types';
 import { AccountConnectionAction, connectAccount } from 'actions/connection';
 import BannerLayer from './BannerLayer';
-import SignupForm from './Auth/SignupForm';
-import LoginForm from './Auth/LoginForm';
 import { NotificationAction, displayNotification } from 'actions/notifications';
 import { Route as AppRoute } from 'constants/routes';
 import { loginWithJwt } from 'api/login';
+import AuthSection from './Auth/AuthSection';
 
 interface Props {
   readonly currentUser: UserState;
@@ -38,15 +37,14 @@ class App extends React.PureComponent<Props & Handlers, never> {
             <Layout.Section>
               <BannerLayer />
             </Layout.Section>
-            <Route path="/signup" component={() => <SignupForm />} />
-            <Route path="/login" component={() => <LoginForm />} />
+            <Route path="/auth" component={AuthSection} />
             <Route
               path={AppRoute.CHECKOUT}
               component={() => {
                 return (
                   <Checkout
-                    name={'The Road to learn React'}
-                    description={'Only the Book'}
+                    name={'Example Item'}
+                    description={'Example description'}
                     amount={100}
                   />
                 );

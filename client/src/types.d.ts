@@ -1,7 +1,6 @@
 export interface RootState {
   readonly currentUser: UserState;
   readonly notifications: NotificationsState;
-  readonly forms: TextForms;
   readonly authForms: AuthForms;
 }
 
@@ -24,19 +23,6 @@ export interface UserState {
 
 export interface NotificationsState {
   readonly fromServer: BannerMessage[];
-}
-export interface EnthusiasmState {
-  readonly languageName: string;
-  readonly level: number;
-}
-
-export interface CoursesState {
-  readonly list: Course[];
-}
-
-export interface TextForms {
-  readonly addCourse: Course;
-  readonly addItem: Product;
 }
 
 export interface AuthForms {
@@ -96,22 +82,4 @@ export interface ExpressValidatorError {
 export interface PassportAuthError {
   readonly message: string;
   readonly name: string;
-}
-
-// declare module '*.svg' {
-//   // Wierd, but allows us to use import syntax to require SVGs.
-//   const x: string;
-//   export default x;
-// }
-
-export interface Product {
-  name: string;
-  description: string;
-  category?: string;
-  imageSrc?: string;
-  price: number;
-}
-
-export interface JwtConnectionSuccess {
-  email: string;
 }

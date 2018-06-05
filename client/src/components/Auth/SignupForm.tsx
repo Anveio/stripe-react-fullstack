@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Layout,
-  DisplayText,
-  FormLayout,
-  Card,
-  Button
-} from '@shopify/polaris';
+import { Layout, FormLayout, Card, Button } from '@shopify/polaris';
 
 import { PasswordField, PasswordConfField, EmailField } from './AuthTextFields';
 import {
@@ -30,14 +24,14 @@ import { ROOT_API_URL } from '../../constants';
 import { pushToAppHistory } from 'utils/history';
 import { Route } from 'constants/routes';
 
-export interface Props {
+interface Props {
   readonly loading: boolean;
   readonly email: AuthTextField;
   readonly password: AuthTextField;
   readonly passwordConf: AuthTextField;
 }
 
-export interface Handlers {
+interface Handlers {
   readonly onChange: (key: keyof SignupForm, value: string) => void;
   readonly onSubmit: (payload: SignupPayload) => void;
 }
@@ -73,7 +67,6 @@ const SignupForm = (props: Props & Handlers) => {
       <Card sectioned>
         <FormLayout>
           <div onKeyPress={watchForEnter}>
-            <DisplayText size="medium">Create an account.</DisplayText>
             <EmailField field={email} onChange={updateField('email')} />
             <PasswordField
               field={password}

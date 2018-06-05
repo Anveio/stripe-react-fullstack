@@ -6,20 +6,10 @@ import Navbar from './Navbar';
 import './PageHeader.css';
 import { connect } from 'react-redux';
 import { RootState, UserState } from 'types';
-// const logo = require('./logo.svg');
-
-// const LeftLogo = () => {
-//   return (
-//     <Link to="/" className="Navbar__brand">
-//       <img src={logo} className="Logo" alt="logo" />
-//     </Link>
-//   );
-// };
 
 const loggedOutLinks = [
   { path: '/', text: 'home' },
-  { path: 'signup' },
-  { path: 'login' }
+  { path: 'auth', text: 'login / signup' }
 ];
 
 const loggedInLinks = [
