@@ -16,7 +16,7 @@ exports.login = (req, res) => {
         return sendJson(res, 500, err);
       }
       if (!user) {
-        return sendJson(res, 403, {
+        return sendJson(res, 401, {
           message: 'Password and/or email are incorrect.'
         });
       }

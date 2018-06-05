@@ -20,14 +20,10 @@ const BannerLayer = ({ notifications, onDismiss }: Props & Handlers) => {
     const serverNotifications = notifications.fromServer;
     return serverNotifications.map((notification, index) => {
       const { status, title, message } = notification;
-      const handleDismiss = () => {
-        onDismiss(message);
-      };
       return (
         <Banner
           status={status}
           title={title}
-          onDismiss={handleDismiss}
           key={index}
         >
           <p>{message}</p>

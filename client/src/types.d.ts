@@ -23,7 +23,7 @@ export interface UserState {
 }
 
 export interface NotificationsState {
-  readonly fromServer: ServerMessage[];
+  readonly fromServer: BannerMessage[];
 }
 export interface EnthusiasmState {
   readonly languageName: string;
@@ -48,10 +48,10 @@ export interface UsersListState {
   readonly list: PublicUserInfo[];
 }
 
-export interface ServerMessage {
+export interface BannerMessage {
   readonly status: StatusType;
-  readonly title: string;
-  readonly message: string;
+  readonly title?: string;
+  readonly message?: string;
 }
 
 export type StatusType = 'success' | 'info' | 'warning' | 'critical';

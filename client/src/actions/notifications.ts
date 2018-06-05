@@ -2,11 +2,11 @@ import {
   PUSH_NOTIFICATION,
   DISMISS_NOTIFICATION_BY_MESSAGE
 } from '../constants';
-import { ServerMessage } from 'types';
+import { BannerMessage } from 'types';
 
-export interface PushNotification {
+export interface DisplayNotification {
   type: PUSH_NOTIFICATION;
-  data: ServerMessage;
+  notification: BannerMessage;
 }
 
 export interface DismissNotification {
@@ -14,14 +14,14 @@ export interface DismissNotification {
   message: string;
 }
 
-export type NotificationAction = DismissNotification | PushNotification;
+export type NotificationAction = DismissNotification | DisplayNotification;
 
-export const pushNotification = (data: ServerMessage): PushNotification => {
-  return {
-    type: PUSH_NOTIFICATION,
-    data
-  };
-};
+export const displayNotification = (
+  notification: BannerMessage
+): DisplayNotification => ({
+  type: PUSH_NOTIFICATION,
+  notification
+});
 
 export const dismissNotification = (message: string): DismissNotification => ({
   type: DISMISS_NOTIFICATION_BY_MESSAGE,

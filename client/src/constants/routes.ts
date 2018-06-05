@@ -1,5 +1,11 @@
-export enum Routes {
+export enum Route {
   HOME = '/',
   AUTH = '/auth',
   CHECKOUT = '/checkout'
+}
+
+export enum ApiEndpoint {
+  LOGIN = '/login',
+  LOGIN_WITH_JWT = 'auth/jwt',
+  SIGNUP = '/signup'
 }

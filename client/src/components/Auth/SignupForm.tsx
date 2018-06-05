@@ -25,7 +25,6 @@ import { Dispatch, connect } from 'react-redux';
 import {
   AuthFormAction,
   changeAuthFieldText,
-  submitAuthField
 } from 'actions/formAuth';
 import { AccountConnectionAction, connectAccount } from 'actions/connection';
 import Axios from 'axios';
@@ -34,10 +33,10 @@ import {
   registerAccountFailure,
   RegisterAccountAction
 } from 'actions/signup';
-import { pushNotification, NotificationAction } from 'actions/notifications';
+import { displayNotification, NotificationAction } from 'actions/notifications';
 import { ROOT_API_URL } from '../../constants';
-import { pushToWindowHistory } from 'utils/history';
-import { Routes } from 'constants/routes';
+import { pushToAppHistory } from 'utils/history';
+import { Route } from 'constants/routes';
 
 export interface Props {
   readonly loading: boolean;
@@ -150,7 +149,6 @@ const mapDispatchToProps = (
     dispatch(changeAuthFieldText<SignupPayload>('signup', key, value));
   },
   onSubmit: (payload: SignupPayload) => {
-    dispatch(submitAuthField('signup', payload));
     Axios.post(`${ROOT_API_URL}/signup`, payload)
       .then(
         success => {
@@ -171,9 +169,9 @@ const mapDispatchToProps = (
               token: (success.data as JsonWebToken).token
             })
           );
-          pushToWindowHistory(Routes.HOME);
+          pushToAppHistory(Route.HOME);
           dispatch(
-            pushNotification({
+            displayNotification({
               status: 'success',
               title: 'Account creation successful.',
               message:
@@ -194,7 +192,7 @@ const mapDispatchToProps = (
             dispatch(registerAccountFailure(data));
           } else {
             dispatch(
-              pushNotification({
+              displayNotification({
                 status: 'critical',
                 title: 'Account creation unsuccessful.',
                 message: data
@@ -214,7 +212,7 @@ const mapDispatchToProps = (
           ])
         );
         dispatch(
-          pushNotification({
+          displayNotification({
             status: 'critical',
             title: 'Account creation unsuccessful..',
             message: reason.msg

@@ -8,26 +8,14 @@ import {
 } from '@shopify/polaris';
 import { PasswordField, EmailField } from './AuthTextFields';
 import { connect, Dispatch } from 'react-redux';
-import {
-  AuthTextField,
-  UserState,
-  LoginPayload,
-  RootState,
-  JsonWebToken,
-  PassportAuthError
-} from 'types';
-import {
-  AuthFormAction,
-  changeAuthFieldText,
-  submitAuthField
-} from 'actions/formAuth';
-import { NotificationAction, pushNotification } from 'actions/notifications';
+import { AuthTextField, UserState, LoginPayload, RootState } from 'types';
+import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
+import { NotificationAction, displayNotification } from 'actions/notifications';
 import { AccountConnectionAction, connectAccount } from 'actions/connection';
-import Axios from 'axios';
-import { ROOT_API_URL } from '../../constants';
 import { loginFailure, LoginFailure } from 'actions/login';
-import { pushToWindowHistory } from 'utils/history';
-import { Routes } from 'constants/routes';
+import { pushToAppHistory } from 'utils/history';
+import { Route } from 'constants/routes';
+import { loginWithPassword } from 'api/login';
 
 export interface Props {
   readonly email: AuthTextField;
@@ -131,64 +119,43 @@ const mapDispatch = (
   return {
     onChange: (key: keyof LoginPayload, value: string) =>
       dispatch(changeAuthFieldText<LoginPayload>('login', key, value)),
-    onSubmit: (payload: LoginPayload) => {
-      dispatch(submitAuthField('login', payload));
-      Axios.post(`${ROOT_API_URL}/login`, payload)
-        .then(
-          success => {
-            window.localStorage.setItem(
-              'jwt',
-              (success.data as JsonWebToken).token
-            );
-            dispatch(
-              connectAccount({
-                email: payload.email,
-                token: (success.data as JsonWebToken).token
-              })
-            );
-            pushToWindowHistory(Routes.HOME);
-            dispatch(
-              pushNotification({
-                status: 'success',
-                title: 'Login successful',
-                // tslint:disable-next-line:quotemark
-                message: "You're now logged in."
-              })
-            );
-          },
-          errors => {
-            const error: PassportAuthError = errors.response.data;
-            // Our server gives us errors in different types depending on the error.
-            // Todo: Normalize error messages from server on login failure.
-            if (error && error.message) {
-              dispatch(loginFailure(error));
-            } else {
-              dispatch(
-                pushNotification({
-                  status: 'critical',
-                  title: 'Login unsuccessful.',
-                  message: 'There were errors with your login information.'
-                })
-              );
-            }
-          }
-        )
-        .catch(reason => {
+    onSubmit: async (payload: LoginPayload) => {
+      try {
+        const { token, error } = await loginWithPassword(payload);
+
+        if (token) {
           dispatch(
-            loginFailure({
-              message:
-                'There was problem logging you in. Please try again later.',
-              name: 'miscError'
+            connectAccount({
+              token,
+              email: payload.email
             })
           );
           dispatch(
-            pushNotification({
+            displayNotification({
+              status: 'success',
+              title: 'Login successful'
+            })
+          );
+          pushToAppHistory(Route.HOME);
+        } else if (error) {
+          dispatch(loginFailure(error));
+          dispatch(
+            displayNotification({
               status: 'critical',
-              title: 'Login unsuccessful.',
-              message: reason.msg
+              title: 'Login failed',
+              message: 'Please check your email and password and try again.'
             })
           );
-        });
+        }
+      } catch (e) {
+        dispatch(
+          displayNotification({
+            status: 'critical',
+            title: 'Login failed',
+            message: 'The server failed to handle your request.'
+          })
+        );
+      }
     }
   };
 };

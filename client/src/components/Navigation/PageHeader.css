@@ -20,11 +20,6 @@ header {
   margin-top: 4rem;
 }
 
-.Logo {
-  animation: Logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .Navbar__list {
   display: flex;
   list-style: none;
@@ -50,15 +45,6 @@ header {
 
 .Navbar .Navbar__list li {
   display: table-cell;
-}
-
-@keyframes Logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 @media (min-width: 46.5em) {

@@ -9,12 +9,7 @@ import {
 } from '@shopify/polaris';
 import { RootState, Product } from 'types';
 import { Dispatch, connect } from 'react-redux';
-import {
-  FormAction,
-  changeFormText,
-  submitForm,
-  resetForm
-} from 'actions/form';
+import { FormAction, changeFormText, resetForm } from 'actions/form';
 
 interface Handlers {
   readonly onChange: (key: keyof Product, value: string) => void;
@@ -113,9 +108,11 @@ const mapDispatch = (dispatch: Dispatch<FormAction<Product>>): Handlers => ({
   onChange: (key: keyof Product, value: string) =>
     dispatch(changeFormText<Product>('addItem', key, value)),
   onSubmit: (payload: Product) => {
-    dispatch(submitForm<Product>('addItem', payload));
     dispatch(resetForm('addItem'));
   }
 });
 
-export default connect(mapState, mapDispatch)(AddProductForm);
+export default connect(
+  mapState,
+  mapDispatch
+)(AddProductForm);
