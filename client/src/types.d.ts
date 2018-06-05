@@ -3,8 +3,6 @@ export interface RootState {
   readonly notifications: NotificationsState;
   readonly forms: TextForms;
   readonly authForms: AuthForms;
-  readonly users: UsersListState;
-  readonly shelf: ShelfState;
 }
 
 export interface Course {
@@ -50,21 +48,10 @@ export interface UsersListState {
   readonly list: PublicUserInfo[];
 }
 
-export interface ShelfState {
-  products: Product[];
-}
-
 export interface ServerMessage {
   readonly status: StatusType;
   readonly title: string;
   readonly message: string;
-}
-
-export interface Action {
-  readonly content?: string;
-  readonly accessibilityLabel?: string;
-  readonly url?: string;
-  readonly onAction: () => void;
 }
 
 export type StatusType = 'success' | 'info' | 'warning' | 'critical';
@@ -100,7 +87,7 @@ export interface AuthTextField {
   readonly error: string | null;
 }
 
-declare type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';
+export type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';
 
 export interface ExpressValidatorError {
   readonly param: AuthFieldKey | 'server-error';
@@ -113,11 +100,11 @@ export interface PassportAuthError {
   readonly name: string;
 }
 
-declare module '*.svg' {
-  // Wierd, but allows us to use import syntax to require SVGs.
-  const x: string;
-  export default x;
-}
+// declare module '*.svg' {
+//   // Wierd, but allows us to use import syntax to require SVGs.
+//   const x: string;
+//   export default x;
+// }
 
 export interface Product {
   name: string;

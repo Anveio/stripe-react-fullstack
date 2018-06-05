@@ -24,10 +24,12 @@ interface Handlers {
 }
 
 class App extends React.PureComponent<Props & Handlers, never> {
-  componentWillMount() {
-    localStorage.getItem('jwt')
-      ? this.props.onBoot() // tslint:disable-next-line:no-console
-      : console.log('No jwt in localstorage. Skipping automatic log in.');
+  componentDidMount() {
+    if (!this.props.currentUser) {
+      localStorage.getItem('jwt')
+        ? this.props.onBoot() // tslint:disable-next-line:no-console
+        : console.log('No jwt in localstorage. Skipping automatic log in.');
+    }
   }
 
   render() {

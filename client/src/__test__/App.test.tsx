@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router-dom';
-import { rootReducer } from '../reducers/';
+import { rootReducer } from '../rootReducer';
 
 import { mockLocalStorage } from './mock/localStorage';
 import App from 'components/App';
