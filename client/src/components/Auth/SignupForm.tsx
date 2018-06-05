@@ -67,18 +67,25 @@ const SignupForm = (props: Props & Handlers) => {
       <Card sectioned>
         <FormLayout>
           <div onKeyPress={watchForEnter}>
-            <EmailField field={email} onChange={updateField('email')} />
+            <EmailField
+              kind="login"
+              field={email}
+              onChange={updateField('email')}
+            />
             <PasswordField
+              kind="login"
               field={password}
               onChange={updateField('password')}
             />
             <PasswordConfField
+              kind="login"
               field={passwordConf}
               onChange={updateField('passwordConf')}
             />
           </div>
           <Button
             primary
+            loading={props.loading}
             icon="circleChevronRight"
             onClick={handleSignUp}
             disabled={validForm()}
@@ -154,7 +161,7 @@ const mapDispatchToProps = (
            */
 
           const data: ExpressValidatorError[] | string = errors.response.data;
-          if (data instanceof Array) {
+          if (typeof data === 'object') {
             dispatch(registerAccountFailure(data));
           } else {
             dispatch(
@@ -168,15 +175,7 @@ const mapDispatchToProps = (
         }
       )
       .catch(reason => {
-        dispatch(
-          registerAccountFailure([
-            {
-              param: 'server-error',
-              msg: reason.msg,
-              value: ''
-            }
-          ])
-        );
+        dispatch(registerAccountFailure());
         dispatch(
           displayNotification({
             status: 'critical',

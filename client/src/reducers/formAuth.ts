@@ -4,7 +4,9 @@ import { RegisterAccountAction } from '../actions/signup';
 import {
   UPDATE_FIELD_AUTH,
   LOGIN_FAILURE,
-  REGISTER_ACCOUNT_FAILURE
+  REGISTER_ACCOUNT_FAILURE,
+  REGISTER_ACCOUNT_REQUEST,
+  LOGIN_REQUEST
 } from '../constants';
 import {
   SignupForm,
@@ -57,19 +59,38 @@ export default (
         }
       };
     case REGISTER_ACCOUNT_FAILURE:
-      const fieldsWithErrors = action.errors.reduce(
-        (newPartialState: Partial<SignupForm>, error: ExpressValidatorError) =>
-          Object.assign(newPartialState, {
-            [error.param]: {
-              text: '',
-              error: error.msg
-            }
-          }),
-        { loading: false }
-      );
+      const fieldsWithErrors = action.errors
+        ? action.errors.reduce(
+            (acc: SignupForm, error: ExpressValidatorError) => ({
+              ...acc,
+              [error.param]: {
+                ...acc[error.param],
+                error: error.msg
+              }
+            }),
+            { ...state.signup, loading: false }
+          )
+        : {};
+
       return {
         ...state,
         signup: { ...state.signup, ...fieldsWithErrors, loading: false }
+      };
+    case REGISTER_ACCOUNT_REQUEST:
+      return {
+        ...state,
+        signup: {
+          ...state.signup,
+          loading: true
+        }
+      };
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        login: {
+          ...state.login,
+          loading: true
+        }
       };
     default:
       return state;

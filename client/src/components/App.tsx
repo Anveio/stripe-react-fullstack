@@ -11,7 +11,7 @@ import BannerLayer from './BannerLayer';
 import { NotificationAction, displayNotification } from 'actions/notifications';
 import { Route as AppRoute } from 'constants/routes';
 import { loginWithJwt } from 'api/login';
-import AuthSection from './Auth/AuthSection';
+import AuthLayout from './Auth/AuthLayout';
 
 interface Props {
   readonly currentUser: UserState;
@@ -37,7 +37,7 @@ class App extends React.PureComponent<Props & Handlers, never> {
             <Layout.Section>
               <BannerLayer />
             </Layout.Section>
-            <Route path="/auth" component={AuthSection} />
+            <Route path="/auth" component={AuthLayout} />
             <Route
               path={AppRoute.CHECKOUT}
               component={() => {

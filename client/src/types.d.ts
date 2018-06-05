@@ -4,10 +4,6 @@ export interface RootState {
   readonly authForms: AuthForms;
 }
 
-export interface Course {
-  readonly name: string;
-}
-
 export interface PublicUserInfo {
   readonly email: string;
 }
@@ -74,7 +70,7 @@ export interface AuthTextField {
 export type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';
 
 export interface ExpressValidatorError {
-  readonly param: AuthFieldKey | 'server-error';
+  readonly param: AuthFieldKey;
   readonly msg: string;
   readonly value: string;
 }

@@ -1,20 +1,26 @@
 import { ExpressValidatorError } from 'types';
 import {
   REGISTER_ACCOUNT_SUCCESS,
-  REGISTER_ACCOUNT_FAILURE
+  REGISTER_ACCOUNT_FAILURE,
+  REGISTER_ACCOUNT_REQUEST
 } from '../constants';
 
 export type RegisterAccountAction =
   | RegisterAccountFailure
-  | RegisterAccountSuccess;
+  | RegisterAccountSuccess
+  | RegisterAccountRequest;
+
+export interface RegisterAccountRequest {
+  readonly type: REGISTER_ACCOUNT_REQUEST;
+}
 
 export interface RegisterAccountSuccess {
-  type: REGISTER_ACCOUNT_SUCCESS;
+  readonly type: REGISTER_ACCOUNT_SUCCESS;
 }
 
 export interface RegisterAccountFailure {
-  type: REGISTER_ACCOUNT_FAILURE;
-  errors: ExpressValidatorError[];
+  readonly type: REGISTER_ACCOUNT_FAILURE;
+  readonly errors?: ExpressValidatorError[];
 }
 
 export const registerAccountSuccess = (): RegisterAccountSuccess => ({
@@ -22,7 +28,7 @@ export const registerAccountSuccess = (): RegisterAccountSuccess => ({
 });
 
 export const registerAccountFailure = (
-  errors: ExpressValidatorError[]
+  errors?: ExpressValidatorError[]
 ): RegisterAccountFailure => ({
   type: REGISTER_ACCOUNT_FAILURE,
   errors

@@ -1,3 +1,4 @@
+import { compose } from 'redux';
 import {
   PRODUCTION_FRONTEND_HOSTNAME,
   PRODUCTION_API_HOSTNAME,
@@ -15,3 +16,8 @@ export const configureApiRoot = () => {
       throw new Error('Invalid hostname');
   }
 };
+
+// tslint:disable:no-string-literal
+export const devtools = window['__REDUX_DEVTOOLS_EXTENSION__']
+  ? window['__REDUX_DEVTOOLS_EXTENSION__']()
+  : compose;

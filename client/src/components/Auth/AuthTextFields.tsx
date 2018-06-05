@@ -3,15 +3,16 @@ import { TextField } from '@shopify/polaris';
 import { AuthTextField } from 'types';
 
 interface Props {
+  readonly kind: 'login' | 'signup';
   readonly field: AuthTextField;
   readonly onChange: (value: string) => void;
 }
 
-const PasswordField = ({ field, onChange }: Props) => {
+const PasswordField = ({ field, onChange, kind }: Props) => {
   return (
     <TextField
       label="Password"
-      name="password"
+      name={`password-${kind}`}
       type="password"
       placeholder="At least 6 characters."
       value={field.text}
@@ -22,12 +23,12 @@ const PasswordField = ({ field, onChange }: Props) => {
   );
 };
 
-const PasswordConfField = ({ field, onChange }: Props) => {
+const PasswordConfField = ({ field, onChange, kind }: Props) => {
   return (
     <TextField
       spellCheck={false}
       label="Confirm Password"
-      name="passwordConf"
+      name={`passwordConf-${kind}`}
       type="password"
       value={field.text}
       placeholder="Same as your password."
@@ -38,13 +39,12 @@ const PasswordConfField = ({ field, onChange }: Props) => {
   );
 };
 
-const EmailField = ({ field, onChange }: Props) => {
+const EmailField = ({ field, onChange, kind }: Props) => {
   return (
     <TextField
       autoComplete={false}
       label="Email address"
-      name="email"
-      id="email"
+      name={`email-${kind}`}
       type="email"
       value={field.text}
       placeholder="e.g. name@business.com"
