@@ -3,10 +3,8 @@ import { LoginAction } from '../actions/login';
 import { RegisterAccountAction } from '../actions/signup';
 import {
   UPDATE_FIELD_AUTH,
-  // LOGIN_SUCCESS,
   LOGIN_FAILURE,
   REGISTER_ACCOUNT_FAILURE
-  // REGISTER_ACCOUNT_SUCCESS
 } from '../constants';
 import {
   SignupForm,
@@ -26,7 +24,6 @@ const login: LoginForm = {
 
 const signup: SignupForm = {
   email: emptyAuthForm,
-  username: emptyAuthForm,
   password: emptyAuthForm,
   passwordConf: emptyAuthForm,
   loading: false

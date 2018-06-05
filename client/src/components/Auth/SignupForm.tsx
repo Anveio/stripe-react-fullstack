@@ -7,12 +7,7 @@ import {
   Button
 } from '@shopify/polaris';
 
-import {
-  PasswordField,
-  PasswordConfField,
-  EmailField,
-  UsernameField
-} from './AuthTextFields';
+import { PasswordField, PasswordConfField, EmailField } from './AuthTextFields';
 import {
   AuthTextField,
   SignupForm,
@@ -22,10 +17,7 @@ import {
   ExpressValidatorError
 } from 'types';
 import { Dispatch, connect } from 'react-redux';
-import {
-  AuthFormAction,
-  changeAuthFieldText,
-} from 'actions/formAuth';
+import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
 import { AccountConnectionAction, connectAccount } from 'actions/connection';
 import Axios from 'axios';
 import {
@@ -41,7 +33,6 @@ import { Route } from 'constants/routes';
 export interface Props {
   readonly loading: boolean;
   readonly email: AuthTextField;
-  readonly username: AuthTextField;
   readonly password: AuthTextField;
   readonly passwordConf: AuthTextField;
 }
@@ -52,7 +43,7 @@ export interface Handlers {
 }
 
 const SignupForm = (props: Props & Handlers) => {
-  const { email, username, password, passwordConf, onSubmit, onChange } = props;
+  const { email, password, passwordConf, onSubmit, onChange } = props;
 
   const updateField = (key: keyof SignupForm) => (value: string) => {
     onChange(key, value);
@@ -61,20 +52,13 @@ const SignupForm = (props: Props & Handlers) => {
   const handleSignUp = (): void => {
     onSubmit({
       email: email.text,
-      username: username.text,
       password: password.text,
       passwordConf: passwordConf.text
     });
   };
 
   const validForm = (): boolean => {
-    // Todo: add realtime client side validation
-    return !(
-      !!email.text &&
-      !!username.text &&
-      !!password.text &&
-      !!passwordConf.text
-    );
+    return !(!!email.text && !!password.text && !!passwordConf.text);
   };
 
   const watchForEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -91,10 +75,6 @@ const SignupForm = (props: Props & Handlers) => {
           <div onKeyPress={watchForEnter}>
             <DisplayText size="medium">Create an account.</DisplayText>
             <EmailField field={email} onChange={updateField('email')} />
-            <UsernameField
-              field={username}
-              onChange={updateField('username')}
-            />
             <PasswordField
               field={password}
               onChange={updateField('password')}
@@ -120,17 +100,10 @@ const SignupForm = (props: Props & Handlers) => {
 };
 
 const mapStateToProps = (state: RootState): Props => {
-  const {
-    email,
-    username,
-    password,
-    passwordConf,
-    loading
-  } = state.authForms.signup;
+  const { email, password, passwordConf, loading } = state.authForms.signup;
 
   return {
     email,
-    username,
     password,
     passwordConf,
     loading

@@ -16,11 +16,6 @@ const userSchema = new mongoose.Schema(
       trim: true,
       validate: [validator.isEmail, 'Invalid email address.'],
       required: 'Please enter an email.'
-    },
-    username: {
-      type: String,
-      trim: true,
-      required: 'Please enter a username.'
     }
   },
   { timestamps: true }

@@ -58,7 +58,6 @@ export type StatusType = 'success' | 'info' | 'warning' | 'critical';
 
 export interface SignupForm {
   readonly email: AuthTextField;
-  readonly username: AuthTextField;
   readonly password: AuthTextField;
   readonly passwordConf: AuthTextField;
   readonly loading: boolean;
@@ -72,7 +71,6 @@ export interface LoginForm {
 
 export interface SignupPayload {
   readonly email: string;
-  readonly username: string;
   readonly password: string;
   readonly passwordConf: string;
 }

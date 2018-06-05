@@ -25,6 +25,7 @@ const PasswordField = ({ field, onChange }: Props) => {
 const PasswordConfField = ({ field, onChange }: Props) => {
   return (
     <TextField
+      spellCheck={false}
       label="Confirm Password"
       name="passwordConf"
       type="password"
@@ -40,6 +41,7 @@ const PasswordConfField = ({ field, onChange }: Props) => {
 const EmailField = ({ field, onChange }: Props) => {
   return (
     <TextField
+      autoComplete={false}
       label="Email address"
       name="email"
       id="email"
@@ -53,20 +55,5 @@ const EmailField = ({ field, onChange }: Props) => {
     />
   );
 };
-const UsernameField = ({ field, onChange }: Props) => {
-  return (
-    <TextField
-      label="Username"
-      name="username"
-      id="username"
-      type="text"
-      value={field.text}
-      placeholder="No spaces or numbers."
-      onChange={onChange}
-      error={field.error || undefined}
-      spellCheck={false}
-    />
-  );
-};
 
-export { PasswordField, PasswordConfField, EmailField, UsernameField };
+export { PasswordField, PasswordConfField, EmailField };
