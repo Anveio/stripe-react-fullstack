@@ -22,7 +22,6 @@ const PageHeader = (account: UserState) => {
   return (
     <header>
       <div className="Navbar-container">
-        {/* <LeftLogo /> */}
         <Navbar links={account.token ? loggedInLinks : loggedOutLinks} />
       </div>
     </header>
