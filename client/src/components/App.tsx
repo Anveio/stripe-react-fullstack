@@ -7,7 +7,7 @@ import PageHeader from './Navigation/PageHeader';
 import { connect, Dispatch } from 'react-redux';
 import { UserState, RootState } from 'types';
 import { AccountConnectionAction, connectAccount } from 'actions/connection';
-import { Route as AppRoute } from 'constants/routes';
+import { Path } from 'constants/routes';
 import { loginWithJwt } from 'api/login';
 import AuthLayout from './Auth/AuthLayout';
 
@@ -21,8 +21,8 @@ interface Handlers {
 
 class App extends React.PureComponent<Props & Handlers, never> {
   componentDidMount() {
-    if (this.props.currentUser.token) {
-      this.props.onBoot(this.props.currentUser.token); // tslint:disable-next-line:no-console
+    if (this.props.currentUser.token && !this.props.currentUser.loggedIn) {
+      this.props.onBoot(this.props.currentUser.token);
     }
   }
 
@@ -32,9 +32,9 @@ class App extends React.PureComponent<Props & Handlers, never> {
         <PageHeader />
         <Page title="Dashboard">
           <Layout>
-            <Route path="/auth" component={AuthLayout} />
+            <Route path={Path.AUTH} component={AuthLayout} />
             <Route
-              path={AppRoute.CHECKOUT}
+              path={Path.CHECKOUT}
               component={() => {
                 return (
                   <Checkout

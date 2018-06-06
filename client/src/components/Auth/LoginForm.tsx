@@ -13,7 +13,7 @@ import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
 import { AccountConnectionAction, connectAccount } from 'actions/connection';
 import { loginFailure, LoginFailure } from 'actions/login';
 import { pushToAppHistory } from 'utils/history';
-import { Route } from 'constants/routes';
+import { Path } from 'constants/routes';
 import { loginWithPassword } from 'api/login';
 
 export interface Props {
@@ -125,7 +125,7 @@ const mapDispatch = (
 
         if (token) {
           dispatch(connectAccount(payload.email, token));
-          pushToAppHistory(Route.HOME);
+          pushToAppHistory(Path.HOME);
         } else if (error) {
           dispatch(loginFailure(error));
         }

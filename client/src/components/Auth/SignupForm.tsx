@@ -21,7 +21,7 @@ import {
 } from 'actions/signup';
 import { ROOT_API_URL } from '../../constants';
 import { pushToAppHistory } from 'utils/history';
-import { Route } from 'constants/routes';
+import { Path } from 'constants/routes';
 
 interface Props {
   readonly loading: boolean;
@@ -138,7 +138,7 @@ const mapDispatchToProps = (
           dispatch(
             connectAccount(payload.email, (success.data as JsonWebToken).token)
           );
-          pushToAppHistory(Route.HOME);
+          pushToAppHistory(Path.HOME);
         },
         errors => {
           /**
