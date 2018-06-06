@@ -78,14 +78,14 @@ With the Stripe API keys set up, you'll need to create two MongoDB databases: on
 <figcaption>Select the "Sandbox" option under Plan Type.</figcaption>
 </figure>
 
-After your database is created copy the MongoDB URI displayed by Mlab and paste it as the value of `DEV_DATABASE` in your `variables.env` file. Make sure to replace `<dbuser>` and `<dbpassword>` with the database's actual username password.
+After your database is created you'll need to secure it with a username and password by clicking the "Create user" button. Copy the MongoDB URI displayed by Mlab and paste it as the value of `DEV_DATABASE` in your `variables.env` file. Make sure to replace `<dbuser>` and `<dbpassword>` with the actual username and password you just created.
 
 <figure>
 <img src="https://i.imgur.com/yTlLgl7.png">
 <figcaption>Copy the MongoDB URI in the fourth line. Replace dbuser and dbpassword with the database's actual username password.</figcaption>
 </figure>
 
-Create another database in Mlab to use for production. Copy the MongoURI of this new database and save it for later. Since `variables.env` is only read from during development, you don't need to paste it there. You'll use the MongoURI of your production database as an environment variable in Heroku later.
+Create another database (and associated user) in Mlab to use for production. Copy the MongoURI of this new database and save it for later. Since `variables.env` is only read from during development, you don't need to paste it there. You'll use the MongoURI of your production database as an environment variable in Heroku later.
 
 ### Deploying the server to Heroku
 
