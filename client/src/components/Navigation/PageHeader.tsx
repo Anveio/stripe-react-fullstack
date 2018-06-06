@@ -22,15 +22,14 @@ const PageHeader = (account: UserState) => {
   return (
     <header>
       <div className="Navbar-container">
-        <Navbar links={account.token ? loggedInLinks : loggedOutLinks} />
+        <Navbar links={account.loggedIn ? loggedInLinks : loggedOutLinks} />
       </div>
     </header>
   );
 };
 
 const mapStateToProps = (state: RootState): UserState => ({
-  email: state.currentUser.email,
-  token: state.currentUser.token
+  ...state.currentUser
 });
 
 export default connect(mapStateToProps)(PageHeader);

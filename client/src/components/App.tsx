@@ -7,8 +7,6 @@ import PageHeader from './Navigation/PageHeader';
 import { connect, Dispatch } from 'react-redux';
 import { UserState, RootState } from 'types';
 import { AccountConnectionAction, connectAccount } from 'actions/connection';
-import BannerLayer from './BannerLayer';
-import { NotificationAction, displayNotification } from 'actions/notifications';
 import { Route as AppRoute } from 'constants/routes';
 import { loginWithJwt } from 'api/login';
 import AuthLayout from './Auth/AuthLayout';
@@ -34,9 +32,6 @@ class App extends React.PureComponent<Props & Handlers, never> {
         <PageHeader />
         <Page title="Dashboard">
           <Layout>
-            <Layout.Section>
-              <BannerLayer />
-            </Layout.Section>
             <Route path="/auth" component={AuthLayout} />
             <Route
               path={AppRoute.CHECKOUT}
@@ -64,23 +59,13 @@ const mapState = (state: RootState): Props => {
 };
 
 const mapDispatch = (
-  dispatch: Dispatch<AccountConnectionAction | NotificationAction>
+  dispatch: Dispatch<AccountConnectionAction>
 ): Handlers => ({
   onBoot: async (jwt: string) => {
     const response = await loginWithJwt(jwt);
     if (response.email) {
-      dispatch(connectAccount({ email: response.email, token: jwt }));
-      displayNotification({
-        status: 'success',
-        title: 'You\'ve been logged in.',
-        message: 'hi'
-      });
+      dispatch(connectAccount(response.email, jwt));
     }
-    displayNotification({
-      status: 'warning',
-      title: 'Your previous session may have expired.',
-      message: 'Please log in again.'
-    });
   }
 });
 

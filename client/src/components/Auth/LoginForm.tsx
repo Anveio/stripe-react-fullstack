@@ -10,7 +10,6 @@ import { PasswordField, EmailField } from './AuthTextFields';
 import { connect, Dispatch } from 'react-redux';
 import { AuthTextField, UserState, LoginPayload, RootState } from 'types';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
-import { NotificationAction, displayNotification } from 'actions/notifications';
 import { AccountConnectionAction, connectAccount } from 'actions/connection';
 import { loginFailure, LoginFailure } from 'actions/login';
 import { pushToAppHistory } from 'utils/history';
@@ -114,10 +113,7 @@ const mapState = (state: RootState): Props => {
 
 const mapDispatch = (
   dispatch: Dispatch<
-    | AuthFormAction<LoginPayload>
-    | NotificationAction
-    | AccountConnectionAction
-    | LoginFailure
+    AuthFormAction<LoginPayload> | AccountConnectionAction | LoginFailure
   >
 ): Handlers => {
   return {
@@ -128,37 +124,13 @@ const mapDispatch = (
         const { token, error } = await loginWithPassword(payload);
 
         if (token) {
-          dispatch(
-            connectAccount({
-              token,
-              email: payload.email
-            })
-          );
-          dispatch(
-            displayNotification({
-              status: 'success',
-              title: 'Login successful'
-            })
-          );
+          dispatch(connectAccount(payload.email, token));
           pushToAppHistory(Route.HOME);
         } else if (error) {
           dispatch(loginFailure(error));
-          dispatch(
-            displayNotification({
-              status: 'critical',
-              title: 'Login failed',
-              message: 'Please check your email and password and try again.'
-            })
-          );
         }
       } catch (e) {
-        dispatch(
-          displayNotification({
-            status: 'critical',
-            title: 'Login failed',
-            message: 'The server failed to handle your request.'
-          })
-        );
+        console.warn(e);
       }
     }
   };

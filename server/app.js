@@ -12,7 +12,6 @@ const errorHandlers = require('./handlers/errorHandlers');
 require('./handlers/passport');
 const routes = require('./routes');
 const CORS_WHITELIST = require('./constants/frontend');
-const { API_VERSION } = require('./constants/api');
 
 const app = express();
 
@@ -47,7 +46,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(`/api/v${API_VERSION}`, routes);
+app.use(`/api/v1`, routes);
 
 app.use(errorHandlers.displayAuthenticationError);
 

@@ -19,7 +19,6 @@ import {
   registerAccountFailure,
   RegisterAccountAction
 } from 'actions/signup';
-import { displayNotification, NotificationAction } from 'actions/notifications';
 import { ROOT_API_URL } from '../../constants';
 import { pushToAppHistory } from 'utils/history';
 import { Route } from 'constants/routes';
@@ -114,7 +113,6 @@ const mapDispatchToProps = (
   dispatch: Dispatch<
     | AuthFormAction<SignupPayload>
     | AccountConnectionAction
-    | NotificationAction
     | RegisterAccountAction
   >
 ): Handlers => ({
@@ -130,6 +128,7 @@ const mapDispatchToProps = (
             'jwt',
             (success.data as JsonWebToken).token
           );
+
           /**
            * POSTing to /signup will run through passport.js' login
            * middleware. So if there are no errors at this point we can log-in
@@ -137,21 +136,9 @@ const mapDispatchToProps = (
            */
 
           dispatch(
-            connectAccount({
-              email: payload.email,
-              token: (success.data as JsonWebToken).token
-            })
+            connectAccount(payload.email, (success.data as JsonWebToken).token)
           );
           pushToAppHistory(Route.HOME);
-          dispatch(
-            displayNotification({
-              status: 'success',
-              title: 'Account creation successful.',
-              message:
-                // tslint:disable-next-line:quotemark
-                "Your account's been made and you're now logged in."
-            })
-          );
         },
         errors => {
           /**
@@ -163,26 +150,11 @@ const mapDispatchToProps = (
           const data: ExpressValidatorError[] | string = errors.response.data;
           if (typeof data === 'object') {
             dispatch(registerAccountFailure(data));
-          } else {
-            dispatch(
-              displayNotification({
-                status: 'critical',
-                title: 'Account creation unsuccessful.',
-                message: data
-              })
-            );
           }
         }
       )
       .catch(reason => {
         dispatch(registerAccountFailure());
-        dispatch(
-          displayNotification({
-            status: 'critical',
-            title: 'Account creation unsuccessful..',
-            message: reason.msg
-          })
-        );
       });
   }
 });

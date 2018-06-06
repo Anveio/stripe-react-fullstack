@@ -1,6 +1,5 @@
 export interface RootState {
   readonly currentUser: UserState;
-  readonly notifications: NotificationsState;
   readonly authForms: AuthForms;
 }
 
@@ -13,6 +12,7 @@ export interface JsonWebToken {
 }
 
 export interface UserState {
+  readonly loggedIn: boolean;
   readonly email: string | null;
   readonly token: string | null;
 }
