@@ -129,11 +129,7 @@ const mapDispatch = (
       dispatch(loginSuccess(payload.email, token));
       pushToAppHistory(Path.HOME);
     } catch (e) {
-      dispatch(
-        loginFailure({
-          message: 'Incorrect email'
-        })
-      );
+      dispatch(loginFailure('Incorrect email or password.'));
       console.warn(e);
     }
   }

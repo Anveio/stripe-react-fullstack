@@ -4,11 +4,17 @@ header {
   max-width: 103.6rem;
 }
 
+.Navbar {
+  display: flex;
+  flex-direction: row;
+}
+
 .Navbar-container {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-direction: row-reverse;
+  margin: 0 3.2rem;
 }
 
 .Navbar__brand {

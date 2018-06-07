@@ -35,7 +35,7 @@ class App extends React.PureComponent<Props & Handlers, never> {
     return (
       <main>
         <PageHeader />
-        <Page title="Dashboard">
+        <Page title="">
           <Layout>
             <Route path={Path.AUTH} component={AuthLayout} />
             <Route
@@ -70,7 +70,7 @@ const mapDispatch = (dispatch: Dispatch<LoginAction>): Handlers => ({
       const response = await loginWithJwt(jwt);
       dispatch(loginSuccess(response.email, jwt));
     } catch (e) {
-      dispatch(loginFailure({ message: 'Please login again.' }));
+      dispatch(loginFailure('Failed to log you in. Please log in again.'));
     }
   }
 });

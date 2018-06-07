@@ -1,4 +1,3 @@
-import { PassportAuthError } from 'types';
 import {
   LOGIN_FAILURE,
   LOGIN_REQUEST,
@@ -20,7 +19,7 @@ export interface LoginSuccess {
 
 export interface LoginFailure {
   readonly type: LOGIN_FAILURE;
-  readonly error: PassportAuthError;
+  readonly error: string;
 }
 
 export interface LogoutUser {
@@ -29,7 +28,7 @@ export interface LogoutUser {
 
 export const loginRequest: LoginRequest = { type: LOGIN_REQUEST };
 
-export const loginFailure = (error: PassportAuthError): LoginFailure => ({
+export const loginFailure = (error: string): LoginFailure => ({
   type: LOGIN_FAILURE,
   error
 });

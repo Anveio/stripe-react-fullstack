@@ -10,14 +10,13 @@ import '@shopify/polaris/styles.css';
 import App from 'components/App';
 import { AppProvider as PolarisProvider } from '@shopify/polaris';
 import { freshHistory } from 'utils/history';
-
-// tslint:disable:no-any
+import { Path } from 'constants/routes';
 
 ReactDOM.render(
   <PolarisProvider>
     <Provider store={store}>
       <Router history={freshHistory}>
-        <Route path="/" component={App} />
+        <Route path={Path.HOME} component={App} />
       </Router>
     </Provider>
   </PolarisProvider>,

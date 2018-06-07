@@ -4,7 +4,6 @@ const mongodbErrorHandler = require('mongoose-mongodb-errors');
 const passportLocalMongoose = require('passport-local-mongoose');
 const jwt = require('jsonwebtoken');
 
-const Schema = mongoose.Schema;
 const secret = process.env.JWT_SECRET;
 
 const userSchema = new mongoose.Schema(
@@ -15,6 +14,7 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       validate: [validator.isEmail, 'Invalid email address.'],
+
       required: 'Please enter an email.'
     }
   },

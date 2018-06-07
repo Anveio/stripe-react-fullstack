@@ -7,9 +7,7 @@ export interface PublicUserInfo {
   readonly email: string;
 }
 
-export interface JsonWebToken {
-  readonly token: string;
-}
+
 
 export interface UserState {
   readonly loggedIn: boolean;
@@ -68,13 +66,3 @@ export interface AuthTextField {
 }
 
 export type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';
-
-export interface ExpressValidatorError {
-  readonly param: AuthFieldKey;
-  readonly msg: string;
-  readonly value: string;
-}
-
-export interface PassportAuthError {
-  readonly message: string;
-}

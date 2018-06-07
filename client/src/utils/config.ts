@@ -3,7 +3,7 @@ import {
   PRODUCTION_FRONTEND_HOSTNAME,
   PRODUCTION_API_HOSTNAME,
   API_VERSION
-} from '../constants';
+} from '../constants/config';
 
 export const configureApiRoot = () => {
   const hostname = window && window.location && window.location.hostname;

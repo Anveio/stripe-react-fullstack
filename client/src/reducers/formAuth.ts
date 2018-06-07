@@ -8,13 +8,8 @@ import {
   REGISTER_ACCOUNT_REQUEST,
   LOGIN_REQUEST
 } from '../constants';
-import {
-  SignupForm,
-  ExpressValidatorError,
-  AuthForms,
-  AuthTextField,
-  LoginForm
-} from 'types';
+import { SignupForm, AuthForms, AuthTextField, LoginForm } from 'types';
+import { ExpressValidatorError } from 'server-response-types';
 
 const emptyAuthForm: AuthTextField = { text: '', error: null };
 
@@ -53,24 +48,22 @@ export default (
       return {
         ...state,
         login: {
-          email: { ...state.login.email, error: action.error.message },
-          password: { ...state.login.password, error: action.error.message },
+          email: { ...state.login.email, error: action.error },
+          password: { ...state.login.password, error: action.error },
           loading: false
         }
       };
     case REGISTER_ACCOUNT_FAILURE:
-      const fieldsWithErrors = action.errors
-        ? action.errors.reduce(
-            (acc: SignupForm, error: ExpressValidatorError) => ({
-              ...acc,
-              [error.param]: {
-                ...acc[error.param],
-                error: error.msg
-              }
-            }),
-            { ...state.signup, loading: false }
-          )
-        : {};
+      const fieldsWithErrors = action.errors.reduce(
+        (acc: SignupForm, error: ExpressValidatorError) => ({
+          ...acc,
+          [error.param]: {
+            ...acc[error.param],
+            error: error.msg
+          }
+        }),
+        { ...state.signup, loading: false }
+      );
 
       return {
         ...state,

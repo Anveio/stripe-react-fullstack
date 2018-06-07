@@ -2,26 +2,20 @@ import * as React from 'react';
 import { Layout, FormLayout, Card, Button } from '@shopify/polaris';
 
 import { PasswordField, PasswordConfField, EmailField } from './AuthTextFields';
-import {
-  AuthTextField,
-  SignupForm,
-  SignupPayload,
-  RootState,
-  JsonWebToken,
-  ExpressValidatorError
-} from 'types';
+import { AuthTextField, SignupForm, SignupPayload, RootState } from 'types';
 import { Dispatch, connect } from 'react-redux';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
-import Axios from 'axios';
 import {
   registerAccountSuccess,
   registerAccountFailure,
-  RegisterAccountAction
+  RegisterAccountAction,
+  registerAccountRequest
 } from 'actions/signup';
-import { ROOT_API_URL } from '../../constants';
 import { pushToAppHistory } from 'utils/history';
 import { Path } from 'constants/routes';
 import { LoginSuccess, loginSuccess } from 'actions/login';
+import { sendUserRegistrationRequest } from 'api/signup';
+import { resolveSignupErrors } from 'utils/errorHandlers';
 
 interface Props {
   readonly loading: boolean;
@@ -117,38 +111,22 @@ const mapDispatchToProps = (
   onChange: (key: keyof SignupPayload, value: string) => {
     dispatch(changeAuthFieldText<SignupPayload>('signup', key, value));
   },
-  onSubmit: (payload: SignupPayload) => {
-    Axios.post(`${ROOT_API_URL}/signup`, payload)
-      .then(
-        success => {
-          dispatch(registerAccountSuccess());
-          /**
-           * POSTing to /signup will run through passport.js' login
-           * middleware. So if there are no errors at this point we can log-in
-           * the user without sending a separate request.
-           */
-
-          dispatch(
-            loginSuccess(payload.email, (success.data as JsonWebToken).token)
-          );
-          pushToAppHistory(Path.HOME);
-        },
-        errors => {
-          /**
-           * If express validator catches an error: 'data' will be a
-           * SignupValidationError[]. If our moongoose User Schema catches an
-           * error: 'data' will be a string.
-           */
-
-          const data: ExpressValidatorError[] | string = errors.response.data;
-          if (typeof data === 'object') {
-            dispatch(registerAccountFailure(data));
-          }
-        }
-      )
-      .catch(reason => {
-        dispatch(registerAccountFailure());
-      });
+  onSubmit: async (payload: SignupPayload) => {
+    dispatch(registerAccountRequest);
+    try {
+      const data = await sendUserRegistrationRequest(payload);
+      dispatch(registerAccountSuccess());
+      /**
+       * POSTing to /signup will run through passport.js' login
+       * middleware. So if there are no errors at this point we can log-in
+       * the user without sending a separate request.
+       */
+      dispatch(loginSuccess(payload.email, data.token));
+      pushToAppHistory(Path.HOME);
+    } catch (e) {
+      const errors = resolveSignupErrors(e);
+      dispatch(registerAccountFailure(errors));
+    }
   }
 });
 

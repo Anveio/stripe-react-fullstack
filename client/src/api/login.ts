@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { ROOT_API_URL } from '../constants';
-import { LoginPayload, JsonWebToken, PassportAuthError } from 'types';
-import { ApiEndpoint } from 'constants/routes';
+import { LoginPayload } from 'types';
+import { ApiEndpoint, ROOT_API_URL } from 'constants/routes';
+import { LoginSuccessResponse, PassportAuthError } from 'server-response-types';
 
 interface PasswordLoginResolution {
   readonly token: string;
@@ -10,7 +10,7 @@ interface PasswordLoginResolution {
 export const loginWithPassword = async (
   payload: LoginPayload
 ): Promise<PasswordLoginResolution> => {
-  const response = await axios.post<JsonWebToken>(
+  const response = await axios.post<LoginSuccessResponse>(
     `${ROOT_API_URL}${ApiEndpoint.LOGIN}`,
     payload
   );

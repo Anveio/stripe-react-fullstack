@@ -13,12 +13,11 @@ const loggedInLinks = [{ path: 'checkout' }, { path: 'inventory' }];
 
 const PageHeader = (account: UserState) => {
   return (
-    <nav>
-      <div className="Navbar-Container">
-        <Navbar links={[{ path: '/', text: 'home' }]} />
+    <header>
+      <div className="Navbar-container">
         <Navbar links={account.loggedIn ? loggedInLinks : loggedOutLinks} />
       </div>
-    </nav>
+    </header>
   );
 };
 

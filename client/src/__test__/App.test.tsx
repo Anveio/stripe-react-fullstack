@@ -13,8 +13,6 @@ beforeEach(() => {
   mockLocalStorage();
 });
 
-// tslint:disable:no-any
-
 it('renders without crashing', () => {
   const div = document.createElement('div');
   const store = createStore(rootReducer);
