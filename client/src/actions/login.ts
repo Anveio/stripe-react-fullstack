@@ -27,6 +27,8 @@ export interface LogoutUser {
   readonly type: CLEAR_CURRENT_USER;
 }
 
+export const loginRequest: LoginRequest = { type: LOGIN_REQUEST };
+
 export const loginFailure = (error: PassportAuthError): LoginFailure => ({
   type: LOGIN_FAILURE,
   error

@@ -10,7 +10,12 @@ import { PasswordField, EmailField } from './AuthTextFields';
 import { connect, Dispatch } from 'react-redux';
 import { AuthTextField, UserState, LoginPayload, RootState } from 'types';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
-import { loginFailure, loginSuccess, LoginAction } from 'actions/login';
+import {
+  loginFailure,
+  loginSuccess,
+  LoginAction,
+  loginRequest
+} from 'actions/login';
 import { pushToAppHistory } from 'utils/history';
 import { Path } from 'constants/routes';
 import { loginWithPassword } from 'api/login';
@@ -117,6 +122,8 @@ const mapDispatch = (
     dispatch(changeAuthFieldText<LoginPayload>('login', key, value)),
   onSubmit: async (payload: LoginPayload) => {
     try {
+      dispatch(loginRequest);
+
       const { token } = await loginWithPassword(payload);
 
       dispatch(loginSuccess(payload.email, token));
