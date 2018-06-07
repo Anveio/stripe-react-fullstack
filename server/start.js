@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const errorHandlers = require('./handlers/errorHandlers');
-const { API_VERSION } = require('./constants/api');
 
 require('dotenv').config({ path: 'variables.env' });
 
@@ -34,8 +33,5 @@ switch (process.env.NODE_ENV) {
 }
 
 const server = app.listen(process.env.PORT, () => {
-  console.log(
-    `Server running on port ${server.address().port}.`,
-    `API version: ${API_VERSION}`
-  );
+  console.log(`Server running on port ${server.address().port}.`);
 });
