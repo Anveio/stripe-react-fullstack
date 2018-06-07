@@ -14,6 +14,7 @@ This repo contains code for a web application that can process card payments via
 
 - User signups saved in MongoDB.
 - Card payment processing.
+- Server-side validation of user signup & login.
 
 Includes user signup/authentication with JWT and payment authorization with Stripe on the server.
 

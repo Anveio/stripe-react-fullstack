@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { Card } from '@shopify/polaris';
+import { Card, Layout } from '@shopify/polaris';
 import StripeCheckout, {
   Token,
   StripeCheckoutProps
@@ -44,9 +44,11 @@ const Checkout = ({ name, description, amount }: Props) => {
   };
 
   return (
-    <Card sectioned>
-      <StripeCheckout {...stripeCheckoutProps} />
-    </Card>
+    <Layout.Section>
+      <Card sectioned>
+        <StripeCheckout {...stripeCheckoutProps} />
+      </Card>
+    </Layout.Section>
   );
 };
 

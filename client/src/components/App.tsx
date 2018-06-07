@@ -15,6 +15,7 @@ import {
   LoginAction,
   loginRequest
 } from 'actions/login';
+import Introduction from './Introduction';
 
 interface Props {
   readonly currentUser: UserState;
@@ -35,20 +36,19 @@ class App extends React.PureComponent<Props & Handlers, never> {
     return (
       <main>
         <PageHeader />
-        <Page title="">
+        <Page title="Stripe React-Redux Starter Kit">
           <Layout>
+            <Route exact path={Path.HOME} component={Introduction} />
             <Route path={Path.AUTH} component={AuthLayout} />
             <Route
               path={Path.CHECKOUT}
-              component={() => {
-                return (
-                  <Checkout
-                    name={'Example Item'}
-                    description={'Example description'}
-                    amount={100}
-                  />
-                );
-              }}
+              component={() => (
+                <Checkout
+                  name={'Example Item'}
+                  description={'Example description'}
+                  amount={100}
+                />
+              )}
             />
           </Layout>
         </Page>
