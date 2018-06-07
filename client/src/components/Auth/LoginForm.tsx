@@ -77,6 +77,7 @@ const LoginForm = (props: Props & Handlers) => {
             <Button
               primary
               icon="circleChevronRight"
+              loading={props.loading}
               onClick={handleLogIn}
               disabled={validForm()}
             >
@@ -121,9 +122,8 @@ const mapDispatch = (
   onChange: (key: keyof LoginPayload, value: string) =>
     dispatch(changeAuthFieldText<LoginPayload>('login', key, value)),
   onSubmit: async (payload: LoginPayload) => {
+    dispatch(loginRequest);
     try {
-      dispatch(loginRequest);
-
       const { token } = await loginWithPassword(payload);
 
       dispatch(loginSuccess(payload.email, token));
@@ -131,8 +131,7 @@ const mapDispatch = (
     } catch (e) {
       dispatch(
         loginFailure({
-          message: 'There was a problem with your login information',
-          name: 'password'
+          message: 'Incorrect email'
         })
       );
       console.warn(e);

@@ -77,5 +77,4 @@ export interface ExpressValidatorError {
 
 export interface PassportAuthError {
   readonly message: string;
-  readonly name: string;
 }

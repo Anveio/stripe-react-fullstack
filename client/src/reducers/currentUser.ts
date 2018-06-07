@@ -1,11 +1,11 @@
-import { LOGIN_SUCCESS, CLEAR_CURRENT_USER, LOGIN_FAILURE } from '../constants';
+import { LOGIN_SUCCESS, CLEAR_CURRENT_USER } from '../constants';
 import { UserState } from 'types';
 import { LoginAction, LogoutUser } from 'actions/login';
 
 const initialState: UserState = {
   loggedIn: false,
-  email: '',
-  token: ''
+  email: null,
+  token: null
 };
 
 export default (state = initialState, action: LoginAction | LogoutUser) => {
@@ -17,7 +17,6 @@ export default (state = initialState, action: LoginAction | LogoutUser) => {
         email: action.email,
         token: action.token
       };
-    case LOGIN_FAILURE:
     case CLEAR_CURRENT_USER:
       return initialState;
     default:

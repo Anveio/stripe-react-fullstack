@@ -51,7 +51,6 @@ const EmailField = ({ field, onChange, kind }: Props) => {
       onChange={onChange}
       error={field.error || undefined}
       spellCheck={false}
-      autoFocus
     />
   );
 };

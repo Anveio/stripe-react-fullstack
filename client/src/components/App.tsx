@@ -9,7 +9,12 @@ import { UserState, RootState } from 'types';
 import { Path } from 'constants/routes';
 import { loginWithJwt } from 'api/login';
 import AuthLayout from './Auth/AuthLayout';
-import { loginSuccess, loginFailure, LoginAction } from 'actions/login';
+import {
+  loginSuccess,
+  loginFailure,
+  LoginAction,
+  loginRequest
+} from 'actions/login';
 
 interface Props {
   readonly currentUser: UserState;
@@ -60,11 +65,12 @@ const mapState = (state: RootState): Props => {
 
 const mapDispatch = (dispatch: Dispatch<LoginAction>): Handlers => ({
   onBoot: async (jwt: string) => {
+    dispatch(loginRequest);
     try {
       const response = await loginWithJwt(jwt);
       dispatch(loginSuccess(response.email, jwt));
     } catch (e) {
-      dispatch(loginFailure({ message: 'Please login again.', name: 'token' }));
+      dispatch(loginFailure({ message: 'Please login again.' }));
     }
   }
 });

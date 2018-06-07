@@ -7,24 +7,18 @@ import './PageHeader.css';
 import { connect } from 'react-redux';
 import { RootState, UserState } from 'types';
 
-const loggedOutLinks = [
-  { path: '/', text: 'home' },
-  { path: 'auth', text: 'login / signup' }
-];
+const loggedOutLinks = [{ path: 'auth', text: 'login / signup' }];
 
-const loggedInLinks = [
-  { path: '/', text: 'home' },
-  { path: 'checkout' },
-  { path: 'inventory' }
-];
+const loggedInLinks = [{ path: 'checkout' }, { path: 'inventory' }];
 
 const PageHeader = (account: UserState) => {
   return (
-    <header>
-      <div className="Navbar-container">
+    <nav>
+      <div className="Navbar-Container">
+        <Navbar links={[{ path: '/', text: 'home' }]} />
         <Navbar links={account.loggedIn ? loggedInLinks : loggedOutLinks} />
       </div>
-    </header>
+    </nav>
   );
 };
 

@@ -12,7 +12,6 @@ import {
 } from 'types';
 import { Dispatch, connect } from 'react-redux';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
-import { AccountConnectionAction, connectAccount } from 'actions/connection';
 import Axios from 'axios';
 import {
   registerAccountSuccess,
@@ -22,6 +21,7 @@ import {
 import { ROOT_API_URL } from '../../constants';
 import { pushToAppHistory } from 'utils/history';
 import { Path } from 'constants/routes';
+import { LoginSuccess, loginSuccess } from 'actions/login';
 
 interface Props {
   readonly loading: boolean;
@@ -111,9 +111,7 @@ const mapStateToProps = (state: RootState): Props => {
 
 const mapDispatchToProps = (
   dispatch: Dispatch<
-    | AuthFormAction<SignupPayload>
-    | AccountConnectionAction
-    | RegisterAccountAction
+    AuthFormAction<SignupPayload> | RegisterAccountAction | LoginSuccess
   >
 ): Handlers => ({
   onChange: (key: keyof SignupPayload, value: string) => {
@@ -124,11 +122,6 @@ const mapDispatchToProps = (
       .then(
         success => {
           dispatch(registerAccountSuccess());
-          window.localStorage.setItem(
-            'jwt',
-            (success.data as JsonWebToken).token
-          );
-
           /**
            * POSTing to /signup will run through passport.js' login
            * middleware. So if there are no errors at this point we can log-in
@@ -136,7 +129,7 @@ const mapDispatchToProps = (
            */
 
           dispatch(
-            connectAccount(payload.email, (success.data as JsonWebToken).token)
+            loginSuccess(payload.email, (success.data as JsonWebToken).token)
           );
           pushToAppHistory(Path.HOME);
         },
