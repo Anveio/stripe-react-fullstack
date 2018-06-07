@@ -1,6 +1,6 @@
-import { AccountConnectionAction } from '../actions/connection';
-import { CONNECT_ACCOUNT, DISCONNECT_ACCOUNT } from '../constants';
+import { LOGIN_SUCCESS, CLEAR_CURRENT_USER, LOGIN_FAILURE } from '../constants';
 import { UserState } from 'types';
+import { LoginAction, LogoutUser } from 'actions/login';
 
 const initialState: UserState = {
   loggedIn: false,
@@ -8,16 +8,17 @@ const initialState: UserState = {
   token: ''
 };
 
-export default (state = initialState, action: AccountConnectionAction) => {
+export default (state = initialState, action: LoginAction | LogoutUser) => {
   switch (action.type) {
-    case CONNECT_ACCOUNT:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         loggedIn: true,
         email: action.email,
         token: action.token
       };
-    case DISCONNECT_ACCOUNT:
+    case LOGIN_FAILURE:
+    case CLEAR_CURRENT_USER:
       return initialState;
     default:
       return state;

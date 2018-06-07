@@ -6,10 +6,10 @@ import Checkout from './Payment/Checkout';
 import PageHeader from './Navigation/PageHeader';
 import { connect, Dispatch } from 'react-redux';
 import { UserState, RootState } from 'types';
-import { AccountConnectionAction, connectAccount } from 'actions/connection';
 import { Path } from 'constants/routes';
 import { loginWithJwt } from 'api/login';
 import AuthLayout from './Auth/AuthLayout';
+import { loginSuccess, loginFailure, LoginAction } from 'actions/login';
 
 interface Props {
   readonly currentUser: UserState;
@@ -58,13 +58,13 @@ const mapState = (state: RootState): Props => {
   };
 };
 
-const mapDispatch = (
-  dispatch: Dispatch<AccountConnectionAction>
-): Handlers => ({
+const mapDispatch = (dispatch: Dispatch<LoginAction>): Handlers => ({
   onBoot: async (jwt: string) => {
-    const response = await loginWithJwt(jwt);
-    if (response.email) {
-      dispatch(connectAccount(response.email, jwt));
+    try {
+      const response = await loginWithJwt(jwt);
+      dispatch(loginSuccess(response.email, jwt));
+    } catch (e) {
+      dispatch(loginFailure({ message: 'Please login again.', name: 'token' }));
     }
   }
 });

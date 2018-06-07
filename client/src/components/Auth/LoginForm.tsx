@@ -10,8 +10,7 @@ import { PasswordField, EmailField } from './AuthTextFields';
 import { connect, Dispatch } from 'react-redux';
 import { AuthTextField, UserState, LoginPayload, RootState } from 'types';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
-import { AccountConnectionAction, connectAccount } from 'actions/connection';
-import { loginFailure, LoginFailure } from 'actions/login';
+import { loginFailure, loginSuccess, LoginAction } from 'actions/login';
 import { pushToAppHistory } from 'utils/history';
 import { Path } from 'constants/routes';
 import { loginWithPassword } from 'api/login';
@@ -112,29 +111,27 @@ const mapState = (state: RootState): Props => {
 };
 
 const mapDispatch = (
-  dispatch: Dispatch<
-    AuthFormAction<LoginPayload> | AccountConnectionAction | LoginFailure
-  >
-): Handlers => {
-  return {
-    onChange: (key: keyof LoginPayload, value: string) =>
-      dispatch(changeAuthFieldText<LoginPayload>('login', key, value)),
-    onSubmit: async (payload: LoginPayload) => {
-      try {
-        const { token, error } = await loginWithPassword(payload);
+  dispatch: Dispatch<AuthFormAction<LoginPayload> | LoginAction>
+): Handlers => ({
+  onChange: (key: keyof LoginPayload, value: string) =>
+    dispatch(changeAuthFieldText<LoginPayload>('login', key, value)),
+  onSubmit: async (payload: LoginPayload) => {
+    try {
+      const { token } = await loginWithPassword(payload);
 
-        if (token) {
-          dispatch(connectAccount(payload.email, token));
-          pushToAppHistory(Path.HOME);
-        } else if (error) {
-          dispatch(loginFailure(error));
-        }
-      } catch (e) {
-        console.warn(e);
-      }
+      dispatch(loginSuccess(payload.email, token));
+      pushToAppHistory(Path.HOME);
+    } catch (e) {
+      dispatch(
+        loginFailure({
+          message: 'There was a problem with your login information',
+          name: 'password'
+        })
+      );
+      console.warn(e);
     }
-  };
-};
+  }
+});
 
 export default connect(
   mapState,

@@ -6,6 +6,6 @@ export enum Path {
 
 export enum ApiEndpoint {
   LOGIN = '/login',
-  LOGIN_WITH_JWT = 'auth/jwt',
+  LOGIN_WITH_JWT = '/auth/jwt',
   SIGNUP = '/signup'
 }

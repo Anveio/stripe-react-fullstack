@@ -60,6 +60,9 @@ export type LOGIN_SUCCESS = typeof LOGIN_SUCCESS;
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export type LOGIN_FAILURE = typeof LOGIN_FAILURE;
 
+export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER';
+export type CLEAR_CURRENT_USER = typeof CLEAR_CURRENT_USER;
+
 export const CONNECT_ACCOUNT = 'CONNECT_ACCOUNT';
 export type CONNECT_ACCOUNT = typeof CONNECT_ACCOUNT;
 
