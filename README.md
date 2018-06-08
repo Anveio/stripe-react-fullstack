@@ -67,7 +67,7 @@ Copy the token for the "Publishable key" and paste it as the value of `STRIPE_PU
 <figcaption>The "Publishable key" will live on the client, the "Secret key" will live on the server.</figcaption>
 </figure>
 
-Next, you'll need to pick a hosting provider for your MongoDB database. One good free solution I recommend is [Mlab](https://mlab.com/home). After creating an account and logging in, click the "Create new" button under "Mongo DB Deployments". After that, select the "Sandbox" plan type to keep things free. If you choose to change your mind, you can upgrade to a paid plan later.
+Next, you'll need to configure the Mongo URI of the development database. One good free solution I recommend is [Mlab](https://mlab.com/home). After creating an account and logging in, click the "Create new" button under "Mongo DB Deployments". After that, select the "Sandbox" plan type to keep things free. If you choose to change your mind, you can upgrade to a paid plan later.
 
 <figure>
 <img src="https://i.imgur.com/tfCM5Lx.png">
