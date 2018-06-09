@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Page, Layout } from '@shopify/polaris';
+import { AppProvider as PolarisProvider, Page, Layout } from '@shopify/polaris';
 import { Route } from 'react-router-dom';
 
 import Checkout from './Payment/Checkout';
@@ -34,25 +34,27 @@ class App extends React.PureComponent<Props & Handlers, never> {
 
   render() {
     return (
-      <main>
-        <PageHeader />
-        <Page title="Stripe React-Redux Starter Kit">
-          <Layout>
-            <Route exact path={Path.HOME} component={Introduction} />
-            <Route path={Path.AUTH} component={AuthLayout} />
-            <Route
-              path={Path.CHECKOUT}
-              component={() => (
-                <Checkout
-                  name={'Example Item'}
-                  description={'Example description'}
-                  amount={100}
-                />
-              )}
-            />
-          </Layout>
-        </Page>
-      </main>
+      <PolarisProvider>
+        <main>
+          <PageHeader />
+          <Page title="Stripe React-Redux Starter Kit">
+            <Layout>
+              <Route exact path={Path.HOME} component={Introduction} />
+              <Route path={Path.AUTH} component={AuthLayout} />
+              <Route
+                path={Path.CHECKOUT}
+                component={() => (
+                  <Checkout
+                    name={'Example Item'}
+                    description={'Example description'}
+                    amount={100}
+                  />
+                )}
+              />
+            </Layout>
+          </Page>
+        </main>
+      </PolarisProvider>
     );
   }
 }
