@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from 'react-testing-library';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router-dom';
@@ -14,14 +14,12 @@ beforeEach(() => {
 });
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const store = createStore(rootReducer);
-  ReactDOM.render(
+  render(
     <Provider store={store}>
       <Router history={freshHistory}>
         <Route path="/" component={App} />
       </Router>
-    </Provider>,
-    div
+    </Provider>
   );
 });
