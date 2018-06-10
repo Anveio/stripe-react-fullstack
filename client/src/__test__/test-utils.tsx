@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RootState } from 'types';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { AppProvider as PolarisProvider } from '@shopify/polaris';
 import { createStore } from 'redux';
@@ -9,8 +10,9 @@ import { Router } from 'react-router';
 
 export const renderWithProvider = (
   component: JSX.Element,
-  store = createStore(rootReducer)
+  preloadedState: Partial<RootState> = {}
 ) => {
+  const store = createStore(rootReducer, preloadedState);
   return {
     ...render(
       <PolarisProvider>
