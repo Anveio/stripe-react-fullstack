@@ -1,5 +1,3 @@
-const path = require('path');
-const express = require('express');
 const mongoose = require('mongoose');
 const errorHandlers = require('./handlers/errorHandlers');
 
@@ -7,6 +5,7 @@ require('dotenv').config({ path: 'variables.env' });
 
 // Models must be registered BEFORE importing app.
 require('./models/User');
+require('./models/Product');
 
 const app = require('./app');
 
