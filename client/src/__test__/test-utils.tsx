@@ -20,7 +20,8 @@ export const renderWithProvider = (
           <Router history={createFreshHistory()}>{component}</Router>
         </Provider>
       </PolarisProvider>
-    )
+    ),
+    store
   };
 };
 
