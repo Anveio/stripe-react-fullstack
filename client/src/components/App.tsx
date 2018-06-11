@@ -70,7 +70,11 @@ const mapDispatch = (dispatch: Dispatch<LoginAction>): Handlers => ({
       const response = await loginWithJwt(jwt);
       dispatch(loginSuccess(response.email, jwt));
     } catch (e) {
-      dispatch(loginFailure('Failed to log you in. Please log in again.'));
+      dispatch(
+        loginFailure({
+          email: 'Failed to log you in automatically. Please log in again.'
+        })
+      );
     }
   }
 });

@@ -3,20 +3,10 @@ export interface RootState {
   readonly authForms: AuthForms;
 }
 
-export interface PublicUserInfo {
-  readonly email: string;
-}
-
-
-
 export interface UserState {
   readonly loggedIn: boolean;
   readonly email: string | null;
   readonly token: string | null;
-}
-
-export interface NotificationsState {
-  readonly fromServer: BannerMessage[];
 }
 
 export interface AuthForms {
@@ -24,30 +14,12 @@ export interface AuthForms {
   readonly login: LoginForm;
 }
 
-export interface UsersListState {
-  readonly list: PublicUserInfo[];
+export interface FormError<T> {
+  readonly field: keyof T;
+  readonly error: string;
 }
 
-export interface BannerMessage {
-  readonly status: StatusType;
-  readonly title?: string;
-  readonly message?: string;
-}
-
-export type StatusType = 'success' | 'info' | 'warning' | 'critical';
-
-export interface SignupForm {
-  readonly email: AuthTextField;
-  readonly password: AuthTextField;
-  readonly passwordConf: AuthTextField;
-  readonly loading: boolean;
-}
-
-export interface LoginForm {
-  readonly email: AuthTextField;
-  readonly password: AuthTextField;
-  readonly loading: boolean;
-}
+export type FormErrorMap<T> = { [k in keyof T]: string | undefined };
 
 export interface SignupPayload {
   readonly email: string;
@@ -55,14 +27,17 @@ export interface SignupPayload {
   readonly passwordConf: string;
 }
 
+export interface SignupForm extends SignupPayload {
+  readonly errors: FormErrorMap<SignupPayload>;
+  readonly loading: boolean;
+}
+
 export interface LoginPayload {
   readonly email: string;
   readonly password: string;
 }
 
-export interface AuthTextField {
-  readonly text: string;
-  readonly error: string | null;
+export interface LoginForm extends LoginPayload {
+  readonly errors: FormErrorMap<LoginPayload>;
+  readonly loading: boolean;
 }
-
-export type AuthFieldKey = 'username' | 'email' | 'password' | 'passwordConf';

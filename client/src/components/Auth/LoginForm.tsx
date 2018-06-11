@@ -8,7 +8,7 @@ import {
 } from '@shopify/polaris';
 import { PasswordField, EmailField } from './AuthTextFields';
 import { connect, Dispatch } from 'react-redux';
-import { AuthTextField, UserState, LoginPayload, RootState } from 'types';
+import { UserState, LoginPayload, RootState, FormErrorMap } from 'types';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
 import {
   loginFailure,
@@ -21,9 +21,10 @@ import { Path } from 'constants/routes';
 import { loginWithPassword } from 'api/login';
 
 export interface Props {
-  readonly email: AuthTextField;
-  readonly password: AuthTextField;
+  readonly email: string;
+  readonly password: string;
   readonly loading: boolean;
+  readonly errors: FormErrorMap<LoginPayload>;
   readonly currentUser: UserState;
 }
 
@@ -33,12 +34,12 @@ export interface Handlers {
 }
 
 const LoginForm = (props: Props & Handlers) => {
-  const { email, password, onChange, onSubmit, currentUser } = props;
+  const { email, password, onChange, onSubmit, currentUser, errors } = props;
 
   const handleLogIn = (): void => {
     onSubmit({
-      email: email.text,
-      password: password.text
+      email,
+      password
     });
   };
 
@@ -47,7 +48,7 @@ const LoginForm = (props: Props & Handlers) => {
   };
 
   const validForm = (): boolean => {
-    return !email.text && !password.text;
+    return !email && !password;
   };
 
   const watchForEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -65,13 +66,15 @@ const LoginForm = (props: Props & Handlers) => {
             <div onKeyPress={watchForEnter}>
               <EmailField
                 kind="login"
-                field={email}
+                text={email}
                 onChange={updateField('email')}
+                error={errors.email}
               />
               <PasswordField
                 kind="login"
-                field={password}
+                text={password}
                 onChange={updateField('password')}
+                error={errors.password}
               />
             </div>
             <Button
@@ -105,14 +108,15 @@ const LoginForm = (props: Props & Handlers) => {
 };
 
 const mapState = (state: RootState): Props => {
-  const { email, password, loading } = state.authForms.login;
+  const { email, password, loading, errors } = state.authForms.login;
   const currentUser = state.currentUser;
 
   return {
     currentUser,
     email,
     password,
-    loading
+    loading,
+    errors
   };
 };
 
@@ -129,7 +133,7 @@ const mapDispatch = (
       dispatch(loginSuccess(payload.email, token));
       pushToAppHistory(Path.HOME);
     } catch (e) {
-      dispatch(loginFailure('Incorrect email or password.'));
+      dispatch(loginFailure({ password: 'Incorrect email or password.' }));
       console.warn(e);
     }
   }

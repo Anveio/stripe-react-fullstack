@@ -3,7 +3,7 @@ import {
   REGISTER_ACCOUNT_FAILURE,
   REGISTER_ACCOUNT_REQUEST
 } from '../constants';
-import { ExpressValidatorError } from 'server-response-types';
+import { SignupPayload, FormErrorMap } from 'types';
 
 export type RegisterAccountAction =
   | RegisterAccountFailure
@@ -20,7 +20,7 @@ export interface RegisterAccountSuccess {
 
 export interface RegisterAccountFailure {
   readonly type: REGISTER_ACCOUNT_FAILURE;
-  readonly errors: ExpressValidatorError[];
+  readonly errors: Partial<FormErrorMap<SignupPayload>>;
 }
 
 export const registerAccountRequest: RegisterAccountRequest = {
@@ -32,7 +32,7 @@ export const registerAccountSuccess = (): RegisterAccountSuccess => ({
 });
 
 export const registerAccountFailure = (
-  errors: ExpressValidatorError[]
+  errors: Partial<FormErrorMap<SignupPayload>>
 ): RegisterAccountFailure => ({
   type: REGISTER_ACCOUNT_FAILURE,
   errors

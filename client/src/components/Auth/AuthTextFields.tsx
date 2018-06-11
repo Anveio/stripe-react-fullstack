@@ -1,55 +1,57 @@
 import * as React from 'react';
 import { TextField } from '@shopify/polaris';
-import { AuthTextField } from 'types';
 
 interface Props {
   readonly kind: 'login' | 'signup';
-  readonly field: AuthTextField;
+  readonly text: string;
   readonly onChange: (value: string) => void;
+  readonly error?: string;
 }
 
-const PasswordField = ({ field, onChange, kind }: Props) => {
+type FieldComponent = React.SFC<Props>;
+
+const PasswordField: FieldComponent = ({ text, onChange, kind, error }) => {
   return (
     <TextField
       label="Password"
       name={`password-${kind}`}
       type="password"
       placeholder="At least 6 characters."
-      value={field.text}
+      value={text}
       onChange={onChange}
-      error={field.error || undefined}
+      error={error}
       min={6}
     />
   );
 };
 
-const PasswordConfField = ({ field, onChange, kind }: Props) => {
+const PasswordConfField: FieldComponent = ({ text, onChange, kind, error }) => {
   return (
     <TextField
       spellCheck={false}
       label="Confirm Password"
       name={`passwordConf-${kind}`}
       type="password"
-      value={field.text}
+      value={text}
       placeholder="Same as your password."
       min={6}
       onChange={onChange}
-      error={field.error || undefined}
+      error={error}
     />
   );
 };
 
-const EmailField = ({ field, onChange, kind }: Props) => {
+const EmailField: FieldComponent = ({ text, onChange, kind, error }) => {
   return (
     <TextField
       autoComplete={false}
       label="Email address"
       name={`email-${kind}`}
       type="email"
-      value={field.text}
+      value={text}
       placeholder="e.g. name@business.com"
       onChange={onChange}
-      error={field.error || undefined}
+      error={error}
       spellCheck={false}
     />
   );

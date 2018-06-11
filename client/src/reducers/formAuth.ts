@@ -8,22 +8,28 @@ import {
   REGISTER_ACCOUNT_REQUEST,
   LOGIN_REQUEST
 } from '../constants';
-import { SignupForm, AuthForms, AuthTextField, LoginForm } from 'types';
-import { ExpressValidatorError } from 'server-response-types';
-
-const emptyAuthForm: AuthTextField = { text: '', error: null };
+import { SignupForm, AuthForms, LoginForm } from 'types';
 
 const login: LoginForm = {
-  email: emptyAuthForm,
-  password: emptyAuthForm,
-  loading: false
+  email: '',
+  password: '',
+  loading: false,
+  errors: {
+    email: undefined,
+    password: undefined
+  }
 };
 
 const signup: SignupForm = {
-  email: emptyAuthForm,
-  password: emptyAuthForm,
-  passwordConf: emptyAuthForm,
-  loading: false
+  email: '',
+  password: '',
+  passwordConf: '',
+  loading: false,
+  errors: {
+    email: undefined,
+    password: undefined,
+    passwordConf: undefined
+  }
 };
 
 const initialState: AuthForms = {
@@ -41,33 +47,33 @@ export default (
         ...state,
         [action.form]: {
           ...state[action.form],
-          [action.key]: { text: action.value, error: null }
+          [action.key]: action.value,
+          errors: {
+            ...state[action.form].errors,
+            [action.key]: undefined
+          }
         }
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         login: {
-          email: { ...state.login.email, error: action.error },
-          password: { ...state.login.password, error: action.error },
-          loading: false
+          ...state.login,
+          loading: false,
+          errors: {
+            ...state.login.errors,
+            ...action.errors
+          }
         }
       };
     case REGISTER_ACCOUNT_FAILURE:
-      const fieldsWithErrors = action.errors.reduce(
-        (acc: SignupForm, error: ExpressValidatorError) => ({
-          ...acc,
-          [error.param]: {
-            ...acc[error.param],
-            error: error.msg
-          }
-        }),
-        { ...state.signup, loading: false }
-      );
-
       return {
         ...state,
-        signup: { ...state.signup, ...fieldsWithErrors, loading: false }
+        signup: {
+          ...state.signup,
+          loading: false,
+          errors: { ...state.signup.errors, ...action.errors }
+        }
       };
     case REGISTER_ACCOUNT_REQUEST:
       return {

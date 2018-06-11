@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Layout, FormLayout, Card, Button } from '@shopify/polaris';
 
 import { PasswordField, PasswordConfField, EmailField } from './AuthTextFields';
-import { AuthTextField, SignupForm, SignupPayload, RootState } from 'types';
+import { SignupForm, SignupPayload, RootState, FormErrorMap } from 'types';
 import { Dispatch, connect } from 'react-redux';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
 import {
@@ -19,9 +19,10 @@ import { resolveSignupErrors } from 'utils/errorHandlers';
 
 interface Props {
   readonly loading: boolean;
-  readonly email: AuthTextField;
-  readonly password: AuthTextField;
-  readonly passwordConf: AuthTextField;
+  readonly email: string;
+  readonly password: string;
+  readonly passwordConf: string;
+  readonly errors: FormErrorMap<SignupPayload>;
 }
 
 interface Handlers {
@@ -30,7 +31,7 @@ interface Handlers {
 }
 
 const SignupForm = (props: Props & Handlers) => {
-  const { email, password, passwordConf, onSubmit, onChange } = props;
+  const { email, password, passwordConf, onSubmit, onChange, errors } = props;
 
   const updateField = (key: keyof SignupForm) => (value: string) => {
     onChange(key, value);
@@ -38,14 +39,14 @@ const SignupForm = (props: Props & Handlers) => {
 
   const handleSignUp = (): void => {
     onSubmit({
-      email: email.text,
-      password: password.text,
-      passwordConf: passwordConf.text
+      email: email,
+      password: password,
+      passwordConf: passwordConf
     });
   };
 
   const validForm = (): boolean => {
-    return !(!!email.text && !!password.text && !!passwordConf.text);
+    return !(!!email && !!password && !!passwordConf);
   };
 
   const watchForEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -62,18 +63,21 @@ const SignupForm = (props: Props & Handlers) => {
           <div onKeyPress={watchForEnter}>
             <EmailField
               kind="login"
-              field={email}
+              text={email}
               onChange={updateField('email')}
+              error={errors.email}
             />
             <PasswordField
               kind="login"
-              field={password}
+              text={password}
               onChange={updateField('password')}
+              error={errors.password}
             />
             <PasswordConfField
               kind="login"
-              field={passwordConf}
+              text={passwordConf}
               onChange={updateField('passwordConf')}
+              error={errors.passwordConf}
             />
           </div>
           <Button
@@ -93,13 +97,14 @@ const SignupForm = (props: Props & Handlers) => {
 };
 
 const mapStateToProps = (state: RootState): Props => {
-  const { email, password, passwordConf, loading } = state.authForms.signup;
+  const { email, password, passwordConf, loading, errors } = state.authForms.signup;
 
   return {
     email,
     password,
     passwordConf,
-    loading
+    loading,
+    errors
   };
 };
 

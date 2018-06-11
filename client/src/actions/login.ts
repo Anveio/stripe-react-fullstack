@@ -4,6 +4,7 @@ import {
   LOGIN_SUCCESS,
   CLEAR_CURRENT_USER
 } from '../constants';
+import { FormErrorMap, LoginPayload } from 'types';
 
 export type LoginAction = LoginRequest | LoginFailure | LoginSuccess;
 
@@ -19,7 +20,7 @@ export interface LoginSuccess {
 
 export interface LoginFailure {
   readonly type: LOGIN_FAILURE;
-  readonly error: string;
+  readonly errors: Partial<FormErrorMap<LoginPayload>>;
 }
 
 export interface LogoutUser {
@@ -28,9 +29,11 @@ export interface LogoutUser {
 
 export const loginRequest: LoginRequest = { type: LOGIN_REQUEST };
 
-export const loginFailure = (error: string): LoginFailure => ({
+export const loginFailure = (
+  errors: Partial<FormErrorMap<LoginPayload>>
+): LoginFailure => ({
   type: LOGIN_FAILURE,
-  error
+  errors
 });
 
 export const loginSuccess = (email: string, token: string): LoginSuccess => ({
