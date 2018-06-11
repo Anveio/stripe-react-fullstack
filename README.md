@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Anveio/stripe-react-fullstack.svg?branch=master)](https://travis-ci.org/Anveio/stripe-react-fullstack)
+
 # Stripe React-Redux Starter Kit
 
 This repo contains code for a web application that can process card payments via Stripe. The client application is built with React, Redux, and TypeScript and sends requests to the server application which is built with Express and connects to a MongoDB database.
