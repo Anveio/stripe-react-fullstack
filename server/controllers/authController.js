@@ -21,19 +21,15 @@ exports.login = (req, res) => {
   })(req, res);
 };
 
-exports.authenticateJwt = expressJwt({
-  secret: process.env.JWT_SECRET,
-  userProperty: 'payload',
-  getToken: getTokenFromHeader
-});
-
-exports.emailFromJwt = (req, res) => {
+exports.decodeJwt = (req, res, next) => {
   const { token } = req.body;
 
-  if (token) {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    sendJson(res, 200, { email: payload.username });
-  } else {
-    sendJson(res, 401, { message: 'Authorization failed.' });
+  if (!token) {
+    sendJson(res, 401, { message: 'No token provided' });
+    return;
   }
+
+  // The JWT is signed with the user's email.
+  const associatedEmail = jwt.verify(token, process.env.JWT_SECRET, next);
+  sendJson(res, 200, { email: associatedEmail.username });
 };
