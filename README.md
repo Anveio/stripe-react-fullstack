@@ -2,7 +2,7 @@
 
 # Stripe React-Redux Starter Kit
 
-This is an example fullstack application for processing card payments via Stripe. The client application is built with React, Redux, and TypeScript and sends requests to the the API server which is built with Express and connects to a MongoDB database.
+This is an example fullstack application for processing card payments via Stripe. The client application is built with React, Redux, and TypeScript and sends requests to the API server which is built with Express and connects to a MongoDB database.
 
 ### Client-side features
 
