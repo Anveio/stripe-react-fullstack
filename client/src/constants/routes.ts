@@ -7,9 +7,10 @@ export enum Path {
 }
 
 export enum ApiEndpoint {
-  LOGIN = '/login',
+  LOGIN_WITH_PASSWORD = '/auth/password',
   LOGIN_WITH_JWT = '/auth/jwt',
-  SIGNUP = '/signup'
+  SIGNUP = '/signup',
+  PAYMENT = '/stripe'
 }
 
 export const ROOT_API_URL = configureApiRoot();

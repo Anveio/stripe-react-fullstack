@@ -18,6 +18,6 @@ router.post('/stripe', stripeController.processPayment);
 
 router.post('/auth/jwt', authController.decodeJwt);
 
-router.post('/login', authController.login);
+router.post('/auth/password', authController.login);
 
 module.exports = router;
