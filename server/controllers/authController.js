@@ -16,7 +16,10 @@ exports.login = (req, res) => {
       });
     }
     if (user) {
-      return sendJson(res, 200, { token: user.generateJWT() });
+      return sendJson(res, 200, {
+        email: user.email,
+        token: user.generateJWT()
+      });
     }
   })(req, res);
 };

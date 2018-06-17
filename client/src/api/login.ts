@@ -3,19 +3,15 @@ import { LoginPayload } from 'types';
 import { ApiEndpoint, ROOT_API_URL } from 'constants/routes';
 import { LoginSuccessResponse, PassportAuthError } from 'server-response-types';
 
-interface PasswordLoginResolution {
-  readonly token: string;
-}
-
 export const loginWithPassword = async (
   payload: LoginPayload
-): Promise<PasswordLoginResolution> => {
+): Promise<LoginSuccessResponse> => {
   const response = await axios.post<LoginSuccessResponse>(
     `${ROOT_API_URL}${ApiEndpoint.LOGIN_WITH_PASSWORD}`,
     payload
   );
 
-  return { token: response.data.token };
+  return response.data;
 };
 
 interface JwtLoginResolution {

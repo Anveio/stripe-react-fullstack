@@ -128,9 +128,9 @@ const mapDispatch = (
   onSubmit: async (payload: LoginPayload) => {
     dispatch(loginRequest);
     try {
-      const { token } = await loginWithPassword(payload);
+      const { email, token } = await loginWithPassword(payload);
 
-      dispatch(loginSuccess(payload.email, token));
+      dispatch(loginSuccess(email, token));
       pushToAppHistory(Path.HOME);
     } catch (e) {
       dispatch(loginFailure({ password: 'Incorrect email or password.' }));

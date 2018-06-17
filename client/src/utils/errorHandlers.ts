@@ -26,7 +26,7 @@ export const resolveSignupErrors = (
     /**
      * Otherwise, the error is an array of ExpressValidatorErrors.
      */
-  } else {
+  } else if (errors instanceof Array) {
     const expressValidatorErrors = e.response.data as ExpressValidatorError[];
     return expressValidatorErrors.reduce(
       (acc: Partial<FormErrorMap<SignupPayload>>, cur) => ({
@@ -35,5 +35,7 @@ export const resolveSignupErrors = (
       }),
       {}
     );
+  } else {
+    return {};
   }
 };

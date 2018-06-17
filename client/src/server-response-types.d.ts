@@ -10,6 +10,7 @@ export interface PassportAuthError {
 export type ApiFormError = PassportAuthError | ExpressValidatorError[];
 
 export interface LoginSuccessResponse {
+  readonly email: string;
   readonly token: string;
 }
 

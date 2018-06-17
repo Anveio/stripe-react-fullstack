@@ -97,7 +97,13 @@ const SignupForm = (props: Props & Handlers) => {
 };
 
 const mapStateToProps = (state: RootState): Props => {
-  const { email, password, passwordConf, loading, errors } = state.authForms.signup;
+  const {
+    email,
+    password,
+    passwordConf,
+    loading,
+    errors
+  } = state.authForms.signup;
 
   return {
     email,
@@ -126,7 +132,7 @@ const mapDispatchToProps = (
        * middleware. So if there are no errors at this point we can log-in
        * the user without sending a separate request.
        */
-      dispatch(loginSuccess(payload.email, data.token));
+      dispatch(loginSuccess(data.email, data.token));
       pushToAppHistory(Path.HOME);
     } catch (e) {
       const errors = resolveSignupErrors(e);
