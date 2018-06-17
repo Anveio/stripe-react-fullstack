@@ -11,7 +11,7 @@ export const loginWithPassword = async (
   payload: LoginPayload
 ): Promise<PasswordLoginResolution> => {
   const response = await axios.post<LoginSuccessResponse>(
-    `${ROOT_API_URL}${ApiEndpoint.LOGIN}`,
+    `${ROOT_API_URL}${ApiEndpoint.LOGIN_WITH_PASSWORD}`,
     payload
   );
 

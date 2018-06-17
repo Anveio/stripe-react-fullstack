@@ -19,7 +19,7 @@ export const renderWithProvider = (
   const wrappedUi = (
     <PolarisProvider>
       <Provider store={store}>
-        <Router history={createFreshHistory()}>{component}</Router>
+        <Router history={createBrowserHistory()}>{component}</Router>
       </Provider>
     </PolarisProvider>
   );
@@ -29,7 +29,5 @@ export const renderWithProvider = (
     wrappedUi
   };
 };
-
-export const createFreshHistory = createBrowserHistory;
 
 export const leftClick = { button: 0 };
