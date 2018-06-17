@@ -58,7 +58,7 @@ Three pieces of information are required to configure the server in development:
 2.  A Stripe API secret key.
 3.  The URI of a MongoDB database to use in development.
 
-To knock out step #1, open the `variables.env` file you just created. you can set any string as `JWT_SECRET` but make sure the string you use is of a decent length (at least 16 characters).
+To knock out step #1, open the `variables.env` file you just created. you can set any string as `JWT_SECRET` [but Auth0 recommends that it's at least 64 characters (512 bits)](https://auth0.com/blog/brute-forcing-hs256-is-possible-the-importance-of-using-strong-keys-to-sign-jwts), but the longer the better.
 
 For step #2 you'll need a Stripe account. Login to your stripe account and navigate to [your dashboard and click on the "API keys" tab.](https://dashboard.stripe.com/account/apikeys)
 
