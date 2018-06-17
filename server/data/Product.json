@@ -4,7 +4,6 @@
     "name": "Dog",
     "slug": "dog",
     "price": 100,
-    "description": "A very good boy.",
-    "photo": "a10ca916-af2a-4a98-96a1-3e320df006f9.jpeg"
+    "description": "A very good boy."
   }
 ]

@@ -1,10 +1,9 @@
-require('dotenv').config({ path: __dirname + '/../variables.env' });
 const fs = require('fs');
-
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE);
+require('dotenv').config({ path: __dirname + '/../variables.env' });
 
-// import all of our models - they need to be imported only once
+mongoose.connect(process.env.DEV_DATABASE);
+
 const Product = require('../models/Product');
 const User = require('../models/User');
 
@@ -20,14 +19,11 @@ async function deleteData() {
 
 async function loadData() {
   try {
-    console.log('PATH:', __dirname + '/Product.json');
-    // const products = JSON.parse(
-    //   fs.readFileSync(__dirname + '/Product.json', 'utf-8')
-    // );
-    const products = [];
-
+    const products = JSON.parse(
+      fs.readFileSync(__dirname + '/Product.json', 'utf-8')
+    );
     await Product.insertMany(products);
-    console.log('👍👍👍👍👍👍👍👍 Done!');
+    console.log('Finished importing sample data.');
     process.exit();
   } catch (e) {
     console.log(e);
