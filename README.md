@@ -69,19 +69,24 @@ Copy the token for the "Publishable key" and paste it as the value of `STRIPE_PU
 <figcaption>The "Publishable key" will live on the client, the "Secret key" will live on the server.</figcaption>
 </figure>
 
-Next, you'll need to configure the Mongo URI of the development database. One good free solution I recommend is [Mlab](https://mlab.com/home). After creating an account and logging in, click the "Create new" button under "Mongo DB Deployments". After that, select the "Sandbox" plan type to keep things free. If you choose to change your mind, you can upgrade to a paid plan later.
+Next, you'll need to configure the Mongo URI of the development database. To set up a development database, there are two options: hosting locally or using a hosted solution. To use a locally hosted database, make sure you have MongoDB installed on your local machine.
 
-<figure>
-<img src="https://i.imgur.com/tfCM5Lx.png">
-<figcaption>Select the "Sandbox" option under Plan Type.</figcaption>
-</figure>
+```shell
+sudo apt-get update
+sudo apt-get install mongodb
+sudo mongod
+```
 
-After your database is created you'll need to secure it with a username and password by clicking the "Create user" button. Copy the MongoDB URI displayed by Mlab and paste it as the value of `DEV_DATABASE` in your `variables.env` file. Make sure to replace `<dbuser>` and `<dbpassword>` with the actual username and password you just created.
+If the `mongod` command errors because it can't find a `/data/db/` directory, you'll have to make the directory yourself.
 
-<figure>
-<img src="https://i.imgur.com/yTlLgl7.png">
-<figcaption>Copy the MongoDB URI in the fourth line. Replace dbuser and dbpassword with the database's actual username password.</figcaption>
-</figure>
+```
+sudo mkdir /data/db
+sudo mongod
+```
+
+With MongoDB running locally, set `DEV_DATABASE` to `mongodb://localhost`.
+
+A good alternative to hosting locally, even for development, is to use a hosted solution. Follow the steps in the <a href="#create-a-production-database">create a production database</a> section but paste the Mongo URI from Mlab as the value for `DEV_DATABASE` in your `variables.env` file.
 
 ## Deploying
 
@@ -104,9 +109,21 @@ The site should successfully deploy under a URL that looks like this `https:exam
 
 Take note that, although the site may be live, you won't be able to create an account on it as the API server is not yet deployed and the client isn't configured to send requests to the correct URL.
 
-### Create the production server.
+### Create a production database
 
-To create a production database,repeat the steps listed in <a href="#configuring-the-development-server">configuring the development server</a> except instead of pasting the Mongo URI into `variables.env` (which is only read from during development), save it for the next step.
+To use a database in a production environment, hosting locally won't be an option. A good free database hosting provider I recommend is [Mlab](https://mlab.com/home). After creating an account and logging in, click the "Create new" button under "Mongo DB Deployments". After that, select the "Sandbox" plan type to keep things free. If you choose to change your mind, you can upgrade to a paid plan later.
+
+<figure>
+<img src="https://i.imgur.com/tfCM5Lx.png">
+<figcaption>Select the "Sandbox" option under Plan Type.</figcaption>
+</figure>
+
+After your database is created you'll need to secure it with a username and password by clicking the "Create user" button. Copy the MongoDB URI displayed by Mlab, replacing `<dbuser>` and `<dbpassword>` with the actual username and password you created and save it for the next step.
+
+<figure>
+<img src="https://i.imgur.com/yTlLgl7.png">
+<figcaption>Copy the MongoDB URI in the fourth line. Replace dbuser and dbpassword with the database's actual username password.</figcaption>
+</figure>
 
 ### Deploying the server to Heroku
 
@@ -129,7 +146,7 @@ git remote rm heroku
 heroku create
 ```
 
-`git remote rm heroku` will destroy heroku remote that already exists if you've cloned or forked this repository.
+`git remote rm heroku` will destroy the heroku remote that already exists if you've cloned or forked this repository.
 
 `heroku create` will deploy an empty application to Heroku and create a remote in your local git repository to push to trigger a deploy. You may need to enter your Heroku credentials for this command to work.
 
@@ -137,7 +154,7 @@ After you've created an empty application with `heroku create`, you'll need to c
 
 - JWT_SECRET should be the same as it is in your `variables.env` file.
 - STRIPE_SECRET_TEST should be the same as it is in your `variables.env`.
-- PROD_DATABASE should be used instead of DEV_DATABASE. Enter in the Mongo URI of the production database you just.
+- PROD_DATABASE should be used instead of DEV_DATABASE. Enter in the Mongo URI of the production database you made on Mlab.
 
 Now you're ready to deploy the server. `git push heroku master` will deploy the application to Heroku. Take note of the URL you just pushed to. You'll need it for the next step.
 
