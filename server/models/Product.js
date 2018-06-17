@@ -40,10 +40,10 @@ productSchema.pre('save', async function(next) {
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
 
   // this.constructor? Because you can't reference Product before it's created
-  const storesWithSlug = await this.constructor.find({ slug: slugRegEx });
+  const productsWithSlug = await this.constructor.find({ slug: slugRegEx });
 
-  if (storesWithSlug.length > 0) {
-    this.slug = `${this.slug}-${storesWithSlug.length + 1}`;
+  if (productsWithSlug.length > 0) {
+    this.slug = `${this.slug}-${productsWithSlug.length + 1}`;
   }
 
   next();
