@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { renderIntoDocument } from 'react-testing-library';
+import { renderIntoDocument, cleanup } from 'react-testing-library';
 import { renderWithProvider, createPreloadedStore } from './test-utils';
 import LoginForm from 'components/Auth/LoginForm';
 import { changeAuthFieldText } from 'actions/formAuth';
 import { LoginPayload } from 'types';
+
+afterEach(cleanup);
 
 const genericEmail = 'foobar@foobar.com';
 const genericPassword = 'foobar';

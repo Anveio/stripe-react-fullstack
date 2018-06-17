@@ -3,6 +3,9 @@ import { renderWithProvider, leftClick } from './test-utils';
 import PageHeader from 'components/Navigation/PageHeader';
 import { Simulate } from 'react-dom/test-utils';
 import { Path } from 'constants/routes';
+import { cleanup } from 'react-testing-library';
+
+afterEach(cleanup);
 
 test('Clicking the login button correctly changes URL', () => {
   const { getByText } = renderWithProvider(<PageHeader />);
