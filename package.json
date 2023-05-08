@@ -1,21 +1,36 @@
 {
-  "name": "dalma-daniela",
-  "author": {
-    "name": "Corey Angelus",
-    "url": "https://dalmadaniela.com"
-  },
-  "repository": {
-    "url": "https://github.com/AngelusProductions/dalma-daniela"
-  },
+  "name": "stripe-react-fullstack-server",
   "version": "1.0.0",
-  "description": "Dalma Daniela's Website.",
   "main": "index.js",
+  "author": "Shovon Hasan <im.shovonhasan@gmail.com>",
+  "license": "MIT",
   "scripts": {
-    "build-client": "cd client && npm install && npm run build ",
-    "build": "cd server && npm install",
-    "start": "cd server && npm install && npm run start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "start": "node ./start.js",
+    "start-dev": "nodemon ./start.js --legacy-watch",
+    "sample": "node ./data/load-sample-data.js"
   },
-  "license": "ISC"
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
+    "express-validator": "^5.2.0",
+    "jsonwebtoken": "^8.2.2",
+    "mongodb": "^5.4.0",
+    "mongoose": "^5.13.17",
+    "mongoose-mongodb-errors": "^0.0.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.0",
+    "slugs": "^0.1.3",
+    "stripe": "^6.1.0",
+    "validator": "^10.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }
