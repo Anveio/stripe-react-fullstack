@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__?: () => typeof compose;
+  }
+}
+
 import { compose } from 'redux';
 import { PRODUCTION_API_HOSTNAME, API_VERSION } from '../constants/config';
 
@@ -13,5 +19,5 @@ export const configureApiRoot = () => {
 
 // tslint:disable:no-string-literal
 export const devtools = window['__REDUX_DEVTOOLS_EXTENSION__']
-  ? window['__REDUX_DEVTOOLS_EXTENSION__']()
+  ? window['__REDUX_DEVTOOLS_EXTENSION__']!()
   : compose;

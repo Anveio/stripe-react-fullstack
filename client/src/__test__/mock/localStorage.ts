@@ -1,5 +1,9 @@
+interface StorageMock {
+  [key: string]: string | undefined;
+}
+
 const localStorageMock = (): Partial<Storage> => {
-  const storage = {};
+  const storage: StorageMock = {};
 
   return {
     setItem: function(key: string, value?: string) {

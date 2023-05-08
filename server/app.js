@@ -11,7 +11,7 @@ const routes = require('./routes');
 const CORS_WHITELIST = require('./constants/frontend');
 
 const app = express();
-
+debugger
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
