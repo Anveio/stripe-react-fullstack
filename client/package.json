@@ -1,8 +1,8 @@
 {
-  "name": "stripe-react-fullstack-client",
+  "name": "dalma-daniela-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://stripe-fullstack-example.shovonhasan.com/",
+  "homepage": "https://dalmadaniela.com",
   "dependencies": {
     "@shopify/polaris": "^2.1.2",
     "@types/jest": "^23.0.0",
@@ -14,6 +14,7 @@
     "@types/react-router-dom": "^4.2.7",
     "@types/redux": "^3.6.0",
     "axios": "^0.18.0",
+    "gh-pages": "^5.0.0",
     "history": "^4.7.2",
     "react": "^16.4.0",
     "react-addons-test-utils": "^15.6.2",
