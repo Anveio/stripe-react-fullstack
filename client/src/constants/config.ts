@@ -7,6 +7,6 @@ export const STRIPE_PUBLISHABLE_TEST_KEY = 'pk_live_'
 /**
  * Replace with the URL of the site you deployed to Heroku. Make sure it doesn't have "https://" at the beginning.
  */
-export const PRODUCTION_API_HOSTNAME = 'afternoon-falls-86728.herokuapp.com';
+export const PRODUCTION_API_HOSTNAME = 'dalma-daniela-server.herokuapp.com/';
 
 export const API_VERSION = 1;
