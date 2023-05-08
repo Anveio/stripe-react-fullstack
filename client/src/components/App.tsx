@@ -36,7 +36,7 @@ class App extends React.PureComponent<Props & Handlers, never> {
     return (
       <main>
         <PageHeader />
-        <Page title="Stripe React-Redux Starter Kit">
+        <Page title="Dalma Daniela">
           <Layout>
             <Route exact path={Path.HOME} component={Introduction} />
             <Route path={Path.AUTH} component={AuthLayout} />
@@ -46,7 +46,7 @@ class App extends React.PureComponent<Props & Handlers, never> {
                 <Checkout
                   name={'Example Item'}
                   description={'Example description'}
-                  amount={100}
+                  amount={1}
                 />
               )}
             />
