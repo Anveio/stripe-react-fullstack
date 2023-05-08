@@ -7,8 +7,8 @@ const FRONTEND_DEV_URLS = ['http://localhost:3000'];
  * original application URL.
  */
 const FRONTEND_PROD_URLS = [
-  'https://stripe-fullstack-example.shovonhasan.com',
-  'https://distracted-kowalevski-960eec.netlify.com'
+  'https://dalmadaniela.com',
+  'https://dalma-daniela.netlify.app'
 ];
 
 module.exports =
