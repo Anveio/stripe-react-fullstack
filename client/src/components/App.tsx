@@ -46,7 +46,7 @@ class App extends React.PureComponent<Props & Handlers, never> {
                 <Checkout
                   name={'Example Item'}
                   description={'Example description'}
-                  amount={1}
+                  amount={100}
                 />
               )}
             />
