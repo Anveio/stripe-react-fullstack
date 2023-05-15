@@ -5,7 +5,6 @@
   "homepage": "https://dalmadaniela.com",
   "dependencies": {
     "@shopify/polaris": "^2.12.1",
-    "@types/history": "^5.0.0",
     "@types/jest": "^23.3.14",
     "@types/mongodb": "^4.0.7",
     "@types/node": "^10.17.60",
@@ -38,6 +37,7 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/bson": "^4.2.0"
+    "@types/bson": "^4.2.0",
+    "@types/history": "^4.7.11"
   }
 }

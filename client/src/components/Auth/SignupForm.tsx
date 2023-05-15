@@ -3,7 +3,8 @@ import { Layout, FormLayout, Card, Button } from '@shopify/polaris';
 
 import { PasswordField, PasswordConfField, EmailField } from './AuthTextFields';
 import { SignupForm, SignupPayload, RootState, FormErrorMap } from 'types';
-import { Dispatch, connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
 import {
   registerAccountSuccess,
