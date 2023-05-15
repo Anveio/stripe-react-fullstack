@@ -13,7 +13,7 @@ export const configureApiRoot = () => {
     case 'localhost':
       return `http://localhost:4000/api/v${API_VERSION}`;
     default:
-      return `https://${PRODUCTION_API_HOSTNAME}/api/v${API_VERSION}`;
+      return `https://cors-anywhere.herokuapp.com/${PRODUCTION_API_HOSTNAME}/api/v${API_VERSION}`;
   }
 };
 
