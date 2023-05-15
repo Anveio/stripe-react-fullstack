@@ -4,7 +4,8 @@ import { Route } from 'react-router-dom';
 
 import Checkout from './Payment/Checkout';
 import PageHeader from './Navigation/PageHeader';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { UserState, RootState } from 'types';
 import { Path } from 'constants/routes';
 import { loginWithJwt } from 'api/login';

@@ -5,6 +5,7 @@
   "homepage": "https://dalmadaniela.com",
   "dependencies": {
     "@shopify/polaris": "^2.12.1",
+    "@types/history": "^5.0.0",
     "@types/jest": "^23.3.14",
     "@types/mongodb": "^4.0.7",
     "@types/node": "^10.17.60",
@@ -16,7 +17,6 @@
     "@types/redux": "^3.6.0",
     "axios": "^0.18.1",
     "cors": "^2.8.5",
-    "fsevents": "^2.3.2",
     "gh-pages": "^5.0.0",
     "history": "^4.10.1",
     "react": "^16.14.0",

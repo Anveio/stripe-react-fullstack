@@ -1,6 +1,6 @@
 {
   "name": "dalma-daniela",
-    "author": {
+  "author": {
     "name": "Corey Angelus",
     "url": "https://dalmadaniela.com"
   },
@@ -17,5 +17,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }
