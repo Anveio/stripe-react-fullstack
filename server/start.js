@@ -6,7 +6,7 @@ require('dotenv').config({ path: 'variables.env' });
 
 // Models must be registered BEFORE importing app.
 require('./models/User');
-require('./models/Product');
+require('./models/Course');
 
 const app = require('./app');
 
@@ -17,20 +17,16 @@ switch (process.env.NODE_ENV) {
     app.use(errorHandlers.developmentErrors);
 
     const db = mongoose.connect(process.env.DEV_DATABASE)
-    
+
     mongoose.connection
       .on('error', err => {
         console.error(`Error connecting to dev database ${err.message}`)
       })
-      .on('open', err => {
-        console.log(`\n\ndb: ${db}`)
+      .on('open', () => {
         Promise.all([db]).then(() => {
-          initializeDatabase(db);
+          //initializeDatabase(mongoose.connection);
         })
-    })
-
-    Promise.resolve()
-
+      })
     break;
   case 'production':
     console.log('App starting in production');

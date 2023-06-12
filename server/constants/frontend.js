@@ -1,4 +1,8 @@
-const FRONTEND_DEV_URLS = ['http://localhost:3000'];
+const FRONTEND_DEV_URLS = [
+  'http://localhost:3000',
+  'http://localhost:4000',
+  'localhost:4000'
+];
 
 /**
  * Replace this with the actual URL of your website after it's been deployed.

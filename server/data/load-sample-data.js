@@ -4,12 +4,12 @@ require('dotenv').config({ path: __dirname + '/../variables.env' });
 
 mongoose.connect(process.env.DEV_DATABASE);
 
-const Product = require('../models/Product');
+const Course = require('../models/Course');
 const User = require('../models/User');
 
 async function deleteData() {
   console.log('Deleting data...');
-  await Product.remove();
+  await Course.remove();
   await User.remove();
   console.log(
     'Data Deleted. To load sample data, run\n\n\t npm run sample\n\n'
@@ -19,10 +19,10 @@ async function deleteData() {
 
 async function loadData() {
   try {
-    const products = JSON.parse(
-      fs.readFileSync(__dirname + '/Product.json', 'utf-8')
+    const courses = JSON.parse(
+      fs.readFileSync(__dirname + '/Course.json', 'utf-8')
     );
-    await Product.insertMany(products);
+    await Course.insertMany(courses);
     console.log('Finished importing sample data.');
     process.exit();
   } catch (e) {
@@ -31,8 +31,6 @@ async function loadData() {
   }
 }
 
-if (process.argv.includes('--delete')) {
-  deleteData();
-} else {
-  loadData();
-}
+
+module.exports.loadData = loadData;
+module.exports.deleteData = deleteData;
