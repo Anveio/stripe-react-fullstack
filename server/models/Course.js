@@ -10,9 +10,12 @@ const courseSchema = new mongoose.Schema({
   name: String,
   description: String,
   price: Number,
-  description: String,
   previewUrl: String,
-  dateCreated: {
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }, 
+  updatedAt: {
     type: Date,
     default: Date.now
   }

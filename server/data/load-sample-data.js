@@ -20,8 +20,9 @@ async function deleteData() {
 async function loadData() {
   try {
     const courses = JSON.parse(
-      fs.readFileSync(__dirname + '/Course.json', 'utf-8')
+      fs.readFileSync(__dirname + '/courses.json', 'utf-8')
     );
+    console.log(courses)
     await Course.insertMany(courses);
     console.log('Finished importing sample data.');
     process.exit();

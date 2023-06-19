@@ -29,7 +29,7 @@ exports.validateSignup = (req, res, next) => {
 
 exports.createUser = async (req, res, next) => {
   const { email, username } = req.body;
-
+  debugger
   const user = new User({ email, username });
 
   await User.register(user, req.body.password);

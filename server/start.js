@@ -24,7 +24,7 @@ switch (process.env.NODE_ENV) {
       })
       .on('open', () => {
         Promise.all([db]).then(() => {
-          //initializeDatabase(mongoose.connection);
+          initializeDatabase(mongoose.connection);
         })
       })
     break;
