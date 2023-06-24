@@ -1,19 +1,22 @@
 {
-  "name": "stripe-react-fullstack",
+  "name": "dalma-daniela",
   "author": {
-    "name": "Shovon Hasan",
-    "url": "https://www.shovonhasan.com"
+    "name": "Corey Angelus",
+    "url": "https://dalmadaniela.com"
   },
   "repository": {
-    "url": "https://github.com/Anveio/stripe-react-fullstack"
+    "url": "https://github.com/AngelusProductions/dalma-daniela"
   },
   "version": "1.0.0",
-  "description": "Example of payment with Stripe with a React Redux front-end. Includes user signup/authentication with JWT and payment authorization with Stripe on the server.",
+  "description": "Dalma Daniela's Website.",
   "main": "index.js",
   "scripts": {
     "build-client": "cd client && npm install && npm run build ",
     "build": "cd server && npm install",
-    "start": "cd server && npm install && npm run start"
+    "start": "cd server && npm install && npm run start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }

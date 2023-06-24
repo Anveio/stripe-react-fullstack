@@ -7,7 +7,8 @@ import {
   DisplayText
 } from '@shopify/polaris';
 import { PasswordField, EmailField } from './AuthTextFields';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { UserState, LoginPayload, RootState, FormErrorMap } from 'types';
 import { AuthFormAction, changeAuthFieldText } from 'actions/formAuth';
 import {

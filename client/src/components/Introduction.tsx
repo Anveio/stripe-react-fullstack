@@ -16,7 +16,7 @@ const Introduction: React.SFC<Props> = ({ loggedIn, email }) => {
   ) : (
     <Layout.Section>
       <Card sectioned>
-        Welcome to the Stripe React-Redux starter kit. Sign up to get started.
+        You should give Dalma 1 dollar. Sign up to get started.
       </Card>
     </Layout.Section>
   );

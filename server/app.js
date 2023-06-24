@@ -31,6 +31,14 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'https://dalmadaniela.com');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
+
 app.use(`/api/v1`, routes);
 
 app.use(errorHandlers.displayAuthenticationError);

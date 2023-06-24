@@ -5,8 +5,7 @@ import { Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store';
 import registerServiceWorker from './registerServiceWorker';
-import '@shopify/polaris/styles.css';
-import App from 'components/App';
+import App from 'components/App.js';
 import { AppProvider as PolarisProvider } from '@shopify/polaris';
 import { freshHistory } from 'utils/history';
 import { Path } from 'constants/routes';
@@ -24,6 +23,6 @@ ReactDOM.render(
       </PolarisProvider>
     </PersistGate>
   </Provider>,
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root')
 );
 registerServiceWorker();

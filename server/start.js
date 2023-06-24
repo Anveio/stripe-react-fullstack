@@ -1,24 +1,32 @@
 const mongoose = require('mongoose');
 const errorHandlers = require('./handlers/errorHandlers');
+const { initializeDatabase } = require('./data/initializeDatabase')
 
 require('dotenv').config({ path: 'variables.env' });
 
 // Models must be registered BEFORE importing app.
 require('./models/User');
-require('./models/Product');
+require('./models/Course');
 
 const app = require('./app');
 
 // Try and handle as much configuration based on environment in one place.
-
 switch (process.env.NODE_ENV) {
   case 'development':
     console.log('App starting in development');
     app.use(errorHandlers.developmentErrors);
-    mongoose.connect(process.env.DEV_DATABASE);
-    mongoose.connection.on('error', err => {
-      console.error(`Error connecting to dev database ${err.message}`);
-    });
+
+    const db = mongoose.connect(process.env.DEV_DATABASE)
+
+    mongoose.connection
+      .on('error', err => {
+        console.error(`Error connecting to dev database ${err.message}`)
+      })
+      .on('open', () => {
+        Promise.all([db]).then(() => {
+          initializeDatabase(mongoose.connection);
+        })
+      })
     break;
   case 'production':
     console.log('App starting in production');

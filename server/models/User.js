@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       validate: [validator.isEmail, 'Invalid email address.'],
-
       required: 'Please enter an email.'
     }
   },
