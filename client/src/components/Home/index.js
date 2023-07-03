@@ -30,7 +30,7 @@ const t = {
   testimonialsQuote: '"Nothing ruins your day more than a bad review." - Taylor Swift',
 
   classViral: 'All without having to go viral.',
-  classTeach: 'And now, I’m going to teach you.',
+  classTeach: 'And now, I\'m going to teach you.',
   classTitle: 'How to be successful on social media without having to go viral'
 }
 
@@ -38,12 +38,32 @@ const Home = ({ currentUser, loggedIn, email }) => {
 
   return (
     <main id='homePage'>
-      <section id="landing">
-        <div className="pageLeft">
+      <section id='landing'>
+        <div className='pageLeft'>
+          <img src={dalmaLanding} alt={t.dalmaName} />
+        </div>
+        <div className='pageRight'>
+          <h1>{t.dalmaName}</h1>
+          <div>{t.dalmaTaglines.map(tagline => <span key={tagline}>{tagline}</span>)}</div>
+          <p>{t.dalmaIntro}</p>
+        </div>
+      </section>
+      <section id='bio'>
+        <div className='pageLeft'>
           <img src={dalmaiVisa} alt={t.dalmaName} />
         </div>
-        <div className="pageRight">
-        
+        <div className='pageRight'>
+          <h2>{t.bioTitle}</h2>
+          <p>{t.bioText}</p>
+        </div>
+      </section>
+      <section id='bio'>
+        <div className='pageLeft'>
+          <img src={dalmaiVisa} alt={t.dalmaName} />
+        </div>
+        <div className='pageRight'>
+          <h2>{t.bioTitle}</h2>
+          <p>{t.bioText}</p>
         </div>
       </section>
     </main>
