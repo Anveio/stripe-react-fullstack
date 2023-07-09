@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Checkout from './Payment/Checkout'
 import PageHeader from './Navigation/PageHeader'
-import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
-import { Path } from 'constants/routes'
-import { loginWithJwt } from 'api/login'
 import AuthLayout from './Auth/AuthLayout'
-import {
-  loginSuccess,
-  loginFailure,
-  LoginAction,
-  loginRequest
-} from 'actions/login'
-import Home from './Home/index'
+
+import { loginWithJwt } from 'api/login'
+import { loginSuccess, loginFailure, LoginAction, loginRequest } from 'actions/login'
 import './app.scss'
-import Introduction from './Introduction'
+
+import Home from './Home'
+import SuperClass from './SuperClass'
+import MagicCalendars from './MagicCalendars'
+import Blog from './Blog'
+import MeetTheTeam from './MeetTheTeam'
+import ContactUs from './ContactUs'
+import GeniusMarketingServices from './GeniusMarketingServices'
 
 const App = ({ currentUser, onBoot }) => {
   useEffect(() => {
@@ -27,11 +27,13 @@ const App = ({ currentUser, onBoot }) => {
 
   return (
     <main id='appContainer'>
-        <PageHeader />
-        <Introduction />
-        <Route exact path={Path.HOME} component={Home} />
-        <Route path={Path.AUTH} component={AuthLayout} />
-        <Route path={Path.CHECKOUT} component={Checkout} />
+      <Route path={paths.home} component={Home}/>
+      <Route path= {paths.SuperClass} component={SuperClass} />
+      <Route path= {paths.MagicCalendars} component={MagicCalendars} />
+      <Route path= {paths.Blog} component={Blog} />
+      <Route path= {paths.MeetTheTeam} component={MeetTheTeam} />
+      <Route path= {paths.ContactUs} component={ContactUs} />
+      <Route path= {paths.GeniusMarketingServices} component={GeniusMarketingServices} />
     </main>
   )
 }

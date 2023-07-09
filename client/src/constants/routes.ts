@@ -1,9 +1,13 @@
-import { configureApiRoot } from 'utils/config';
+import { configureApiRoot } from 'utils/config'
 
-export enum Path {
-  HOME = '/',
-  AUTH = '/auth',
-  CHECKOUT = '/checkout'
+export const paths = {
+  home: '/',
+  superClass: '/super-class',
+  magicCalendars: '/magic-calendars',
+  blog: '/blog',
+  meetTheTeam: '/team',
+  contactUs: '/contact',
+  geniusMarketingServices: '/services',
 }
 
 export enum ApiEndpoint {
