@@ -2,11 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, Layout } from '@shopify/polaris';
 import './index.scss'
+
 import {
-    dalmaInstagram, dalmaiVisa, dalmaLanding, dalmaLinkedInLaptop, limaAndVinegar, theSovereign, bioOptimizers, celebMix, eoApp, errante, 
-    flanelle, fridays, hardRockCafe, it49, iVisa, laWeekly, lilyJade, mamb, nyWeekly, nyWire, sunMed, sunWink, uptime, versed, whiteChick, 
-    alexTestimonial, cammyTestimonial, evanTestimonial, garrettTestimonial,
-} from '../../assets/index'
+  bucketPrefix,
+  folders
+} from '../../constants/assets'
 
 const t = {
   dalmaName: 'Dalma Llinas',
@@ -46,15 +46,6 @@ const Home = ({ currentUser, loggedIn, email }) => {
           <h1>{t.dalmaName}</h1>
           <div>{t.dalmaTaglines.map(tagline => <span key={tagline}>{tagline}</span>)}</div>
           <p>{t.dalmaIntro}</p>
-        </div>
-      </section>
-      <section id='bio'>
-        <div className='pageLeft'>
-          <img src={dalmaiVisa} alt={t.dalmaName} />
-        </div>
-        <div className='pageRight'>
-          <h2>{t.bioTitle}</h2>
-          <p>{t.bioText}</p>
         </div>
       </section>
       <section id='bio'>

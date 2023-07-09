@@ -1,3 +1,29 @@
+
+$pink: #DA2A7D;
+$yellow: #FEFF7C;
+$black: #000000;
+$white: #FFFFFF;
+
 body {
     margin: unset;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: unset;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.interactable {
+    &:hover {
+        transform: scale(1.02);
+    }
+    &:active {
+        transform: scale(0.98);
+    }
 }

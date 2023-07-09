@@ -2,14 +2,6 @@ import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import Checkout from './Payment/Checkout'
-import PageHeader from './Navigation/PageHeader'
-import AuthLayout from './Auth/AuthLayout'
-
-import { loginWithJwt } from 'api/login'
-import { loginSuccess, loginFailure, LoginAction, loginRequest } from 'actions/login'
-import './app.scss'
-
 import Home from './Home'
 import SuperClass from './SuperClass'
 import MagicCalendars from './MagicCalendars'
@@ -17,6 +9,14 @@ import Blog from './Blog'
 import MeetTheTeam from './MeetTheTeam'
 import ContactUs from './ContactUs'
 import GeniusMarketingServices from './GeniusMarketingServices'
+import Checkout from './Payment/Checkout'
+import PageHeader from './Navigation/PageHeader'
+import AuthLayout from './Auth/AuthLayout'
+
+import { paths } from '../constants/routes'
+import { loginWithJwt } from 'api/login'
+import { loginSuccess, loginFailure, LoginAction, loginRequest } from 'actions/login'
+import './app.scss'
 
 const App = ({ currentUser, onBoot }) => {
   useEffect(() => {
@@ -26,15 +26,15 @@ const App = ({ currentUser, onBoot }) => {
   })
 
   return (
-    <main id='appContainer'>
+    <div id='appContainer'>
       <Route path={paths.home} component={Home}/>
-      <Route path= {paths.SuperClass} component={SuperClass} />
-      <Route path= {paths.MagicCalendars} component={MagicCalendars} />
-      <Route path= {paths.Blog} component={Blog} />
-      <Route path= {paths.MeetTheTeam} component={MeetTheTeam} />
-      <Route path= {paths.ContactUs} component={ContactUs} />
-      <Route path= {paths.GeniusMarketingServices} component={GeniusMarketingServices} />
-    </main>
+      <Route path= {paths.superClass} component={SuperClass} />
+      <Route path= {paths.magicCalendars} component={MagicCalendars} />
+      <Route path= {paths.blog} component={Blog} />
+      <Route path= {paths.meetTheTeam} component={MeetTheTeam} />
+      <Route path= {paths.contactUs} component={ContactUs} />
+      <Route path= {paths.geniusMarketingServices} component={GeniusMarketingServices} />
+    </div>
   )
 }
 
